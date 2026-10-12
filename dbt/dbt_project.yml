@@ -1,0 +1,24 @@
+name: rdc_reporting
+version: '1.0.0'
+config-version: 2
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+
+seeds:
+  rdc_reporting:
+    +schema: curated
+
+models:
+  rdc_reporting:
+    # Current-state views over raw CDC events for source tables that the core
+    # package does not stage (stockmanagement, fulfillment, lots, ...).
+    # Prefixed drc_stg_ so they never collide with core stg_ model names
+    # (scripts/packages/validate.sh rejects collisions).
+    staging:
+      +materialized: view
+      +schema: curated
+    marts:
+      +materialized: table
+      +schema: curated

@@ -1,0 +1,14 @@
+database_name: reporting_clickhouse
+sqlalchemy_uri: "clickhousedb+connect://default@clickhouse:8123/curated"
+uuid: "b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"
+version: "1.0.0"
+cache_timeout: null
+expose_in_sqllab: true
+allow_run_async: false
+allow_ctas: false
+allow_cvas: false
+allow_dml: false
+allow_csv_upload: false
+extra:
+  allows_virtual_table_explore: true
+is_managed_externally: false

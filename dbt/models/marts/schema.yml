@@ -1,0 +1,6 @@
+version: 2
+
+# DRC marts (mart_drc_*). Prefer ref() to a core mart over rebuilding from
+# staging; see docs/reporting-stack-migration.md Part B/C for the target of
+# each legacy view.
+models: []

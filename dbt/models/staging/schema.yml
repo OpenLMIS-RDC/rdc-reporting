@@ -1,0 +1,6 @@
+version: 2
+
+# DRC staging models (drc_stg_*) are added here as the CDC allowlist grows.
+# Copy the idiom from the core package's dbt/models/staging/stg_facilities.sql:
+# latest event per id (row_number over ts_ms, _ingested_at), op != 'd'.
+models: []

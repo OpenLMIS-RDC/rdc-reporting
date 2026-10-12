@@ -1,0 +1,9 @@
+# IDE
+.idea/
+
+# dbt artefacts, in case dbt is ever run with this package in place rather than
+# mounted into the platform image
+target/
+dbt_packages/
+logs/
+.user.yml

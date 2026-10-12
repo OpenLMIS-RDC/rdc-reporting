@@ -1,0 +1,10 @@
+name: rdc-reporting
+type: extension
+platform_version: ">=1.0.0"
+description: >
+  Analytics-extension package for OpenLMIS DRC (LOGIMEV).
+  Adds the DRC-specific dbt staging models, marts and Superset dashboards
+  on top of olmis-analytics-core (OpenLMIS/openlmis-reporting).
+includes:
+  - dbt
+  - superset
