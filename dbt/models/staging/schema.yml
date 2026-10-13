@@ -22,6 +22,23 @@ models:
         tests:
           - not_null
 
+  - name: drc_stg_facilities
+    description: >
+      Supplement to core stg_facilities: only the referencedata.facilities
+      columns core does not stage (go_live_date, go_down_date). Join on id.
+    columns:
+      - name: id
+        description: Facility UUID
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('stg_facilities')
+                field: id
+
   - name: drc_stg_geographic_levels
     description: >
       Current-state view of geographic levels from CDC events. code carries

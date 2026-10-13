@@ -3,4 +3,39 @@ version: 2
 # DRC marts (mart_drc_*). Prefer ref() to a core mart over rebuilding from
 # staging; see docs/reporting-stack-migration.md Part B/C for the target of
 # each legacy view.
-models: []
+models:
+  - name: mart_drc_facility_directory
+    description: >
+      DRC facility dimension, replacing legacy analytics.dim_facility. One
+      row per facility with the district / region / country rungs, facility
+      type, operator, and the province (PROV), health zone (ZS) and health
+      area (AS) names from a walk up stg_geographic_zones joined to
+      drc_stg_geographic_levels on the level code.
+    columns:
+      - name: facility_id
+        description: Facility UUID
+        tests:
+          - not_null
+          - unique
+      - name: facility_code
+        tests:
+          - not_null
+      - name: facility_name
+        tests:
+          - not_null
+      - name: district_id
+        description: Zone the facility is attached to (legacy name; not always a district)
+      - name: region_id
+        description: Parent of the facility's zone
+      - name: country_id
+        description: Grandparent of the facility's zone
+      - name: geographic_zone_name
+        description: Same as district_name, kept for the legacy datasets
+      - name: geographic_level
+        description: Level name of the facility's zone
+      - name: province_name
+        description: Name of the PROV-level zone on the facility's path, NULL if none
+      - name: health_zone_name
+        description: Name of the ZS-level zone on the facility's path, NULL if none
+      - name: health_area_name
+        description: Name of the AS-level zone on the facility's path, NULL if none
