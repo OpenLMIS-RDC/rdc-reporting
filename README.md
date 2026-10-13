@@ -40,7 +40,7 @@ rdc-reporting/
 - dbt model names carry a `drc_` / `mart_drc_` prefix. The platform validator rejects any name that also exists in core.
 - Superset asset UUIDs must be unique across core and this package. The legacy DRC export UUIDs have been checked for collisions and may be reused for traceability.
 - Marts `ref()` core marts (`mart_stock_status`, `mart_facility_directory`, `mart_requisition_summary`, ...) wherever the legacy view was a thin wrapper over the same data. Only build from staging when core has no equivalent.
-- Column names of the legacy `analytics.*` objects are preserved where practical so the Power BI model can be re-pointed later with a documented mapping.
+- Column names are the ones the RDC team defined in the legacy views and datasets, kept verbatim (French in the `vw_*` line, English in the `analytics.*` star schema). When a mart builds on a core mart, core columns are aliased back to the legacy names. Display labels go in the dataset YAML `verbose_name`. This keeps the existing charts and the Power BI model valid without a column remap.
 - Assets are authored in the Superset UI against dev, exported with the platform's import/export scripts, and committed as YAML.
 
 ## Usage

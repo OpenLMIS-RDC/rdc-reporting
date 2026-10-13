@@ -1,6 +1,337 @@
 version: 2
 
-# DRC staging models (drc_stg_*) are added here as the CDC allowlist grows.
-# Copy the idiom from the core package's dbt/models/staging/stg_facilities.sql:
-# latest event per id (row_number over ts_ms, _ingested_at), op != 'd'.
-models: []
+# DRC staging models (drc_stg_*), one per source table that DRC adds to the
+# CDC allowlist on top of core. Copy the idiom from the core package's
+# dbt/models/staging/stg_facilities.sql: latest event per id
+# (row_number over ts_ms, _ingested_at), op != 'd'.
+# Relationship tests are severity: warn, as in core: CDC snapshots of the
+# parent and child tables do not land atomically.
+
+models:
+  # referencedata
+
+  - name: drc_stg_facility_operators
+    description: Current-state view of facility operators from CDC events
+    columns:
+      - name: id
+        description: Facility operator UUID
+        tests:
+          - not_null
+          - unique
+      - name: code
+        tests:
+          - not_null
+
+  - name: drc_stg_geographic_levels
+    description: >
+      Current-state view of geographic levels from CDC events. code carries
+      the DRC level codes (PROV, ZS, AS) used to build the province /
+      health zone / health area hierarchy.
+    columns:
+      - name: id
+        description: Geographic level UUID
+        tests:
+          - not_null
+          - unique
+      - name: code
+        tests:
+          - not_null
+      - name: level_number
+        tests:
+          - not_null
+
+  - name: drc_stg_lots
+    description: Current-state view of lots from CDC events
+    columns:
+      - name: id
+        description: Lot UUID
+        tests:
+          - not_null
+          - unique
+      - name: lot_code
+        tests:
+          - not_null
+
+  - name: drc_stg_program_orderables
+    description: >
+      Current-state view of program orderables from CDC events. One row per
+      program_orderables id; each orderable version has its own rows.
+    columns:
+      - name: id
+        description: Program orderable UUID
+        tests:
+          - not_null
+          - unique
+      - name: program_id
+        tests:
+          - not_null
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('stg_programs')
+                field: id
+      - name: orderable_id
+        tests:
+          - not_null
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('stg_orderables')
+                field: id
+      - name: orderable_version_number
+        tests:
+          - not_null
+      - name: active
+        tests:
+          - not_null
+
+  - name: drc_stg_users
+    description: >
+      Current-state view of users from CDC events, limited to the name
+      columns behind the "who adjusted" columns of ds_ajustement.
+    columns:
+      - name: id
+        description: User UUID
+        tests:
+          - not_null
+          - unique
+      - name: username
+        tests:
+          - not_null
+
+  # stockmanagement
+
+  - name: drc_stg_stock_cards
+    description: Current-state view of stock cards from CDC events
+    columns:
+      - name: id
+        description: Stock card UUID
+        tests:
+          - not_null
+          - unique
+      - name: facility_id
+        tests:
+          - not_null
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('stg_facilities')
+                field: id
+      - name: program_id
+        tests:
+          - not_null
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('stg_programs')
+                field: id
+      - name: orderable_id
+        tests:
+          - not_null
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('stg_orderables')
+                field: id
+      - name: lot_id
+        tests:
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('drc_stg_lots')
+                field: id
+
+  - name: drc_stg_stock_card_line_items
+    description: >
+      Current-state view of stock card line items from CDC events. quantity
+      is unsigned; the sign comes from the reason's reason_type.
+    columns:
+      - name: id
+        description: Stock card line item UUID
+        tests:
+          - not_null
+          - unique
+      - name: stock_card_id
+        tests:
+          - not_null
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('drc_stg_stock_cards')
+                field: id
+      - name: reason_id
+        description: Null for receive/issue lines that carry a source or destination instead
+        tests:
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('drc_stg_stock_card_line_item_reasons')
+                field: id
+      - name: quantity
+        tests:
+          - not_null
+      - name: occurred_date
+        tests:
+          - not_null
+      - name: user_id
+        tests:
+          - not_null
+
+  - name: drc_stg_stock_card_line_item_reasons
+    description: Current-state view of stock card line item reasons from CDC events
+    columns:
+      - name: id
+        description: Reason UUID
+        tests:
+          - not_null
+          - unique
+      - name: name
+        tests:
+          - not_null
+      - name: reason_category
+        tests:
+          - not_null
+      - name: reason_type
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - CREDIT
+                  - DEBIT
+                  - BALANCE_ADJUSTMENT
+
+  # fulfillment
+
+  - name: drc_stg_orders
+    description: Current-state view of fulfillment orders from CDC events
+    columns:
+      - name: id
+        description: Order UUID
+        tests:
+          - not_null
+          - unique
+      - name: order_code
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - not_null
+      - name: program_id
+        tests:
+          - not_null
+
+  - name: drc_stg_order_line_items
+    description: Current-state view of order line items from CDC events
+    columns:
+      - name: id
+        description: Order line item UUID
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('drc_stg_orders')
+                field: id
+      - name: orderable_id
+        tests:
+          - not_null
+      - name: ordered_quantity
+        tests:
+          - not_null
+
+  - name: drc_stg_shipments
+    description: Current-state view of shipments from CDC events
+    columns:
+      - name: id
+        description: Shipment UUID
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        tests:
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('drc_stg_orders')
+                field: id
+      - name: shipped_date
+        tests:
+          - not_null
+
+  - name: drc_stg_proofs_of_delivery
+    description: Current-state view of proofs of delivery from CDC events
+    columns:
+      - name: id
+        description: Proof of delivery UUID
+        tests:
+          - not_null
+          - unique
+      - name: shipment_id
+        tests:
+          - not_null
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('drc_stg_shipments')
+                field: id
+
+  - name: drc_stg_proof_of_delivery_line_items
+    description: Current-state view of proof of delivery line items from CDC events
+    columns:
+      - name: id
+        description: Proof of delivery line item UUID
+        tests:
+          - not_null
+          - unique
+      - name: proof_of_delivery_id
+        tests:
+          - not_null
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('drc_stg_proofs_of_delivery')
+                field: id
+      - name: orderable_id
+        tests:
+          - not_null
+
+  - name: drc_stg_order_status_changes
+    description: >
+      Current-state view of fulfillment.status_changes (order status
+      history) from CDC events. Not to be confused with core
+      stg_status_changes, which is requisition.status_changes.
+    columns:
+      - name: id
+        description: Order status change UUID
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('drc_stg_orders')
+                field: id
+      - name: status
+        tests:
+          - not_null
