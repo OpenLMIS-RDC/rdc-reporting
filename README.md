@@ -19,7 +19,11 @@ rdc-reporting/
       staging/                           # drc_stg_* current-state views for source tables
                                          # that core does not stage (stockmanagement,
                                          # fulfillment, lots, program_orderables, ...)
+      intermediate/                      # drc_int_* building blocks shared by several marts
+                                         # (the daily stock series)
       marts/                             # mart_drc_* marts, one per legacy view/dataset
+    macros/                              # drc_* macros (French month names)
+    tests/                               # singular tests (daily carry-forward check)
 
   superset/
     assets/
@@ -32,6 +36,7 @@ rdc-reporting/
   docs/
     reporting-stack-migration.md         # legacy object -> target mapping and risks
     plan.md                              # phased delivery plan
+    daily-snapshot-design.md             # Phase 5 design of the daily stock series
 ```
 
 ## Conventions

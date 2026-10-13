@@ -174,3 +174,140 @@ models:
         description: Days from the build date to the expiration date, negative when expired
       - name: valeur_usd_30j
         description: qte_expirant_30j * price per pack / net content, rounded to 2 decimals
+
+  - name: mart_drc_stock_monthly
+    description: >
+      DRC monthly stock, replacing legacy analytics.fact_stock_monthly and the
+      RUPTURE PAR PRODUIT dataset. One row per month x facility x program x
+      product with flows, opening / average / closing balance, stockout and
+      observed days, adjusted consumption, 3-month AMC and months of stock,
+      and the stockout severity labels.
+    tests:
+      - unique:
+          column_name: "(month_date, facility_id, program_id, product_id)"
+    columns:
+      - name: month_date
+        tests:
+          - not_null
+      - name: facility_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: active_days
+        description: Days of the month present in the daily series
+        tests:
+          - not_null
+      - name: adjusted_consumption
+        description: consumptions scaled up to the month's days with stock, 0 when no such day
+      - name: amc_3m
+        description: Average adjusted_consumption of the 3 preceding months, NULL in the key's first month
+      - name: msd_3m
+        description: closing_balance / amc_3m; NULL when stock without consumption, 0 when out of stock
+      - name: severite_rupture
+        description: Share of the observed days spent out of stock, as a label
+
+  - name: mart_drc_stock_daily
+    description: >
+      DRC daily stock, replacing legacy analytics.stock_daily_history /
+      fact_stock_daily and the two daily report datasets. One row per day x
+      facility x program x product with balances, flows, the previous month's
+      CMM, months of stock, stock status and the report flags.
+    tests:
+      - unique:
+          column_name: "(movement_date, facility_id, program_id, product_id)"
+    columns:
+      - name: movement_date
+        tests:
+          - not_null
+      - name: facility_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: cmm_m_1
+        description: amc_3m of the previous month, else of the current month, else 0
+      - name: msd
+        description: stock_on_hand / cmm_m_1, NULL when cmm_m_1 is 0
+      - name: est_dernier_jour
+        description: 1 on the latest day of the series (yesterday)
+      - name: jours_en_rupture
+        description: Stockout days of the key over the whole series
+
+  - name: mart_drc_stock_msd
+    description: >
+      DRC stock status by months of stock, replacing legacy public.vw_stock_msd
+      and the two ETAT DE STOCK datasets. One row per facility x program x
+      product with the latest balance, the 3-month CMM, the MSD and the stock
+      state band.
+    tests:
+      - unique:
+          column_name: "(facility_id, program_id, product_id)"
+    columns:
+      - name: facility_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: etat_stock
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Rupture', 'Stock dormant', 'Potentielle rupture', 'Sous-stock', 'Satisfaisant', 'Surstock']
+      - name: cmm
+        description: Consumption of the last 3 months of movements / 3, NULL without consumption
+      - name: msd
+        description: 0 when out of stock, NULL when CMM is 0, capped at 24
+
+  - name: mart_drc_stockout_facilities
+    description: >
+      DRC stockouts by facility, replacing legacy public.vw_rupture_structures
+      and the Ruptures_stock dataset. One row per active program product x
+      facility supporting the program, with the latest stock on hand and
+      stockout / no-data flags.
+    tests:
+      - unique:
+          column_name: "(facility_id, program_id, product_id)"
+    columns:
+      - name: facility_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: program_id
+        tests:
+          - not_null
+      - name: stock_on_hand
+        description: Latest balance of the product at the facility, summed over programs; NULL without stock card
+      - name: sans_donnee
+        description: 1 when the facility has no stock card for the product
+
+  - name: mart_drc_loss_rate
+    description: >
+      DRC loss rate, replacing legacy public.vw_taux_perte and the Taux de
+      perte dataset. One row per month x facility x program x product with
+      movements, with receipts, issues, losses by cause, the month's opening
+      balance and four loss-rate denominators.
+    tests:
+      - unique:
+          column_name: "(date_rapport, facility_id, program_id, product_id)"
+    columns:
+      - name: date_rapport
+        description: First day of the month
+        tests:
+          - not_null
+      - name: facility_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: stock_debut
+        description: Opening balance of the month's first day in the daily series, NULL before the series starts
+      - name: taux_perte_pct
+        description: 100 * quantite_perdue / quantite_sorties, rounded to 1 decimal

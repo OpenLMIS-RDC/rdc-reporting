@@ -1,0 +1,42 @@
+version: 2
+
+# DRC intermediate models (drc_int_*): building blocks shared by several
+# marts. Superset and Power BI read the mart_drc_* models, not these.
+models:
+  - name: drc_int_stock_daily_history
+    description: >
+      Dense daily stock series, replacing legacy analytics.stock_daily_history
+      and refresh_daily_stock_history(). One row per day x facility x program
+      x product from the key's first balance date (not before
+      var drc_snapshot_start_date) to yesterday. Stateless: rebuilt from the
+      full history on every run (docs/daily-snapshot-design.md).
+    tests:
+      - unique:
+          column_name: "(movement_date, facility_id, program_id, product_id)"
+    columns:
+      - name: movement_date
+        tests:
+          - not_null
+      - name: facility_id
+        tests:
+          - not_null
+      - name: program_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: opening_balance
+        description: Previous day's stock_on_hand (the balance before the key's first day, i.e. 0, on that day)
+        tests:
+          - not_null
+      - name: stock_on_hand
+        description: >
+          Closing balance: OpenLMIS's calculated stock on hand, latest row on
+          or before the day per stock card, summed over the key's cards (lots)
+        tests:
+          - not_null
+      - name: net_variation
+        description: stock_on_hand - opening_balance
+      - name: stockout_days
+        description: 1 when stock_on_hand <= 0

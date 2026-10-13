@@ -120,6 +120,34 @@ models:
 
   # stockmanagement
 
+  - name: drc_stg_calculated_stocks_on_hand
+    description: >
+      Current-state view of OpenLMIS's stored closing balance per stock card
+      per occurred date (stockmanagement.calculated_stocks_on_hand). Several
+      rows per (stock_card_id, occurred_date) are possible on stockmanagement
+      versions without OLMIS-8206; consumers keep the latest processed_date.
+    columns:
+      - name: id
+        description: Calculated stock on hand UUID
+        tests:
+          - not_null
+          - unique
+      - name: stock_card_id
+        tests:
+          - not_null
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('drc_stg_stock_cards')
+                field: id
+      - name: stock_on_hand
+        tests:
+          - not_null
+      - name: occurred_date
+        tests:
+          - not_null
+
   - name: drc_stg_stock_cards
     description: Current-state view of stock cards from CDC events
     columns:

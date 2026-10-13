@@ -19,6 +19,11 @@ models:
     staging:
       +materialized: view
       +schema: curated
+    # Internal building blocks shared by several marts (drc_int_*). Not
+    # exposed to Superset directly; read the mart_drc_* models instead.
+    intermediate:
+      +materialized: table
+      +schema: curated
     marts:
       +materialized: table
       +schema: curated
