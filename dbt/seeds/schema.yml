@@ -1,16 +1,4 @@
 version: 2
 
-seeds:
-  - name: drc_reporting_dates
-    description: >
-      Reporting-rate cut-offs, carried over from the legacy reporting
-      database table public.reporting_dates (one row). due_days is the
-      number of days after period end within which a requisition counts as
-      on time; late_days extends that window for "late but reported".
-    columns:
-      - name: country
-        tests: [not_null, unique]
-      - name: due_days
-        tests: [not_null]
-      - name: late_days
-        tests: [not_null]
+# DRC seeds (drc_*).
+seeds: []

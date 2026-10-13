@@ -14,8 +14,7 @@ rdc-reporting/
 
   dbt/
     dbt_project.yml
-    seeds/
-      drc_reporting_dates.csv            # Reporting-rate cut-offs (legacy public.reporting_dates)
+    seeds/                               # drc_* seeds (none yet)
     models/
       staging/                           # drc_stg_* current-state views for source tables
                                          # that core does not stage (stockmanagement,
