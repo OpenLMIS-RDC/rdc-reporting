@@ -1,0 +1,38 @@
+slice_name: Pertes par programme et cause
+viz_type: pivot_table_v2
+uuid: 52f4cba9-5591-462d-a7b2-71347779a964
+version: 1.0.0
+dataset_uuid: 55ce0ab8-12a4-4b55-a761-636882680240
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: pivot_table_v2
+  groupbyRows:
+    - programme
+  groupbyColumns:
+    - cause_principale
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(valeur_pertes),0)
+      label: Quantité perdue
+      hasCustomLabel: true
+      optionName: m_87ovmisy
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 100
+  aggregateFunction: Sum
+  rowOrder: value_z_to_a
+  colOrder: key_a_to_z
+  rowTotals: true
+  colTotals: true
+  valueFormat: ',d'
+  metricsLayout: COLUMNS
+  conditional_formatting: []
+  time_range: No filter
+  combineMetric: false
+query_context: null

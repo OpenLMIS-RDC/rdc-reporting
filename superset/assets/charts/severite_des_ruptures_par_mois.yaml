@@ -1,0 +1,49 @@
+slice_name: Sévérité des ruptures par mois
+viz_type: echarts_timeseries_bar
+uuid: 2b84db6c-dd45-46ef-9246-0af13f0d350a
+version: 1.0.0
+dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Couples structure × produit
+      hasCustomLabel: true
+      optionName: m_v40ll4pf
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 200
+  color_scheme: supersetColors
+  show_legend: true
+  rich_tooltip: true
+  y_axis_format: .0%
+  y_axis_bounds:
+    - 0
+    - 1
+  time_range: No filter
+  x_axis: annee_mois
+  groupby:
+    - severite_rupture
+  stack: Stack
+  show_value: false
+  contributionMode: row
+  x_axis_sort: annee_mois
+  x_axis_sort_asc: true
+  xAxisLabelRotation: 0
+  x_axis_title: Mois
+  y_axis_title: Part des couples suivis
+  x_axis_title_margin: 50
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

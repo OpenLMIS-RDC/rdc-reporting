@@ -1,0 +1,156 @@
+slice_name: Diagnostic disponibilité — rupture réelle, angle mort et action
+viz_type: table
+uuid: a53cdb03-f97f-4af3-a1ef-b320842b724e
+version: 1.0.0
+dataset_uuid: 3c5df730-cced-4285-814c-1d0ed6e6ec14
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - statut_disponibilite
+  metrics:
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE statut_disponibilite
+         WHEN '1. Stock disponible' THEN 4
+         WHEN '2. Rupture confirmée' THEN 1
+         WHEN '3. Pas de données' THEN 2
+         ELSE 6 END)
+      label: Gravité
+      hasCustomLabel: true
+      optionName: m_grav_131
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Couples structure × produit
+      hasCustomLabel: true
+      optionName: m_ocrjybtm
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT structure)
+      label: Structures
+      hasCustomLabel: true
+      optionName: m_jyiaiycs
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT produit)
+      label: Produits
+      hasCustomLabel: true
+      optionName: m_oo39yvls
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE statut_disponibilite
+         WHEN '1. Stock disponible' THEN '🟢 CONFORME'
+         WHEN '2. Rupture confirmée' THEN '🔴 CRITIQUE'
+         WHEN '3. Pas de données' THEN '🟠 ANGLE MORT'
+         ELSE '⚪ À VÉRIFIER' END)
+      label: Niveau d’urgence
+      hasCustomLabel: true
+      optionName: m_5vx7hi4c
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE statut_disponibilite
+         WHEN '1. Stock disponible' THEN 'Rien à faire. Ces couples structure × produit constituent le vivier mobilisable pour un redéploiement vers les ruptures confirmées.'
+         WHEN '2. Rupture confirmée' THEN 'Rupture réelle et vérifiée : c’est le seul périmètre sur lequel dimensionner une commande. Traiter produit par produit en partant du Top 15 ci-dessous.'
+         WHEN '3. Pas de données' THEN 'Ce n’est pas une rupture mais une absence de fiche de stock. Relancer les structures concernées : tant que cette part reste élevée, aucun autre indicateur de l’onglet n’est fiable.'
+         ELSE 'Statut non reconnu : signaler à l’équipe données.' END)
+      label: Propositions d'actions
+      hasCustomLabel: true
+      optionName: m_a141bwza
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  percent_metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Part du périmètre
+      hasCustomLabel: true
+      optionName: m_o8wz3kci
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 100
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: MIN(toInt64(substring(statut_disponibilite, 1, 1)))
+    label: tri
+    hasCustomLabel: true
+    optionName: m_t6opvgsh
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  order_desc: false
+  table_timestamp_format: smart_date
+  show_cell_bars: false
+  color_pn: false
+  include_search: false
+  allow_rearrange_columns: true
+  column_config:
+    Couples structure × produit:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Structures:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Produits:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    '%Part du périmètre':
+      d3NumberFormat: .1%
+      horizontalAlign: right
+    statut_disponibilite:
+      horizontalAlign: left
+    Niveau d’urgence:
+      horizontalAlign: left
+    Propositions d'actions:
+      horizontalAlign: left
+  time_range: No filter
+  conditional_formatting:
+    - operator: '='
+      targetValue: 1
+      colorScheme: '#d92d20'
+      column: Gravité
+    - operator: '='
+      targetValue: 2
+      colorScheme: '#e8770c'
+      column: Gravité
+    - operator: '='
+      targetValue: 3
+      colorScheme: '#dcae04'
+      column: Gravité
+    - operator: '='
+      targetValue: 4
+      colorScheme: '#12984f'
+      column: Gravité
+    - operator: '='
+      targetValue: 5
+      colorScheme: '#2563eb'
+      column: Gravité
+    - operator: '='
+      targetValue: 6
+      colorScheme: '#98a2b3'
+      column: Gravité
+    - operator: '='
+      targetValue: 7
+      colorScheme: '#334155'
+      column: Gravité
+  allow_render_html: true
+query_context: null

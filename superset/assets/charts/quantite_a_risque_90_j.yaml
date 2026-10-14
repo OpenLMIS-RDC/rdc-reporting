@@ -1,0 +1,30 @@
+slice_name: Quantité à risque (≤ 90 j)
+viz_type: big_number_total
+uuid: 43984e51-f2b5-405f-acd6-36add521d77f
+version: 1.0.0
+dataset_uuid: 8c994ec6-0cc7-4601-a021-28a32372771a
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: COALESCE(SUM(qte_expirant_90j), 0)
+    label: Quantité ≤ 90 jours
+    hasCustomLabel: true
+    optionName: m_pk3
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  adhoc_filters: []
+  subheader: Exposition totale, horizons 30-60-90 cumulés
+  y_axis_format: .3s
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+  time_format: smart_date
+  force_timestamp_formatting: false
+query_context: null

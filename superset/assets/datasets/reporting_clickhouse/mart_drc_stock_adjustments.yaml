@@ -1,0 +1,258 @@
+table_name: mart_drc_stock_adjustments
+uuid: 5279f063-d572-484e-a63e-66dbb23ec2de
+version: 1.0.0
+database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+schema: curated
+main_dttm_col: date_ajustement
+description: Ajustements de stock (catégorie ADJUSTMENT) avec l'utilisateur ayant saisi. Remplace le dataset
+  « ds_ajustement ».
+default_endpoint: null
+offset: 0
+cache_timeout: null
+sql: null
+params: null
+template_params: null
+filter_select_enabled: true
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+is_managed_externally: false
+columns:
+  - column_name: line_item_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: structure
+    verbose_name: Structure
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: code_produit
+    verbose_name: Code produit
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: nom_produit
+    verbose_name: Produit
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: numero_lot
+    verbose_name: N° de lot
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: unite_de_dispensation
+    verbose_name: Unité de dispensation
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: quantite_ajustee
+    verbose_name: Quantité ajustée
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: raison_ajustement
+    verbose_name: Raison de l’ajustement
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: utilisateur_ayant_ajuste
+    verbose_name: Utilisateur
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: login_utilisateur
+    verbose_name: Login utilisateur
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: sens_ajustement
+    verbose_name: Sens
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: reasontype
+    verbose_name: Type de mouvement
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: quantite_absolue
+    verbose_name: Quantité (valeur absolue)
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_ajustement
+    verbose_name: Date d’ajustement
+    is_dttm: true
+    is_active: true
+    type: Date
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: programme
+    verbose_name: Programme
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: niveau_organisationnel
+    verbose_name: Niveau d’organisation
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: zone_geographique
+    verbose_name: Zone géographique
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: district
+    verbose_name: District
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: region
+    verbose_name: Région
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: type_de_structure
+    verbose_name: Type de structure
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee
+    verbose_name: Année
+    is_dttm: false
+    is_active: true
+    type: UInt16
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois
+    verbose_name: Mois
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee_mois
+    verbose_name: Période (mois)
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: facility_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UUID)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois_nom
+    verbose_name: Mois (nom)
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: CASE mois WHEN 1 THEN 'Janvier' WHEN 2 THEN '​Février' WHEN 3 THEN '​​Mars' WHEN 4 THEN
+      '​​​Avril' WHEN 5 THEN '​​​​Mai' WHEN 6 THEN '​​​​​Juin' WHEN 7 THEN '​​​​​​Juillet' WHEN 8 THEN
+      '​​​​​​​Août' WHEN 9 THEN '​​​​​​​​Septembre' WHEN 10 THEN '​​​​​​​​​Octobre' WHEN 11 THEN '​​​​​​​​​​Novembre'
+      WHEN 12 THEN '​​​​​​​​​​​Décembre' END
+    description: null
+metrics:
+  - metric_name: count
+    verbose_name: COUNT(*)
+    metric_type: null
+    expression: COUNT(*)
+    description: null
+    d3format: null
+    extra: null
+    warning_text: null

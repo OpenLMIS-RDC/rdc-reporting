@@ -1,0 +1,49 @@
+slice_name: '% de structures en rupture par produit'
+viz_type: echarts_timeseries_bar
+uuid: 1eedd994-3f93-4c5d-a24b-1ff29386ec9c
+version: 1.0.0
+dataset_uuid: 3c5df730-cced-4285-814c-1d0ed6e6ec14
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  color_scheme: bnbColors
+  metrics:
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: '% de structures en rupture de stock'
+      optionName: metric_c7ikqgzlc2s_03gcm65p3wl5
+      sqlExpression: "toFloat64(COUNT(DISTINCT CASE WHEN a_une_rupture = 1 THEN structure END))\r\n/ NULLIF(COUNT(DISTINCT\
+        \ structure), 0)"
+  order_desc: true
+  rich_tooltip: true
+  row_limit: 20
+  show_legend: false
+  time_range: No filter
+  viz_type: echarts_timeseries_bar
+  y_axis_bounds:
+    - 0
+    - 1
+  y_axis_format: ',.1%'
+  x_axis: produit
+  groupby: []
+  stack: Stack
+  show_value: false
+  x_axis_sort: '% de structures en rupture de stock'
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: Produit
+  y_axis_title: '% de structures en rupture'
+  x_axis_title_margin: 150
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

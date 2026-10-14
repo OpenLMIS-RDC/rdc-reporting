@@ -1,0 +1,26 @@
+slice_name: Satisfaction – Taux global pondéré
+viz_type: big_number_total
+uuid: 1495899e-5179-472d-b5da-aa7afdb65902
+version: 1.0.0
+dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  adhoc_filters: []
+  metric:
+    expressionType: SQL
+    sqlExpression: toFloat64(SUM(quantite_livree))/NULLIF(SUM(quantite_demandee),0)
+    label: Taux global
+    hasCustomLabel: true
+    optionName: m_0zi2hwc5
+  subheader: Part du volume demandé qui a été livré
+  y_axis_format: .1%
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+  force_timestamp_formatting: false
+query_context: null

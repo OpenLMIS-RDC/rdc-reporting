@@ -1,0 +1,25 @@
+slice_name: Délai – Réquisitions réceptionnées
+viz_type: big_number_total
+uuid: 4613bfad-24ae-42e1-a9f3-e7670ac1e042
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  adhoc_filters: []
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(delai_traitement_jours)
+    label: Réceptionnées
+    hasCustomLabel: true
+    optionName: m_k0e9w11z
+  subheader: Lignes avec une réception enregistrée
+  y_axis_format: ',d'
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+query_context: null

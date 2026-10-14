@@ -1,0 +1,273 @@
+table_name: mart_drc_stock_msd
+uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+version: 1.0.0
+database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+schema: curated
+main_dttm_col: date_rapport
+description: État de stock (MSD) par structure, programme et produit. Remplace les datasets « ETAT DE
+  STOCK » et « ETAT DE STOCK A DIFFERENTS NIVEAUX ».
+default_endpoint: null
+offset: 0
+cache_timeout: null
+sql: null
+params: null
+template_params: null
+filter_select_enabled: true
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+is_managed_externally: false
+columns:
+  - column_name: facility_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: product_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: program_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_rapport
+    verbose_name: null
+    is_dttm: true
+    is_active: true
+    type: Date
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt16
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois_num
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: niveau_organisation
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: unite_organisation
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: district
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: region
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: type_structure
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: structure
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: programme
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: produit
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: code_produit
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: quantites_en_fin_de_periode
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: cmm
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Decimal(38, 2))
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: msd
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Decimal(38, 2))
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: etat_stock
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee_mois
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: etat_stock_ordonne
+    verbose_name: État de stock (du plus grave au moins grave)
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: est_en_rupture
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: est_sous_4_mois
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: est_en_surstock
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: est_dormant
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: ligne_suivie
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+metrics:
+  - metric_name: count
+    verbose_name: COUNT(*)
+    metric_type: null
+    expression: COUNT(*)
+    description: null
+    d3format: null
+    extra: null
+    warning_text: null

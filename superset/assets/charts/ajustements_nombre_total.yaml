@@ -1,0 +1,30 @@
+slice_name: Ajustements – Nombre total
+viz_type: big_number_total
+uuid: 8329d2bf-7d25-43f5-9613-66856f5a6009
+version: 1.0.0
+dataset_uuid: 5279f063-d572-484e-a63e-66dbb23ec2de
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  force_timestamp_formatting: false
+  header_font_size: 0.4
+  metric:
+    aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    isNew: false
+    label: Ajustements
+    optionName: metric_itgmj9gzkbj_ycjp336rb8
+    sqlExpression: COUNT(*)
+  subheader: Mouvements d’ajustement enregistrés
+  subheader_font_size: 0.125
+  time_format: smart_date
+  time_range: No filter
+  viz_type: big_number_total
+  y_axis_format: ',d'
+query_context: null

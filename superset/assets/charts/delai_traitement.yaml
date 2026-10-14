@@ -1,0 +1,32 @@
+slice_name: Délai traitement
+viz_type: big_number_total
+uuid: 1cb12570-d49d-496a-9b28-a4c68ba6be5e
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  force_timestamp_formatting: false
+  header_font_size: 0.4
+  metric:
+    aggregate: AVG
+    column:
+      column_name: delai_traitement_jours
+    expressionType: SIMPLE
+    hasCustomLabel: false
+    isNew: false
+    label: AVG(delai_traitement_jours)
+    optionName: metric_3nczaub0sd1_eqzopo3jipp
+    sqlExpression: null
+  subheader: Jours (moyenne)
+  subheader_font_size: 0.18
+  time_format: smart_date
+  time_range: No filter
+  viz_type: big_number_total
+  y_axis_format: ',.1f'
+  number_format: ',.1f'
+query_context: null

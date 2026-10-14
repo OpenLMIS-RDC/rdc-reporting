@@ -1,0 +1,30 @@
+slice_name: Niveaux organisationnels couverts
+viz_type: big_number_total
+uuid: 816d6965-539f-4e4c-bafe-43b46c5652cd
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(DISTINCT niveau_organisation)
+    label: Niveaux
+    hasCustomLabel: true
+    optionName: m_gn9r3aeb
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  adhoc_filters: []
+  subheader: Niveaux de la pyramide dans le périmètre
+  y_axis_format: ',d'
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+  time_format: smart_date
+  force_timestamp_formatting: false
+query_context: null

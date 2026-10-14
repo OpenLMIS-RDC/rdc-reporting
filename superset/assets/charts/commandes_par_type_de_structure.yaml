@@ -1,0 +1,38 @@
+slice_name: Commandes par type de structure
+viz_type: pie
+uuid: 9eab9d65-4171-4717-a300-786c9a884bc9
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: pie
+  adhoc_filters: []
+  groupby:
+    - type_de_structure
+  row_limit: 100
+  date_format: smart_date
+  donut: true
+  innerRadius: 45
+  outerRadius: 70
+  label_type: percent
+  labels_outside: true
+  legendOrientation: bottom
+  legendType: plain
+  number_format: ',d'
+  show_labels: true
+  show_labels_threshold: 1
+  show_legend: true
+  sort_by_metric: true
+  time_range: No filter
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(DISTINCT numero_commande)
+    label: Commandes
+    hasCustomLabel: true
+    optionName: m_yd9ucw76
+  show_total: true
+query_context: null

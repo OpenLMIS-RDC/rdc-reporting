@@ -1,0 +1,118 @@
+slice_name: Rupture - Detail structure / produit
+viz_type: table
+uuid: 36624050-4124-42c0-8975-80ab35bda434
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - expressionType: SQL
+      sqlExpression: province
+      label: Province
+      hasCustomLabel: true
+      optionName: c_province
+    - expressionType: SQL
+      sqlExpression: zone_de_sante
+      label: Zone de santé
+      hasCustomLabel: true
+      optionName: c_zone_de_sante
+    - expressionType: SQL
+      sqlExpression: structure
+      label: Structure
+      hasCustomLabel: true
+      optionName: c_structure
+    - expressionType: SQL
+      sqlExpression: type_structure
+      label: Type de structure
+      hasCustomLabel: true
+      optionName: c_type_structure
+    - expressionType: SQL
+      sqlExpression: programme
+      label: Programme
+      hasCustomLabel: true
+      optionName: c_programme
+    - expressionType: SQL
+      sqlExpression: produit
+      label: Produit
+      hasCustomLabel: true
+      optionName: c_produit
+  metrics:
+    - expressionType: SQL
+      sqlExpression: SUM(stock_disponible)
+      label: SDU
+      hasCustomLabel: true
+      optionName: m_rt_sdu
+    - expressionType: SQL
+      sqlExpression: ROUND(SUM(cmm_m_1),2)
+      label: CMM (M-1)
+      hasCustomLabel: true
+      optionName: m_rt_cmm
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      label: Jours en rupture
+      optionName: m_jours_rupt
+      sqlExpression: MAX(jours_en_rupture)
+    - expressionType: SQL
+      sqlExpression: CASE WHEN SUM(cmm_m_1) > 0 THEN '<span style="display:block;background-color:#C00000;color:#ffffff;padding:2px
+        6px;font-weight:600;">Rupture</span>' ELSE '<span style="display:block;background-color:#C00000;color:#ffffff;padding:2px
+        6px;font-weight:600;">Rupture - CMM indisponible</span>' END
+      label: Statut
+      hasCustomLabel: true
+      optionName: m_rt_statut
+  percent_metrics: []
+  adhoc_filters:
+    - expressionType: SQL
+      sqlExpression: est_en_rupture = 1
+      clause: WHERE
+  time_range: No filter
+  timeseries_limit_metric:
+    aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    label: Jours en rupture
+    optionName: m_jours_rupt
+    sqlExpression: COUNT(DISTINCT date_rapport)
+  order_desc: true
+  row_limit: 50000
+  server_pagination: true
+  server_page_length: 50
+  page_length: 50
+  include_search: true
+  allow_rearrange_columns: true
+  show_cell_bars: false
+  align_pn: false
+  color_pn: false
+  table_timestamp_format: smart_date
+  column_config:
+    SDU:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    CMM (M-1):
+      d3NumberFormat: ',.2f'
+      horizontalAlign: right
+    Statut:
+      horizontalAlign: left
+    Province:
+      horizontalAlign: left
+    Zone de santé:
+      horizontalAlign: left
+    Structure:
+      horizontalAlign: left
+    Produit:
+      horizontalAlign: left
+    Programme:
+      horizontalAlign: left
+    Jours en rupture:
+      d3NumberFormat: ',d'
+  conditional_formatting: []
+  allow_render_html: true
+query_context: null

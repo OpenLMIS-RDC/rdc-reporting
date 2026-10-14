@@ -1,0 +1,342 @@
+table_name: mart_drc_expiry_risk
+uuid: 8c994ec6-0cc7-4601-a021-28a32372771a
+version: 1.0.0
+database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+schema: curated
+main_dttm_col: null
+description: Lots expirés ou expirant sous 90 jours. Remplace le dataset « ds_expiration ».
+default_endpoint: null
+offset: 0
+cache_timeout: null
+sql: null
+params: null
+template_params: null
+filter_select_enabled: true
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+is_managed_externally: false
+columns:
+  - column_name: facility_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UUID)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: product_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UUID)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: lot_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UUID)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: program_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UUID)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: structure
+    verbose_name: Structure
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: code_produit
+    verbose_name: Code produit
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: nom_produit
+    verbose_name: Nom du produit
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: numero_lot
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_expiration
+    verbose_name: Date d'expiration
+    is_dttm: true
+    is_active: true
+    type: Nullable(Date)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: unite_du_produit
+    verbose_name: Unité du produit
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: stock_on_hand
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: categorie_expiration
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: qte_deja_expiree
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: qte_expirant_30j
+    verbose_name: Quantité expirant dans 30 jours
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: qte_expirant_60j
+    verbose_name: Quantité expirant dans 60 jours
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: qte_expirant_90j
+    verbose_name: Quantité expirant dans 90 jours
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: valeur_usd_30j
+    verbose_name: Valeur USD proche expiration 30 jours
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: priceperpack
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: netcontent
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Int64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: programme
+    verbose_name: Programme
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: niveau_organisationnel
+    verbose_name: Niveau organisationnel
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: zone_geographique
+    verbose_name: Zone géographique
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: district
+    verbose_name: District
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: region
+    verbose_name: Région
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: type_de_structure
+    verbose_name: Type de structure
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee
+    verbose_name: Année d'expiration
+    is_dttm: false
+    is_active: true
+    type: Nullable(UInt16)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois
+    verbose_name: Mois d'expiration
+    is_dttm: false
+    is_active: true
+    type: Nullable(UInt8)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee_mois
+    verbose_name: Mois d'échéance
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: horizon_expiration
+    verbose_name: Horizon d’expiration
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: CASE WHEN toDate(date_expiration) < today() THEN '0. Déjà expiré' WHEN dateDiff('day',
+      today(), toDate(date_expiration)) <= 30 THEN '1. ≤ 30 j' WHEN dateDiff('day', today(), toDate(date_expiration))
+      <= 60 THEN '2. 31-60 j' WHEN dateDiff('day', today(), toDate(date_expiration)) <= 90 THEN '3. 61-90
+      j' ELSE '4. > 90 j' END
+    description: Fenêtre d'échéance calculée à partir de la date d'expiration et de la date du jour.
+  - column_name: type_structure
+    verbose_name: Type de structure (alias filtre)
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: type_de_structure
+    description: Alias de type_de_structure permettant aux filtres natifs partagés du dashboard (définis
+      sur ds_etat_stock) de s'appliquer à cet onglet.
+  - column_name: unite_organisation
+    verbose_name: Unité d'organisation (alias filtre)
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: zone_geographique
+    description: Alias de zone_geographique permettant aux filtres natifs partagés du dashboard (définis
+      sur ds_etat_stock) de s'appliquer à cet onglet.
+  - column_name: niveau_organisation
+    verbose_name: Niveau d’organisation (alias filtre)
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: niveau_organisationnel
+    description: Alias de niveau_organisationnel permettant aux filtres natifs partagés du dashboard (définis
+      sur ds_etat_stock) de s'appliquer à cet onglet.
+  - column_name: produit
+    verbose_name: Produit (alias filtre)
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: nom_produit
+    description: Alias de nom_produit permettant aux filtres natifs partagés du dashboard (définis sur
+      ds_etat_stock) de s'appliquer à cet onglet.
+  - column_name: jours_avant_expiration
+    verbose_name: Jours avant expiration
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: (dateDiff('day', today(), toDate(date_expiration)))
+    description: Nombre de jours restants avant expiration (négatif = lot déjà expiré).
+metrics:
+  - metric_name: count
+    verbose_name: COUNT(*)
+    metric_type: null
+    expression: COUNT(*)
+    description: null
+    d3format: null
+    extra: null
+    warning_text: null

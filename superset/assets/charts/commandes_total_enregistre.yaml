@@ -1,0 +1,25 @@
+slice_name: Commandes – Total enregistré
+viz_type: big_number_total
+uuid: 2e58a234-be77-43cc-9c14-076b35187f50
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  adhoc_filters: []
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(DISTINCT numero_commande)
+    label: Commandes
+    hasCustomLabel: true
+    optionName: m_mvo3546i
+  subheader: Commandes distinctes enregistrées
+  y_axis_format: ',d'
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+query_context: null

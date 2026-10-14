@@ -1,0 +1,39 @@
+slice_name: Taux de satisfaction global (pondéré)
+viz_type: gauge_chart
+uuid: 49da16b2-633f-4042-bbdc-00cf16103ace
+version: 1.0.0
+dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  animation: true
+  color_scheme: supersetColors
+  end_angle: -45
+  font_size: 20
+  groupby: []
+  max_val: '100'
+  metric:
+    expressionType: SQL
+    sqlExpression: ROUND(100.0*SUM(quantite_livree)/NULLIF(SUM(quantite_demandee),0),1)
+    label: Taux de satisfaction (%)
+    hasCustomLabel: true
+    optionName: m_mhrcnv01
+  min_val: '0'
+  number_format: ',.1f'
+  overlap: true
+  row_limit: 10
+  show_pointer: true
+  show_progress: true
+  split_number: 5
+  start_angle: 225
+  time_range: No filter
+  value_formatter: '{value} %'
+  viz_type: gauge_chart
+  show_axis_tick: true
+  show_split_line: true
+  roundCap: true
+query_context: null

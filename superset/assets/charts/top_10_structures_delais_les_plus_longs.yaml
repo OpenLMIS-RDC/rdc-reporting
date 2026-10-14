@@ -1,0 +1,46 @@
+slice_name: Top 10 structures – délais les plus longs
+viz_type: echarts_timeseries_bar
+uuid: f2238bb4-dcab-46f5-ac61-15ad537a97eb
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  adhoc_filters:
+    - expressionType: SQL
+      sqlExpression: delai_traitement_jours IS NOT NULL
+      clause: WHERE
+  metrics:
+    - expressionType: SQL
+      sqlExpression: ROUND(toFloat64(AVG(delai_traitement_jours)),1)
+      label: Délai moyen (jours)
+      hasCustomLabel: true
+      optionName: m_ydjjrb27
+  row_limit: 10
+  order_desc: true
+  show_legend: false
+  color_scheme: supersetColors
+  y_axis_format: ',.1f'
+  rich_tooltip: true
+  y_axis_bounds:
+    - null
+    - null
+  time_range: No filter
+  x_axis: structure
+  groupby: []
+  stack: null
+  show_value: true
+  show_extra_controls: false
+  x_axis_sort: Délai moyen (jours)
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: ''
+  y_axis_title: ''
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

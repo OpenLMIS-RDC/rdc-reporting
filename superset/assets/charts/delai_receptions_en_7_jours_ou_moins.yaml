@@ -1,0 +1,25 @@
+slice_name: Délai – Réceptions en 7 jours ou moins
+viz_type: big_number_total
+uuid: 31fd91c5-2533-499d-81b4-88720b992367
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  adhoc_filters: []
+  metric:
+    expressionType: SQL
+    sqlExpression: toFloat64(SUM(CASE WHEN delai_traitement_jours <= 7 THEN 1 ELSE 0 END))/NULLIF(COUNT(delai_traitement_jours),0)
+    label: ≤ 7 jours
+    hasCustomLabel: true
+    optionName: m_d7brz3ew
+  subheader: Part des réceptions traitées en 7 jours ou moins
+  y_axis_format: .1%
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+query_context: null

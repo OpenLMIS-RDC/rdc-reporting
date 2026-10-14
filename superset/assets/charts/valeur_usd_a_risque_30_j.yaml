@@ -1,0 +1,30 @@
+slice_name: Valeur USD à risque (≤ 30 j)
+viz_type: big_number_total
+uuid: b040bd75-ce12-4e42-929a-09db0a9e8d8f
+version: 1.0.0
+dataset_uuid: 8c994ec6-0cc7-4601-a021-28a32372771a
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: COALESCE(SUM(valeur_usd_30j), 0)
+    label: Valeur USD ≤ 30 jours
+    hasCustomLabel: true
+    optionName: m_pk4
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  adhoc_filters: []
+  subheader: Champ non encore alimenté dans la vue source
+  y_axis_format: $,.0f
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+  time_format: smart_date
+  force_timestamp_formatting: false
+query_context: null

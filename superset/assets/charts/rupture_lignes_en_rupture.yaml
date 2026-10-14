@@ -1,0 +1,25 @@
+slice_name: Rupture - Lignes en rupture
+viz_type: big_number_total
+uuid: e9beb3ca-f5ac-45a2-84f3-6081a5133ae9
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: SUM(est_en_rupture)
+    label: Lignes en rupture
+    hasCustomLabel: true
+    optionName: m_r_lignes
+  subheader: Lignes structure-produit en rupture
+  y_axis_format: ',d'
+  header_font_size: 0.35
+  subheader_font_size: 0.125
+  adhoc_filters: []
+  time_range: No filter
+query_context: null

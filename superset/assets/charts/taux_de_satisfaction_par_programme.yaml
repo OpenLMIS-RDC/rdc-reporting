@@ -1,0 +1,43 @@
+slice_name: Taux de satisfaction par programme (%)
+viz_type: echarts_timeseries_bar
+uuid: 3620442d-1068-49f4-bfaa-201577306318
+version: 1.0.0
+dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  adhoc_filters: []
+  metrics:
+    - expressionType: SQL
+      sqlExpression: ROUND(100.0*SUM(quantite_livree)/NULLIF(SUM(quantite_demandee),0),1)
+      label: Taux de satisfaction (%)
+      hasCustomLabel: true
+      optionName: m_yuqjptoj
+  row_limit: 12
+  order_desc: true
+  show_legend: false
+  color_scheme: supersetColors
+  y_axis_format: ',.1f'
+  rich_tooltip: true
+  y_axis_bounds:
+    - 0
+    - 100
+  time_range: No filter
+  x_axis: programme
+  groupby: []
+  stack: null
+  show_value: true
+  show_extra_controls: false
+  x_axis_sort: Taux de satisfaction (%)
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: ''
+  y_axis_title: ''
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

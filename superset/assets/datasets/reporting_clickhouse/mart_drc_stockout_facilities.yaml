@@ -1,0 +1,210 @@
+table_name: mart_drc_stockout_facilities
+uuid: 3c5df730-cced-4285-814c-1d0ed6e6ec14
+version: 1.0.0
+database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+schema: curated
+main_dttm_col: null
+description: Disponibilité de chaque produit de programme dans chaque structure qui le gère. Remplace
+  le dataset « Ruptures_stock ».
+default_endpoint: null
+offset: 0
+cache_timeout: null
+sql: null
+params: null
+template_params: null
+filter_select_enabled: true
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+is_managed_externally: false
+columns:
+  - column_name: product_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: facility_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: program_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: code_produit
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: produit
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: programme
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: structure
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: niveau_organisation
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: unite_organisation
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: district
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: region
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: type_structure
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: stock_on_hand
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Int64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: structure_existante
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: en_rupture
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: sans_donnee
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: stockout_confirme
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: a_une_rupture
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: stock_disponible_ok
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: statut_disponibilite
+    verbose_name: Statut de disponibilité
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+metrics:
+  - metric_name: count
+    verbose_name: COUNT(*)
+    metric_type: null
+    expression: COUNT(*)
+    description: null
+    d3format: null
+    extra: null
+    warning_text: null

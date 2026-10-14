@@ -1,0 +1,31 @@
+slice_name: Ajustements – Quantité sortie (−)
+viz_type: big_number_total
+uuid: 096cd7b6-68a2-4a25-b31e-ee72fd4030cc
+version: 1.0.0
+dataset_uuid: 5279f063-d572-484e-a63e-66dbb23ec2de
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  force_timestamp_formatting: false
+  header_font_size: 0.4
+  metric:
+    aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    isNew: false
+    label: Sorties
+    optionName: metric_1gnfknihhrh_k0immzoxb3q
+    sqlExpression: COALESCE(SUM(CASE WHEN sens_ajustement = 'Négatif' THEN quantite_absolue ELSE 0 END),
+      0)
+  subheader: Quantité retirée du stock
+  subheader_font_size: 0.125
+  time_format: smart_date
+  time_range: No filter
+  viz_type: big_number_total
+  y_axis_format: .3s
+query_context: null

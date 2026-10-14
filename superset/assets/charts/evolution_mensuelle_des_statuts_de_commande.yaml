@@ -1,0 +1,44 @@
+slice_name: Évolution mensuelle des statuts de commande
+viz_type: echarts_timeseries_bar
+uuid: 2ab13be8-59d9-4f7c-89e4-d59084fa889e
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  adhoc_filters: []
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT numero_commande)
+      label: Commandes
+      hasCustomLabel: true
+      optionName: m_mmlrrphb
+  row_limit: 50
+  order_desc: true
+  show_legend: true
+  color_scheme: supersetColors
+  y_axis_format: ',d'
+  rich_tooltip: true
+  y_axis_bounds:
+    - null
+    - null
+  time_range: No filter
+  x_axis: mois_nom
+  groupby:
+    - statut_commande
+  stack: Stack
+  show_value: false
+  show_extra_controls: false
+  x_axis_sort: mois_nom
+  x_axis_sort_asc: true
+  xAxisLabelRotation: 0
+  x_axis_title: ''
+  y_axis_title: ''
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

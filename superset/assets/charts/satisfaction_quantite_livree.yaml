@@ -1,0 +1,26 @@
+slice_name: Satisfaction – Quantité livrée
+viz_type: big_number_total
+uuid: a6e37723-21d0-45e4-acc5-af8e43b096c4
+version: 1.0.0
+dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  adhoc_filters: []
+  metric:
+    expressionType: SQL
+    sqlExpression: SUM(quantite_livree)
+    label: Quantité livrée
+    hasCustomLabel: true
+    optionName: m_kt4vv7f8
+  subheader: Volume effectivement livré
+  y_axis_format: .3s
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+  force_timestamp_formatting: false
+query_context: null

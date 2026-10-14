@@ -1,0 +1,113 @@
+slice_name: Détail par programme et produit
+viz_type: table
+uuid: 13742bd6-2c16-4da8-b3e0-c9ba910cb44d
+version: 1.0.0
+dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  all_columns: []
+  color_pn: false
+  column_config:
+    Quantité approuvée:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Quantité demandée:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Quantité livrée:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Quantité reçue:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Taux de satisfaction (%):
+      d3NumberFormat: ',.1f'
+      horizontalAlign: right
+  conditional_formatting:
+    - colorScheme: '#fda29b'
+      column: Taux de satisfaction (%)
+      operator: <
+      targetValue: 80
+    - colorScheme: '#a6f4c5'
+      column: Taux de satisfaction (%)
+      operator: ≥
+      targetValue: 95
+  groupby:
+    - programme
+    - nom_du_produit
+    - unite_du_produit
+  include_search: true
+  metrics:
+    - aggregate: SUM
+      column:
+        column_name: quantite_demandee
+      expressionType: SIMPLE
+      hasCustomLabel: true
+      isNew: false
+      label: Quantité demandée
+      optionName: metric_979oisfdso_5toa2z42w2e
+      sqlExpression: null
+    - aggregate: SUM
+      column:
+        column_name: quantite_approuvee
+      expressionType: SIMPLE
+      hasCustomLabel: true
+      isNew: false
+      label: Quantité approuvée
+      optionName: metric_tom2c4zcmla_ecincs2w9sp
+      sqlExpression: null
+    - aggregate: SUM
+      column:
+        column_name: quantite_livree
+      expressionType: SIMPLE
+      hasCustomLabel: true
+      isNew: false
+      label: Quantité livrée
+      optionName: metric_rqxhfez4go_pfb2s2190r
+      sqlExpression: null
+    - aggregate: SUM
+      column:
+        column_name: quantite_recue
+      expressionType: SIMPLE
+      hasCustomLabel: true
+      isNew: false
+      label: Quantité reçue
+      optionName: metric_axjy1405ans_1fw93xl2y8n
+      sqlExpression: null
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: Taux de satisfaction (%)
+      optionName: metric_taux_satisf_cast
+      sqlExpression: AVG(toFloat64(taux_de_satisfaction_pct))
+      sqlExpressionType: SIMPLE
+  order_by_cols: []
+  order_desc: true
+  page_length: 10
+  percent_metrics: []
+  query_mode: aggregate
+  row_limit: 10000
+  server_page_length: 10
+  show_cell_bars: false
+  table_timestamp_format: smart_date
+  time_range: No filter
+  timeseries_limit_metric:
+    aggregate: SUM
+    column:
+      column_name: quantite_demandee
+    expressionType: SIMPLE
+    hasCustomLabel: true
+    isNew: false
+    label: Quantité demandée
+    optionName: metric_979oisfdso_5toa2z42w2e
+    sqlExpression: null
+  viz_type: table
+  allow_render_html: true
+query_context: null

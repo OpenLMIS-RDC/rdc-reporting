@@ -1,0 +1,102 @@
+slice_name: 'Détail : pertes par structure et produit'
+viz_type: table
+uuid: 6f4d993a-5c83-4a30-9dc4-aa23a5943e8b
+version: 1.0.0
+dataset_uuid: 55ce0ab8-12a4-4b55-a761-636882680240
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  align_pn: false
+  all_columns: []
+  color_pn: false
+  column_config:
+    '%Pertes':
+      d3NumberFormat: ',.1%'
+      d3SmallNumberFormat: ',.1%'
+    Quantité disponible:
+      d3NumberFormat: ',d'
+      d3SmallNumberFormat: ',d'
+    'Quantité périmés ':
+      d3NumberFormat: ',d'
+      d3SmallNumberFormat: ',d'
+    Quantité volés:
+      d3NumberFormat: ',d'
+      d3SmallNumberFormat: ',d'
+    'Total pertes ':
+      d3NumberFormat: ',d'
+      d3SmallNumberFormat: ',d'
+  conditional_formatting: []
+  groupby:
+    - province
+    - zone_de_sante
+    - etablissement_de_sante
+    - programme
+    - produit
+  include_search: false
+  metrics:
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: Quantité disponible
+      optionName: metric_x0oal07nj3m_x2f3565b5cq
+      sqlExpression: COALESCE(SUM(stock_total_disponible),0)
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: 'Quantité périmés '
+      optionName: metric_4vs1xv9ebek_uxg71ggif5
+      sqlExpression: COALESCE( SUM(pertes_peremption), 0 )
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: Quantité avariés
+      optionName: metric_6au6e6b1kxv_6huyhjseyd9
+      sqlExpression: COALESCE( SUM(pertes_avarie), 0 )
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: Quantité volés
+      optionName: metric_3de9anybd3h_79xjc89vs55
+      sqlExpression: COALESCE( SUM(pertes_vol), 0 )
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: 'Total pertes '
+      optionName: metric_sruf6d4nmkl_4ui0z27x8tk
+      sqlExpression: COALESCE( SUM(valeur_pertes),0)
+  order_by_cols: []
+  order_desc: false
+  percent_metrics:
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: Pertes
+      optionName: metric_a96j0qqc4oc_l1swu774uga
+      sqlExpression: COALESCE( toFloat64(SUM(valeur_pertes)) / NULLIF(SUM(stock_total_disponible),0),
+        0 )
+  query_mode: aggregate
+  row_limit: 10000
+  server_page_length: 10
+  server_pagination: false
+  show_cell_bars: false
+  table_timestamp_format: smart_date
+  time_range: No filter
+  viz_type: table
+  allow_render_html: true
+query_context: null

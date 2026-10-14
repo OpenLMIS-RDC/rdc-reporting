@@ -1,0 +1,45 @@
+slice_name: Délai moyen (en jours) par type de structure
+viz_type: echarts_timeseries_bar
+uuid: 16c4a3ca-8b5d-4958-8549-b479eb5fd7d9
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters:
+    - expressionType: SQL
+      sqlExpression: delai_traitement_jours IS NOT NULL
+      clause: WHERE
+  color_scheme: supersetColors
+  metrics:
+    - expressionType: SQL
+      sqlExpression: ROUND(toFloat64(AVG(delai_traitement_jours)),1)
+      label: Délai moyen (jours)
+      hasCustomLabel: true
+      optionName: m_sweoa4z5
+  order_desc: true
+  rich_tooltip: true
+  row_limit: 10000
+  show_legend: false
+  time_range: No filter
+  viz_type: echarts_timeseries_bar
+  y_axis_bounds:
+    - null
+    - null
+  y_axis_format: ',.1f'
+  x_axis: type_de_structure
+  groupby: []
+  stack: Stack
+  show_value: true
+  x_axis_sort: type_de_structure
+  x_axis_sort_asc: true
+  xAxisLabelRotation: 45
+  x_axis_title: ''
+  y_axis_title: ''
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

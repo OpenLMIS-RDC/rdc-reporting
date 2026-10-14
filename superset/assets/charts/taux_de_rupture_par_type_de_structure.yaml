@@ -1,0 +1,48 @@
+slice_name: Taux de rupture par type de structure
+viz_type: echarts_timeseries_bar
+uuid: 84e96ee2-64c8-4fe7-8cc0-d5b8ee3618ad
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  metrics:
+    - expressionType: SQL
+      sqlExpression: AVG(est_en_rupture)
+      label: Taux de rupture
+      hasCustomLabel: true
+      optionName: m_b22nml63
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 20
+  color_scheme: supersetColors
+  order_desc: true
+  show_legend: false
+  rich_tooltip: true
+  y_axis_format: .0%
+  y_axis_bounds:
+    - 0
+    - 1
+  time_range: No filter
+  x_axis: type_structure
+  groupby: []
+  stack: null
+  show_value: true
+  x_axis_sort: Taux de rupture
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: Type de structure
+  y_axis_title: Taux de rupture
+  x_axis_title_margin: 125
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

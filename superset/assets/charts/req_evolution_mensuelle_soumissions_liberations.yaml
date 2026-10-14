@@ -1,0 +1,43 @@
+slice_name: Réq. – Évolution mensuelle soumissions / libérations
+viz_type: echarts_timeseries_line
+uuid: 27351276-ad3d-484b-9b0a-123aec513364
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_line
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: TEMPORAL_RANGE
+      operatorId: TEMPORAL_RANGE
+      subject: date_initiated
+      comparator: No filter
+  time_range: No filter
+  metrics:
+    - nb_soumises
+    - nb_liberees
+  groupby: []
+  row_limit: 10000
+  color_scheme: supersetColors
+  show_legend: true
+  rich_tooltip: true
+  y_axis_format: ',d'
+  x_axis: date_initiated
+  time_grain_sqla: P1M
+  markerEnabled: true
+  markerSize: 6
+  seriesType: line
+  x_axis_time_format: smart_date
+  x_axis_title: Mois
+  y_axis_title: Nombre de réquisitions
+  x_axis_title_margin: 30
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  legendType: scroll
+  legendOrientation: top
+query_context: null

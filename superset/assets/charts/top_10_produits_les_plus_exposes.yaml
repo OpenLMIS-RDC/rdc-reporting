@@ -1,0 +1,81 @@
+slice_name: Top 10 produits les plus exposés
+viz_type: table
+uuid: 3485ced0-8f67-4abd-beb7-82c6438c1cd1
+version: 1.0.0
+dataset_uuid: 8c994ec6-0cc7-4601-a021-28a32372771a
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters:
+    - clause: WHERE
+      comparator: null
+      expressionType: SQL
+      operator: null
+      sqlExpression: qte_expirant_90j > 0
+      subject: null
+  align_pn: false
+  all_columns: []
+  color_pn: false
+  column_config:
+    '%Quantité ≤ 90 j':
+      d3NumberFormat: .1%
+      horizontalAlign: right
+      showCellBars: false
+    Lots concernés:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+      showCellBars: false
+    Quantité ≤ 30 j:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Quantité ≤ 90 j:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+  conditional_formatting: []
+  groupby:
+    - nom_produit
+    - programme
+  include_search: false
+  metrics:
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: Lots concernés
+      optionName: m_t80c
+      sqlExpression: COUNT(*)
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: Quantité ≤ 30 j
+      optionName: m_t80a
+      sqlExpression: COALESCE(SUM(qte_expirant_30j), 0)
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: Quantité ≤ 90 j
+      optionName: m_t80b
+      sqlExpression: COALESCE(SUM(qte_expirant_90j), 0)
+  order_by_cols: []
+  order_desc: true
+  page_length: null
+  percent_metrics:
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: Quantité ≤ 90 j
+      optionName: m_t80b
+      sqlExpression: COALESCE(SUM(qte_expirant_90j), 0)
+  query_mode: aggregate
+  row_limit: 10
+  server_page_length: 10
+  show_cell_bars: true
+  table_timestamp_format: smart_date
+  time_range: No filter
+  timeseries_limit_metric:
+    expressionType: SQL
+    hasCustomLabel: true
+    label: Quantité ≤ 90 j
+    optionName: m_t80b
+    sqlExpression: COALESCE(SUM(qte_expirant_90j), 0)
+  viz_type: table
+  allow_render_html: true
+query_context: null

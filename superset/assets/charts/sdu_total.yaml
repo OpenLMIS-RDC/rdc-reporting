@@ -1,0 +1,25 @@
+slice_name: SDU total
+viz_type: big_number_total
+uuid: b2daaef8-760e-4efe-9501-ee4016755436
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: SUM(stock_disponible)
+    label: Stock disponible
+    hasCustomLabel: true
+    optionName: m_3n9r5z2f
+  subheader: Quantité cumulée sur la période filtrée
+  y_axis_format: SMART_NUMBER
+  header_font_size: 0.3
+  subheader_font_size: 0.125
+  adhoc_filters: []
+  time_range: No filter
+query_context: null

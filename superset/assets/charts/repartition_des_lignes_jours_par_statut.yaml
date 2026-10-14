@@ -1,0 +1,41 @@
+slice_name: Répartition des lignes-jours par statut
+viz_type: pie
+uuid: 3bae220f-3748-4485-9368-6266d9d830e0
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: pie
+  groupby:
+    - statut
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(*)
+    label: Lignes-jours
+    hasCustomLabel: true
+    optionName: m_rtn0fnp8
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  adhoc_filters: []
+  row_limit: 20
+  sort_by_metric: true
+  donut: true
+  innerRadius: 34
+  outerRadius: 55
+  show_labels: true
+  labels_outside: true
+  label_type: percent
+  number_format: ',d'
+  date_format: smart_date
+  show_legend: true
+  legendType: plain
+  legendOrientation: bottom
+  show_labels_threshold: 1
+  show_total: true
+  time_range: No filter
+query_context: null

@@ -1,0 +1,48 @@
+slice_name: Top 15 produits par rupture confirmée
+viz_type: echarts_timeseries_bar
+uuid: 7846a8a6-dfe4-4f93-bf56-5a21950e5cf8
+version: 1.0.0
+dataset_uuid: 3c5df730-cced-4285-814c-1d0ed6e6ec14
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  metrics:
+    - expressionType: SQL
+      sqlExpression: AVG(stockout_confirme)
+      label: Taux de rupture confirmée
+      hasCustomLabel: true
+      optionName: m_grtdrssw
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 15
+  color_scheme: supersetColors
+  order_desc: true
+  show_legend: false
+  rich_tooltip: true
+  y_axis_format: .0%
+  y_axis_bounds:
+    - 0
+    - null
+  time_range: No filter
+  x_axis: produit
+  groupby: []
+  stack: null
+  show_value: true
+  x_axis_sort: Taux de rupture confirmée
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: Produit
+  y_axis_title: Taux de rupture confirmée
+  x_axis_title_margin: 150
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

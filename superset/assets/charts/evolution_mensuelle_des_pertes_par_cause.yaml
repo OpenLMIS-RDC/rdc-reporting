@@ -1,0 +1,60 @@
+slice_name: Évolution mensuelle des pertes par cause
+viz_type: echarts_timeseries_bar
+uuid: e634b0db-9f44-4fd7-8e15-a1494ce45ae3
+version: 1.0.0
+dataset_uuid: 55ce0ab8-12a4-4b55-a761-636882680240
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(pertes_peremption),0)
+      label: Péremption
+      hasCustomLabel: true
+      optionName: m_48zd041l
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(pertes_avarie),0)
+      label: Avarie / casse
+      hasCustomLabel: true
+      optionName: m_nd43lgmi
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(pertes_vol),0)
+      label: Vol / disparition
+      hasCustomLabel: true
+      optionName: m_f7aw3bep
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 100
+  color_scheme: supersetColors
+  show_legend: true
+  rich_tooltip: true
+  y_axis_format: ',d'
+  time_range: No filter
+  x_axis: annee_mois
+  groupby: []
+  stack: Stack
+  show_value: false
+  x_axis_sort: annee_mois
+  x_axis_sort_asc: true
+  xAxisLabelRotation: 45
+  x_axis_title: Mois
+  y_axis_title: Quantité perdue
+  x_axis_title_margin: 75
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

@@ -1,0 +1,37 @@
+slice_name: Quantité à risque par programme et horizon
+viz_type: pivot_table_v2
+uuid: c37988df-2ec8-4191-9d38-2775d5f2c615
+version: 1.0.0
+dataset_uuid: 8c994ec6-0cc7-4601-a021-28a32372771a
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  time_range: No filter
+  dateFormat: smart_date
+  viz_type: pivot_table_v2
+  groupbyRows:
+    - programme
+  groupbyColumns:
+    - horizon_expiration
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(qte_expirant_90j), 0)
+      label: Quantité à risque
+      hasCustomLabel: true
+      optionName: m_pv77
+  metricsLayout: COLUMNS
+  combineMetric: false
+  aggregateFunction: Sum
+  valueFormat: ',d'
+  rowOrder: value_z_to_a
+  colOrder: key_a_to_z
+  rowTotals: true
+  colTotals: true
+  transposePivot: false
+  row_limit: 1000
+  conditional_formatting: []
+query_context: null

@@ -1,0 +1,166 @@
+slice_name: Diagnostic automatique — situation, chiffres et action à entreprendre
+viz_type: table
+uuid: 3dd1cd55-57a5-44be-a986-b98c0623cd79
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - etat_stock_ordonne
+  metrics:
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE etat_stock
+         WHEN 'Rupture' THEN 1
+         WHEN 'Potentielle rupture' THEN 2
+         WHEN 'Sous-stock' THEN 3
+         WHEN 'Satisfaisant' THEN 4
+         WHEN 'Surstock' THEN 5
+         WHEN 'Stock dormant' THEN 6
+         ELSE 7 END)
+      label: Gravité
+      hasCustomLabel: true
+      optionName: m_grav_129
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Lignes concernées
+      hasCustomLabel: true
+      optionName: m_sl2kcnul
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT structure)
+      label: Structures
+      hasCustomLabel: true
+      optionName: m_yteq3jhc
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT produit)
+      label: Produits
+      hasCustomLabel: true
+      optionName: m_l8hyb3c8
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE etat_stock
+         WHEN 'Rupture' THEN '🔴 1 · CRITIQUE'
+         WHEN 'Potentielle rupture' THEN '🟠 2 · URGENT'
+         WHEN 'Sous-stock' THEN '🟡 3 · VIGILANCE'
+         WHEN 'Satisfaisant' THEN '🟢 4 · CONFORME'
+         WHEN 'Surstock' THEN '🔵 5 · REDÉPLOYER'
+         WHEN 'Stock dormant' THEN '⚪ 6 · À QUALIFIER'
+         ELSE '⚫ 9 · À VÉRIFIER' END)
+      label: Niveau d’urgence
+      hasCustomLabel: true
+      optionName: m_wt10eaeb
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE etat_stock
+         WHEN 'Rupture' THEN 'Commande d’urgence ou emprunt au niveau supérieur. Vérifier d’abord que la fiche de stock a bien été transmise, puis redéployer depuis une structure en surstock du même produit.'
+         WHEN 'Potentielle rupture' THEN 'Déclencher le réapprovisionnement maintenant : le stock ne couvre pas le délai de livraison. Dimensionner la quantité sur la CMM des 3 derniers mois.'
+         WHEN 'Sous-stock' THEN 'Pas d’urgence. Inscrire le produit à la prochaine commande de routine et suivre l’évolution de la consommation.'
+         WHEN 'Satisfaisant' THEN 'Aucune action. Maintenir le rythme de commande et la saisie régulière des mouvements.'
+         WHEN 'Surstock' THEN 'Suspendre les commandes et organiser un redéploiement vers les structures en rupture du même produit. Croiser avec l’onglet Suivi de péremption avant tout transfert.'
+         WHEN 'Stock dormant' THEN 'MSD non calculable (CMM = 0). Vérifier si le produit est réellement dispensé ici : corriger la saisie des consommations ou retirer le produit de la liste gérée.'
+         ELSE 'État non classé : signaler la ligne à l’équipe données.' END)
+      label: Propositions d'actions
+      hasCustomLabel: true
+      optionName: m_agv7iwoo
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  percent_metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Part des lignes
+      hasCustomLabel: true
+      optionName: m_omh0k7s9
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 100
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: MIN(CASE etat_stock WHEN 'Rupture' THEN 1 WHEN 'Potentielle rupture' THEN 2 WHEN 'Sous-stock'
+      THEN 3 WHEN 'Satisfaisant' THEN 4 WHEN 'Surstock' THEN 5 WHEN 'Stock dormant' THEN 6 ELSE 9 END)
+    label: Ordre
+    hasCustomLabel: true
+    optionName: m_mxhiq2r8
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  order_desc: false
+  table_timestamp_format: smart_date
+  show_cell_bars: false
+  color_pn: false
+  include_search: false
+  allow_rearrange_columns: true
+  column_config:
+    Lignes concernées:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Structures:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Produits:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    '%Part des lignes':
+      d3NumberFormat: .1%
+      horizontalAlign: right
+    etat_stock_ordonne:
+      horizontalAlign: left
+    Niveau d’urgence:
+      horizontalAlign: left
+    Propositions d'actions:
+      horizontalAlign: left
+  time_range: No filter
+  conditional_formatting:
+    - operator: '='
+      targetValue: 1
+      colorScheme: '#d92d20'
+      column: Gravité
+    - operator: '='
+      targetValue: 2
+      colorScheme: '#e8770c'
+      column: Gravité
+    - operator: '='
+      targetValue: 3
+      colorScheme: '#dcae04'
+      column: Gravité
+    - operator: '='
+      targetValue: 4
+      colorScheme: '#12984f'
+      column: Gravité
+    - operator: '='
+      targetValue: 5
+      colorScheme: '#2563eb'
+      column: Gravité
+    - operator: '='
+      targetValue: 6
+      colorScheme: '#98a2b3'
+      column: Gravité
+    - operator: '='
+      targetValue: 7
+      colorScheme: '#334155'
+      column: Gravité
+  allow_render_html: true
+query_context: null

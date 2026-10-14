@@ -1,0 +1,25 @@
+slice_name: Délai – En attente de réception
+viz_type: big_number_total
+uuid: 738652f8-5a22-4d74-a1ab-0dbaf6feb371
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  adhoc_filters: []
+  metric:
+    expressionType: SQL
+    sqlExpression: SUM(CASE WHEN delai_traitement_jours IS NULL THEN 1 ELSE 0 END)
+    label: En attente
+    hasCustomLabel: true
+    optionName: m_0i569dke
+  subheader: Lignes sans réception enregistrée
+  y_axis_format: ',d'
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+query_context: null

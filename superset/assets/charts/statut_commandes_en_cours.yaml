@@ -1,0 +1,26 @@
+slice_name: Statut – Commandes en cours
+viz_type: big_number_total
+uuid: b7d5dd13-7d22-4328-9b5e-4bb2e4c4f2fe
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  adhoc_filters: []
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(DISTINCT CASE WHEN date_reception IS NULL AND statut_commande <> 'Commande échouée'
+      THEN numero_commande END)
+    label: En cours
+    hasCustomLabel: true
+    optionName: m_7vwt9b3u
+  subheader: Commandées, en préparation ou expédiées
+  y_axis_format: ',d'
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+query_context: null

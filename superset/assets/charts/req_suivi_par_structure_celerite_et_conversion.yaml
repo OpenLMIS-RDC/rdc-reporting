@@ -1,0 +1,86 @@
+slice_name: 'Réq. – Suivi par structure : célérité et conversion'
+viz_type: table
+uuid: c88884f3-6b84-49f6-8337-a67bb10f9b54
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  adhoc_filters: []
+  time_range: No filter
+  query_mode: aggregate
+  groupby:
+    - structure
+    - type_de_structure
+    - programme
+  metrics:
+    - nb_initiees
+    - nb_soumises
+    - nb_liberees
+    - expressionType: SQL
+      sqlExpression: ROUND(100.0 * SUM(nb_liberee) / NULLIF(SUM(nb_soumise), 0), 1)
+      label: Taux de conversion (%)
+      optionName: metric_req_t1
+      hasCustomLabel: true
+      aggregate: null
+      column: null
+      isNew: false
+    - expressionType: SQL
+      sqlExpression: ROUND(AVG(delai_total_j), 1)
+      label: Délai moyen total (j)
+      optionName: metric_req_t2
+      hasCustomLabel: true
+      aggregate: null
+      column: null
+      isNew: false
+    - expressionType: SQL
+      sqlExpression: SUM(CASE WHEN nb_liberee = 0 THEN 1 ELSE 0 END)
+      label: En attente
+      optionName: metric_req_t3
+      hasCustomLabel: true
+      aggregate: null
+      column: null
+      isNew: false
+    - expressionType: SQL
+      sqlExpression: ROUND(AVG((if(date_released IS NULL, round(dateDiff('second', date_last_change, now())
+        / 86400.0, 1), NULL))), 1)
+      label: Ancienneté moy. sans mouvement (j)
+      optionName: metric_req_t4
+      hasCustomLabel: true
+      aggregate: null
+      column: null
+      isNew: false
+  percent_metrics: []
+  timeseries_limit_metric: nb_initiees
+  order_desc: true
+  row_limit: 1000
+  page_length: 20
+  include_search: true
+  show_cell_bars: true
+  color_pn: true
+  allow_rearrange_columns: true
+  table_timestamp_format: smart_date
+  column_config: {}
+  conditional_formatting:
+    - colorScheme: '#ACE1C4'
+      column: Taux de conversion (%)
+      operator: ≥
+      targetValue: 80
+    - colorScheme: '#FDE380'
+      column: Taux de conversion (%)
+      operator: <
+      targetValue: 80
+    - colorScheme: '#EFA1AA'
+      column: Taux de conversion (%)
+      operator: <
+      targetValue: 50
+    - colorScheme: '#EFA1AA'
+      column: Délai moyen total (j)
+      operator: '>'
+      targetValue: 10
+  allow_render_html: true
+query_context: null

@@ -1,0 +1,26 @@
+slice_name: Satisfaction – Commandes traitées
+viz_type: big_number_total
+uuid: fe678142-95fa-4b88-80ac-d15ae8720e0e
+version: 1.0.0
+dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  adhoc_filters: []
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(DISTINCT numero_commande)
+    label: Commandes
+    hasCustomLabel: true
+    optionName: m_rxvif0br
+  subheader: Réquisitions distinctes sur le périmètre filtré
+  y_axis_format: ',d'
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+  force_timestamp_formatting: false
+query_context: null

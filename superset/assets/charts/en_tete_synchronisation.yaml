@@ -1,0 +1,29 @@
+slice_name: En-tete - Synchronisation
+viz_type: table
+uuid: 63b9adc9-e8fc-41ff-846c-6a50e7107dde
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby: []
+  metrics:
+    - expressionType: SQL
+      sqlExpression: '''Synchronisation des données au '' || COALESCE(formatDateTime(MAX(date_rapport),
+        ''%d/%m/%Y''),''--'') || '' - RDC'''
+      label: titre_rapport
+      hasCustomLabel: true
+      optionName: m_hdr_sync
+  row_limit: 1
+  adhoc_filters: []
+  time_range: No filter
+  server_pagination: false
+  include_search: false
+  show_totals: false
+  allow_render_html: true
+query_context: null

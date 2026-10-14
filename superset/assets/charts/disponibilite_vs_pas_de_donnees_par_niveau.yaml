@@ -1,0 +1,49 @@
+slice_name: Disponibilité vs Pas de données par niveau
+viz_type: echarts_timeseries_bar
+uuid: 04bee377-f424-4e7e-ada7-94065bcea824
+version: 1.0.0
+dataset_uuid: 3c5df730-cced-4285-814c-1d0ed6e6ec14
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Couples structure × produit
+      hasCustomLabel: true
+      optionName: m_llo7k8h7
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 200
+  color_scheme: supersetColors
+  show_legend: true
+  rich_tooltip: true
+  y_axis_format: .0%
+  y_axis_bounds:
+    - 0
+    - 1
+  time_range: No filter
+  x_axis: niveau_organisation
+  groupby:
+    - statut_disponibilite
+  stack: Stack
+  show_value: false
+  contributionMode: row
+  x_axis_sort: niveau_organisation
+  x_axis_sort_asc: true
+  xAxisLabelRotation: 0
+  x_axis_title: Niveau organisationnel
+  y_axis_title: Part des couples structure × produit
+  x_axis_title_margin: 50
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

@@ -1,0 +1,61 @@
+slice_name: Top 10 produits par quantité perdue
+viz_type: echarts_timeseries_bar
+uuid: 2f0e3965-2e5f-45d4-a086-367238a9fb43
+version: 1.0.0
+dataset_uuid: 55ce0ab8-12a4-4b55-a761-636882680240
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(pertes_peremption),0)
+      label: Péremption
+      hasCustomLabel: true
+      optionName: m_cghjqsyt
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(pertes_avarie),0)
+      label: Avarie / casse
+      hasCustomLabel: true
+      optionName: m_2h4kvt58
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(pertes_vol),0)
+      label: Vol / disparition
+      hasCustomLabel: true
+      optionName: m_tzw498rj
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 10
+  color_scheme: supersetColors
+  order_desc: true
+  show_legend: true
+  rich_tooltip: true
+  y_axis_format: ',d'
+  time_range: No filter
+  x_axis: produit
+  groupby: []
+  stack: Stack
+  show_value: false
+  x_axis_sort: Péremption
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: Produit
+  y_axis_title: Quantité perdue
+  x_axis_title_margin: 150
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

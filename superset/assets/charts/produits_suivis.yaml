@@ -1,0 +1,25 @@
+slice_name: Produits suivis
+viz_type: big_number_total
+uuid: fde29a85-307e-46c9-a0bc-cbbf64be05cb
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(DISTINCT produit)
+    label: Produits suivis
+    hasCustomLabel: true
+    optionName: m_prodsuiv
+  subheader: Produits suivis
+  y_axis_format: ',d'
+  header_font_size: 0.35
+  subheader_font_size: 0.125
+  adhoc_filters: []
+  time_range: No filter
+query_context: null

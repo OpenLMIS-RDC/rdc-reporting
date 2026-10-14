@@ -77,6 +77,18 @@ with sc as (
   group by requisition_id
 ),
 
+-- Facility key renamed: joined on a second facility_id, frl.* would come
+-- out as `frl.facility_id`.
+df as (
+  select
+    facility_id as df_facility_id,
+    geographic_level,
+    geographic_zone_name,
+    facility_type_name,
+    facility_name
+  from {{ ref('mart_drc_facility_directory') }}
+),
+
 frl as (
   select
     r.id                   as req_id,
@@ -161,8 +173,8 @@ select
   toMonth(dpp.start_date) as mois,
   dpp.name                as periode
 from frl
-left join {{ ref('mart_drc_facility_directory') }} df
-  on df.facility_id = frl.facility_id
+left join df
+  on df.df_facility_id = frl.facility_id
 left join {{ ref('stg_programs') }} dpr
   on dpr.id = frl.program_id
 left join {{ ref('stg_processing_periods') }} dpp

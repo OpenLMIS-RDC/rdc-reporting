@@ -1,0 +1,326 @@
+table_name: mart_drc_loss_rate
+uuid: 55ce0ab8-12a4-4b55-a761-636882680240
+version: 1.0.0
+database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+schema: curated
+main_dttm_col: date_rapport
+description: Pertes mensuelles par cause et taux de perte. Remplace le dataset « Taux de perte ».
+default_endpoint: null
+offset: 0
+cache_timeout: null
+sql: null
+params: null
+template_params: null
+filter_select_enabled: true
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+is_managed_externally: false
+columns:
+  - column_name: date_rapport
+    verbose_name: null
+    is_dttm: true
+    is_active: true
+    type: Date
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt16
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: province
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: zone_de_sante
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: aire_de_sante
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: etablissement_de_sante
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: type_structure
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: programme
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: code
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: produit
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: stock_debut
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Int64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: quantite_entrees
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: quantite_sorties
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: quantite_perdue
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: pertes_peremption
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: pertes_avarie
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: pertes_vol
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: stock_total_disponible
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Int64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: taux_perte_sur_entrees
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: taux_perte_sur_sorties
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: taux_perte_sur_disponible
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: taux_perte_pct
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee_mois
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: facility_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: program_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: product_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: structure
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: unite_organisation
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: valeur_pertes
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: cause_principale
+    verbose_name: Cause principale de la perte
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: a_une_perte
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: ligne_suivie
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+metrics:
+  - metric_name: count
+    verbose_name: COUNT(*)
+    metric_type: null
+    expression: COUNT(*)
+    description: null
+    d3format: null
+    extra: null
+    warning_text: null

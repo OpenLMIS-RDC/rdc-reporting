@@ -1,0 +1,46 @@
+slice_name: Top 10 structures par volume ajusté
+viz_type: echarts_timeseries_bar
+uuid: 97deab6d-b37b-4165-80d6-7d22894204fe
+version: 1.0.0
+dataset_uuid: 5279f063-d572-484e-a63e-66dbb23ec2de
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  color_scheme: supersetColors
+  metrics:
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: Volume ajusté
+      optionName: metric_08w3g5xf888_lk9wnxgmd5
+      sqlExpression: COALESCE(SUM(quantite_absolue), 0)
+  order_desc: true
+  rich_tooltip: true
+  row_limit: 10
+  show_legend: false
+  time_range: No filter
+  viz_type: echarts_timeseries_bar
+  y_axis_bounds:
+    - null
+    - null
+  y_axis_format: .3s
+  x_axis: structure
+  groupby: []
+  stack: Stack
+  show_value: true
+  series_limit: null
+  x_axis_sort: Volume ajusté
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: ''
+  y_axis_title: ''
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

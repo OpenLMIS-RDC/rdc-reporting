@@ -1,0 +1,284 @@
+table_name: Délai moyen de traitement des réquisitions
+uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+version: 1.0.0
+database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+schema: curated
+main_dttm_col: null
+description: Lignes de « Taux de satisfaction des commandes » avec le délai entre l'initiation et la libération
+  de la réquisition.
+default_endpoint: null
+offset: 0
+cache_timeout: null
+sql: |
+  -- "Délai moyen de traitement des réquisitions": the "Taux de satisfaction des
+  -- commandes" lines (core mart_stock_status) with the requisition's
+  -- initiation and release dates from mart_drc_requisition_leadtime and the
+  -- processing time between them, in days.
+  select
+    s.facility_id                                       as facility_id,
+    'REQ-' || upper(s.program_code)
+      || '-' || formatDateTime(s.period_start_date, '%Y%m')
+      || '-' || upper(substring(toString(s.requisition_id), 1, 8)) as numero_commande,
+    s.product_code                                      as code_produit,
+    s.product_name                                      as nom_du_produit,
+    o.description                                       as unite_du_produit,
+    s.requested_quantity                                as quantite_demandee,
+    s.approved_quantity                                 as quantite_approuvee,
+    s.approved_quantity                                 as quantite_livree,
+    coalesce(s.total_received_quantity, 0)              as quantite_recue,
+    if(s.requested_quantity > 0,
+      round(s.approved_quantity / s.requested_quantity * 100, 2),
+      0)                                                as taux_de_satisfaction_pct,
+    l.date_initiated                                    as date_demande,
+    l.date_released                                     as date_reception,
+    round(dateDiff('second', l.date_initiated, l.date_released) / 86400.0, 1)
+                                                        as delai_traitement_jours,
+    df.geographic_level                                 as niveau_organisationnel,
+    df.geographic_zone_name                             as zone_geographique,
+    df.facility_type_name                               as type_de_structure,
+    s.facility_name                                     as structure,
+    s.program_name                                      as programme,
+    toYear(s.period_start_date)                         as annee,
+    toMonth(s.period_start_date)                        as mois,
+    s.period_name                                       as periode
+  from curated.mart_stock_status s
+  left join curated.mart_drc_facility_directory df
+    on df.facility_id = s.facility_id
+  left join curated.stg_orderables o
+    on o.id = s.orderable_id
+  left join curated.mart_drc_requisition_leadtime l
+    on l.req_id = s.requisition_id
+  -- Legacy kept lines where requested or order quantity IS NOT NULL. Core
+  -- reads both as 0 when absent, so lines with neither are dropped on 0.
+  where s.requested_quantity != 0 or s.approved_quantity != 0
+params: null
+template_params: null
+filter_select_enabled: true
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+is_managed_externally: false
+columns:
+  - column_name: facility_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: numero_commande
+    verbose_name: N° de commande
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: code_produit
+    verbose_name: Code produit
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: nom_du_produit
+    verbose_name: Produit
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: unite_du_produit
+    verbose_name: Unité
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: quantite_demandee
+    verbose_name: Quantité demandée
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: quantite_approuvee
+    verbose_name: Quantité approuvée
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: quantite_livree
+    verbose_name: Quantité livrée
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: quantite_recue
+    verbose_name: Quantité reçue
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: taux_de_satisfaction_pct
+    verbose_name: Taux de satisfaction (%)
+    is_dttm: false
+    is_active: true
+    type: Float64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_demande
+    verbose_name: Date de demande
+    is_dttm: true
+    is_active: true
+    type: Nullable(DateTime)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_reception
+    verbose_name: Date de réception
+    is_dttm: true
+    is_active: true
+    type: Nullable(DateTime)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_traitement_jours
+    verbose_name: Délai de traitement (jours)
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: niveau_organisationnel
+    verbose_name: Niveau d'organisation
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: zone_geographique
+    verbose_name: Zone géographique
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: type_de_structure
+    verbose_name: Type de structure
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: structure
+    verbose_name: Structure
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: programme
+    verbose_name: Programme
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee
+    verbose_name: Année
+    is_dttm: false
+    is_active: true
+    type: UInt16
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois
+    verbose_name: Mois
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: periode
+    verbose_name: Période
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois_nom
+    verbose_name: Mois (nom)
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: CASE mois WHEN 1 THEN 'Janvier' WHEN 2 THEN '​Février' WHEN 3 THEN '​​Mars' WHEN 4 THEN
+      '​​​Avril' WHEN 5 THEN '​​​​Mai' WHEN 6 THEN '​​​​​Juin' WHEN 7 THEN '​​​​​​Juillet' WHEN 8 THEN
+      '​​​​​​​Août' WHEN 9 THEN '​​​​​​​​Septembre' WHEN 10 THEN '​​​​​​​​​Octobre' WHEN 11 THEN '​​​​​​​​​​Novembre'
+      WHEN 12 THEN '​​​​​​​​​​​Décembre' END
+    description: null
+  - column_name: tranche_delai
+    verbose_name: Tranche de délai
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: CASE WHEN delai_traitement_jours IS NULL THEN '5. Non réceptionné' WHEN delai_traitement_jours
+      <= 7 THEN '1. Moins de 7 jours' WHEN delai_traitement_jours <= 14 THEN '2. 8-14 jours' WHEN delai_traitement_jours
+      <= 30 THEN '3. 15-30 jours' ELSE '4. Plus de 30 jours' END
+    description: Regroupement du délai de traitement en tranches
+metrics:
+  - metric_name: count
+    verbose_name: COUNT(*)
+    metric_type: null
+    expression: COUNT(*)
+    description: null
+    d3format: null
+    extra: null
+    warning_text: null
+source_db_engine: clickhousedb

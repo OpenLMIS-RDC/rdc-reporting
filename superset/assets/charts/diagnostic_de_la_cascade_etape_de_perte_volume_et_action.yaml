@@ -1,0 +1,198 @@
+slice_name: Diagnostic de la cascade — étape de perte, volume et action
+viz_type: table
+uuid: 2e1b7df3-c8f5-4d95-a2b0-11901497db50
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - expressionType: SQL
+      sqlExpression: CASE (CASE WHEN COALESCE(qte_demandee,0)=0 THEN 6 WHEN COALESCE(qte_livree,0)=0 THEN
+        1 WHEN COALESCE(qte_approuvee,0) < 0.8*qte_demandee THEN 2 WHEN COALESCE(qte_livree,0) < 0.8*greatest(COALESCE(qte_approuvee,0),1)
+        THEN 3 WHEN COALESCE(qte_rejetee,0) > 0.05*greatest(COALESCE(qte_livree,0),1) THEN 4 ELSE 5 END)
+        WHEN 1 THEN '1. Rien de livré' WHEN 2 THEN '2. Volume perdu à l’approbation' WHEN 3 THEN '3. Volume
+        perdu à la livraison' WHEN 4 THEN '4. Rejet à la réception > 5 %' WHEN 5 THEN '5. Cascade conforme'
+        ELSE '6. Demande nulle ou non saisie' END
+      label: Étape de la cascade (du plus grave au moins grave)
+      hasCustomLabel: true
+      optionName: col_xh7w845k
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  metrics:
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE (CASE WHEN COALESCE(qte_demandee,0)=0 THEN 6 WHEN COALESCE(qte_livree,0)=0 THEN 1 WHEN COALESCE(qte_approuvee,0) < 0.8*qte_demandee THEN 2 WHEN COALESCE(qte_livree,0) < 0.8*greatest(COALESCE(qte_approuvee,0),1) THEN 3 WHEN COALESCE(qte_rejetee,0) > 0.05*greatest(COALESCE(qte_livree,0),1) THEN 4 ELSE 5 END)
+         WHEN 1 THEN 1
+         WHEN 2 THEN 2
+         WHEN 3 THEN 2
+         WHEN 4 THEN 3
+         WHEN 5 THEN 4
+         ELSE 6 END)
+      label: Gravité
+      hasCustomLabel: true
+      optionName: m_grav_138
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Lignes concernées
+      hasCustomLabel: true
+      optionName: m_1p43oavk
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT numero_commande)
+      label: Commandes
+      hasCustomLabel: true
+      optionName: m_lmmuzkrt
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT structure)
+      label: Structures
+      hasCustomLabel: true
+      optionName: m_9zz7jceu
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: SUM(COALESCE(qte_demandee,0))
+      label: Quantité demandée
+      hasCustomLabel: true
+      optionName: m_h5r2lrre
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: SUM(COALESCE(qte_livree,0))
+      label: Quantité livrée
+      hasCustomLabel: true
+      optionName: m_g37l3oy3
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE (CASE WHEN COALESCE(qte_demandee,0)=0 THEN 6 WHEN COALESCE(qte_livree,0)=0 THEN 1 WHEN COALESCE(qte_approuvee,0) < 0.8*qte_demandee THEN 2 WHEN COALESCE(qte_livree,0) < 0.8*greatest(COALESCE(qte_approuvee,0),1) THEN 3 WHEN COALESCE(qte_rejetee,0) > 0.05*greatest(COALESCE(qte_livree,0),1) THEN 4 ELSE 5 END)
+         WHEN 1 THEN '🔴 1 · CRITIQUE'
+         WHEN 2 THEN '🟠 2 · URGENT'
+         WHEN 3 THEN '🟠 3 · URGENT'
+         WHEN 4 THEN '🟡 4 · VIGILANCE'
+         WHEN 5 THEN '🟢 5 · CONFORME'
+         ELSE '⚪ 6 · À QUALIFIER' END)
+      label: Niveau d’urgence
+      hasCustomLabel: true
+      optionName: m_tnj1lfr8
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE (CASE WHEN COALESCE(qte_demandee,0)=0 THEN 6 WHEN COALESCE(qte_livree,0)=0 THEN 1 WHEN COALESCE(qte_approuvee,0) < 0.8*qte_demandee THEN 2 WHEN COALESCE(qte_livree,0) < 0.8*greatest(COALESCE(qte_approuvee,0),1) THEN 3 WHEN COALESCE(qte_rejetee,0) > 0.05*greatest(COALESCE(qte_livree,0),1) THEN 4 ELSE 5 END)
+         WHEN 1 THEN 'Rien n’est sorti sur ces lignes. Vérifier d’abord que les expéditions sont bien saisies, puis remonter le blocage au niveau central. Croiser avec l’onglet Statut des commandes pour situer l’étape.'
+         WHEN 2 THEN 'Le volume est perdu dès l’arbitrage, avant toute contrainte logistique. Revoir les règles d’approbation et le calibrage des quantités : une demande systématiquement rabotée entraîne une sur-demande en retour.'
+         WHEN 3 THEN 'Rupture amont ou problème de transport. Vérifier la disponibilité dans le Rapport d’état de stock, puis le circuit logistique du programme concerné.'
+         WHEN 4 THEN 'La qualité de ce qui arrive est en cause, pas la quantité. Investiguer les lots et les conditions de transport, et contrôler les dates de péremption à l’expédition.'
+         WHEN 5 THEN 'Aucune action. Maintenir le rythme de commande et la régularité de la saisie mensuelle.'
+         ELSE 'Angle mort de remontée, pas une absence de besoin. Confirmer auprès des structures que les réquisitions ont bien été transmises, puis corriger la saisie avant d’exploiter la tendance.' END)
+      label: Propositions d'actions
+      hasCustomLabel: true
+      optionName: m_isxrdpfk
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  percent_metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Part des lignes
+      hasCustomLabel: true
+      optionName: m_ygddy4l4
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 100
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: MIN(CASE WHEN COALESCE(qte_demandee,0)=0 THEN 6 WHEN COALESCE(qte_livree,0)=0 THEN
+      1 WHEN COALESCE(qte_approuvee,0) < 0.8*qte_demandee THEN 2 WHEN COALESCE(qte_livree,0) < 0.8*greatest(COALESCE(qte_approuvee,0),1)
+      THEN 3 WHEN COALESCE(qte_rejetee,0) > 0.05*greatest(COALESCE(qte_livree,0),1) THEN 4 ELSE 5 END)
+    label: Ordre
+    hasCustomLabel: true
+    optionName: m_yoqzrl0m
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  order_desc: false
+  table_timestamp_format: smart_date
+  show_cell_bars: false
+  color_pn: false
+  include_search: false
+  allow_rearrange_columns: true
+  column_config:
+    Lignes concernées:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Commandes:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Structures:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Quantité demandée:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Quantité livrée:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    '%Part des lignes':
+      d3NumberFormat: .1%
+      horizontalAlign: right
+    Étape de la cascade (du plus grave au moins grave):
+      horizontalAlign: left
+    Niveau d’urgence:
+      horizontalAlign: left
+    Propositions d'actions:
+      horizontalAlign: left
+  time_range: No filter
+  conditional_formatting:
+    - operator: '='
+      targetValue: 1
+      colorScheme: '#d92d20'
+      column: Gravité
+    - operator: '='
+      targetValue: 2
+      colorScheme: '#e8770c'
+      column: Gravité
+    - operator: '='
+      targetValue: 3
+      colorScheme: '#dcae04'
+      column: Gravité
+    - operator: '='
+      targetValue: 4
+      colorScheme: '#12984f'
+      column: Gravité
+    - operator: '='
+      targetValue: 5
+      colorScheme: '#2563eb'
+      column: Gravité
+    - operator: '='
+      targetValue: 6
+      colorScheme: '#98a2b3'
+      column: Gravité
+    - operator: '='
+      targetValue: 7
+      colorScheme: '#334155'
+      column: Gravité
+  allow_render_html: true
+query_context: null

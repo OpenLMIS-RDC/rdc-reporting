@@ -1,0 +1,48 @@
+slice_name: Quantité demandée vs livrée par programme
+viz_type: echarts_timeseries_bar
+uuid: e1731667-30fa-4983-a53b-faa9d3de4d17
+version: 1.0.0
+dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  adhoc_filters: []
+  metrics:
+    - expressionType: SQL
+      sqlExpression: SUM(quantite_demandee)
+      label: Quantité demandée
+      hasCustomLabel: true
+      optionName: m_llp5dwtr
+    - expressionType: SQL
+      sqlExpression: SUM(quantite_livree)
+      label: Quantité livrée
+      hasCustomLabel: true
+      optionName: m_l5y45zfc
+  row_limit: 12
+  order_desc: true
+  show_legend: true
+  color_scheme: supersetColors
+  y_axis_format: .3s
+  rich_tooltip: true
+  y_axis_bounds:
+    - null
+    - null
+  time_range: No filter
+  x_axis: programme
+  groupby: []
+  stack: null
+  show_value: false
+  show_extra_controls: false
+  x_axis_sort: Quantité demandée
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: ''
+  y_axis_title: ''
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

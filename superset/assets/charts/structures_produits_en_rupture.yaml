@@ -1,0 +1,30 @@
+slice_name: '% structures-produits en rupture'
+viz_type: big_number_total
+uuid: 1f8fd221-20f2-4d0c-ba4a-b55b0fefaf3d
+version: 1.0.0
+dataset_uuid: 3c5df730-cced-4285-814c-1d0ed6e6ec14
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: AVG(a_une_rupture)
+    label: Rupture brute
+    hasCustomLabel: true
+    optionName: m_4jc1lryo
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  adhoc_filters: []
+  subheader: Stock nul OU aucune donnée reçue
+  y_axis_format: .1%
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+  time_format: smart_date
+  force_timestamp_formatting: false
+query_context: null

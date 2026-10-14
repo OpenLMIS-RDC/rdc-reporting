@@ -1,0 +1,537 @@
+table_name: mart_drc_requisition_leadtime
+uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+version: 1.0.0
+database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+schema: curated
+main_dttm_col: date_initiated
+description: Réquisitions avec la date de chaque étape du circuit et les délais. Remplace le dataset «
+  Suivi des réquisitions ».
+default_endpoint: null
+offset: 0
+cache_timeout: null
+sql: null
+params: null
+template_params: null
+filter_select_enabled: true
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+is_managed_externally: false
+columns:
+  - column_name: req_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: facility_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UUID)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: program_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UUID)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: processing_period_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UUID)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: req_status_current
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: emergency_status
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_initiated
+    verbose_name: Date d'initiation
+    is_dttm: true
+    is_active: true
+    type: Nullable(DateTime)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_submitted
+    verbose_name: Date de soumission
+    is_dttm: true
+    is_active: true
+    type: Nullable(DateTime)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_authorized
+    verbose_name: Date d'autorisation
+    is_dttm: true
+    is_active: true
+    type: Nullable(DateTime)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_in_approval
+    verbose_name: Date de mise en approbation
+    is_dttm: true
+    is_active: true
+    type: Nullable(DateTime)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_approved
+    verbose_name: Date d'approbation
+    is_dttm: true
+    is_active: true
+    type: Nullable(DateTime)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_released
+    verbose_name: Date de libération
+    is_dttm: true
+    is_active: true
+    type: Nullable(DateTime)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_rejected
+    verbose_name: null
+    is_dttm: true
+    is_active: true
+    type: Nullable(DateTime)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_last_change
+    verbose_name: null
+    is_dttm: true
+    is_active: true
+    type: Nullable(DateTime)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_initiated_to_submitted_j
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_submitted_to_authorized_j
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_authorized_to_approved_j
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_approved_to_released_j
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_total_initiated_to_released_j
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: month_initiated
+    verbose_name: null
+    is_dttm: true
+    is_active: true
+    type: Nullable(Date)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: numero_requisition
+    verbose_name: N° de réquisition
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: statut_code
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: statut_requisition
+    verbose_name: Statut de la réquisition
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: type_requisition
+    verbose_name: Type de réquisition
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: nb_initiee
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: nb_soumise
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: nb_autorisee
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: nb_en_approbation
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: nb_approuvee
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: nb_liberee
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_initiation_a_soumission_j
+    verbose_name: Délai initiation → soumission (j)
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_soumission_a_autorisation_j
+    verbose_name: Délai soumission → autorisation (j)
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_autorisation_a_approbation_j
+    verbose_name: Délai autorisation → approbation (j)
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_approbation_a_liberation_j
+    verbose_name: Délai approbation → libération (j)
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_total_j
+    verbose_name: Délai total initiation → libération (j)
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: tranche_celerite
+    verbose_name: Tranche de célérité
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: niveau_organisationnel
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: zone_geographique
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: type_de_structure
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: structure
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: programme
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UInt16)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UInt8)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: periode
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois_nom
+    verbose_name: Mois (nom)
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: CASE mois WHEN 1 THEN 'Janvier' WHEN 2 THEN '​Février' WHEN 3 THEN '​​Mars' WHEN 4 THEN
+      '​​​Avril' WHEN 5 THEN '​​​​Mai' WHEN 6 THEN '​​​​​Juin' WHEN 7 THEN '​​​​​​Juillet' WHEN 8 THEN
+      '​​​​​​​Août' WHEN 9 THEN '​​​​​​​​Septembre' WHEN 10 THEN '​​​​​​​​​Octobre' WHEN 11 THEN '​​​​​​​​​​Novembre'
+      WHEN 12 THEN '​​​​​​​​​​​Décembre' END
+    description: null
+  - column_name: anciennete_sans_mouvement_j
+    verbose_name: Ancienneté sans mouvement (j)
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: if(date_released IS NULL, round(dateDiff('second', date_last_change, now()) / 86400.0,
+      1), NULL)
+    description: null
+metrics:
+  - metric_name: nb_en_attente
+    verbose_name: Réquisitions non libérées
+    metric_type: null
+    expression: SUM(CASE WHEN nb_liberee = 0 THEN 1 ELSE 0 END)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: taux_conversion_pct
+    verbose_name: Taux de conversion en commande (%)
+    metric_type: null
+    expression: 100.0 * SUM(nb_liberee) / NULLIF(SUM(nb_soumise), 0)
+    description: null
+    d3format: ',.1f'
+    extra: null
+    warning_text: null
+  - metric_name: delai_moyen_soumission_j
+    verbose_name: Délai moyen initiation → soumission (j)
+    metric_type: null
+    expression: AVG(delai_initiation_a_soumission_j)
+    description: null
+    d3format: ',.1f'
+    extra: null
+    warning_text: null
+  - metric_name: anciennete_moyenne_j
+    verbose_name: Ancienneté moyenne sans mouvement (j)
+    metric_type: null
+    expression: AVG((if(date_released IS NULL, round(dateDiff('second', date_last_change, now()) / 86400.0,
+      1), NULL)))
+    description: null
+    d3format: ',.1f'
+    extra: null
+    warning_text: null
+  - metric_name: delai_moyen_total_j
+    verbose_name: Délai moyen total (jours)
+    metric_type: null
+    expression: AVG(delai_total_j)
+    description: null
+    d3format: ',.1f'
+    extra: null
+    warning_text: null
+  - metric_name: nb_en_approbation
+    verbose_name: Réquisitions passées en approbation
+    metric_type: null
+    expression: SUM(nb_en_approbation)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: count
+    verbose_name: Nombre de lignes
+    metric_type: null
+    expression: COUNT(*)
+    description: null
+    d3format: null
+    extra: null
+    warning_text: null
+  - metric_name: nb_requisitions
+    verbose_name: Réquisitions
+    metric_type: null
+    expression: COUNT(DISTINCT numero_requisition)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: nb_autorisees
+    verbose_name: Réquisitions autorisées
+    metric_type: null
+    expression: SUM(nb_autorisee)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: nb_liberees
+    verbose_name: Réquisitions libérées
+    metric_type: null
+    expression: SUM(nb_liberee)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: nb_initiees
+    verbose_name: Réquisitions initiées
+    metric_type: null
+    expression: SUM(nb_initiee)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: nb_soumises
+    verbose_name: Réquisitions soumises
+    metric_type: null
+    expression: SUM(nb_soumise)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null

@@ -1,0 +1,568 @@
+table_name: mart_drc_stock_daily
+uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+version: 1.0.0
+database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+schema: curated
+main_dttm_col: date_rapport
+description: Stock journalier par structure, programme et produit (une ligne par jour). Remplace les datasets
+  « Rapport de stock journalier - RDC » et « Rapport stock journalier ».
+default_endpoint: null
+offset: 0
+cache_timeout: null
+sql: null
+params: null
+template_params: null
+filter_select_enabled: true
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+is_managed_externally: false
+columns:
+  - column_name: movement_date
+    verbose_name: null
+    is_dttm: true
+    is_active: true
+    type: Date
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: facility_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: program_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: product_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UUID
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: opening_balance
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: receipts
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: consumptions
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: losses
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: net_transfers
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: net_adjustments
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: net_variation
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: stock_on_hand
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: stockout_days
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: updated_at
+    verbose_name: null
+    is_dttm: true
+    is_active: true
+    type: DateTime
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_rapport
+    verbose_name: Date du rapport
+    is_dttm: true
+    is_active: true
+    type: Date
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_rapport_fr
+    verbose_name: Date
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee
+    verbose_name: Annee
+    is_dttm: false
+    is_active: true
+    type: UInt16
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois_num
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois
+    verbose_name: Mois
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: jour
+    verbose_name: Jour
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee_mois
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: niveau_organisation
+    verbose_name: Niveau d'organisation
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: unite_organisation
+    verbose_name: Unite d'organisation
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: province
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: zone_de_sante
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: type_structure
+    verbose_name: Type de structure
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: structure
+    verbose_name: Structure
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: programme
+    verbose_name: Programme
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: code_produit
+    verbose_name: Code
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: code
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: produit
+    verbose_name: Produit
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: stock_ouverture
+    verbose_name: Stock a l'ouverture
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: stock_recu
+    verbose_name: Stock recu
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: receptions
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: pertes
+    verbose_name: Pertes
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: consommations
+    verbose_name: Consommations
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: consommation
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: ajustements
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: transferts_nets
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: stock_disponible
+    verbose_name: Stock disponible
+    is_dttm: false
+    is_active: true
+    type: Int64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: cmm_m_1
+    verbose_name: CMM (M-1)
+    is_dttm: false
+    is_active: true
+    type: Decimal(38, 2)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: msd
+    verbose_name: MSD
+    is_dttm: false
+    is_active: true
+    type: Nullable(Decimal(38, 2))
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: statut
+    verbose_name: Statut
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: est_dernier_jour
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: est_en_rupture
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: cmm_exploitable
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: a_mouvement
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: ligne_suivie
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: jours_en_rupture
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: UInt64
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: periode
+    verbose_name: Période
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: CASE WHEN date_rapport = today() - 1 THEN 'J-1' ELSE 'Autres jours' END
+    description: null
+metrics:
+  - metric_name: taux_rupture
+    verbose_name: Taux de rupture (%)
+    metric_type: null
+    expression: CASE WHEN COUNT(*)>0 THEN ROUND(100.0*SUM(est_en_rupture)/COUNT(*),1) END
+    description: null
+    d3format: ',.1f'
+    extra: null
+    warning_text: null
+  - metric_name: msd_median
+    verbose_name: MSD median
+    metric_type: null
+    expression: medianExactWeightedInterpolated(toFloat64(msd), 1)
+    description: null
+    d3format: ',.1f'
+    extra: null
+    warning_text: null
+  - metric_name: produits_suivis
+    verbose_name: Produits suivis
+    metric_type: null
+    expression: COUNT(DISTINCT produit)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: structures_suivies
+    verbose_name: Structures suivies
+    metric_type: null
+    expression: COUNT(DISTINCT structure)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: lignes_en_rupture
+    verbose_name: Lignes en rupture
+    metric_type: null
+    expression: SUM(est_en_rupture)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: mois_ordre
+    verbose_name: Ordre du mois
+    metric_type: null
+    expression: MAX(mois_num)
+    description: null
+    d3format: null
+    extra: null
+    warning_text: null
+  - metric_name: lignes_suivies
+    verbose_name: Lignes suivies
+    metric_type: null
+    expression: COUNT(*)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: stock_disponible_total
+    verbose_name: SDU total
+    metric_type: null
+    expression: SUM(stock_disponible)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: receptions_totales
+    verbose_name: Stock recu
+    metric_type: null
+    expression: SUM(stock_recu)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: count
+    verbose_name: Lignes
+    metric_type: count
+    expression: COUNT(*)
+    description: null
+    d3format: null
+    extra: null
+    warning_text: null
+  - metric_name: consommations_totales
+    verbose_name: Consommations
+    metric_type: null
+    expression: SUM(consommations)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: pertes_totales
+    verbose_name: Pertes
+    metric_type: null
+    expression: SUM(pertes)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null

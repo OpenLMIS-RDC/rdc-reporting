@@ -1,0 +1,102 @@
+slice_name: Comparaison synthétique des niveaux
+viz_type: table
+uuid: 5d7db040-2a97-4ab7-8411-2709af81fde7
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - niveau_organisation
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT structure)
+      label: Structures
+      hasCustomLabel: true
+      optionName: m_uqii85f1
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Lignes suivies
+      hasCustomLabel: true
+      optionName: m_om9lfjv4
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: AVG(est_en_rupture)
+      label: Taux de rupture
+      hasCustomLabel: true
+      optionName: m_uhjz2ylf
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: AVG(est_sous_4_mois)
+      label: Taux sous 4 mois de stock
+      hasCustomLabel: true
+      optionName: m_5a62b9de
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: AVG(est_en_surstock)
+      label: Taux de surstock
+      hasCustomLabel: true
+      optionName: m_ucqs0i2i
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: ROUND(toFloat64(medianExactWeightedInterpolated(toFloat64(msd), 1)),1)
+      label: MSD médian
+      hasCustomLabel: true
+      optionName: m_315upjbh
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(quantites_en_fin_de_periode),0)
+      label: Stock disponible
+      hasCustomLabel: true
+      optionName: m_u3rcpohr
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 50
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: AVG(est_en_rupture)
+    label: tri
+    hasCustomLabel: true
+    optionName: m_81hcrio2
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  order_desc: true
+  show_cell_bars: true
+  include_search: false
+  allow_rearrange_columns: true
+  column_config:
+    Taux de rupture:
+      d3NumberFormat: .1%
+    Taux sous 4 mois de stock:
+      d3NumberFormat: .1%
+    Taux de surstock:
+      d3NumberFormat: .1%
+  time_range: No filter
+  conditional_formatting:
+    - operator: '>='
+      targetValue: 0.9
+      colorScheme: '#EFA1AA'
+      column: Taux de rupture
+  allow_render_html: true
+query_context: null

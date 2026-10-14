@@ -1,0 +1,30 @@
+slice_name: Stock disponible (dernier jour)
+viz_type: big_number_total
+uuid: bfbe0033-6cf1-4ab5-83c4-e6c4984a0995
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: COALESCE(sumIf(stock_disponible, est_dernier_jour = 1),0)
+    label: Stock disponible
+    hasCustomLabel: true
+    optionName: m_qp6wa2zv
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  adhoc_filters: []
+  subheader: Unités en stock au dernier jour connu
+  y_axis_format: ',d'
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+  time_format: smart_date
+  force_timestamp_formatting: false
+query_context: null

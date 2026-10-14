@@ -1,0 +1,43 @@
+slice_name: Top 10 produits par volume ajusté
+viz_type: echarts_timeseries_bar
+uuid: f30e0d59-24b6-4028-b371-40560f5a046c
+version: 1.0.0
+dataset_uuid: 5279f063-d572-484e-a63e-66dbb23ec2de
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  adhoc_filters: []
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(quantite_absolue), 0)
+      label: Volume ajusté
+      hasCustomLabel: true
+      optionName: m_1vr9hjf4
+  row_limit: 10
+  order_desc: true
+  show_legend: false
+  color_scheme: supersetColors
+  y_axis_format: .3s
+  rich_tooltip: true
+  y_axis_bounds:
+    - null
+    - null
+  time_range: No filter
+  x_axis: nom_produit
+  groupby: []
+  stack: null
+  show_value: true
+  show_extra_controls: false
+  x_axis_sort: Volume ajusté
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: ''
+  y_axis_title: ''
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

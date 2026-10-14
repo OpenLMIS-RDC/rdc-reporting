@@ -1,0 +1,185 @@
+slice_name: Diagnostic des statuts — blocage, volume et action
+viz_type: table
+uuid: 196a1cc7-f789-489e-b4f3-9fa04b4239d8
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - expressionType: SQL
+      sqlExpression: CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED' THEN 2 WHEN
+        'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN 5 ELSE 9 END) WHEN 1 THEN '1. Commande
+        échouée' WHEN 2 THEN '2. Commandée — non prise en charge' WHEN 3 THEN '3. En préparation' WHEN
+        4 THEN '4. Expédiée — réception non confirmée' WHEN 5 THEN '5. Reçue' ELSE '9. Statut à qualifier'
+        END
+      label: Statut (du plus bloquant au plus abouti)
+      hasCustomLabel: true
+      optionName: col_pc4f44pr
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  metrics:
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED' THEN 2 WHEN 'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN 5 ELSE 9 END)
+         WHEN 1 THEN 1
+         WHEN 2 THEN 2
+         WHEN 3 THEN 3
+         WHEN 4 THEN 2
+         WHEN 5 THEN 4
+         ELSE 6 END)
+      label: Gravité
+      hasCustomLabel: true
+      optionName: m_grav_139
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT numero_commande)
+      label: Commandes
+      hasCustomLabel: true
+      optionName: m_knso3o0y
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT structure)
+      label: Structures
+      hasCustomLabel: true
+      optionName: m_2cmcs0iq
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT programme)
+      label: Programmes
+      hasCustomLabel: true
+      optionName: m_vhw2k2gu
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT type_de_structure)
+      label: Types de structure
+      hasCustomLabel: true
+      optionName: m_4rvf5eon
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED' THEN 2 WHEN 'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN 5 ELSE 9 END)
+         WHEN 1 THEN '🔴 1 · CRITIQUE'
+         WHEN 2 THEN '🟠 2 · URGENT'
+         WHEN 3 THEN '🟡 3 · VIGILANCE'
+         WHEN 4 THEN '🟠 4 · À CONFIRMER'
+         WHEN 5 THEN '🟢 5 · CONFORME'
+         ELSE '⚪ 9 · À QUALIFIER' END)
+      label: Niveau d’urgence
+      hasCustomLabel: true
+      optionName: m_wnlq8uxk
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED' THEN 2 WHEN 'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN 5 ELSE 9 END)
+         WHEN 1 THEN 'Incident technique : la commande a échoué et ne repartira pas seule. La relancer depuis l’application source ; si elle échoue de nouveau, ouvrir un ticket au support et prévenir la structure destinataire.'
+         WHEN 2 THEN 'Goulot à l’entrée : l’entrepôt ne prend pas les demandes en charge. Vérifier sa charge et ses priorités, puis relancer les commandes les plus anciennes en premier.'
+         WHEN 3 THEN 'Traitement en cours, normal tant qu’il ne vieillit pas. Mesurer l’ancienneté dans l’onglet Délai moyen de traitement des réquisitions avant toute intervention.'
+         WHEN 4 THEN 'Le transport a eu lieu mais la réception n’est pas confirmée. Appeler les structures : dans la majorité des cas la marchandise est arrivée sans que la réception soit saisie. Corriger la saisie avant de conclure à une perte.'
+         WHEN 5 THEN 'Aucune action. Maintenir la régularité de la confirmation de réception côté structures.'
+         ELSE 'Statut non reconnu : vérifier la remontée du statut avant toute interprétation.' END)
+      label: Propositions d'actions
+      hasCustomLabel: true
+      optionName: m_v8so70dt
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  percent_metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Part des lignes
+      hasCustomLabel: true
+      optionName: m_k9urkxpr
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 100
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: MIN(CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED' THEN 2 WHEN 'FULFILLING'
+      THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN 5 ELSE 9 END)
+    label: Ordre
+    hasCustomLabel: true
+    optionName: m_yhf02dz0
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  order_desc: false
+  table_timestamp_format: smart_date
+  show_cell_bars: false
+  color_pn: false
+  include_search: false
+  allow_rearrange_columns: true
+  column_config:
+    Commandes:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Structures:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Programmes:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Types de structure:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    '%Part des lignes':
+      d3NumberFormat: .1%
+      horizontalAlign: right
+    Statut (du plus bloquant au plus abouti):
+      horizontalAlign: left
+    Niveau d’urgence:
+      horizontalAlign: left
+    Propositions d'actions:
+      horizontalAlign: left
+  time_range: No filter
+  conditional_formatting:
+    - operator: '='
+      targetValue: 1
+      colorScheme: '#d92d20'
+      column: Gravité
+    - operator: '='
+      targetValue: 2
+      colorScheme: '#e8770c'
+      column: Gravité
+    - operator: '='
+      targetValue: 3
+      colorScheme: '#dcae04'
+      column: Gravité
+    - operator: '='
+      targetValue: 4
+      colorScheme: '#12984f'
+      column: Gravité
+    - operator: '='
+      targetValue: 5
+      colorScheme: '#2563eb'
+      column: Gravité
+    - operator: '='
+      targetValue: 6
+      colorScheme: '#98a2b3'
+      column: Gravité
+    - operator: '='
+      targetValue: 7
+      colorScheme: '#334155'
+      column: Gravité
+  allow_render_html: true
+query_context: null

@@ -1,0 +1,71 @@
+slice_name: Délai de traitement moyen (en jours) par Niveau d’Organisation
+viz_type: table
+uuid: e158ad61-4b18-48a9-a88f-b0dc39e6f886
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - niveau_organisationnel
+  metrics:
+    - aggregate: COUNT
+      column:
+        column_name: numero_commande
+      expressionType: SIMPLE
+      hasCustomLabel: true
+      isNew: false
+      label: Nombre de commandes
+      optionName: metric_yoypvp7wnwh_nzk01r1q1y
+      sqlExpression: null
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: Délai moyen (jours)
+      optionName: metric_tsaigapq22p_58fmo7xbia5
+      sqlExpression: COALESCE(AVG(delai_traitement_jours), 0)
+  percent_metrics: []
+  adhoc_filters: []
+  row_limit: 1000
+  order_desc: true
+  timeseries_limit_metric:
+    aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    isNew: false
+    label: Délai moyen (jours)
+    optionName: metric_tsaigapq22p_58fmo7xbia5
+    sqlExpression: COALESCE(AVG(delai_traitement_jours), 0)
+  table_timestamp_format: smart_date
+  page_length: 0
+  include_search: false
+  show_cell_bars: false
+  color_pn: false
+  allow_rearrange_columns: false
+  time_range: No filter
+  column_config:
+    Nombre de commandes:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Délai moyen (jours):
+      d3NumberFormat: ',.1f'
+      horizontalAlign: right
+  conditional_formatting:
+    - operator: ≤
+      targetValue: 3
+      colorScheme: '#a6f4c5'
+      column: Délai moyen (jours)
+    - operator: '>'
+      targetValue: 3
+      colorScheme: '#fda29b'
+      column: Délai moyen (jours)
+  allow_render_html: true
+query_context: null

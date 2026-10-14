@@ -42,7 +42,8 @@ rdc-reporting/
 ## Conventions
 
 - dbt model names carry a `drc_` / `mart_drc_` prefix. The platform validator rejects any name that also exists in core.
-- Superset asset UUIDs must be unique across core and this package. The legacy DRC export UUIDs have been checked for collisions and may be reused for traceability.
+- Superset asset UUIDs must be unique across core and this package, and are newly generated, not reused from the legacy DRC export (plan decision 3). The database YAML is the exception: it re-declares the core database UUID.
+- Virtual datasets are written in ClickHouse SQL and carry `source_db_engine: clickhousedb`; without it `superset import-directory` transpiles the SQL from a generic dialect and rewrites `dateDiff` arguments.
 - Marts `ref()` core marts (`mart_stock_status`, `mart_facility_directory`, `mart_requisition_summary`, ...) wherever the legacy view was a thin wrapper over the same data. Only build from staging when core has no equivalent.
 - Column names are the ones the RDC team defined in the legacy views and datasets, kept verbatim (French in the `vw_*` line, English in the `analytics.*` star schema). When a mart builds on a core mart, core columns are aliased back to the legacy names. Display labels go in the dataset YAML `verbose_name`. This keeps the existing charts and the Power BI model valid without a column remap.
 - Assets are authored in the Superset UI against dev, exported with the platform's import/export scripts, and committed as YAML.

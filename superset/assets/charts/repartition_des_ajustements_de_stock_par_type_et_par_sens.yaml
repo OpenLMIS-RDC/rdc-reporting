@@ -1,0 +1,46 @@
+slice_name: Répartition des ajustements de stock par type et par sens
+viz_type: echarts_timeseries_bar
+uuid: 26232fd8-3ce5-4f09-a431-e754d727974c
+version: 1.0.0
+dataset_uuid: 5279f063-d572-484e-a63e-66dbb23ec2de
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  color_scheme: supersetColors
+  metrics:
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: Volume ajusté
+      optionName: metric_4m2nzj3ulji_nd7s1jryahn
+      sqlExpression: COALESCE(SUM(quantite_absolue), 0)
+  order_desc: true
+  rich_tooltip: true
+  row_limit: 10000
+  show_legend: true
+  time_range: No filter
+  viz_type: echarts_timeseries_bar
+  y_axis_bounds:
+    - null
+    - null
+  y_axis_format: .3s
+  x_axis: raison_ajustement
+  groupby:
+    - sens_ajustement
+  stack: Stack
+  show_value: false
+  x_axis_sort: Volume ajusté
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: ''
+  y_axis_title: ''
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

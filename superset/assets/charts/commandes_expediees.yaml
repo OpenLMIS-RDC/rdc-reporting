@@ -1,0 +1,26 @@
+slice_name: Commandes expédiées
+viz_type: big_number_total
+uuid: 1f7ab91f-4f1b-4464-860e-d9bd99d317a9
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  header_font_size: 0.4
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(DISTINCT CASE WHEN date_expedition IS NOT NULL THEN numero_commande END)
+    label: Commandes expédiées
+    hasCustomLabel: true
+    optionName: m_iu195boi
+  subheader_font_size: 0.125
+  time_format: smart_date
+  time_range: No filter
+  viz_type: big_number_total
+  y_axis_format: ',d'
+  subheader: Commandes ayant quitté l’entrepôt
+query_context: null

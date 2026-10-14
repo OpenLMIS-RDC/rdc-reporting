@@ -1,0 +1,37 @@
+slice_name: Commandes par structure et par statut
+viz_type: pivot_table_v2
+uuid: 1ba20c6d-b031-4e71-be4e-30271c10fd74
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  time_range: No filter
+  dateFormat: smart_date
+  viz_type: pivot_table_v2
+  groupbyRows:
+    - structure
+  groupbyColumns:
+    - statut_commande
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT numero_commande)
+      label: Commandes
+      hasCustomLabel: true
+      optionName: m_6hw7krdb
+  metricsLayout: COLUMNS
+  combineMetric: false
+  aggregateFunction: Sum
+  valueFormat: ',d'
+  rowOrder: value_z_to_a
+  colOrder: key_a_to_z
+  rowTotals: true
+  colTotals: true
+  transposePivot: false
+  row_limit: 1000
+  conditional_formatting: []
+query_context: null

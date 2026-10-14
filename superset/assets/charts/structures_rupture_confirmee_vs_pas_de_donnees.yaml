@@ -1,0 +1,89 @@
+slice_name: 'Structures : rupture confirmée vs Pas de données'
+viz_type: table
+uuid: 4b172ad1-add4-4fff-860d-e8fc7dd860f8
+version: 1.0.0
+dataset_uuid: 3c5df730-cced-4285-814c-1d0ed6e6ec14
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - structure
+    - niveau_organisation
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Produits attendus
+      hasCustomLabel: true
+      optionName: m_1efk4qbh
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: SUM(stockout_confirme)
+      label: Ruptures confirmées
+      hasCustomLabel: true
+      optionName: m_krw3wpqe
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: SUM(sans_donnee)
+      label: Produits sans données
+      hasCustomLabel: true
+      optionName: m_dmatq7v7
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: AVG(sans_donnee)
+      label: Taux de sans données
+      hasCustomLabel: true
+      optionName: m_bvjv5xuo
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: AVG(stockout_confirme)
+      label: Taux de rupture confirmée
+      hasCustomLabel: true
+      optionName: m_q0yh0wvr
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 200
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: SUM(sans_donnee)
+    label: tri
+    hasCustomLabel: true
+    optionName: m_e3o00czo
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  order_desc: true
+  show_cell_bars: true
+  include_search: true
+  allow_rearrange_columns: true
+  column_config:
+    Taux de sans données:
+      d3NumberFormat: .0%
+    Taux de rupture confirmée:
+      d3NumberFormat: .0%
+  time_range: No filter
+  conditional_formatting:
+    - operator: '>='
+      targetValue: 0.5
+      colorScheme: '#EFA1AA'
+      column: Taux de sans données
+    - operator: '>='
+      targetValue: 0.2
+      colorScheme: '#EFA1AA'
+      column: Taux de rupture confirmée
+  allow_render_html: true
+query_context: null

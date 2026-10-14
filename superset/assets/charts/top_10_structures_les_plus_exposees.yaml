@@ -1,0 +1,54 @@
+slice_name: Top 10 structures les plus exposées
+viz_type: echarts_timeseries_bar
+uuid: 8a0e6905-3d3e-45ff-9e20-0d17cc7abfdf
+version: 1.0.0
+dataset_uuid: 8c994ec6-0cc7-4601-a021-28a32372771a
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(qte_expirant_90j), 0)
+      label: Quantité ≤ 90 jours
+      hasCustomLabel: true
+      optionName: m_pk9
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters:
+    - expressionType: SQL
+      clause: WHERE
+      subject: null
+      operator: null
+      comparator: null
+      sqlExpression: qte_expirant_90j > 0
+  row_limit: 10
+  order_desc: true
+  color_scheme: supersetColors
+  show_legend: false
+  rich_tooltip: true
+  y_axis_format: .3s
+  y_axis_bounds:
+    - null
+    - null
+  time_range: No filter
+  x_axis: structure
+  groupby: []
+  stack: null
+  show_value: false
+  logAxis: false
+  x_axis_sort: Quantité ≤ 90 jours
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: ''
+  y_axis_title: Unités
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

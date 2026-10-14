@@ -1,0 +1,79 @@
+slice_name: Structures les plus touchées par les pertes
+viz_type: table
+uuid: 68f09c90-debe-442e-ac95-99be1631fa04
+version: 1.0.0
+dataset_uuid: 55ce0ab8-12a4-4b55-a761-636882680240
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - province
+    - zone_de_sante
+    - etablissement_de_sante
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(valeur_pertes),0)
+      label: Quantité perdue
+      hasCustomLabel: true
+      optionName: m_9aa5znla
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(pertes_peremption),0)
+      label: dont péremption
+      hasCustomLabel: true
+      optionName: m_0mxxqqzi
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: toFloat64(SUM(valeur_pertes)) / NULLIF(SUM(quantite_entrees),0)
+      label: Taux de perte sur entrées
+      hasCustomLabel: true
+      optionName: m_256pw6jr
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: uniqExactIf(produit, valeur_pertes > 0)
+      label: Produits concernés
+      hasCustomLabel: true
+      optionName: m_08lkjimc
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters:
+    - expressionType: SQL
+      clause: HAVING
+      sqlExpression: SUM(valeur_pertes) > 0
+  row_limit: 100
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: SUM(valeur_pertes)
+    label: tri
+    hasCustomLabel: true
+    optionName: m_la5w2oxl
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  order_desc: true
+  show_cell_bars: true
+  include_search: true
+  allow_rearrange_columns: true
+  column_config:
+    Taux de perte sur entrées:
+      d3NumberFormat: .2%
+  time_range: No filter
+  conditional_formatting:
+    - operator: '>='
+      targetValue: 0.05
+      colorScheme: '#EFA1AA'
+      column: Taux de perte sur entrées
+  allow_render_html: true
+query_context: null

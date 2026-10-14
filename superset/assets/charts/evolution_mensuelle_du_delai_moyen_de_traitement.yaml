@@ -1,0 +1,49 @@
+slice_name: Évolution mensuelle du délai moyen de traitement
+viz_type: echarts_timeseries_line
+uuid: 8eab962a-33d1-49da-b136-8e6a51c2e216
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_line
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: TEMPORAL_RANGE
+      operatorId: TEMPORAL_RANGE
+      subject: date_demande
+      comparator: No filter
+  metrics:
+    - expressionType: SQL
+      sqlExpression: ROUND(toFloat64(AVG(delai_traitement_jours)),2)
+      label: Délai moyen (jours)
+      hasCustomLabel: true
+      optionName: m_kpuylk7e
+  groupby: []
+  time_range: No filter
+  row_limit: 10000
+  color_scheme: supersetColors
+  rich_tooltip: true
+  show_legend: false
+  y_axis_format: ',.1f'
+  y_axis_bounds:
+    - null
+    - null
+  x_axis: date_demande
+  time_grain_sqla: P1M
+  markerEnabled: true
+  markerSize: 6
+  seriesType: line
+  x_axis_time_format: '%m/%Y'
+  x_axis_title: Mois
+  y_axis_title: Jours
+  x_axis_title_margin: 30
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  legendType: scroll
+  legendOrientation: top
+query_context: null

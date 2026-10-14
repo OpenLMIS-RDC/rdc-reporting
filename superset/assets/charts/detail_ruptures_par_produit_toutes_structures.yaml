@@ -1,0 +1,60 @@
+slice_name: 'Détail : ruptures par produit (toutes structures)'
+viz_type: table
+uuid: bf468988-670a-4611-b67f-84b1cae05705
+version: 1.0.0
+dataset_uuid: 3c5df730-cced-4285-814c-1d0ed6e6ec14
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  all_columns: []
+  color_pn: false
+  column_config:
+    '% en rupture':
+      d3NumberFormat: ',.1%'
+      d3SmallNumberFormat: ',.1%'
+  conditional_formatting: []
+  groupby:
+    - programme
+    - produit
+  metrics:
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: Structures existantes
+      optionName: metric_2k1omtgd8dv_dwrs1c1g4y
+      sqlExpression: COUNT(DISTINCT structure)
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: Structures en rupture
+      optionName: metric_ds6guhgphfq_lxra7d5pw6p
+      sqlExpression: COUNT(DISTINCT CASE WHEN a_une_rupture = 1 THEN structure END)
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: '% en rupture'
+      optionName: metric_lk7py60w9v_ffvuqjtgg2
+      sqlExpression: "toFloat64(COUNT(DISTINCT CASE WHEN a_une_rupture = 1 THEN structure END))\r\n/ NULLIF(COUNT(DISTINCT\
+        \ structure), 0)"
+  order_by_cols: []
+  order_desc: false
+  percent_metrics: []
+  query_mode: aggregate
+  row_limit: 10000
+  server_page_length: 10
+  show_cell_bars: false
+  table_timestamp_format: smart_date
+  time_range: No filter
+  viz_type: table
+  allow_render_html: true
+query_context: null

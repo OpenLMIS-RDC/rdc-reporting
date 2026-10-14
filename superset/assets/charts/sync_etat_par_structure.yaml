@@ -1,0 +1,99 @@
+slice_name: Sync - Etat par structure
+viz_type: table
+uuid: 60852c1c-a832-4aba-bbce-22ceeb6db505
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - expressionType: SQL
+      sqlExpression: province
+      label: Province
+      hasCustomLabel: true
+      optionName: c_province
+    - expressionType: SQL
+      sqlExpression: zone_de_sante
+      label: Zone de santé
+      hasCustomLabel: true
+      optionName: c_zone_de_sante
+    - expressionType: SQL
+      sqlExpression: type_structure
+      label: Type de structure
+      hasCustomLabel: true
+      optionName: c_type_structure
+    - expressionType: SQL
+      sqlExpression: structure
+      label: Structure
+      hasCustomLabel: true
+      optionName: c_structure
+  metrics:
+    - expressionType: SQL
+      sqlExpression: MAX(a_mouvement)
+      label: Sync
+      hasCustomLabel: true
+      optionName: m_sy_flag
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Lignes
+      hasCustomLabel: true
+      optionName: m_sy_lignes
+    - expressionType: SQL
+      sqlExpression: SUM(a_mouvement)
+      label: Lignes avec mouvement
+      hasCustomLabel: true
+      optionName: m_sy_mvt
+  percent_metrics: []
+  adhoc_filters: []
+  time_range: No filter
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: MAX(a_mouvement)
+    label: tri
+    hasCustomLabel: true
+    optionName: m_sy_tri
+  order_desc: false
+  row_limit: 50000
+  server_pagination: true
+  server_page_length: 50
+  page_length: 50
+  include_search: true
+  allow_rearrange_columns: true
+  show_cell_bars: false
+  align_pn: false
+  color_pn: false
+  table_timestamp_format: smart_date
+  column_config:
+    Sync:
+      d3NumberFormat: ',d'
+      horizontalAlign: center
+    Lignes:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Lignes avec mouvement:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Province:
+      horizontalAlign: left
+    Zone de santé:
+      horizontalAlign: left
+    Type de structure:
+      horizontalAlign: left
+    Structure:
+      horizontalAlign: left
+  conditional_formatting:
+    - colorScheme: '#d92d20'
+      column: Sync
+      operator: '='
+      targetValue: 0
+    - colorScheme: '#12984f'
+      column: Sync
+      operator: '='
+      targetValue: 1
+  allow_render_html: true
+query_context: null

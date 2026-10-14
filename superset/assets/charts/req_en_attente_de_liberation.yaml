@@ -1,0 +1,23 @@
+slice_name: Réq. – En attente de libération
+viz_type: big_number_total
+uuid: 1a4f2168-262b-41d4-8853-dfc25da44243
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  adhoc_filters: []
+  time_range: No filter
+  metric: nb_en_attente
+  subheader: Non encore converties
+  header_font_size: 0.4
+  subheader_font_size: 0.18
+  number_format: ',d'
+  y_axis_format: ',d'
+  time_format: smart_date
+  force_timestamp_formatting: false
+query_context: null

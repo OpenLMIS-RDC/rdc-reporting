@@ -1,0 +1,144 @@
+slice_name: Rapport de stock
+viz_type: table
+uuid: bb583383-36f0-40e4-ae66-78eec6300df9
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  align_pn: false
+  all_columns: []
+  color_pn: false
+  column_config:
+    CMM (M-1):
+      d3NumberFormat: ',.2f'
+      horizontalAlign: right
+    Gravité:
+      d3NumberFormat: ',d'
+    MSD:
+      d3NumberFormat: ',.2f'
+      horizontalAlign: right
+    Pertes:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    SDU:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Stock reçu:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Stock à l'ouverture:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    produit:
+      horizontalAlign: left
+    Consom:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Programme:
+      horizontalAlign: left
+  conditional_formatting:
+    - colorScheme: '#d92d20'
+      column: Gravité
+      operator: '='
+      targetValue: 1
+    - colorScheme: '#e8770c'
+      column: Gravité
+      operator: '='
+      targetValue: 2
+    - colorScheme: '#12984f'
+      column: Gravité
+      operator: '='
+      targetValue: 3
+    - colorScheme: '#98a2b3'
+      column: Gravité
+      operator: '='
+      targetValue: 4
+    - colorScheme: '#334155'
+      column: Gravité
+      operator: '='
+      targetValue: 5
+    - colorScheme: '#2563eb'
+      column: Gravité
+      operator: '='
+      targetValue: 6
+  groupby:
+    - produit
+  include_search: true
+  metrics:
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: Gravité
+      optionName: m_gravit
+      sqlExpression: |-
+        CASE
+         WHEN SUM(stock_disponible) IS NULL THEN 5
+         WHEN SUM(stock_disponible) <= 0 THEN 1
+         WHEN SUM(cmm_m_1) = 0 THEN 4
+         WHEN SUM(stock_disponible)/SUM(cmm_m_1) < 1 THEN 2
+         WHEN SUM(stock_disponible)/SUM(cmm_m_1) <= 3 THEN 3
+         ELSE 6 END
+    - expressionType: SQL
+      sqlExpression: MIN(programme)
+      label: Programme
+      hasCustomLabel: true
+      optionName: m_programme
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: Stock à l'ouverture
+      optionName: m_stocklouve
+      sqlExpression: SUM(stock_ouverture)
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: Stock reçu
+      optionName: m_stockreu
+      sqlExpression: SUM(stock_recu)
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: Pertes
+      optionName: m_pertes
+      sqlExpression: SUM(pertes)
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: Consom
+      optionName: m_consommati
+      sqlExpression: SUM(consommations)
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: SDU
+      optionName: m_stockdispo
+      sqlExpression: SUM(stock_disponible)
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: CMM (M-1)
+      optionName: m_cmmm1
+      sqlExpression: ROUND(SUM(cmm_m_1),2)
+    - expressionType: SQL
+      hasCustomLabel: true
+      label: MSD
+      optionName: m_msd
+      sqlExpression: CASE WHEN SUM(cmm_m_1) > 0 THEN ROUND(SUM(stock_disponible)/SUM(cmm_m_1),2) END
+  order_by_cols: []
+  order_desc: false
+  page_length: 50
+  percent_metrics: []
+  query_mode: aggregate
+  row_limit: 10000
+  server_page_length: 50
+  server_pagination: true
+  show_cell_bars: false
+  table_timestamp_format: smart_date
+  time_range: No filter
+  timeseries_limit_metric:
+    expressionType: SQL
+    hasCustomLabel: true
+    label: tri
+    optionName: m_2isdw97w
+    sqlExpression: MIN(produit)
+  viz_type: table
+  allow_render_html: true
+query_context: null

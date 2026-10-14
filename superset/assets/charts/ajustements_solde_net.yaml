@@ -1,0 +1,30 @@
+slice_name: Ajustements – Solde net
+viz_type: big_number_total
+uuid: 5c638178-8e0e-4aee-8671-44a997d61eb9
+version: 1.0.0
+dataset_uuid: 5279f063-d572-484e-a63e-66dbb23ec2de
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  force_timestamp_formatting: false
+  header_font_size: 0.4
+  metric:
+    aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    isNew: false
+    label: Solde net
+    optionName: metric_ks201l53mr_zjy55hpuorh
+    sqlExpression: COALESCE(SUM(quantite_ajustee), 0)
+  subheader: Entrées − sorties
+  subheader_font_size: 0.125
+  time_format: smart_date
+  time_range: No filter
+  viz_type: big_number_total
+  y_axis_format: +.3s
+query_context: null

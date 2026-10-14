@@ -1,0 +1,41 @@
+slice_name: Répartition des lignes par état de stock
+viz_type: pie
+uuid: d79a33c9-cd8d-47e7-9c19-7c2c0acad663
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: pie
+  groupby:
+    - etat_stock_ordonne
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(*)
+    label: Lignes
+    hasCustomLabel: true
+    optionName: m_r8o7n90q
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  adhoc_filters: []
+  row_limit: 20
+  sort_by_metric: true
+  donut: true
+  innerRadius: 34
+  outerRadius: 55
+  show_labels: true
+  labels_outside: true
+  label_type: percent
+  number_format: ',d'
+  date_format: smart_date
+  show_legend: true
+  legendType: plain
+  legendOrientation: bottom
+  show_labels_threshold: 1
+  show_total: true
+  time_range: No filter
+query_context: null

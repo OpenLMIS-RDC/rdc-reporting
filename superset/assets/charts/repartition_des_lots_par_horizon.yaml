@@ -1,0 +1,41 @@
+slice_name: Répartition des lots par horizon
+viz_type: pie
+uuid: 1a41fc1b-358d-4296-8efb-82ab41df46dd
+version: 1.0.0
+dataset_uuid: 8c994ec6-0cc7-4601-a021-28a32372771a
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: pie
+  groupby:
+    - horizon_expiration
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(*)
+    label: Lots concernés
+    hasCustomLabel: true
+    optionName: m_pk5
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  adhoc_filters: []
+  row_limit: 20
+  sort_by_metric: true
+  donut: true
+  innerRadius: 45
+  outerRadius: 70
+  show_labels: true
+  labels_outside: true
+  label_type: percent
+  number_format: ',d'
+  date_format: smart_date
+  show_legend: true
+  legendType: plain
+  legendOrientation: bottom
+  show_labels_threshold: 1
+  show_total: true
+  time_range: No filter
+query_context: null

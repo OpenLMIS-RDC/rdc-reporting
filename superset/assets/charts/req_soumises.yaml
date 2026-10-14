@@ -1,0 +1,23 @@
+slice_name: Réq. – Soumises
+viz_type: big_number_total
+uuid: c65e448f-8855-4973-bd2f-c8b7de6ff0ad
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  adhoc_filters: []
+  time_range: No filter
+  metric: nb_soumises
+  subheader: Transmises pour autorisation
+  header_font_size: 0.4
+  subheader_font_size: 0.18
+  number_format: ',d'
+  y_axis_format: ',d'
+  time_format: smart_date
+  force_timestamp_formatting: false
+query_context: null

@@ -1,0 +1,26 @@
+slice_name: Sync - Structures non synchronisees
+viz_type: big_number_total
+uuid: 469ecb26-6264-47b3-8328-aea558f87958
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(DISTINCT structure) - COUNT(DISTINCT CASE WHEN a_mouvement = 1 THEN structure
+      END)
+    label: Non synchronisées
+    hasCustomLabel: true
+    optionName: m_s_nonsync
+  subheader: Sans aucun mouvement
+  y_axis_format: ',d'
+  header_font_size: 0.35
+  subheader_font_size: 0.125
+  adhoc_filters: []
+  time_range: No filter
+query_context: null

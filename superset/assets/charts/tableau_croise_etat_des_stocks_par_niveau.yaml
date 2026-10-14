@@ -1,0 +1,58 @@
+slice_name: 'Tableau croisé : état des stocks par niveau'
+viz_type: pivot_table_v2
+uuid: 0d7046b5-2934-4ca7-8b3e-605988c712bb
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: pivot_table_v2
+  groupbyRows:
+    - produit
+  groupbyColumns:
+    - niveau_organisation
+  metrics:
+    - expressionType: SIMPLE
+      column:
+        column_name: quantites_en_fin_de_periode
+      aggregate: SUM
+      sqlExpression: null
+      isNew: false
+      hasCustomLabel: true
+      label: SDU
+      optionName: metric_niv_sdu
+    - expressionType: SIMPLE
+      column:
+        column_name: cmm
+      aggregate: SUM
+      sqlExpression: null
+      isNew: false
+      hasCustomLabel: true
+      label: CMM
+      optionName: metric_niv_cmm
+    - expressionType: SQL
+      column: null
+      aggregate: null
+      sqlExpression: toFloat64(SUM(quantites_en_fin_de_periode) / NULLIF(SUM(cmm), 0))
+      isNew: false
+      hasCustomLabel: true
+      label: MSD
+      optionName: metric_niv_msd
+  metricsLayout: COLUMNS
+  combineMetric: true
+  aggregateFunction: Sum
+  valueFormat: ',.1~f'
+  dateFormat: smart_date
+  rowOrder: key_a_to_z
+  colOrder: key_a_to_z
+  rowTotals: false
+  colTotals: false
+  transposePivot: false
+  adhoc_filters: []
+  row_limit: 1000
+  time_range: No filter
+  conditional_formatting: []
+query_context: null

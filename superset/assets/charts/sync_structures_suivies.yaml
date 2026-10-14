@@ -1,0 +1,25 @@
+slice_name: Sync - Structures suivies
+viz_type: big_number_total
+uuid: 05e330aa-1988-49e1-8e66-fa4d662c83b6
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(DISTINCT structure)
+    label: Structures suivies
+    hasCustomLabel: true
+    optionName: m_s_suivies
+  subheader: Structures rapportant
+  y_axis_format: ',d'
+  header_font_size: 0.35
+  subheader_font_size: 0.125
+  adhoc_filters: []
+  time_range: No filter
+query_context: null

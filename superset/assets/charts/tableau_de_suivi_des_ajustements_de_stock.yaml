@@ -1,0 +1,44 @@
+slice_name: Tableau de suivi des ajustements de stock
+viz_type: table
+uuid: 3dd8bdf1-9625-4958-9cb6-b5b345533898
+version: 1.0.0
+dataset_uuid: 5279f063-d572-484e-a63e-66dbb23ec2de
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  all_columns:
+    - date_ajustement
+    - structure
+    - type_de_structure
+    - programme
+    - nom_produit
+    - numero_lot
+    - unite_de_dispensation
+    - raison_ajustement
+    - sens_ajustement
+    - reasontype
+    - quantite_ajustee
+    - utilisateur_ayant_ajuste
+  color_pn: false
+  conditional_formatting: []
+  groupby: []
+  metrics: []
+  order_by_cols:
+    - '["date_ajustement", false]'
+  order_desc: true
+  percent_metrics: []
+  query_mode: raw
+  row_limit: 1000
+  server_page_length: 10
+  show_cell_bars: false
+  table_timestamp_format: '%d/%m/%Y'
+  time_range: No filter
+  viz_type: table
+  page_length: 15
+  include_search: true
+  allow_render_html: true
+query_context: null

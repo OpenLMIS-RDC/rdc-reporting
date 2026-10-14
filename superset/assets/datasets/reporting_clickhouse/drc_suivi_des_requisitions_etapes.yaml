@@ -1,0 +1,238 @@
+table_name: Suivi des réquisitions – étapes
+uuid: 0920c8ab-4b6b-435d-8ad1-5a0ccfa81820
+version: 1.0.0
+database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+schema: curated
+main_dttm_col: date_initiated
+description: Une ligne par réquisition et par étape du circuit (6 étapes), dépivotée de mart_drc_requisition_leadtime.
+default_endpoint: null
+offset: 0
+cache_timeout: null
+sql: |
+  -- "Suivi des réquisitions – étapes": one row per requisition x step of the
+  -- circuit (6 steps), unpivoted from mart_drc_requisition_leadtime.
+  -- Legacy: CROSS JOIN LATERAL (VALUES ...) over analytics.fact_requisition_leadtime.
+  -- delai_etape_j is the time from the previous step, in days, NULL for the
+  -- first step and for steps not reached.
+  select
+    l.facility_id            as facility_id,
+    l.numero_requisition     as numero_requisition,
+    l.statut_requisition     as statut_requisition,
+    l.type_requisition       as type_requisition,
+    l.date_initiated         as date_initiated,
+    e.1                      as etape,
+    e.2                      as atteinte,
+    e.3                      as delai_etape_j,
+    l.niveau_organisationnel as niveau_organisationnel,
+    l.zone_geographique      as zone_geographique,
+    l.type_de_structure      as type_de_structure,
+    l.structure              as structure,
+    l.programme              as programme,
+    l.annee                  as annee,
+    l.mois                   as mois,
+    l.periode                as periode
+  from curated.mart_drc_requisition_leadtime l
+  array join [
+    tuple('1. Initiée', toUInt8(1), cast(null, 'Nullable(Float64)')),
+    tuple('2. Soumise', toUInt8(l.date_submitted is not null),
+      round(dateDiff('second', l.date_initiated, l.date_submitted) / 86400.0, 2)),
+    tuple('3. Autorisée', toUInt8(l.date_authorized is not null),
+      round(dateDiff('second', l.date_submitted, l.date_authorized) / 86400.0, 2)),
+    tuple('4. En cours d''approbation', toUInt8(l.date_in_approval is not null),
+      round(dateDiff('second', l.date_authorized, l.date_in_approval) / 86400.0, 2)),
+    tuple('5. Approuvée', toUInt8(l.date_approved is not null),
+      round(dateDiff('second', l.date_in_approval, l.date_approved) / 86400.0, 2)),
+    tuple('6. Libérée', toUInt8(l.date_released is not null),
+      round(dateDiff('second', l.date_approved, l.date_released) / 86400.0, 2))
+  ] as e
+params: null
+template_params: null
+filter_select_enabled: true
+fetch_values_predicate: null
+extra: null
+normalize_columns: false
+always_filter_main_dttm: false
+is_managed_externally: false
+columns:
+  - column_name: facility_id
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UUID)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: numero_requisition
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: statut_requisition
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: type_requisition
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: date_initiated
+    verbose_name: null
+    is_dttm: true
+    is_active: true
+    type: Nullable(DateTime)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: etape
+    verbose_name: Étape du circuit
+    is_dttm: false
+    is_active: true
+    type: String
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: atteinte
+    verbose_name: Étape atteinte (0/1)
+    is_dttm: false
+    is_active: true
+    type: UInt8
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: delai_etape_j
+    verbose_name: Délai pour atteindre l’étape (j)
+    is_dttm: false
+    is_active: true
+    type: Nullable(Float64)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: niveau_organisationnel
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: zone_geographique
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: type_de_structure
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: structure
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: programme
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: annee
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UInt16)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(UInt8)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: periode
+    verbose_name: null
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois_nom
+    verbose_name: Mois (nom)
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: CASE mois WHEN 1 THEN 'Janvier' WHEN 2 THEN '​Février' WHEN 3 THEN '​​Mars' WHEN 4 THEN
+      '​​​Avril' WHEN 5 THEN '​​​​Mai' WHEN 6 THEN '​​​​​Juin' WHEN 7 THEN '​​​​​​Juillet' WHEN 8 THEN
+      '​​​​​​​Août' WHEN 9 THEN '​​​​​​​​Septembre' WHEN 10 THEN '​​​​​​​​​Octobre' WHEN 11 THEN '​​​​​​​​​​Novembre'
+      WHEN 12 THEN '​​​​​​​​​​​Décembre' END
+    description: null
+metrics:
+  - metric_name: delai_moyen_etape_j
+    verbose_name: Délai moyen pour atteindre l’étape (j)
+    metric_type: null
+    expression: AVG(delai_etape_j)
+    description: null
+    d3format: ',.1f'
+    extra: null
+    warning_text: null
+  - metric_name: nb_requisitions_etape
+    verbose_name: Réquisitions ayant atteint l’étape
+    metric_type: null
+    expression: SUM(atteinte)
+    description: null
+    d3format: ',d'
+    extra: null
+    warning_text: null
+  - metric_name: count
+    verbose_name: Nombre de lignes
+    metric_type: null
+    expression: COUNT(*)
+    description: null
+    d3format: null
+    extra: null
+    warning_text: null
+source_db_engine: clickhousedb

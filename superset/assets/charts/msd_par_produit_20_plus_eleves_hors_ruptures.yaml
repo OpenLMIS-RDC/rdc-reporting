@@ -1,0 +1,57 @@
+slice_name: MSD par produit (20 plus élevés, hors ruptures)
+viz_type: echarts_timeseries_bar
+uuid: 55c53057-8eb3-4d17-aee5-115eed9450aa
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters:
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(cmm), 0) > 0 AND ROUND(SUM(quantites_en_fin_de_periode) / SUM(cmm),
+        1) > 0
+      clause: HAVING
+      subject: null
+      operator: null
+      comparator: null
+  color_scheme: supersetColors
+  metrics:
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: MSD
+      optionName: metric_fzw01q99c2_lo15dq3c5dj
+      sqlExpression: "CASE\r\n    WHEN SUM(quantites_en_fin_de_periode) <= 0 THEN 0\n    WHEN COALESCE(SUM(cmm),\
+        \ 0) = 0             THEN NULL\n    ELSE least(ROUND(SUM(quantites_en_fin_de_periode) / SUM(cmm),\
+        \ 1), 24)\nEND"
+  order_desc: true
+  rich_tooltip: true
+  row_limit: 20
+  show_legend: false
+  time_range: No filter
+  viz_type: echarts_timeseries_bar
+  y_axis_bounds:
+    - 0
+    - null
+  y_axis_format: ',.1f'
+  x_axis: produit
+  groupby: []
+  stack: null
+  show_value: true
+  show_extra_controls: false
+  x_axis_sort: MSD
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: ''
+  y_axis_title: MSD (mois de couverture)
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

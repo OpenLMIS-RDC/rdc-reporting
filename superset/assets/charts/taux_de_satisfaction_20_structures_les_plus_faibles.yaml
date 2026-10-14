@@ -1,0 +1,42 @@
+slice_name: Taux de satisfaction (%) – 20 structures les plus faibles
+viz_type: echarts_timeseries_bar
+uuid: ad830807-a058-4e0d-9961-ffe9582530cd
+version: 1.0.0
+dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  color_scheme: supersetColors
+  metrics:
+    - expressionType: SQL
+      sqlExpression: ROUND(100.0*SUM(quantite_livree)/NULLIF(SUM(quantite_demandee),0),1)
+      label: Taux de satisfaction (%)
+      hasCustomLabel: true
+      optionName: m_l1fir83c
+  order_desc: false
+  rich_tooltip: true
+  row_limit: 20
+  time_range: No filter
+  viz_type: echarts_timeseries_bar
+  y_axis_bounds:
+    - 0
+    - 100
+  y_axis_format: ',.0f'
+  show_legend: false
+  x_axis: structure
+  groupby: []
+  stack: null
+  show_value: true
+  x_axis_sort: Taux de satisfaction (%)
+  x_axis_sort_asc: true
+  xAxisLabelRotation: 45
+  x_axis_title: ''
+  y_axis_title: ''
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

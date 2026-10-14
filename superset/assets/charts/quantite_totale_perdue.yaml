@@ -1,0 +1,30 @@
+slice_name: Quantité totale perdue
+viz_type: big_number_total
+uuid: 1119359d-bf78-4f4c-8fe6-cd2d93df1a41
+version: 1.0.0
+dataset_uuid: 55ce0ab8-12a4-4b55-a761-636882680240
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: COALESCE(SUM(valeur_pertes),0)
+    label: Quantité perdue
+    hasCustomLabel: true
+    optionName: m_bqg20c3f
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  adhoc_filters: []
+  subheader: Unités perdues, toutes causes confondues
+  y_axis_format: ',d'
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+  time_format: smart_date
+  force_timestamp_formatting: false
+query_context: null

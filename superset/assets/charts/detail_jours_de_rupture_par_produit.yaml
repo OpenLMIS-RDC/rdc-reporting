@@ -1,0 +1,41 @@
+slice_name: 'Détail : jours de rupture par produit'
+viz_type: table
+uuid: be118c02-f785-494f-95cd-5075877dacf9
+version: 1.0.0
+dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  all_columns: []
+  color_pn: true
+  groupby:
+    - programme
+    - code
+    - produit
+  metrics:
+    - aggregate: MAX
+      column:
+        column_name: nombre_de_jours_de_rupture
+      expressionType: SIMPLE
+      hasCustomLabel: true
+      isNew: false
+      label: Nombre de jours de reupture
+      optionName: metric_f3pxug159fi_loayuuxqd8s
+      sqlExpression: null
+  order_by_cols: []
+  order_desc: false
+  percent_metrics: []
+  query_mode: aggregate
+  row_limit: 10000
+  server_page_length: 10
+  show_cell_bars: true
+  table_timestamp_format: smart_date
+  time_range: No filter
+  viz_type: table
+  include_search: true
+  allow_render_html: true
+query_context: null

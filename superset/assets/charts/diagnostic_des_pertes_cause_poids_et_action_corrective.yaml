@@ -1,0 +1,181 @@
+slice_name: Diagnostic des pertes — cause, poids et action corrective
+viz_type: table
+uuid: 52e74167-5c36-4c79-ba9f-1f36cd0d4f43
+version: 1.0.0
+dataset_uuid: 55ce0ab8-12a4-4b55-a761-636882680240
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - cause_principale
+  metrics:
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE cause_principale
+         WHEN '0. Aucune perte' THEN 4
+         WHEN '1. Péremption' THEN 1
+         WHEN '2. Avarie / casse' THEN 2
+         WHEN '3. Vol / disparition' THEN 1
+         ELSE 6 END)
+      label: Gravité
+      hasCustomLabel: true
+      optionName: m_grav_133
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: SUM(valeur_pertes)
+      label: Quantité perdue
+      hasCustomLabel: true
+      optionName: m_b031vzqr
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Lignes concernées
+      hasCustomLabel: true
+      optionName: m_ps530pba
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT structure)
+      label: Structures
+      hasCustomLabel: true
+      optionName: m_9fnhm8wk
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT produit)
+      label: Produits
+      hasCustomLabel: true
+      optionName: m_epz6ucli
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: toFloat64(SUM(valeur_pertes)) / NULLIF(SUM(quantite_sorties),0)
+      label: Taux sur sorties
+      hasCustomLabel: true
+      optionName: m_u68jxrrk
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE cause_principale
+         WHEN '0. Aucune perte' THEN '🟢 SAIN'
+         WHEN '1. Péremption' THEN '🔴 ÉVITABLE'
+         WHEN '2. Avarie / casse' THEN '🟠 CONDITIONS DE STOCKAGE'
+         WHEN '3. Vol / disparition' THEN '🔴 CONTRÔLE INTERNE'
+         ELSE '⚪ À DOCUMENTER' END)
+      label: Niveau d’urgence
+      hasCustomLabel: true
+      optionName: m_dyc0ujjt
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE cause_principale
+         WHEN '0. Aucune perte' THEN 'Aucune perte déclarée. Vérifier tout de même que les pertes sont réellement saisies : une absence de perte peut n’être qu’un défaut de déclaration.'
+         WHEN '1. Péremption' THEN 'Perte évitable. Appliquer strictement le FEFO, redéployer les lots proches de la date limite et réduire les quantités commandées. Croiser avec l’onglet Suivi de péremption pour agir avant la perte.'
+         WHEN '2. Avarie / casse' THEN 'Contrôler les conditions de stockage et de transport : chaîne du froid, palettisation, manutention, étanchéité et sécurité des locaux.'
+         WHEN '3. Vol / disparition' THEN 'Déclencher un inventaire physique et un contrôle interne : accès au magasin, traçabilité des sorties, séparation des tâches.'
+         ELSE 'Cause non ventilée : demander à la structure de qualifier la perte, sinon aucune action corrective ne peut être ciblée.' END)
+      label: Propositions d'actions
+      hasCustomLabel: true
+      optionName: m_979zichg
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  percent_metrics:
+    - expressionType: SQL
+      sqlExpression: SUM(valeur_pertes)
+      label: Part des pertes
+      hasCustomLabel: true
+      optionName: m_0gugl8fg
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 100
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: SUM(valeur_pertes)
+    label: tri
+    hasCustomLabel: true
+    optionName: m_efl2100z
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  order_desc: true
+  table_timestamp_format: smart_date
+  show_cell_bars: false
+  color_pn: false
+  include_search: false
+  allow_rearrange_columns: true
+  column_config:
+    Quantité perdue:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Lignes concernées:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Structures:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Produits:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Taux sur sorties:
+      d3NumberFormat: .2%
+      horizontalAlign: right
+    '%Part des pertes':
+      d3NumberFormat: .1%
+      horizontalAlign: right
+    cause_principale:
+      horizontalAlign: left
+    Niveau d’urgence:
+      horizontalAlign: left
+    Propositions d'actions:
+      horizontalAlign: left
+  time_range: No filter
+  conditional_formatting:
+    - operator: '='
+      targetValue: 1
+      colorScheme: '#d92d20'
+      column: Gravité
+    - operator: '='
+      targetValue: 2
+      colorScheme: '#e8770c'
+      column: Gravité
+    - operator: '='
+      targetValue: 3
+      colorScheme: '#dcae04'
+      column: Gravité
+    - operator: '='
+      targetValue: 4
+      colorScheme: '#12984f'
+      column: Gravité
+    - operator: '='
+      targetValue: 5
+      colorScheme: '#2563eb'
+      column: Gravité
+    - operator: '='
+      targetValue: 6
+      colorScheme: '#98a2b3'
+      column: Gravité
+    - operator: '='
+      targetValue: 7
+      colorScheme: '#334155'
+      column: Gravité
+  allow_render_html: true
+query_context: null

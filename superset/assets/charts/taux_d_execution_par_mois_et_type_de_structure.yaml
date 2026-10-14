@@ -1,0 +1,44 @@
+slice_name: Taux d'exécution par mois et type de structure
+viz_type: echarts_timeseries_bar
+uuid: 71273919-7bf7-4aa0-ada4-56c4f4804589
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  color_scheme: supersetColors
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COALESCE(toFloat64(COUNT(DISTINCT CASE WHEN date_expedition IS NOT NULL OR date_reception
+        IS NOT NULL THEN numero_commande END)) / NULLIF(COUNT(DISTINCT numero_commande),0), 0)
+      label: Taux d'exécution
+      hasCustomLabel: true
+      optionName: m_8tdbgcs8
+  order_desc: true
+  rich_tooltip: true
+  row_limit: 100
+  show_legend: true
+  time_range: No filter
+  viz_type: echarts_timeseries_bar
+  y_axis_bounds:
+    - 0
+    - 1
+  y_axis_format: ',.0%'
+  x_axis: mois_nom
+  groupby:
+    - type_de_structure
+  stack: null
+  show_value: false
+  x_axis_sort: mois_nom
+  x_axis_sort_asc: true
+  xAxisLabelRotation: 0
+  x_axis_title: ''
+  y_axis_title: ''
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

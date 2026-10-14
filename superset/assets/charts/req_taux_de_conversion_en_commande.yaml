@@ -1,0 +1,31 @@
+slice_name: Réq. – Taux de conversion en commande
+viz_type: big_number_total
+uuid: 8a08ddef-c56c-463d-872e-9ae5fe639fbd
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  adhoc_filters: []
+  time_range: No filter
+  metric:
+    expressionType: SQL
+    sqlExpression: toFloat64(SUM(nb_liberee)) / NULLIF(SUM(nb_soumise), 0)
+    label: Taux de conversion
+    optionName: metric_req_tx
+    hasCustomLabel: true
+    aggregate: null
+    column: null
+    isNew: false
+  subheader: Libérées ÷ soumises
+  header_font_size: 0.4
+  subheader_font_size: 0.18
+  number_format: .1%
+  y_axis_format: .1%
+  time_format: smart_date
+  force_timestamp_formatting: false
+query_context: null

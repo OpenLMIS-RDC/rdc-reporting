@@ -1,0 +1,49 @@
+slice_name: Répartition des états de stock par niveau
+viz_type: echarts_timeseries_bar
+uuid: bf038682-f3aa-4f9e-8aeb-bb98c6f776e2
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Lignes
+      hasCustomLabel: true
+      optionName: m_mcz0v4f2
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 200
+  color_scheme: supersetColors
+  show_legend: true
+  rich_tooltip: true
+  y_axis_format: .0%
+  y_axis_bounds:
+    - 0
+    - 1
+  time_range: No filter
+  x_axis: niveau_organisation
+  groupby:
+    - etat_stock_ordonne
+  stack: Stack
+  show_value: false
+  contributionMode: row
+  x_axis_sort: niveau_organisation
+  x_axis_sort_asc: true
+  xAxisLabelRotation: 0
+  x_axis_title: Niveau organisationnel
+  y_axis_title: Part des lignes
+  x_axis_title_margin: 50
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

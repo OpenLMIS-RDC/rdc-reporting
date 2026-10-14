@@ -1,0 +1,90 @@
+slice_name: Structures à traiter en priorité
+viz_type: table
+uuid: a2de0385-1996-47cc-b498-b1638784275d
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - structure
+    - type_structure
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Produits suivis
+      hasCustomLabel: true
+      optionName: m_jgik7w5j
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: SUM(est_en_rupture)
+      label: Lignes en rupture
+      hasCustomLabel: true
+      optionName: m_pk6omupm
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: AVG(est_en_rupture)
+      label: Taux de rupture
+      hasCustomLabel: true
+      optionName: m_y7rje80e
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: SUM(est_en_surstock)
+      label: Lignes en surstock
+      hasCustomLabel: true
+      optionName: m_o7ztb4h4
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: ROUND(toFloat64(medianExactWeightedInterpolated(toFloat64(msd), 1)),1)
+      label: MSD médian
+      hasCustomLabel: true
+      optionName: m_nigmot6k
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  percent_metrics: []
+  adhoc_filters: []
+  row_limit: 100
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: SUM(est_en_rupture)
+    label: Lignes en rupture
+    hasCustomLabel: true
+    optionName: m_pk6omupm
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  order_desc: true
+  table_timestamp_format: smart_date
+  show_cell_bars: true
+  color_pn: false
+  include_search: true
+  allow_rearrange_columns: true
+  column_config:
+    Taux de rupture:
+      d3NumberFormat: .0%
+  conditional_formatting:
+    - operator: '>='
+      targetValue: 0.9
+      colorScheme: '#EFA1AA'
+      column: Taux de rupture
+    - operator: '>='
+      targetValue: 0.5
+      colorScheme: '#FDE380'
+      column: Taux de rupture
+  time_range: No filter
+  allow_render_html: true
+query_context: null

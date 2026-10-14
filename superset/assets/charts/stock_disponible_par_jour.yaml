@@ -1,0 +1,49 @@
+slice_name: Stock disponible par jour
+viz_type: echarts_timeseries_bar
+uuid: 8c3e7a35-caf8-43c3-bbc9-787ba25a161e
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  metrics:
+    - expressionType: SQL
+      sqlExpression: COALESCE(SUM(stock_disponible),0)
+      label: Stock disponible
+      hasCustomLabel: true
+      optionName: m_3px0pbgw
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters:
+    - clause: WHERE
+      expressionType: SIMPLE
+      operator: TEMPORAL_RANGE
+      operatorId: TEMPORAL_RANGE
+      subject: date_rapport
+      comparator: No filter
+  row_limit: 200
+  color_scheme: supersetColors
+  show_legend: false
+  rich_tooltip: true
+  y_axis_format: ',d'
+  time_range: No filter
+  x_axis: date_rapport
+  groupby: []
+  time_grain_sqla: P1D
+  stack: null
+  show_value: true
+  xAxisLabelRotation: 45
+  x_axis_title: Jour
+  y_axis_title: Unités en stock
+  x_axis_title_margin: 100
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

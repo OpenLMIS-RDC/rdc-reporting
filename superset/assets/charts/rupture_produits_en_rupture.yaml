@@ -1,0 +1,25 @@
+slice_name: Rupture - Produits en rupture
+viz_type: big_number_total
+uuid: 8de7b0d8-f06e-4021-ad7f-e92882804104
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(DISTINCT CASE WHEN est_en_rupture = 1 THEN produit END)
+    label: Produits en rupture
+    hasCustomLabel: true
+    optionName: m_r_prod
+  subheader: Produits distincts concernés
+  y_axis_format: ',d'
+  header_font_size: 0.35
+  subheader_font_size: 0.125
+  adhoc_filters: []
+  time_range: No filter
+query_context: null

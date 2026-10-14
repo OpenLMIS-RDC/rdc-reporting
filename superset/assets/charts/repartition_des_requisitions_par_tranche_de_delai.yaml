@@ -1,0 +1,38 @@
+slice_name: Répartition des réquisitions par tranche de délai
+viz_type: pie
+uuid: 3de0d265-3371-440c-9bee-afc042258952
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: pie
+  adhoc_filters: []
+  groupby:
+    - tranche_delai
+  row_limit: 100
+  date_format: smart_date
+  donut: true
+  innerRadius: 45
+  outerRadius: 70
+  label_type: percent
+  labels_outside: true
+  legendOrientation: bottom
+  legendType: plain
+  number_format: ',d'
+  show_labels: true
+  show_labels_threshold: 1
+  show_legend: true
+  sort_by_metric: true
+  time_range: No filter
+  metric:
+    expressionType: SQL
+    sqlExpression: COUNT(*)
+    label: Réquisitions
+    hasCustomLabel: true
+    optionName: m_rn611ojz
+  show_total: true
+query_context: null

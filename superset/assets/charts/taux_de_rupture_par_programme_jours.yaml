@@ -1,0 +1,48 @@
+slice_name: Taux de rupture par programme (jours)
+viz_type: echarts_timeseries_bar
+uuid: b88e0459-14f1-49af-b932-6e11e68c58d6
+version: 1.0.0
+dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  metrics:
+    - expressionType: SQL
+      sqlExpression: toFloat64(SUM(nombre_de_jours_de_rupture)) / NULLIF(SUM(nombre_de_jours_observes),0)
+      label: Taux de rupture
+      hasCustomLabel: true
+      optionName: m_gf6snwix
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 20
+  color_scheme: supersetColors
+  order_desc: true
+  show_legend: false
+  rich_tooltip: true
+  y_axis_format: .0%
+  y_axis_bounds:
+    - 0
+    - 1
+  time_range: No filter
+  x_axis: programme
+  groupby: []
+  stack: null
+  show_value: true
+  x_axis_sort: Taux de rupture
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: Programme
+  y_axis_title: Taux de rupture
+  x_axis_title_margin: 125
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

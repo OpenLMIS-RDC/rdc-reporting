@@ -1,0 +1,109 @@
+slice_name: 'Détail journalier : stock et statut par structure et produit'
+viz_type: table
+uuid: 48ff4c2b-4d2d-40b6-8c07-4b3be4987c0c
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters: []
+  all_columns: []
+  color_pn: false
+  column_config:
+    CMM (M-1):
+      d3NumberFormat: ',d'
+      d3SmallNumberFormat: ',d'
+      showCellBars: false
+    MSD:
+      d3NumberFormat: ',d'
+      d3SmallNumberFormat: ',d'
+      showCellBars: false
+    'Pertes ':
+      d3NumberFormat: ',d'
+      d3SmallNumberFormat: ',d'
+    'Réceptions ':
+      d3NumberFormat: ',d'
+      d3SmallNumberFormat: ',d'
+    Stock disponible:
+      d3NumberFormat: ',d'
+      d3SmallNumberFormat: ',d'
+      showCellBars: false
+    'Stock à l''ouverture ':
+      d3NumberFormat: ',d'
+      d3SmallNumberFormat: ',d'
+  conditional_formatting: []
+  groupby:
+    - structure
+    - programme
+    - produit
+    - statut
+  metrics:
+    - aggregate: SUM
+      column:
+        column_name: stock_ouverture
+      expressionType: SIMPLE
+      hasCustomLabel: true
+      isNew: false
+      label: 'Stock à l''ouverture '
+      optionName: metric_h4ppvroi7tw_1eqzhigkf9l
+      sqlExpression: null
+    - aggregate: SUM
+      column:
+        column_name: receptions
+      expressionType: SIMPLE
+      hasCustomLabel: true
+      isNew: false
+      label: 'Réceptions '
+      optionName: metric_ldlw82j9al9_c25jyiddcwc
+      sqlExpression: null
+    - aggregate: SUM
+      column:
+        column_name: pertes
+      expressionType: SIMPLE
+      hasCustomLabel: true
+      isNew: false
+      label: 'Pertes '
+      optionName: metric_xdb5n7lwwxl_cdowhxugc8n
+      sqlExpression: null
+    - aggregate: SUM
+      column:
+        column_name: stock_disponible
+      expressionType: SIMPLE
+      hasCustomLabel: true
+      isNew: false
+      label: Stock disponible
+      optionName: metric_dhbvfr87h8a_axz0nlu4k7a
+      sqlExpression: null
+    - aggregate: SUM
+      column:
+        column_name: cmm_m_1
+      expressionType: SIMPLE
+      hasCustomLabel: true
+      isNew: false
+      label: CMM (M-1)
+      optionName: metric_lg06di2sim_reexkbosbq
+      sqlExpression: null
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: MSD
+      optionName: metric_efs4x6pc93_1errr75a0zh
+      sqlExpression: SUM(stock_disponible) / NULLIF(SUM(cmm_m_1), 0)
+  order_by_cols: []
+  order_desc: false
+  percent_metrics: []
+  query_mode: aggregate
+  row_limit: 10000
+  server_page_length: 10
+  show_cell_bars: false
+  table_timestamp_format: smart_date
+  time_range: No filter
+  viz_type: table
+  include_search: true
+  allow_render_html: true
+query_context: null

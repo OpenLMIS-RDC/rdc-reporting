@@ -1,0 +1,53 @@
+slice_name: Demandé → Approuvé → Livré par programme
+viz_type: echarts_timeseries_bar
+uuid: 72e8e09c-9390-4fb5-8275-a10c360b0911
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: echarts_timeseries_bar
+  adhoc_filters: []
+  metrics:
+    - expressionType: SQL
+      sqlExpression: SUM(qte_demandee)
+      label: Quantité demandée
+      hasCustomLabel: true
+      optionName: m_vz60rs4j
+    - expressionType: SQL
+      sqlExpression: SUM(qte_approuvee)
+      label: Quantité approuvée
+      hasCustomLabel: true
+      optionName: m_l0p27fl6
+    - expressionType: SQL
+      sqlExpression: SUM(qte_livree)
+      label: Quantité livrée
+      hasCustomLabel: true
+      optionName: m_bgexuyxm
+  row_limit: 10
+  order_desc: true
+  show_legend: true
+  color_scheme: supersetColors
+  y_axis_format: .3s
+  rich_tooltip: true
+  y_axis_bounds:
+    - null
+    - null
+  time_range: No filter
+  x_axis: programme
+  groupby: []
+  stack: null
+  show_value: false
+  show_extra_controls: false
+  x_axis_sort: Quantité demandée
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: ''
+  y_axis_title: ''
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

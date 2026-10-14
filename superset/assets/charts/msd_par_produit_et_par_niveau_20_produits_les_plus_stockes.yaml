@@ -1,0 +1,62 @@
+slice_name: MSD par produit et par niveau (20 produits les plus stockés)
+viz_type: echarts_timeseries_bar
+uuid: 517318f4-35af-49ae-8c4d-b744308b9019
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  adhoc_filters:
+    - expressionType: SQL
+      sqlExpression: quantites_en_fin_de_periode IS NOT NULL
+      clause: WHERE
+      subject: null
+      operator: null
+      comparator: null
+    - expressionType: SQL
+      sqlExpression: ROUND(toFloat64(SUM(quantites_en_fin_de_periode) / NULLIF(SUM(cmm), 0)), 2) > 0
+      clause: HAVING
+      subject: null
+      operator: null
+      comparator: null
+  color_scheme: supersetColors
+  metrics:
+    - aggregate: null
+      column: null
+      expressionType: SQL
+      hasCustomLabel: true
+      isNew: false
+      label: MSD
+      optionName: metric_33_msd
+      sqlExpression: SUM(quantites_en_fin_de_periode) / NULLIF(SUM(cmm), 0)
+  order_desc: true
+  rich_tooltip: true
+  row_limit: 20
+  time_range: No filter
+  viz_type: echarts_timeseries_bar
+  y_axis_bounds:
+    - null
+    - null
+  y_axis_format: ',.2f'
+  show_legend: true
+  x_axis: produit
+  groupby:
+    - niveau_organisation
+  stack: null
+  show_value: true
+  logAxis: false
+  x_axis_sort: MSD
+  x_axis_sort_asc: false
+  xAxisLabelRotation: 45
+  x_axis_title: Produits
+  y_axis_title: MSD
+  x_axis_title_margin: 30
+  y_axis_title_margin: 30
+  y_axis_title_position: Left
+  orientation: vertical
+  legendType: scroll
+  legendOrientation: top
+query_context: null

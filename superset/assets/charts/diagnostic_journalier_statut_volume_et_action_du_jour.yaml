@@ -1,0 +1,176 @@
+slice_name: Diagnostic journalier — statut, volume et action du jour
+viz_type: table
+uuid: f543635d-bcce-4547-a8cf-2e842c233426
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: table
+  query_mode: aggregate
+  groupby:
+    - statut
+  metrics:
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE statut
+         WHEN '1. Rupture' THEN 1
+         WHEN '2. Risque de rupture' THEN 2
+         WHEN '3. Satisfaisant' THEN 4
+         WHEN '4. Stock présent - CMM indisponible' THEN 3
+         WHEN '5. Sans donnée' THEN 6
+         WHEN '6. Surstock' THEN 5
+         ELSE 7 END)
+      label: Gravité
+      hasCustomLabel: true
+      optionName: m_grav_134
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Lignes-jours
+      hasCustomLabel: true
+      optionName: m_0ysjf83r
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT structure)
+      label: Structures
+      hasCustomLabel: true
+      optionName: m_bl9lt9is
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: COUNT(DISTINCT produit)
+      label: Produits
+      hasCustomLabel: true
+      optionName: m_zum7ka28
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: SUM(stock_disponible)
+      label: Unités en stock
+      hasCustomLabel: true
+      optionName: m_9710z3fg
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE statut
+         WHEN '1. Rupture' THEN '🔴 CRITIQUE'
+         WHEN '2. Risque de rupture' THEN '🟠 URGENT'
+         WHEN '3. Satisfaisant' THEN '🟢 CONFORME'
+         WHEN '4. Stock présent - CMM indisponible' THEN '🟡 DONNÉE INCOMPLÈTE'
+         WHEN '5. Sans donnée' THEN '⚪ NON RAPPORTÉ'
+         WHEN '6. Surstock' THEN '🔵 REDÉPLOYER'
+         ELSE '⚫ À VÉRIFIER' END)
+      label: Niveau d’urgence
+      hasCustomLabel: true
+      optionName: m_lvy74h0e
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+    - expressionType: SQL
+      sqlExpression: |-
+        MAX(CASE statut
+         WHEN '1. Rupture' THEN 'Stock nul. Constituer la liste d’action du jour à partir du graphique « Produits en rupture au dernier jour ».'
+         WHEN '2. Risque de rupture' THEN 'Moins d’un mois de couverture : lancer le réapprovisionnement immédiatement, sans attendre le cycle de commande.'
+         WHEN '3. Satisfaisant' THEN 'Couverture de 1 à 3 mois. Aucune action, maintenir la saisie quotidienne des mouvements.'
+         WHEN '4. Stock présent - CMM indisponible' THEN 'Il y a du stock mais aucune consommation exploitable : impossible de juger la couverture. Faire remonter les consommations pour que la CMM se calcule.'
+         WHEN '5. Sans donnée' THEN 'Aucune donnée de stock ce jour-là. Relancer la structure : la complétude de la saisie conditionne la fiabilité du taux de rupture.'
+         WHEN '6. Surstock' THEN 'Plus de 3 mois de couverture : suspendre les commandes et proposer un transfert vers les structures en rupture du même produit.'
+         ELSE 'Statut non reconnu : signaler à l’équipe données.' END)
+      label: Propositions d'actions
+      hasCustomLabel: true
+      optionName: m_ubhh139b
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  percent_metrics:
+    - expressionType: SQL
+      sqlExpression: COUNT(*)
+      label: Part des lignes-jours
+      hasCustomLabel: true
+      optionName: m_4x1cikyk
+      sqlExpressionType: SIMPLE
+      aggregate: null
+      column: null
+  adhoc_filters: []
+  row_limit: 100
+  timeseries_limit_metric:
+    expressionType: SQL
+    sqlExpression: MIN(toInt64(substring(statut, 1, 1)))
+    label: tri
+    hasCustomLabel: true
+    optionName: m_o2ljgj8l
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  order_desc: false
+  table_timestamp_format: smart_date
+  show_cell_bars: false
+  color_pn: false
+  include_search: false
+  allow_rearrange_columns: true
+  column_config:
+    Lignes-jours:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Structures:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Produits:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    Unités en stock:
+      d3NumberFormat: ',d'
+      horizontalAlign: right
+    '%Part des lignes-jours':
+      d3NumberFormat: .1%
+      horizontalAlign: right
+    statut:
+      horizontalAlign: left
+    Niveau d’urgence:
+      horizontalAlign: left
+    Propositions d'actions:
+      horizontalAlign: left
+  time_range: No filter
+  conditional_formatting:
+    - operator: '='
+      targetValue: 1
+      colorScheme: '#d92d20'
+      column: Gravité
+    - operator: '='
+      targetValue: 2
+      colorScheme: '#e8770c'
+      column: Gravité
+    - operator: '='
+      targetValue: 3
+      colorScheme: '#dcae04'
+      column: Gravité
+    - operator: '='
+      targetValue: 4
+      colorScheme: '#12984f'
+      column: Gravité
+    - operator: '='
+      targetValue: 5
+      colorScheme: '#2563eb'
+      column: Gravité
+    - operator: '='
+      targetValue: 6
+      colorScheme: '#98a2b3'
+      column: Gravité
+    - operator: '='
+      targetValue: 7
+      colorScheme: '#334155'
+      column: Gravité
+  allow_render_html: true
+query_context: null

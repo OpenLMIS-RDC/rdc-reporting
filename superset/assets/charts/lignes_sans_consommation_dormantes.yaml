@@ -1,0 +1,30 @@
+slice_name: Lignes sans consommation (dormantes)
+viz_type: big_number_total
+uuid: 56b80032-2ee9-478f-8919-e620251aa483
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: big_number_total
+  metric:
+    expressionType: SQL
+    sqlExpression: SUM(est_dormant)
+    label: Lignes dormantes
+    hasCustomLabel: true
+    optionName: m_purq1vl5
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  adhoc_filters: []
+  subheader: 'Lignes à CMM nulle : MSD non calculable'
+  y_axis_format: ',d'
+  header_font_size: 0.4
+  subheader_font_size: 0.125
+  time_range: No filter
+  time_format: smart_date
+  force_timestamp_formatting: false
+query_context: null

@@ -1,0 +1,34 @@
+slice_name: Réq. – Répartition par statut actuel
+viz_type: pie
+uuid: b415c885-4917-4356-8cd3-19a8736bd301
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+description: null
+certified_by: null
+certification_details: null
+is_managed_externally: false
+cache_timeout: null
+params:
+  viz_type: pie
+  adhoc_filters: []
+  time_range: No filter
+  groupby:
+    - statut_requisition
+  metric: nb_requisitions
+  row_limit: 25
+  donut: true
+  innerRadius: 55
+  labels_outside: true
+  label_type: percent
+  number_format: ',d'
+  date_format: smart_date
+  show_labels: true
+  show_legend: true
+  legendOrientation: bottom
+  color_scheme: supersetColors
+  sort_by_metric: true
+  legendType: plain
+  legendMargin: 0
+  show_labels_threshold: 2
+  outerRadius: 72
+query_context: null
