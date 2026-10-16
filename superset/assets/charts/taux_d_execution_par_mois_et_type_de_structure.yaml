@@ -28,12 +28,12 @@ params:
     - 0
     - 1
   y_axis_format: ',.0%'
-  x_axis: mois_nom
+  x_axis: mois_saisie_nom
   groupby:
     - type_de_structure
   stack: null
   show_value: false
-  x_axis_sort: mois_nom
+  x_axis_sort: mois_saisie_nom
   x_axis_sort_asc: true
   xAxisLabelRotation: 0
   x_axis_title: ''

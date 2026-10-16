@@ -27,13 +27,13 @@ params:
     - null
     - null
   time_range: No filter
-  x_axis: mois_nom
+  x_axis: mois_saisie_nom
   groupby:
     - statut_commande
   stack: Stack
   show_value: false
   show_extra_controls: false
-  x_axis_sort: mois_nom
+  x_axis_sort: mois_saisie_nom
   x_axis_sort_asc: true
   xAxisLabelRotation: 0
   x_axis_title: ''

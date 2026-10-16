@@ -40,12 +40,19 @@ sql: |
     s.program_name                                      as programme,
     toYear(s.period_start_date)                         as annee,
     toMonth(s.period_start_date)                        as mois,
-    s.period_name                                       as periode
+    s.period_name                                       as periode,
+    -- date de saisie: requisition creation, as UAT after the export
+    toYear(r.created_date)                              as annee_saisie,
+    toMonth(r.created_date)                             as mois_saisie,
+    case toMonth(r.created_date) when 1 then '01 · Janvier' when 2 then '02 · Février' when 3 then '03 · Mars' when 4 then '04 · Avril' when 5 then '05 · Mai' when 6 then '06 · Juin' when 7 then '07 · Juillet' when 8 then '08 · Août' when 9 then '09 · Septembre' when 10 then '10 · Octobre' when 11 then '11 · Novembre' when 12 then '12 · Décembre' end
+                                                        as mois_saisie_nom
   from curated.mart_stock_status s
   left join curated.mart_drc_facility_directory df
     on df.facility_id = s.facility_id
   left join curated.stg_orderables o
     on o.id = s.orderable_id
+  left join curated.stg_requisitions r
+    on r.id = s.requisition_id
   left join curated.mart_drc_requisition_leadtime l
     on l.req_id = s.requisition_id
   -- Legacy kept lines where requested or order quantity IS NOT NULL. Core
@@ -272,6 +279,33 @@ columns:
       <= 7 THEN '1. Moins de 7 jours' WHEN delai_traitement_jours <= 14 THEN '2. 8-14 jours' WHEN delai_traitement_jours
       <= 30 THEN '3. 15-30 jours' ELSE '4. Plus de 30 jours' END
     description: Regroupement du délai de traitement en tranches
+  - column_name: annee_saisie
+    verbose_name: Année de saisie
+    is_dttm: false
+    is_active: true
+    type: Nullable(UInt16)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois_saisie
+    verbose_name: Mois de saisie (n°)
+    is_dttm: false
+    is_active: true
+    type: Nullable(UInt8)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois_saisie_nom
+    verbose_name: Mois de saisie
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
 metrics:
   - metric_name: count
     verbose_name: COUNT(*)

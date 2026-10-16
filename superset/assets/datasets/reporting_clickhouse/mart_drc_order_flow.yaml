@@ -346,6 +346,33 @@ columns:
     filterable: true
     expression: CASE WHEN urgence = 1 THEN 'Urgence' ELSE 'Régulière' END
     description: null
+  - column_name: annee_saisie
+    verbose_name: Année de saisie
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: 'toYear(date_commande)'
+    description: null
+  - column_name: mois_saisie
+    verbose_name: Mois de saisie (n°)
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: 'toMonth(date_commande)'
+    description: null
+  - column_name: mois_saisie_nom
+    verbose_name: Mois de saisie
+    is_dttm: false
+    is_active: true
+    type: null
+    groupby: true
+    filterable: true
+    expression: 'CASE toMonth(date_commande) WHEN 1 THEN ''01 · Janvier'' WHEN 2 THEN ''02 · Février'' WHEN 3 THEN ''03 · Mars'' WHEN 4 THEN ''04 · Avril'' WHEN 5 THEN ''05 · Mai'' WHEN 6 THEN ''06 · Juin'' WHEN 7 THEN ''07 · Juillet'' WHEN 8 THEN ''08 · Août'' WHEN 9 THEN ''09 · Septembre'' WHEN 10 THEN ''10 · Octobre'' WHEN 11 THEN ''11 · Novembre'' WHEN 12 THEN ''12 · Décembre'' END'
+    description: null
 metrics:
   - metric_name: count
     verbose_name: COUNT(*)

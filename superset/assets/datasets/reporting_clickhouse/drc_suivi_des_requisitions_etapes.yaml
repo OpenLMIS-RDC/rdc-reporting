@@ -30,7 +30,12 @@ sql: |
     l.programme              as programme,
     l.annee                  as annee,
     l.mois                   as mois,
-    l.periode                as periode
+    l.periode                as periode,
+    -- date de saisie: requisition initiation, as UAT after the export
+    toYear(l.date_initiated) as annee_saisie,
+    toMonth(l.date_initiated) as mois_saisie,
+    case toMonth(l.date_initiated) when 1 then '01 · Janvier' when 2 then '02 · Février' when 3 then '03 · Mars' when 4 then '04 · Avril' when 5 then '05 · Mai' when 6 then '06 · Juin' when 7 then '07 · Juillet' when 8 then '08 · Août' when 9 then '09 · Septembre' when 10 then '10 · Octobre' when 11 then '11 · Novembre' when 12 then '12 · Décembre' end
+                             as mois_saisie_nom
   from curated.mart_drc_requisition_leadtime l
   array join [
     tuple('1. Initiée', toUInt8(1), cast(null, 'Nullable(Float64)')),
@@ -209,6 +214,33 @@ columns:
       '​​​Avril' WHEN 5 THEN '​​​​Mai' WHEN 6 THEN '​​​​​Juin' WHEN 7 THEN '​​​​​​Juillet' WHEN 8 THEN
       '​​​​​​​Août' WHEN 9 THEN '​​​​​​​​Septembre' WHEN 10 THEN '​​​​​​​​​Octobre' WHEN 11 THEN '​​​​​​​​​​Novembre'
       WHEN 12 THEN '​​​​​​​​​​​Décembre' END
+    description: null
+  - column_name: annee_saisie
+    verbose_name: Année de saisie
+    is_dttm: false
+    is_active: true
+    type: Nullable(UInt16)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois_saisie
+    verbose_name: Mois de saisie (n°)
+    is_dttm: false
+    is_active: true
+    type: Nullable(UInt8)
+    groupby: true
+    filterable: true
+    expression: null
+    description: null
+  - column_name: mois_saisie_nom
+    verbose_name: Mois de saisie
+    is_dttm: false
+    is_active: true
+    type: Nullable(String)
+    groupby: true
+    filterable: true
+    expression: null
     description: null
 metrics:
   - metric_name: delai_moyen_etape_j

@@ -159,7 +159,7 @@ daily_movements as (
     c.product_id     as product_id,
     li.occurred_date as movement_date,
     sum(if(r.name in ('Receipts'), li.quantity, 0))                     as receipts,
-    sum(if(r.name in ('Consumed', 'Consommation'), li.quantity, 0))     as consumptions,
+    sum(if(r.name in {{ drc_consumption_reasons() }}, li.quantity, 0)) as consumptions,
     sum(if(
       r.reason_type = 'DEBIT'
         and r.reason_category = 'ADJUSTMENT'

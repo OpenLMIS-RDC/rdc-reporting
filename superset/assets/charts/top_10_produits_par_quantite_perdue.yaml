@@ -49,13 +49,13 @@ params:
   show_value: false
   x_axis_sort: Péremption
   x_axis_sort_asc: false
-  xAxisLabelRotation: 45
-  x_axis_title: Produit
+  xAxisLabelRotation: 0
+  x_axis_title: ''
   y_axis_title: Quantité perdue
-  x_axis_title_margin: 150
+  x_axis_title_margin: 0
   y_axis_title_margin: 30
   y_axis_title_position: Left
-  orientation: vertical
+  orientation: horizontal
   legendType: scroll
   legendOrientation: top
 query_context: null

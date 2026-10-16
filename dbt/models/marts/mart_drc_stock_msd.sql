@@ -68,7 +68,9 @@ conso as (
   inner join {{ ref('drc_stg_stock_cards') }} sc
     on sc.id = li.stock_card_id
   cross join bornes b
-  where r.name in ('Consommation', 'Consumed', 'Sortie de stock')
+  -- 'Sortie de stock' is the legacy MSD view's own addition; whether it
+  -- stays is the DRC team's call (plan 7c).
+  where r.name in {{ drc_consumption_reasons(['Sortie de stock']) }}
     and li.occurred_date > b.d_max - toIntervalMonth(3)
     and li.occurred_date <= b.d_max
   group by sc.facility_id, sc.orderable_id, sc.program_id

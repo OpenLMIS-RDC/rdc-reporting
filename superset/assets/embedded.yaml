@@ -1,0 +1,28 @@
+# Embedded-dashboard UUIDs, one per dashboard slug.
+#
+# These are the `embeddeduuid` values of the `report.dashboard_reports` rows in
+# OpenLMIS. Superset's metadata database is wiped on every restore deploy, so a
+# UUID minted through the Superset UI would orphan those rows. rdc-deployment
+# `dev/reporting-stack/deploy-remote.sh` inserts these into Superset's
+# `embedded_dashboards` after `make setup` instead (idempotent, keyed on slug).
+#
+# Keep the format flat, one `slug: uuid` per line: deploy-remote.sh parses it
+# with sed, not a YAML library. `superset import-directory` ignores this file
+# (no databases/ / datasets/ / charts/ / dashboards/ prefix), and the package
+# validator only reads `^uuid:` lines, so these UUIDs do not collide with
+# asset UUIDs.
+
+# DRC dashboards (this package)
+rapport_stock_rdc: 3be39da2-6dbc-4f11-b293-24ea5de79c70        # Suivi journalier des stocks
+rapport_stock_superset: 6904a35a-b1a2-431a-a2af-310d831c697b   # Suivi mensuel des stocks
+gestion_des_commandes: 4368c095-7456-4631-9bd4-556912e30cbd    # Suivi des commandes
+
+# Core dashboards that replace the legacy English dashboards
+# (reporting-stack-migration.md Part A; Stock Adjustments merges into olmis-adjustments)
+olmis-reporting-rate: 09b8733d-8b51-4086-8a4a-552832a608af     # REPORTING RATE AND TIMELINESS
+olmis-stock-status: e13d3052-4007-41a3-b710-6c6164eed548       # STOCK STATUS
+olmis-stockouts: 5bedda81-31cf-4d02-94dd-f3b4e2f09602          # STOCKOUTS
+olmis-consumption: 277d744b-3139-4925-b2a0-357248cb1ca5        # CONSUMPTION
+olmis-orders: 186b49c9-48ff-40f2-9987-7541b6c19ea0             # ORDERS
+olmis-adjustments: 6932d394-3664-49cc-af5d-392b50189bb1        # ADJUSTMENTS
+olmis-facilities: 27fe38a1-cf8c-48e4-ad69-7d841493d969         # ADMINISTRATIVE
