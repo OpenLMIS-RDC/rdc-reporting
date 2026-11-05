@@ -1,13 +1,16 @@
 # Embedded-dashboard UUIDs, one per dashboard slug.
 #
-# These are the `embeddeduuid` values of the `report.dashboard_reports` rows in
-# OpenLMIS. Superset's metadata database is wiped on every restore deploy, so a
-# UUID minted through the Superset UI would orphan those rows. rdc-deployment
-# `dev/reporting-stack/deploy-remote.sh` inserts these into Superset's
-# `embedded_dashboards` after `make setup` instead (idempotent, keyed on slug).
+# These are meant as the `embeddeduuid` values of the `report.dashboard_reports`
+# rows in OpenLMIS. Superset's metadata database is wiped on every restore
+# deploy, so a UUID minted through the Superset UI orphans those rows.
 #
-# Keep the format flat, one `slug: uuid` per line: deploy-remote.sh parses it
-# with sed, not a YAML library. `superset import-directory` ignores this file
+# Nothing applies this file yet: no deploy step inserts these rows into
+# Superset's `embedded_dashboards`. Until one does, embedding is switched on by
+# hand in Superset on each environment (again after every restore deploy), and
+# the dashboard report in OpenLMIS is pointed at the resulting Embedded UUID.
+#
+# Keep the format flat, one `slug: uuid` per line, so a deploy step can parse it
+# with sed, without a YAML library. `superset import-directory` ignores this file
 # (no databases/ / datasets/ / charts/ / dashboards/ prefix), and the package
 # validator only reads `^uuid:` lines, so these UUIDs do not collide with
 # asset UUIDs.
