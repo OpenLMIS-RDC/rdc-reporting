@@ -1,13 +1,8 @@
-slice_name: Réq. – Libérées
-viz_type: big_number_total
-uuid: 0bfab93a-d7ea-439d-b9a7-e78c38f11379
-version: 1.0.0
-dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+slice_name: "R\xE9q. \u2013 Lib\xE9r\xE9es"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   adhoc_filters: []
@@ -20,4 +15,9 @@ params:
   y_axis_format: ',d'
   time_format: smart_date
   force_timestamp_formatting: false
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 0bfab93a-d7ea-439d-b9a7-e78c38f11379
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79

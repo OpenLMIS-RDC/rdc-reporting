@@ -1,13 +1,8 @@
 slice_name: Niveaux organisationnels couverts
-viz_type: big_number_total
-uuid: 816d6965-539f-4e4c-bafe-43b46c5652cd
-version: 1.0.0
-dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   metric:
@@ -20,11 +15,16 @@ params:
     aggregate: null
     column: null
   adhoc_filters: []
-  subheader: Niveaux de la pyramide dans le périmètre
+  subheader: "Niveaux de la pyramide dans le p\xE9rim\xE8tre"
   y_axis_format: ',d'
   header_font_size: 0.4
   subheader_font_size: 0.125
   time_range: No filter
   time_format: smart_date
   force_timestamp_formatting: false
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 816d6965-539f-4e4c-bafe-43b46c5652cd
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9

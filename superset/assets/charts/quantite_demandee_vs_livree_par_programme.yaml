@@ -1,27 +1,22 @@
-slice_name: Quantité demandée vs livrée par programme
-viz_type: echarts_timeseries_bar
-uuid: e1731667-30fa-4983-a53b-faa9d3de4d17
-version: 1.0.0
-dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce
+slice_name: "Quantit\xE9 demand\xE9e vs livr\xE9e par programme"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   viz_type: echarts_timeseries_bar
   adhoc_filters: []
   metrics:
-    - expressionType: SQL
-      sqlExpression: SUM(quantite_demandee)
-      label: Quantité demandée
-      hasCustomLabel: true
-      optionName: m_llp5dwtr
-    - expressionType: SQL
-      sqlExpression: SUM(quantite_livree)
-      label: Quantité livrée
-      hasCustomLabel: true
-      optionName: m_l5y45zfc
+  - expressionType: SQL
+    sqlExpression: SUM(quantite_demandee)
+    label: "Quantit\xE9 demand\xE9e"
+    hasCustomLabel: true
+    optionName: m_llp5dwtr
+  - expressionType: SQL
+    sqlExpression: SUM(quantite_livree)
+    label: "Quantit\xE9 livr\xE9e"
+    hasCustomLabel: true
+    optionName: m_l5y45zfc
   row_limit: 12
   order_desc: true
   show_legend: true
@@ -29,15 +24,15 @@ params:
   y_axis_format: .3s
   rich_tooltip: true
   y_axis_bounds:
-    - null
-    - null
+  - null
+  - null
   time_range: No filter
   x_axis: programme
   groupby: []
   stack: null
   show_value: false
   show_extra_controls: false
-  x_axis_sort: Quantité demandée
+  x_axis_sort: "Quantit\xE9 demand\xE9e"
   x_axis_sort_asc: false
   xAxisLabelRotation: 45
   x_axis_title: ''
@@ -45,4 +40,9 @@ params:
   orientation: vertical
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: e1731667-30fa-4983-a53b-faa9d3de4d17
+version: 1.0.0
+dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce

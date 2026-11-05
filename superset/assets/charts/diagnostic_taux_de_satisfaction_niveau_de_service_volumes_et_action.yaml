@@ -1,13 +1,9 @@
-slice_name: Diagnostic  Taux de  Satisfaction — niveau de service, volumes et action
-viz_type: table
-uuid: 74d028af-d884-46d6-bb29-06e5b016a6fc
-version: 1.0.0
-dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce
+slice_name: "Diagnostic  Taux de  Satisfaction \u2014 niveau de service, volumes et\
+  \ action"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: table
 params:
   adhoc_filters: []
   all_columns: []
@@ -17,17 +13,17 @@ params:
       columnWidth: 100
       d3NumberFormat: .1%
       horizontalAlign: right
-    Gravité:
+    "Gravit\xE9":
       columnWidth: 1
       d3NumberFormat: ',d'
-    Lignes concernées:
+    "Lignes concern\xE9es":
       columnWidth: 95
       d3NumberFormat: ',d'
       horizontalAlign: right
     Niveau de service (du plus grave au moins grave):
       columnWidth: 250
       horizontalAlign: left
-    Niveau d’urgence:
+    "Niveau d\u2019urgence":
       columnWidth: 140
       horizontalAlign: left
     Produits:
@@ -37,7 +33,7 @@ params:
     Propositions d'actions:
       columnWidth: 460
       horizontalAlign: left
-    Quantité non livrée:
+    "Quantit\xE9 non livr\xE9e":
       columnWidth: 135
       d3NumberFormat: ',d'
       horizontalAlign: right
@@ -46,136 +42,158 @@ params:
       d3NumberFormat: ',d'
       horizontalAlign: right
   conditional_formatting:
-    - colorScheme: '#d92d20'
-      column: Gravité
-      operator: '='
-      targetValue: 1
-    - colorScheme: '#e8770c'
-      column: Gravité
-      operator: '='
-      targetValue: 2
-    - colorScheme: '#dcae04'
-      column: Gravité
-      operator: '='
-      targetValue: 3
-    - colorScheme: '#12984f'
-      column: Gravité
-      operator: '='
-      targetValue: 4
-    - colorScheme: '#2563eb'
-      column: Gravité
-      operator: '='
-      targetValue: 5
-    - colorScheme: '#98a2b3'
-      column: Gravité
-      operator: '='
-      targetValue: 6
-    - colorScheme: '#334155'
-      column: Gravité
-      operator: '='
-      targetValue: 7
+  - colorScheme: '#d92d20'
+    column: "Gravit\xE9"
+    operator: '='
+    targetValue: 1
+  - colorScheme: '#e8770c'
+    column: "Gravit\xE9"
+    operator: '='
+    targetValue: 2
+  - colorScheme: '#dcae04'
+    column: "Gravit\xE9"
+    operator: '='
+    targetValue: 3
+  - colorScheme: '#12984f'
+    column: "Gravit\xE9"
+    operator: '='
+    targetValue: 4
+  - colorScheme: '#2563eb'
+    column: "Gravit\xE9"
+    operator: '='
+    targetValue: 5
+  - colorScheme: '#98a2b3'
+    column: "Gravit\xE9"
+    operator: '='
+    targetValue: 6
+  - colorScheme: '#334155'
+    column: "Gravit\xE9"
+    operator: '='
+    targetValue: 7
   groupby:
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      label: Niveau de service (du plus grave au moins grave)
-      optionName: col_9ndecjxw
-      sqlExpression: CASE WHEN COALESCE(quantite_demandee,0)=0 THEN '6. Taux non calculable (demande nulle)'
-        WHEN COALESCE(quantite_livree,0) > quantite_demandee THEN '5. Sur-livraison (livré > demandé)'
-        WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 50 THEN '1. Service critique (< 50
-        %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 80 THEN '2. Service dégradé (50
-        – 79 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 95 THEN '3. Service acceptable
-        (80 – 94 %)' ELSE '4. Service conforme (≥ 95 %)' END
-      sqlExpressionType: SIMPLE
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    label: Niveau de service (du plus grave au moins grave)
+    optionName: col_9ndecjxw
+    sqlExpression: "CASE WHEN COALESCE(quantite_demandee,0)=0 THEN '6. Taux non calculable\
+      \ (demande nulle)' WHEN COALESCE(quantite_livree,0) > quantite_demandee THEN\
+      \ '5. Sur-livraison (livr\xE9 > demand\xE9)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 50 THEN '1. Service critique (< 50 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 80 THEN '2. Service d\xE9grad\xE9 (50 \u2013 79 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 95 THEN '3. Service acceptable (80 \u2013 94 %)' ELSE '4. Service conforme\
+      \ (\u2265 95 %)' END"
+    sqlExpressionType: SIMPLE
   include_search: false
   metrics:
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      label: Gravité
-      optionName: m_grav_lvl1
-      sqlExpression: MIN(CASE WHEN COALESCE(quantite_demandee,0)=0 THEN 6 WHEN COALESCE(quantite_livree,0)
-        > quantite_demandee THEN 5 WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 50 THEN
-        1 WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 80 THEN 2 WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee
-        < 95 THEN 3 ELSE 4 END)
-      sqlExpressionType: SIMPLE
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      label: Lignes concernées
-      optionName: m_3mmaoca1
-      sqlExpression: COUNT(*)
-      sqlExpressionType: SIMPLE
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      label: Structures
-      optionName: m_raasgekr
-      sqlExpression: COUNT(DISTINCT structure)
-      sqlExpressionType: SIMPLE
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      label: Produits
-      optionName: m_gh9dgcig
-      sqlExpression: COUNT(DISTINCT nom_du_produit)
-      sqlExpressionType: SIMPLE
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      label: Quantité non livrée
-      optionName: m_otrjyxp1
-      sqlExpression: SUM(greatest(COALESCE(quantite_demandee,0)-COALESCE(quantite_livree,0),0))
-      sqlExpressionType: SIMPLE
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      label: Niveau d’urgence
-      optionName: m_id7hg1z3
-      sqlExpression: |-
-        MAX(CASE (CASE WHEN COALESCE(quantite_demandee,0)=0 THEN '6. Taux non calculable (demande nulle)' WHEN COALESCE(quantite_livree,0) > quantite_demandee THEN '5. Sur-livraison (livré > demandé)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 50 THEN '1. Service critique (< 50 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 80 THEN '2. Service dégradé (50 – 79 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 95 THEN '3. Service acceptable (80 – 94 %)' ELSE '4. Service conforme (≥ 95 %)' END)
-         WHEN '1. Service critique (< 50 %)' THEN '🔴 1 · CRITIQUE'
-         WHEN '2. Service dégradé (50 – 79 %)' THEN '🟠 2 · URGENT'
-         WHEN '3. Service acceptable (80 – 94 %)' THEN '🟡 3 · VIGILANCE'
-         WHEN '4. Service conforme (≥ 95 %)' THEN '🟢 4 · CONFORME'
-         WHEN '5. Sur-livraison (livré > demandé)' THEN '🔵 5 · À CONTRÔLER'
-         WHEN '6. Taux non calculable (demande nulle)' THEN '⚪ 6 · À QUALIFIER'
-         ELSE '⚫ 9 · À VÉRIFIER' END)
-      sqlExpressionType: SIMPLE
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      label: Propositions d'actions
-      optionName: m_7miygsen
-      sqlExpression: |-
-        MAX(CASE (CASE WHEN COALESCE(quantite_demandee,0)=0 THEN '6. Taux non calculable (demande nulle)' WHEN COALESCE(quantite_livree,0) > quantite_demandee THEN '5. Sur-livraison (livré > demandé)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 50 THEN '1. Service critique (< 50 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 80 THEN '2. Service dégradé (50 – 79 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 95 THEN '3. Service acceptable (80 – 94 %)' ELSE '4. Service conforme (≥ 95 %)' END)
-         WHEN '1. Service critique (< 50 %)' THEN 'Vérifier la disponibilité chez l’approvisionneur, puis remonter la commande au niveau central. Croiser avec l’onglet Statut des commandes pour écarter un simple retard.'
-         WHEN '2. Service dégradé (50 – 79 %)' THEN 'Identifier les produits qui portent l’essentiel de l’écart dans le tableau de détail et les inscrire en priorité sur la prochaine commande.'
-         WHEN '3. Service acceptable (80 – 94 %)' THEN 'Pas d’urgence. Traiter au cycle de commande habituel et surveiller la répétition du même produit d’un mois sur l’autre.'
-         WHEN '4. Service conforme (≥ 95 %)' THEN 'Aucune action. Maintenir le rythme de commande et la régularité de la saisie des livraisons.'
-         WHEN '5. Sur-livraison (livré > demandé)' THEN 'Contrôler les bons de livraison : le plus souvent une unité de conditionnement mal saisie. Corriger à la source avant d’exploiter le taux.'
-         WHEN '6. Taux non calculable (demande nulle)' THEN 'Vérifier que les réquisitions de la structure sont bien remontées sur la période. Sinon retirer la structure du périmètre plutôt que de la compter à 0 %.'
-         ELSE 'Qualifier la situation avant toute action.' END)
-      sqlExpressionType: SIMPLE
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    label: "Gravit\xE9"
+    optionName: m_grav_lvl1
+    sqlExpression: MIN(CASE WHEN COALESCE(quantite_demandee,0)=0 THEN 6 WHEN COALESCE(quantite_livree,0)
+      > quantite_demandee THEN 5 WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee
+      < 50 THEN 1 WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 80 THEN
+      2 WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 95 THEN 3 ELSE
+      4 END)
+    sqlExpressionType: SIMPLE
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    label: "Lignes concern\xE9es"
+    optionName: m_3mmaoca1
+    sqlExpression: COUNT(*)
+    sqlExpressionType: SIMPLE
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    label: Structures
+    optionName: m_raasgekr
+    sqlExpression: COUNT(DISTINCT structure)
+    sqlExpressionType: SIMPLE
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    label: Produits
+    optionName: m_gh9dgcig
+    sqlExpression: COUNT(DISTINCT nom_du_produit)
+    sqlExpressionType: SIMPLE
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    label: "Quantit\xE9 non livr\xE9e"
+    optionName: m_otrjyxp1
+    sqlExpression: SUM(greatest(COALESCE(quantite_demandee,0)-COALESCE(quantite_livree,0),0))
+    sqlExpressionType: SIMPLE
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    label: "Niveau d\u2019urgence"
+    optionName: m_id7hg1z3
+    sqlExpression: "MAX(CASE (CASE WHEN COALESCE(quantite_demandee,0)=0 THEN '6. Taux\
+      \ non calculable (demande nulle)' WHEN COALESCE(quantite_livree,0) > quantite_demandee\
+      \ THEN '5. Sur-livraison (livr\xE9 > demand\xE9)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 50 THEN '1. Service critique (< 50 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 80 THEN '2. Service d\xE9grad\xE9 (50 \u2013 79 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 95 THEN '3. Service acceptable (80 \u2013 94 %)' ELSE '4. Service conforme\
+      \ (\u2265 95 %)' END)\n WHEN '1. Service critique (< 50 %)' THEN '\U0001F534\
+      \ 1 \xB7 CRITIQUE'\n WHEN '2. Service d\xE9grad\xE9 (50 \u2013 79 %)' THEN '\U0001F7E0\
+      \ 2 \xB7 URGENT'\n WHEN '3. Service acceptable (80 \u2013 94 %)' THEN '\U0001F7E1\
+      \ 3 \xB7 VIGILANCE'\n WHEN '4. Service conforme (\u2265 95 %)' THEN '\U0001F7E2\
+      \ 4 \xB7 CONFORME'\n WHEN '5. Sur-livraison (livr\xE9 > demand\xE9)' THEN '\U0001F535\
+      \ 5 \xB7 \xC0 CONTR\xD4LER'\n WHEN '6. Taux non calculable (demande nulle)'\
+      \ THEN '\u26AA 6 \xB7 \xC0 QUALIFIER'\n ELSE '\u26AB 9 \xB7 \xC0 V\xC9RIFIER'\
+      \ END)"
+    sqlExpressionType: SIMPLE
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    label: Propositions d'actions
+    optionName: m_7miygsen
+    sqlExpression: "MAX(CASE (CASE WHEN COALESCE(quantite_demandee,0)=0 THEN '6. Taux\
+      \ non calculable (demande nulle)' WHEN COALESCE(quantite_livree,0) > quantite_demandee\
+      \ THEN '5. Sur-livraison (livr\xE9 > demand\xE9)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 50 THEN '1. Service critique (< 50 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 80 THEN '2. Service d\xE9grad\xE9 (50 \u2013 79 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 95 THEN '3. Service acceptable (80 \u2013 94 %)' ELSE '4. Service conforme\
+      \ (\u2265 95 %)' END)\n WHEN '1. Service critique (< 50 %)' THEN 'V\xE9rifier\
+      \ la disponibilit\xE9 chez l\u2019approvisionneur, puis remonter la commande\
+      \ au niveau central. Croiser avec l\u2019onglet Statut des commandes pour \xE9\
+      carter un simple retard.'\n WHEN '2. Service d\xE9grad\xE9 (50 \u2013 79 %)'\
+      \ THEN 'Identifier les produits qui portent l\u2019essentiel de l\u2019\xE9\
+      cart dans le tableau de d\xE9tail et les inscrire en priorit\xE9 sur la prochaine\
+      \ commande.'\n WHEN '3. Service acceptable (80 \u2013 94 %)' THEN 'Pas d\u2019\
+      urgence. Traiter au cycle de commande habituel et surveiller la r\xE9p\xE9tition\
+      \ du m\xEAme produit d\u2019un mois sur l\u2019autre.'\n WHEN '4. Service conforme\
+      \ (\u2265 95 %)' THEN 'Aucune action. Maintenir le rythme de commande et la\
+      \ r\xE9gularit\xE9 de la saisie des livraisons.'\n WHEN '5. Sur-livraison (livr\xE9\
+      \ > demand\xE9)' THEN 'Contr\xF4ler les bons de livraison : le plus souvent\
+      \ une unit\xE9 de conditionnement mal saisie. Corriger \xE0 la source avant\
+      \ d\u2019exploiter le taux.'\n WHEN '6. Taux non calculable (demande nulle)'\
+      \ THEN 'V\xE9rifier que les r\xE9quisitions de la structure sont bien remont\xE9\
+      es sur la p\xE9riode. Sinon retirer la structure du p\xE9rim\xE8tre plut\xF4\
+      t que de la compter \xE0 0 %.'\n ELSE 'Qualifier la situation avant toute action.'\
+      \ END)"
+    sqlExpressionType: SIMPLE
   order_by_cols: []
   order_desc: false
   percent_metrics:
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      label: Part des lignes
-      optionName: m_hs27mjo1
-      sqlExpression: COUNT(*)
-      sqlExpressionType: SIMPLE
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    label: Part des lignes
+    optionName: m_hs27mjo1
+    sqlExpression: COUNT(*)
+    sqlExpressionType: SIMPLE
   query_mode: aggregate
   row_limit: 100
   server_page_length: 10
@@ -189,16 +207,23 @@ params:
     hasCustomLabel: true
     label: Ordre
     optionName: m_cq7pdpht
-    sqlExpression: MIN(CASE (CASE WHEN COALESCE(quantite_demandee,0)=0 THEN '6. Taux non calculable (demande
-      nulle)' WHEN COALESCE(quantite_livree,0) > quantite_demandee THEN '5. Sur-livraison (livré > demandé)'
-      WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 50 THEN '1. Service critique (< 50 %)'
-      WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 80 THEN '2. Service dégradé (50 – 79
-      %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee < 95 THEN '3. Service acceptable (80
-      – 94 %)' ELSE '4. Service conforme (≥ 95 %)' END) WHEN '1. Service critique (< 50 %)' THEN 1 WHEN
-      '2. Service dégradé (50 – 79 %)' THEN 2 WHEN '3. Service acceptable (80 – 94 %)' THEN 3 WHEN '4.
-      Service conforme (≥ 95 %)' THEN 4 WHEN '5. Sur-livraison (livré > demandé)' THEN 5 WHEN '6. Taux
-      non calculable (demande nulle)' THEN 6 ELSE 9 END)
+    sqlExpression: "MIN(CASE (CASE WHEN COALESCE(quantite_demandee,0)=0 THEN '6. Taux\
+      \ non calculable (demande nulle)' WHEN COALESCE(quantite_livree,0) > quantite_demandee\
+      \ THEN '5. Sur-livraison (livr\xE9 > demand\xE9)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 50 THEN '1. Service critique (< 50 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 80 THEN '2. Service d\xE9grad\xE9 (50 \u2013 79 %)' WHEN COALESCE(quantite_livree,0)*100.0/quantite_demandee\
+      \ < 95 THEN '3. Service acceptable (80 \u2013 94 %)' ELSE '4. Service conforme\
+      \ (\u2265 95 %)' END) WHEN '1. Service critique (< 50 %)' THEN 1 WHEN '2. Service\
+      \ d\xE9grad\xE9 (50 \u2013 79 %)' THEN 2 WHEN '3. Service acceptable (80 \u2013\
+      \ 94 %)' THEN 3 WHEN '4. Service conforme (\u2265 95 %)' THEN 4 WHEN '5. Sur-livraison\
+      \ (livr\xE9 > demand\xE9)' THEN 5 WHEN '6. Taux non calculable (demande nulle)'\
+      \ THEN 6 ELSE 9 END)"
     sqlExpressionType: SIMPLE
   viz_type: table
   allow_render_html: true
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 74d028af-d884-46d6-bb29-06e5b016a6fc
+version: 1.0.0
+dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce

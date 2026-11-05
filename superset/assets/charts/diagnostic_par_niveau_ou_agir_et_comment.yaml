@@ -1,101 +1,98 @@
-slice_name: Diagnostic par niveau — où agir et comment
-viz_type: table
-uuid: 2f6222a2-dfa6-4e8f-8ea3-a6547a301ac4
-version: 1.0.0
-dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+slice_name: "Diagnostic par niveau \u2014 o\xF9 agir et comment"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: table
 params:
   viz_type: table
   query_mode: aggregate
   groupby:
-    - niveau_organisation
+  - niveau_organisation
   metrics:
-    - expressionType: SQL
-      sqlExpression: |-
-        CASE
-         WHEN AVG(est_en_rupture) >= 0.9 THEN 1
-         WHEN AVG(est_en_rupture) >= 0.6 THEN 2
-         WHEN AVG(est_en_rupture) >= 0.3 THEN 3
-         WHEN AVG(est_en_surstock) >= 0.2 THEN 5
-         ELSE 4 END
-      label: Gravité
-      hasCustomLabel: true
-      optionName: m_grav_130
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: COUNT(DISTINCT structure)
-      label: Structures
-      hasCustomLabel: true
-      optionName: m_tlwxhgih
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: COUNT(*)
-      label: Lignes suivies
-      hasCustomLabel: true
-      optionName: m_me1cjc2w
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: AVG(est_en_rupture)
-      label: Taux de rupture
-      hasCustomLabel: true
-      optionName: m_rt8uvqhk
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: AVG(est_en_surstock)
-      label: Part en surstock
-      hasCustomLabel: true
-      optionName: m_kjvenngn
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: ROUND(toFloat64(medianExactWeightedInterpolated(toFloat64(msd), 1)),1)
-      label: MSD médian
-      hasCustomLabel: true
-      optionName: m_50pcalpi
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: |-
-        CASE
-         WHEN AVG(est_en_rupture) >= 0.9 THEN '🔴 CRITIQUE — rupture quasi généralisée'
-         WHEN AVG(est_en_rupture) >= 0.6 THEN '🟠 ÉLEVÉ — chaîne fortement tendue'
-         WHEN AVG(est_en_rupture) >= 0.3 THEN '🟡 MODÉRÉ — tension localisée'
-         WHEN AVG(est_en_surstock) >= 0.2 THEN '🔵 SURSTOCK — source de redéploiement'
-         ELSE '🟢 SOUS CONTRÔLE' END
-      label: Niveau d’alerte
-      hasCustomLabel: true
-      optionName: m_i0mp1qz2
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: |-
-        CASE
-         WHEN AVG(est_en_rupture) >= 0.9 THEN 'Rupture quasi totale à ce niveau : le blocage est en amont (commande, financement ou livraison nationale). Escalader au niveau central — un redéploiement local ne suffira pas.'
-         WHEN AVG(est_en_rupture) >= 0.6 THEN 'Niveau très tendu. Vérifier si le niveau immédiatement supérieur détient du stock : si oui le problème est la distribution, organiser les livraisons ; sinon passer commande d’urgence.'
-         WHEN AVG(est_en_rupture) >= 0.3 THEN 'Tension localisée. Descendre dans le tableau croisé pour isoler les produits et structures concernés, puis réapprovisionner de façon ciblée.'
-         WHEN AVG(est_en_surstock) >= 0.2 THEN 'Ce niveau détient du surstock alors que d’autres sont en rupture : organiser un redéploiement descendant avant péremption.'
-         ELSE 'Situation maîtrisée. Ce niveau peut servir de source pour approvisionner les niveaux en tension.' END
-      label: Propositions d'actions
-      hasCustomLabel: true
-      optionName: m_l70jwraq
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
+  - expressionType: SQL
+    sqlExpression: "CASE\n WHEN AVG(est_en_rupture) >= 0.9 THEN 1\n WHEN AVG(est_en_rupture)\
+      \ >= 0.6 THEN 2\n WHEN AVG(est_en_rupture) >= 0.3 THEN 3\n WHEN AVG(est_en_surstock)\
+      \ >= 0.2 THEN 5\n ELSE 4 END"
+    label: "Gravit\xE9"
+    hasCustomLabel: true
+    optionName: m_grav_130
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: COUNT(DISTINCT structure)
+    label: Structures
+    hasCustomLabel: true
+    optionName: m_tlwxhgih
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: COUNT(*)
+    label: Lignes suivies
+    hasCustomLabel: true
+    optionName: m_me1cjc2w
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: AVG(est_en_rupture)
+    label: Taux de rupture
+    hasCustomLabel: true
+    optionName: m_rt8uvqhk
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: AVG(est_en_surstock)
+    label: Part en surstock
+    hasCustomLabel: true
+    optionName: m_kjvenngn
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: ROUND(toFloat64(medianExactWeightedInterpolated(toFloat64(msd),
+      1)),1)
+    label: "MSD m\xE9dian"
+    hasCustomLabel: true
+    optionName: m_50pcalpi
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: "CASE\n WHEN AVG(est_en_rupture) >= 0.9 THEN '\U0001F534 CRITIQUE\
+      \ \u2014 rupture quasi g\xE9n\xE9ralis\xE9e'\n WHEN AVG(est_en_rupture) >= 0.6\
+      \ THEN '\U0001F7E0 \xC9LEV\xC9 \u2014 cha\xEEne fortement tendue'\n WHEN AVG(est_en_rupture)\
+      \ >= 0.3 THEN '\U0001F7E1 MOD\xC9R\xC9 \u2014 tension localis\xE9e'\n WHEN AVG(est_en_surstock)\
+      \ >= 0.2 THEN '\U0001F535 SURSTOCK \u2014 source de red\xE9ploiement'\n ELSE\
+      \ '\U0001F7E2 SOUS CONTR\xD4LE' END"
+    label: "Niveau d\u2019alerte"
+    hasCustomLabel: true
+    optionName: m_i0mp1qz2
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: "CASE\n WHEN AVG(est_en_rupture) >= 0.9 THEN 'Rupture quasi totale\
+      \ \xE0 ce niveau : le blocage est en amont (commande, financement ou livraison\
+      \ nationale). Escalader au niveau central \u2014 un red\xE9ploiement local ne\
+      \ suffira pas.'\n WHEN AVG(est_en_rupture) >= 0.6 THEN 'Niveau tr\xE8s tendu.\
+      \ V\xE9rifier si le niveau imm\xE9diatement sup\xE9rieur d\xE9tient du stock\
+      \ : si oui le probl\xE8me est la distribution, organiser les livraisons ; sinon\
+      \ passer commande d\u2019urgence.'\n WHEN AVG(est_en_rupture) >= 0.3 THEN 'Tension\
+      \ localis\xE9e. Descendre dans le tableau crois\xE9 pour isoler les produits\
+      \ et structures concern\xE9s, puis r\xE9approvisionner de fa\xE7on cibl\xE9\
+      e.'\n WHEN AVG(est_en_surstock) >= 0.2 THEN 'Ce niveau d\xE9tient du surstock\
+      \ alors que d\u2019autres sont en rupture : organiser un red\xE9ploiement descendant\
+      \ avant p\xE9remption.'\n ELSE 'Situation ma\xEEtris\xE9e. Ce niveau peut servir\
+      \ de source pour approvisionner les niveaux en tension.' END"
+    label: Propositions d'actions
+    hasCustomLabel: true
+    optionName: m_l70jwraq
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
   percent_metrics: []
   adhoc_filters: []
   row_limit: 100
@@ -129,41 +126,46 @@ params:
       horizontalAlign: right
     niveau_organisation:
       horizontalAlign: left
-    MSD médian:
+    "MSD m\xE9dian":
       horizontalAlign: right
-    Niveau d’alerte:
+    "Niveau d\u2019alerte":
       horizontalAlign: left
     Propositions d'actions:
       horizontalAlign: left
   conditional_formatting:
-    - operator: '='
-      targetValue: 1
-      colorScheme: '#d92d20'
-      column: Gravité
-    - operator: '='
-      targetValue: 2
-      colorScheme: '#e8770c'
-      column: Gravité
-    - operator: '='
-      targetValue: 3
-      colorScheme: '#dcae04'
-      column: Gravité
-    - operator: '='
-      targetValue: 4
-      colorScheme: '#12984f'
-      column: Gravité
-    - operator: '='
-      targetValue: 5
-      colorScheme: '#2563eb'
-      column: Gravité
-    - operator: '='
-      targetValue: 6
-      colorScheme: '#98a2b3'
-      column: Gravité
-    - operator: '='
-      targetValue: 7
-      colorScheme: '#334155'
-      column: Gravité
+  - operator: '='
+    targetValue: 1
+    colorScheme: '#d92d20'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 2
+    colorScheme: '#e8770c'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 3
+    colorScheme: '#dcae04'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 4
+    colorScheme: '#12984f'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 5
+    colorScheme: '#2563eb'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 6
+    colorScheme: '#98a2b3'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 7
+    colorScheme: '#334155'
+    column: "Gravit\xE9"
   time_range: No filter
   allow_render_html: true
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 2f6222a2-dfa6-4e8f-8ea3-a6547a301ac4
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9

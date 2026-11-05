@@ -1,22 +1,17 @@
 slice_name: Commandes par mois
-viz_type: echarts_timeseries_bar
-uuid: 75dfc3ee-8b6d-4aa5-95db-a24436ed1c59
-version: 1.0.0
-dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   viz_type: echarts_timeseries_bar
   adhoc_filters: []
   metrics:
-    - expressionType: SQL
-      sqlExpression: COUNT(DISTINCT numero_commande)
-      label: Commandes
-      hasCustomLabel: true
-      optionName: m_pq9907hh
+  - expressionType: SQL
+    sqlExpression: COUNT(DISTINCT numero_commande)
+    label: Commandes
+    hasCustomLabel: true
+    optionName: m_pq9907hh
   row_limit: 24
   order_desc: true
   show_legend: false
@@ -24,8 +19,8 @@ params:
   y_axis_format: ',d'
   rich_tooltip: true
   y_axis_bounds:
-    - null
-    - null
+  - null
+  - null
   time_range: No filter
   x_axis: mois_saisie_nom
   groupby: []
@@ -40,4 +35,9 @@ params:
   orientation: vertical
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 75dfc3ee-8b6d-4aa5-95db-a24436ed1c59
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3

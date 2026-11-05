@@ -1,19 +1,14 @@
-slice_name: Structures touchées
-viz_type: big_number_total
-uuid: aa7367a3-7baa-44ae-8088-044f4258b808
-version: 1.0.0
-dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc
+slice_name: "Structures touch\xE9es"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   metric:
     expressionType: SQL
     sqlExpression: uniqExactIf(structure, nombre_de_jours_de_rupture > 0)
-    label: Structures touchées
+    label: "Structures touch\xE9es"
     hasCustomLabel: true
     optionName: m_47vp4ffb
     sqlExpressionType: SIMPLE
@@ -27,4 +22,9 @@ params:
   time_range: No filter
   time_format: smart_date
   force_timestamp_formatting: false
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: aa7367a3-7baa-44ae-8088-044f4258b808
+version: 1.0.0
+dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc

@@ -1,59 +1,54 @@
 slice_name: Produits en rupture au dernier jour
-viz_type: table
-uuid: 127ec027-ac12-46f8-ac08-df18ee8a5e80
-version: 1.0.0
-dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: table
 params:
   viz_type: table
   query_mode: aggregate
   groupby:
-    - programme
-    - produit
-    - code
+  - programme
+  - produit
+  - code
   metrics:
-    - expressionType: SQL
-      sqlExpression: uniqExactIf(structure, est_en_rupture = 1)
-      label: Structures en rupture
-      hasCustomLabel: true
-      optionName: m_48omwi9g
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: COUNT(DISTINCT structure)
-      label: Structures suivies
-      hasCustomLabel: true
-      optionName: m_vcmtbevz
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: AVG(est_en_rupture)
-      label: Taux de rupture
-      hasCustomLabel: true
-      optionName: m_wtgu2qsx
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: COALESCE(SUM(stock_disponible),0)
-      label: Stock disponible cumulé
-      hasCustomLabel: true
-      optionName: m_a73pstl5
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
+  - expressionType: SQL
+    sqlExpression: uniqExactIf(structure, est_en_rupture = 1)
+    label: Structures en rupture
+    hasCustomLabel: true
+    optionName: m_48omwi9g
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: COUNT(DISTINCT structure)
+    label: Structures suivies
+    hasCustomLabel: true
+    optionName: m_vcmtbevz
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: AVG(est_en_rupture)
+    label: Taux de rupture
+    hasCustomLabel: true
+    optionName: m_wtgu2qsx
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: COALESCE(SUM(stock_disponible),0)
+    label: "Stock disponible cumul\xE9"
+    hasCustomLabel: true
+    optionName: m_a73pstl5
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
   adhoc_filters:
-    - expressionType: SIMPLE
-      subject: est_dernier_jour
-      operator: ==
-      comparator: 1
-      clause: WHERE
+  - expressionType: SIMPLE
+    subject: est_dernier_jour
+    operator: ==
+    comparator: 1
+    clause: WHERE
   row_limit: 200
   timeseries_limit_metric:
     expressionType: SQL
@@ -73,9 +68,14 @@ params:
       d3NumberFormat: .0%
   time_range: No filter
   conditional_formatting:
-    - operator: '>='
-      targetValue: 0.9
-      colorScheme: '#EFA1AA'
-      column: Taux de rupture
+  - operator: '>='
+    targetValue: 0.9
+    colorScheme: '#EFA1AA'
+    column: Taux de rupture
   allow_render_html: true
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 127ec027-ac12-46f8-ac08-df18ee8a5e80
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946

@@ -1,13 +1,8 @@
-slice_name: Jours de rupture cumulés
-viz_type: big_number_total
-uuid: db819031-6f15-4a4f-bbf9-1a516064566f
-version: 1.0.0
-dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc
+slice_name: "Jours de rupture cumul\xE9s"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   metric:
@@ -20,11 +15,16 @@ params:
     aggregate: null
     column: null
   adhoc_filters: []
-  subheader: Somme des jours passés à stock nul
+  subheader: "Somme des jours pass\xE9s \xE0 stock nul"
   y_axis_format: ',d'
   header_font_size: 0.4
   subheader_font_size: 0.125
   time_range: No filter
   time_format: smart_date
   force_timestamp_formatting: false
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: db819031-6f15-4a4f-bbf9-1a516064566f
+version: 1.0.0
+dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc

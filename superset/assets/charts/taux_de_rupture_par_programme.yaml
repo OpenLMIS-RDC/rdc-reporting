@@ -1,24 +1,19 @@
 slice_name: Taux de rupture par programme
-viz_type: echarts_timeseries_bar
-uuid: 69bc8fa7-a0b6-4ecc-955b-3f28efc422db
-version: 1.0.0
-dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   viz_type: echarts_timeseries_bar
   metrics:
-    - expressionType: SQL
-      sqlExpression: AVG(est_en_rupture)
-      label: Taux de rupture
-      hasCustomLabel: true
-      optionName: m_2lsphjh1
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
+  - expressionType: SQL
+    sqlExpression: AVG(est_en_rupture)
+    label: Taux de rupture
+    hasCustomLabel: true
+    optionName: m_2lsphjh1
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
   adhoc_filters: []
   row_limit: 20
   color_scheme: supersetColors
@@ -27,8 +22,8 @@ params:
   rich_tooltip: true
   y_axis_format: .0%
   y_axis_bounds:
-    - 0
-    - 1
+  - 0
+  - 1
   time_range: No filter
   x_axis: programme
   groupby: []
@@ -45,4 +40,9 @@ params:
   orientation: vertical
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 69bc8fa7-a0b6-4ecc-955b-3f28efc422db
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9

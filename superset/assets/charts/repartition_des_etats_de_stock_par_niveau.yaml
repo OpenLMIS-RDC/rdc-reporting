@@ -1,24 +1,19 @@
-slice_name: Répartition des états de stock par niveau
-viz_type: echarts_timeseries_bar
-uuid: bf038682-f3aa-4f9e-8aeb-bb98c6f776e2
-version: 1.0.0
-dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+slice_name: "R\xE9partition des \xE9tats de stock par niveau"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   viz_type: echarts_timeseries_bar
   metrics:
-    - expressionType: SQL
-      sqlExpression: COUNT(*)
-      label: Lignes
-      hasCustomLabel: true
-      optionName: m_mcz0v4f2
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
+  - expressionType: SQL
+    sqlExpression: COUNT(*)
+    label: Lignes
+    hasCustomLabel: true
+    optionName: m_mcz0v4f2
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
   adhoc_filters: []
   row_limit: 200
   color_scheme: supersetColors
@@ -26,12 +21,12 @@ params:
   rich_tooltip: true
   y_axis_format: .0%
   y_axis_bounds:
-    - 0
-    - 1
+  - 0
+  - 1
   time_range: No filter
   x_axis: niveau_organisation
   groupby:
-    - etat_stock_ordonne
+  - etat_stock_ordonne
   stack: Stack
   show_value: false
   contributionMode: row
@@ -46,4 +41,9 @@ params:
   orientation: vertical
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: bf038682-f3aa-4f9e-8aeb-bb98c6f776e2
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9

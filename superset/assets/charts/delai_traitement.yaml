@@ -1,13 +1,8 @@
-slice_name: Délai traitement
-viz_type: big_number_total
-uuid: 1cb12570-d49d-496a-9b28-a4c68ba6be5e
-version: 1.0.0
-dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+slice_name: "D\xE9lai traitement"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   adhoc_filters: []
   force_timestamp_formatting: false
@@ -29,4 +24,9 @@ params:
   viz_type: big_number_total
   y_axis_format: ',.1f'
   number_format: ',.1f'
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 1cb12570-d49d-496a-9b28-a4c68ba6be5e
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2

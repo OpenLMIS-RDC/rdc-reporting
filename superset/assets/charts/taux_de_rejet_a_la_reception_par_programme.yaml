@@ -1,25 +1,20 @@
-slice_name: Taux de rejet à la réception par programme (%)
-viz_type: echarts_timeseries_bar
-uuid: 6e7adc07-70cb-4cf9-abb4-83e6d41c1e73
-version: 1.0.0
-dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+slice_name: "Taux de rejet \xE0 la r\xE9ception par programme (%)"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   viz_type: echarts_timeseries_bar
   adhoc_filters:
-    - expressionType: SQL
-      sqlExpression: qte_livree > 0
-      clause: WHERE
+  - expressionType: SQL
+    sqlExpression: qte_livree > 0
+    clause: WHERE
   metrics:
-    - expressionType: SQL
-      sqlExpression: ROUND(100.0*SUM(qte_rejetee)/NULLIF(SUM(qte_livree),0),1)
-      label: Taux de rejet (%)
-      hasCustomLabel: true
-      optionName: m_mkv4f3o6
+  - expressionType: SQL
+    sqlExpression: ROUND(100.0*SUM(qte_rejetee)/NULLIF(SUM(qte_livree),0),1)
+    label: Taux de rejet (%)
+    hasCustomLabel: true
+    optionName: m_mkv4f3o6
   row_limit: 12
   order_desc: true
   show_legend: false
@@ -27,8 +22,8 @@ params:
   y_axis_format: ',.1f'
   rich_tooltip: true
   y_axis_bounds:
-    - null
-    - null
+  - null
+  - null
   time_range: No filter
   x_axis: programme
   groupby: []
@@ -43,4 +38,9 @@ params:
   orientation: vertical
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 6e7adc07-70cb-4cf9-abb4-83e6d41c1e73
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3

@@ -1,17 +1,12 @@
-slice_name: Répartition des lignes par état de stock
-viz_type: pie
-uuid: d79a33c9-cd8d-47e7-9c19-7c2c0acad663
-version: 1.0.0
-dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9
+slice_name: "R\xE9partition des lignes par \xE9tat de stock"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: pie
 params:
   viz_type: pie
   groupby:
-    - etat_stock_ordonne
+  - etat_stock_ordonne
   metric:
     expressionType: SQL
     sqlExpression: COUNT(*)
@@ -38,4 +33,9 @@ params:
   show_labels_threshold: 1
   show_total: true
   time_range: No filter
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: d79a33c9-cd8d-47e7-9c19-7c2c0acad663
+version: 1.0.0
+dataset_uuid: 04d9d4a7-e0d0-4ea4-8274-3517437df4e9

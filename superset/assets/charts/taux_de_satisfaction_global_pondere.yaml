@@ -1,13 +1,8 @@
-slice_name: Taux de satisfaction global (pondéré)
-viz_type: gauge_chart
-uuid: 49da16b2-633f-4042-bbdc-00cf16103ace
-version: 1.0.0
-dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce
+slice_name: "Taux de satisfaction global (pond\xE9r\xE9)"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: gauge_chart
 params:
   adhoc_filters: []
   animation: true
@@ -36,4 +31,9 @@ params:
   show_axis_tick: true
   show_split_line: true
   roundCap: true
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 49da16b2-633f-4042-bbdc-00cf16103ace
+version: 1.0.0
+dataset_uuid: 17046be8-41a9-4785-be1f-06dc20aac8ce

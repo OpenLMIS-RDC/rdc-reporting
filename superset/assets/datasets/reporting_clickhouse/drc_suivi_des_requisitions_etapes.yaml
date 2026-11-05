@@ -1,55 +1,44 @@
-table_name: Suivi des réquisitions – étapes
-uuid: 0920c8ab-4b6b-435d-8ad1-5a0ccfa81820
-version: 1.0.0
-database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
-schema: curated
+table_name: "Suivi des r\xE9quisitions \u2013 \xE9tapes"
 main_dttm_col: date_initiated
-description: Une ligne par réquisition et par étape du circuit (6 étapes), dépivotée de mart_drc_requisition_leadtime.
+currency_code_column: null
+description: "Une ligne par r\xE9quisition et par \xE9tape du circuit (6 \xE9tapes),\
+  \ d\xE9pivot\xE9e de mart_drc_requisition_leadtime."
 default_endpoint: null
 offset: 0
 cache_timeout: null
-sql: |
-  -- "Suivi des réquisitions – étapes": one row per requisition x step of the
-  -- circuit (6 steps), unpivoted from mart_drc_requisition_leadtime.
-  -- Legacy: CROSS JOIN LATERAL (VALUES ...) over analytics.fact_requisition_leadtime.
-  -- delai_etape_j is the time from the previous step, in days, NULL for the
-  -- first step and for steps not reached.
-  select
-    l.facility_id            as facility_id,
-    l.numero_requisition     as numero_requisition,
-    l.statut_requisition     as statut_requisition,
-    l.type_requisition       as type_requisition,
-    l.date_initiated         as date_initiated,
-    e.1                      as etape,
-    e.2                      as atteinte,
-    e.3                      as delai_etape_j,
-    l.niveau_organisationnel as niveau_organisationnel,
-    l.zone_geographique      as zone_geographique,
-    l.type_de_structure      as type_de_structure,
-    l.structure              as structure,
-    l.programme              as programme,
-    l.annee                  as annee,
-    l.mois                   as mois,
-    l.periode                as periode,
-    -- date de saisie: requisition initiation, as UAT after the export
-    toYear(l.date_initiated) as annee_saisie,
-    toMonth(l.date_initiated) as mois_saisie,
-    case toMonth(l.date_initiated) when 1 then '01 · Janvier' when 2 then '02 · Février' when 3 then '03 · Mars' when 4 then '04 · Avril' when 5 then '05 · Mai' when 6 then '06 · Juin' when 7 then '07 · Juillet' when 8 then '08 · Août' when 9 then '09 · Septembre' when 10 then '10 · Octobre' when 11 then '11 · Novembre' when 12 then '12 · Décembre' end
-                             as mois_saisie_nom
-  from curated.mart_drc_requisition_leadtime l
-  array join [
-    tuple('1. Initiée', toUInt8(1), cast(null, 'Nullable(Float64)')),
-    tuple('2. Soumise', toUInt8(l.date_submitted is not null),
-      round(dateDiff('second', l.date_initiated, l.date_submitted) / 86400.0, 2)),
-    tuple('3. Autorisée', toUInt8(l.date_authorized is not null),
-      round(dateDiff('second', l.date_submitted, l.date_authorized) / 86400.0, 2)),
-    tuple('4. En cours d''approbation', toUInt8(l.date_in_approval is not null),
-      round(dateDiff('second', l.date_authorized, l.date_in_approval) / 86400.0, 2)),
-    tuple('5. Approuvée', toUInt8(l.date_approved is not null),
-      round(dateDiff('second', l.date_in_approval, l.date_approved) / 86400.0, 2)),
-    tuple('6. Libérée', toUInt8(l.date_released is not null),
-      round(dateDiff('second', l.date_approved, l.date_released) / 86400.0, 2))
-  ] as e
+catalog: null
+schema: curated
+sql: "-- \"Suivi des r\xE9quisitions \u2013 \xE9tapes\": one row per requisition x\
+  \ step of the\n-- circuit (6 steps), unpivoted from mart_drc_requisition_leadtime.\n\
+  -- Legacy: CROSS JOIN LATERAL (VALUES ...) over analytics.fact_requisition_leadtime.\n\
+  -- delai_etape_j is the time from the previous step, in days, NULL for the\n-- first\
+  \ step and for steps not reached.\nselect\n  l.facility_id            as facility_id,\n\
+  \  l.numero_requisition     as numero_requisition,\n  l.statut_requisition     as\
+  \ statut_requisition,\n  l.type_requisition       as type_requisition,\n  l.date_initiated\
+  \         as date_initiated,\n  e.1                      as etape,\n  e.2      \
+  \                as atteinte,\n  e.3                      as delai_etape_j,\n  l.niveau_organisationnel\
+  \ as niveau_organisationnel,\n  l.zone_geographique      as zone_geographique,\n\
+  \  l.type_de_structure      as type_de_structure,\n  l.structure              as\
+  \ structure,\n  l.programme              as programme,\n  l.annee              \
+  \    as annee,\n  l.mois                   as mois,\n  l.periode               \
+  \ as periode,\n  -- date de saisie: requisition initiation, as UAT after the export\n\
+  \  toYear(l.date_initiated) as annee_saisie,\n  toMonth(l.date_initiated) as mois_saisie,\n\
+  \  case toMonth(l.date_initiated) when 1 then '01 \xB7 Janvier' when 2 then '02\
+  \ \xB7 F\xE9vrier' when 3 then '03 \xB7 Mars' when 4 then '04 \xB7 Avril' when 5\
+  \ then '05 \xB7 Mai' when 6 then '06 \xB7 Juin' when 7 then '07 \xB7 Juillet' when\
+  \ 8 then '08 \xB7 Ao\xFBt' when 9 then '09 \xB7 Septembre' when 10 then '10 \xB7\
+  \ Octobre' when 11 then '11 \xB7 Novembre' when 12 then '12 \xB7 D\xE9cembre' end\n\
+  \                           as mois_saisie_nom\nfrom curated.mart_drc_requisition_leadtime\
+  \ l\narray join [\n  tuple('1. Initi\xE9e', toUInt8(1), cast(null, 'Nullable(Float64)')),\n\
+  \  tuple('2. Soumise', toUInt8(l.date_submitted is not null),\n    round(dateDiff('second',\
+  \ l.date_initiated, l.date_submitted) / 86400.0, 2)),\n  tuple('3. Autoris\xE9e',\
+  \ toUInt8(l.date_authorized is not null),\n    round(dateDiff('second', l.date_submitted,\
+  \ l.date_authorized) / 86400.0, 2)),\n  tuple('4. En cours d''approbation', toUInt8(l.date_in_approval\
+  \ is not null),\n    round(dateDiff('second', l.date_authorized, l.date_in_approval)\
+  \ / 86400.0, 2)),\n  tuple('5. Approuv\xE9e', toUInt8(l.date_approved is not null),\n\
+  \    round(dateDiff('second', l.date_in_approval, l.date_approved) / 86400.0, 2)),\n\
+  \  tuple('6. Lib\xE9r\xE9e', toUInt8(l.date_released is not null),\n    round(dateDiff('second',\
+  \ l.date_approved, l.date_released) / 86400.0, 2))\n] as e\n"
 params: null
 template_params: null
 filter_select_enabled: true
@@ -57,214 +46,305 @@ fetch_values_predicate: null
 extra: null
 normalize_columns: false
 always_filter_main_dttm: false
-is_managed_externally: false
-columns:
-  - column_name: facility_id
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(UUID)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: numero_requisition
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: statut_requisition
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: String
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: type_requisition
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: String
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: date_initiated
-    verbose_name: null
-    is_dttm: true
-    is_active: true
-    type: Nullable(DateTime)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: etape
-    verbose_name: Étape du circuit
-    is_dttm: false
-    is_active: true
-    type: String
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: atteinte
-    verbose_name: Étape atteinte (0/1)
-    is_dttm: false
-    is_active: true
-    type: UInt8
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: delai_etape_j
-    verbose_name: Délai pour atteindre l’étape (j)
-    is_dttm: false
-    is_active: true
-    type: Nullable(Float64)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: niveau_organisationnel
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: zone_geographique
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: type_de_structure
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: structure
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: programme
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: annee
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(UInt16)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: mois
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(UInt8)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: periode
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: mois_nom
-    verbose_name: Mois (nom)
-    is_dttm: false
-    is_active: true
-    type: null
-    groupby: true
-    filterable: true
-    expression: CASE mois WHEN 1 THEN 'Janvier' WHEN 2 THEN '​Février' WHEN 3 THEN '​​Mars' WHEN 4 THEN
-      '​​​Avril' WHEN 5 THEN '​​​​Mai' WHEN 6 THEN '​​​​​Juin' WHEN 7 THEN '​​​​​​Juillet' WHEN 8 THEN
-      '​​​​​​​Août' WHEN 9 THEN '​​​​​​​​Septembre' WHEN 10 THEN '​​​​​​​​​Octobre' WHEN 11 THEN '​​​​​​​​​​Novembre'
-      WHEN 12 THEN '​​​​​​​​​​​Décembre' END
-    description: null
-  - column_name: annee_saisie
-    verbose_name: Année de saisie
-    is_dttm: false
-    is_active: true
-    type: Nullable(UInt16)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: mois_saisie
-    verbose_name: Mois de saisie (n°)
-    is_dttm: false
-    is_active: true
-    type: Nullable(UInt8)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: mois_saisie_nom
-    verbose_name: Mois de saisie
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
+folders: null
+uuid: 0920c8ab-4b6b-435d-8ad1-5a0ccfa81820
 metrics:
-  - metric_name: delai_moyen_etape_j
-    verbose_name: Délai moyen pour atteindre l’étape (j)
-    metric_type: null
-    expression: AVG(delai_etape_j)
-    description: null
-    d3format: ',.1f'
-    extra: null
-    warning_text: null
-  - metric_name: nb_requisitions_etape
-    verbose_name: Réquisitions ayant atteint l’étape
-    metric_type: null
-    expression: SUM(atteinte)
-    description: null
-    d3format: ',d'
-    extra: null
-    warning_text: null
-  - metric_name: count
-    verbose_name: Nombre de lignes
-    metric_type: null
-    expression: COUNT(*)
-    description: null
-    d3format: null
-    extra: null
-    warning_text: null
+- metric_name: delai_moyen_etape_j
+  verbose_name: "D\xE9lai moyen pour atteindre l\u2019\xE9tape (j)"
+  metric_type: null
+  expression: AVG(delai_etape_j)
+  description: null
+  d3format: ',.1f'
+  currency: null
+  extra: null
+  warning_text: null
+- metric_name: nb_requisitions_etape
+  verbose_name: "R\xE9quisitions ayant atteint l\u2019\xE9tape"
+  metric_type: null
+  expression: SUM(atteinte)
+  description: null
+  d3format: ',d'
+  currency: null
+  extra: null
+  warning_text: null
+- metric_name: count
+  verbose_name: Nombre de lignes
+  metric_type: null
+  expression: COUNT(*)
+  description: null
+  d3format: null
+  currency: null
+  extra: null
+  warning_text: null
+columns:
+- column_name: mois_nom
+  verbose_name: Mois (nom)
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: "CASE mois WHEN 1 THEN 'Janvier' WHEN 2 THEN '\u200BF\xE9vrier' WHEN\
+    \ 3 THEN '\u200B\u200BMars' WHEN 4 THEN '\u200B\u200B\u200BAvril' WHEN 5 THEN\
+    \ '\u200B\u200B\u200B\u200BMai' WHEN 6 THEN '\u200B\u200B\u200B\u200B\u200BJuin'\
+    \ WHEN 7 THEN '\u200B\u200B\u200B\u200B\u200B\u200BJuillet' WHEN 8 THEN '\u200B\
+    \u200B\u200B\u200B\u200B\u200B\u200BAo\xFBt' WHEN 9 THEN '\u200B\u200B\u200B\u200B\
+    \u200B\u200B\u200B\u200BSeptembre' WHEN 10 THEN '\u200B\u200B\u200B\u200B\u200B\
+    \u200B\u200B\u200B\u200BOctobre' WHEN 11 THEN '\u200B\u200B\u200B\u200B\u200B\u200B\
+    \u200B\u200B\u200B\u200BNovembre' WHEN 12 THEN '\u200B\u200B\u200B\u200B\u200B\
+    \u200B\u200B\u200B\u200B\u200B\u200BD\xE9cembre' END"
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: delai_etape_j
+  verbose_name: "D\xE9lai pour atteindre l\u2019\xE9tape (j)"
+  is_dttm: false
+  is_active: true
+  type: Nullable(Float64)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: mois_saisie
+  verbose_name: "Mois de saisie (n\xB0)"
+  is_dttm: false
+  is_active: true
+  type: Nullable(UInt8)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: atteinte
+  verbose_name: "\xC9tape atteinte (0/1)"
+  is_dttm: false
+  is_active: true
+  type: UInt8
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: annee_saisie
+  verbose_name: "Ann\xE9e de saisie"
+  is_dttm: false
+  is_active: true
+  type: Nullable(UInt16)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: mois_saisie_nom
+  verbose_name: Mois de saisie
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: etape
+  verbose_name: "\xC9tape du circuit"
+  is_dttm: false
+  is_active: true
+  type: String
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: annee
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(UInt16)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: mois
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(UInt8)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: facility_id
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(UUID)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: date_initiated
+  verbose_name: null
+  is_dttm: true
+  is_active: true
+  type: Nullable(DateTime)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: type_de_structure
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: niveau_organisationnel
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: zone_geographique
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: numero_requisition
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: programme
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: structure
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: periode
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: statut_requisition
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: String
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: type_requisition
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: String
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+version: 1.0.0
+database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
 source_db_engine: clickhousedb

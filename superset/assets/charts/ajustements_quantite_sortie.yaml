@@ -1,13 +1,8 @@
-slice_name: Ajustements – Quantité sortie (−)
-viz_type: big_number_total
-uuid: 096cd7b6-68a2-4a25-b31e-ee72fd4030cc
-version: 1.0.0
-dataset_uuid: 5279f063-d572-484e-a63e-66dbb23ec2de
+slice_name: "Ajustements \u2013 Quantit\xE9 sortie (\u2212)"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   adhoc_filters: []
   force_timestamp_formatting: false
@@ -20,12 +15,17 @@ params:
     isNew: false
     label: Sorties
     optionName: metric_1gnfknihhrh_k0immzoxb3q
-    sqlExpression: COALESCE(SUM(CASE WHEN sens_ajustement = 'Négatif' THEN quantite_absolue ELSE 0 END),
-      0)
-  subheader: Quantité retirée du stock
+    sqlExpression: "COALESCE(SUM(CASE WHEN sens_ajustement = 'N\xE9gatif' THEN quantite_absolue\
+      \ ELSE 0 END), 0)"
+  subheader: "Quantit\xE9 retir\xE9e du stock"
   subheader_font_size: 0.125
   time_format: smart_date
   time_range: No filter
   viz_type: big_number_total
   y_axis_format: .3s
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 096cd7b6-68a2-4a25-b31e-ee72fd4030cc
+version: 1.0.0
+dataset_uuid: 5279f063-d572-484e-a63e-66dbb23ec2de

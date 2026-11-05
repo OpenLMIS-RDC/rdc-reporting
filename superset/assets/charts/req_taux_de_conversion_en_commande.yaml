@@ -1,13 +1,8 @@
-slice_name: Réq. – Taux de conversion en commande
-viz_type: big_number_total
-uuid: 8a08ddef-c56c-463d-872e-9ae5fe639fbd
-version: 1.0.0
-dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+slice_name: "R\xE9q. \u2013 Taux de conversion en commande"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   adhoc_filters: []
@@ -21,11 +16,16 @@ params:
     aggregate: null
     column: null
     isNew: false
-  subheader: Libérées ÷ soumises
+  subheader: "Lib\xE9r\xE9es \xF7 soumises"
   header_font_size: 0.4
   subheader_font_size: 0.18
   number_format: .1%
   y_axis_format: .1%
   time_format: smart_date
   force_timestamp_formatting: false
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 8a08ddef-c56c-463d-872e-9ae5fe639fbd
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79

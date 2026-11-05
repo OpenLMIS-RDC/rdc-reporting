@@ -1,13 +1,8 @@
 slice_name: Taux de perte (sur sorties)
-viz_type: big_number_total
-uuid: 114e48a8-f4c4-4146-bb6b-ec3031cb21c6
-version: 1.0.0
-dataset_uuid: 55ce0ab8-12a4-4b55-a761-636882680240
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   metric:
@@ -20,11 +15,16 @@ params:
     aggregate: null
     column: null
   adhoc_filters: []
-  subheader: Quantité perdue ÷ quantités sorties
+  subheader: "Quantit\xE9 perdue \xF7 quantit\xE9s sorties"
   y_axis_format: .2%
   header_font_size: 0.4
   subheader_font_size: 0.125
   time_range: No filter
   time_format: smart_date
   force_timestamp_formatting: false
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 114e48a8-f4c4-4146-bb6b-ec3031cb21c6
+version: 1.0.0
+dataset_uuid: 55ce0ab8-12a4-4b55-a761-636882680240

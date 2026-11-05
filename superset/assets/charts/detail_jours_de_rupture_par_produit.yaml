@@ -1,31 +1,26 @@
-slice_name: 'Détail : jours de rupture par produit'
-viz_type: table
-uuid: be118c02-f785-494f-95cd-5075877dacf9
-version: 1.0.0
-dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc
+slice_name: "D\xE9tail : jours de rupture par produit"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: table
 params:
   adhoc_filters: []
   all_columns: []
   color_pn: true
   groupby:
-    - programme
-    - code
-    - produit
+  - programme
+  - code
+  - produit
   metrics:
-    - aggregate: MAX
-      column:
-        column_name: nombre_de_jours_de_rupture
-      expressionType: SIMPLE
-      hasCustomLabel: true
-      isNew: false
-      label: Nombre de jours de reupture
-      optionName: metric_f3pxug159fi_loayuuxqd8s
-      sqlExpression: null
+  - aggregate: MAX
+    column:
+      column_name: nombre_de_jours_de_rupture
+    expressionType: SIMPLE
+    hasCustomLabel: true
+    isNew: false
+    label: Nombre de jours de reupture
+    optionName: metric_f3pxug159fi_loayuuxqd8s
+    sqlExpression: null
   order_by_cols: []
   order_desc: false
   percent_metrics: []
@@ -38,4 +33,9 @@ params:
   viz_type: table
   include_search: true
   allow_render_html: true
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: be118c02-f785-494f-95cd-5075877dacf9
+version: 1.0.0
+dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc

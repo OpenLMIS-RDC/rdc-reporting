@@ -1,13 +1,8 @@
-slice_name: 'Détail : ruptures par produit (toutes structures)'
-viz_type: table
-uuid: bf468988-670a-4611-b67f-84b1cae05705
-version: 1.0.0
-dataset_uuid: 3c5df730-cced-4285-814c-1d0ed6e6ec14
+slice_name: "D\xE9tail : ruptures par produit (toutes structures)"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: table
 params:
   adhoc_filters: []
   all_columns: []
@@ -18,34 +13,34 @@ params:
       d3SmallNumberFormat: ',.1%'
   conditional_formatting: []
   groupby:
-    - programme
-    - produit
+  - programme
+  - produit
   metrics:
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      isNew: false
-      label: Structures existantes
-      optionName: metric_2k1omtgd8dv_dwrs1c1g4y
-      sqlExpression: COUNT(DISTINCT structure)
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      isNew: false
-      label: Structures en rupture
-      optionName: metric_ds6guhgphfq_lxra7d5pw6p
-      sqlExpression: COUNT(DISTINCT CASE WHEN a_une_rupture = 1 THEN structure END)
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      isNew: false
-      label: '% en rupture'
-      optionName: metric_lk7py60w9v_ffvuqjtgg2
-      sqlExpression: "toFloat64(COUNT(DISTINCT CASE WHEN a_une_rupture = 1 THEN structure END))\r\n/ NULLIF(COUNT(DISTINCT\
-        \ structure), 0)"
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    isNew: false
+    label: Structures existantes
+    optionName: metric_2k1omtgd8dv_dwrs1c1g4y
+    sqlExpression: COUNT(DISTINCT structure)
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    isNew: false
+    label: Structures en rupture
+    optionName: metric_ds6guhgphfq_lxra7d5pw6p
+    sqlExpression: COUNT(DISTINCT CASE WHEN a_une_rupture = 1 THEN structure END)
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    isNew: false
+    label: '% en rupture'
+    optionName: metric_lk7py60w9v_ffvuqjtgg2
+    sqlExpression: "toFloat64(COUNT(DISTINCT CASE WHEN a_une_rupture = 1 THEN structure\
+      \ END))\r\n/ NULLIF(COUNT(DISTINCT structure), 0)"
   order_by_cols: []
   order_desc: false
   percent_metrics: []
@@ -57,4 +52,9 @@ params:
   time_range: No filter
   viz_type: table
   allow_render_html: true
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: bf468988-670a-4611-b67f-84b1cae05705
+version: 1.0.0
+dataset_uuid: 3c5df730-cced-4285-814c-1d0ed6e6ec14

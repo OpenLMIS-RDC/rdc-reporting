@@ -1,18 +1,13 @@
 slice_name: Commandes par type de structure
-viz_type: pie
-uuid: 9eab9d65-4171-4717-a300-786c9a884bc9
-version: 1.0.0
-dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: pie
 params:
   viz_type: pie
   adhoc_filters: []
   groupby:
-    - type_de_structure
+  - type_de_structure
   row_limit: 100
   date_format: smart_date
   donut: true
@@ -35,4 +30,9 @@ params:
     hasCustomLabel: true
     optionName: m_yd9ucw76
   show_total: true
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 9eab9d65-4171-4717-a300-786c9a884bc9
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3

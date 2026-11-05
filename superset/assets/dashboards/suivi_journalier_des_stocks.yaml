@@ -1,389 +1,906 @@
 dashboard_title: Suivi journalier des stocks
-uuid: bf2d3933-6a81-4ee2-bfe0-38ac1c785e96
-version: 1.0.0
 description: null
+css: "/* ============================================================\n   LOGIMEV\
+  \ - feuille Superset 6 (rework minimum viable, phase 7d)\n   Les regles propres\
+  \ a un graphique sont cle'es sur\n   .chart-slice[data-test-chart-name=\"<slice_name\
+  \ du YAML>\"] et non plus\n   sur l'id numerique (#chart-id-N / data-test-chart-id):\
+  \ les ids changent\n   a chaque import (dev, UAT, prod), une regle cle'e sur un\
+  \ id finit par\n   styler le mauvais graphique. Le nom (slice_name) est stable.\n\
+  \   Supprime: regles sur ids legacy (couleurs KPI par famille, largeurs de\n   colonnes),\
+  \ teinte de ligne par Gravite (dependait du style inline de\n   Superset 1.5), selecteurs\
+  \ DOM Superset 1.5 disparus.\n   ============================================================\
+  \ */\n\n/* ===== A. CHARTE LOGIMEV (bandeau + barre de filtres bleu marine) =====\
+  \ */\n/* ============================================================\n   Gestion\
+  \ des commandes - habillage repris de \"Rapport d'etat de stock\"\n   ============================================================\
+  \ */\n/* ====== THEME LOGIMEV - Rapport d'etat de stock ====== */\n\n/* --- Fond\
+  \ general bleu --- */\nbody,\n#app,\n.dashboard,\n.dashboard-content,\n[data-test=\"\
+  dashboard-content-wrapper\"],\n.grid-content,\n.dashboard .dashboard-grid,\n.dashboard-component-tabs-content,\n\
+  .grid-row,\n.dragdroppable-row { background-color: #4E93CF !important; }\n\n.grid-content\
+  \ { padding: 12px !important; }\n\n/* --- Bandeau de titre bleu fonce --- */\n.dashboard-header-container\
+  \ { background-color: #1F3864 !important; border-bottom: none !important; box-shadow:\
+  \ none !important; }\n\n.dashboard-header-container [data-test=\"editable-title-input\"\
+  ],\n.dashboard-header-container .title-panel .input-sizer { color: #FFFFFF !important;\
+  \ font-weight: 700 !important; font-size: 22px !important; background: transparent\
+  \ !important; }\n\n/* --- Onglets en paves --- */\n.dashboard .ant-tabs-nav { background:\
+  \ transparent !important; margin-bottom: 10px !important; }\n\n.dashboard .ant-tabs-nav::before\
+  \ { border-bottom: none !important; }\n\n.dashboard .ant-tabs-ink-bar { display:\
+  \ none !important; }\n\n.dashboard .ant-tabs-tab { background-color: #8FB8DE !important;\
+  \ border-radius: 4px 4px 0 0 !important; margin: 0 4px 0 0 !important; padding:\
+  \ 10px 14px !important; border: none !important; white-space: nowrap !important;\
+  \ }\n\n.dashboard .ant-tabs-tab .ant-tabs-tab-btn,\n.dashboard .ant-tabs-tab .ant-tabs-tab-btn\
+  \ * { color: #1F3864 !important; font-weight: 600 !important; font-size: 12px !important;\
+  \ text-transform: uppercase; white-space: nowrap !important; }\n\n.dashboard .ant-tabs-tab.ant-tabs-tab-active\
+  \ { background-color: #1F3864 !important; }\n\n.dashboard .ant-tabs-tab.ant-tabs-tab-active\
+  \ .ant-tabs-tab-btn,\n.dashboard .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn\
+  \ * { color: #FFFFFF !important; }\n\n/* --- Cartes de graphiques / tableaux ---\
+  \ */\n.dashboard-component-chart-holder { background-color: #FFFFFF !important;\
+  \ border: 1px solid #2E5C8A !important; border-radius: 6px !important; box-shadow:\
+  \ 0 2px 6px rgba(0,0,0,0.18) !important; padding: 6px 8px !important; }\n\n.dashboard-component-chart-holder\
+  \ .header-title,\n.dashboard-component-chart-holder .header-title span,\n[data-test=\"\
+  slice-header\"] .header-title { color: #1F3864 !important; font-weight: 700 !important;\
+  \ text-align: center !important; width: 100% !important; }\n\n/* --- Blocs Markdown\
+  \ (en-tete / legende) --- */\n.dashboard-markdown { background-color: #FFFFFF !important;\
+  \ border: 1px solid #2E5C8A !important; border-radius: 6px !important; }\n\n/* ---\
+  \ Barre de filtres --- */\n[data-test=\"filter-bar\"],\n[data-test=\"filter-bar\"\
+  ] > div,\n[data-test=\"filter-bar\"] > div > div { background-color: #4E93CF !important;\
+  \ }\n\n[data-test=\"filter-bar\"] h4,\n[data-test=\"filter-bar\"] label,\n[data-test=\"\
+  filter-bar\"] .ant-form-item-label > label { color: #FFFFFF !important; font-weight:\
+  \ 700 !important; }\n\n[data-test=\"filter-bar\"] .ant-form-item { background-color:\
+  \ #1F3864 !important; border-radius: 6px !important; padding: 8px 10px 4px 10px\
+  \ !important; margin-bottom: 12px !important; }\n\n[data-test=\"filter-bar\"] .ant-select-selector\
+  \ { border-radius: 4px !important; border: 1px solid #FFFFFF !important; background-color:\
+  \ #FFFFFF !important; }\n\n[data-test=\"filter-bar\"] .ant-select-selection-placeholder,\n\
+  [data-test=\"filter-bar\"] .ant-select-selection-item { color: #1F3864 !important;\
+  \ }\n\n[data-test=\"filter-bar__expand-button\"] svg,\n[data-test=\"filter-bar__filter-icon\"\
+  ] svg { color: #FFFFFF !important; }\n\n/* --- Tableaux --- */\n.dashboard table\
+  \ thead th { background-color: #DCE6F1 !important; color: #1F3864 !important; font-weight:\
+  \ 700 !important; }\n\n.dashboard table tbody tr:nth-child(even) { background-color:\
+  \ #EEF4FB !important; }\n\n/* --- Boutons de la barre de filtres --- */\n[data-test=\"\
+  filter-bar__apply-button\"] { background-color: #1F3864 !important; border-color:\
+  \ #1F3864 !important; color: #FFFFFF !important; font-weight: 700 !important; }\n\
+  \n[data-test=\"filter-bar__apply-button\"] span { color: #FFFFFF !important; }\n\
+  \n[data-test=\"filter-bar__clear-button\"],\n[data-test=\"filter-bar__clear-button\"\
+  ] span,\n[data-test=\"filter-bar\"] .ant-btn-link span,\n[data-test=\"filter-bar\"\
+  ] [role=\"button\"] { color: #FFFFFF !important; }\n\n/* --- Bouton Clear all :\
+  \ fond bleu marine, texte blanc --- */\n[data-test=\"filter-bar__clear-button\"\
+  ] { background-color: #1F3864 !important; border: 1px solid #1F3864 !important;\
+  \ border-radius: 4px !important; color: #FFFFFF !important; font-weight: 700 !important;\
+  \ }\n\n[data-test=\"filter-bar__clear-button\"] span { color: #FFFFFF !important;\
+  \ }\n\n[data-test=\"filter-bar__clear-button\"]:hover { background-color: #2E5C8A\
+  \ !important; border-color: #2E5C8A !important; color: #FFFFFF !important; }\n\n\
+  /* === RESPONSIVE === */\n/* --- fluidite generale --- */\n.dashboard .grid-content,\n\
+  .dashboard-content,\n.dashboard-component-chart-holder { max-width: 100% !important;\
+  \ }\n\n.dashboard-component-chart-holder .chart-container,\n.dashboard-component-chart-holder\
+  \ .slice_container { width: 100% !important; max-width: 100% !important; }\n\n.dashboard-component-chart-holder\
+  \ .superset-chart-table,\n.dashboard-component-chart-holder .chart-slice[data-test-viz-type=\"\
+  pivot_table_v2\"] { overflow-x: auto !important; max-width: 100% !important; }\n\
+  \n/* --- barre de filtres : on recupere de la place sur petits ecrans --- */\n@media\
+  \ (max-width: 1100px) {\n\n  [data-test=\"filter-bar\"].open,\ndiv:has(> [data-test=\"\
+  filter-bar\"].open) { width: 210px !important; min-width: 210px !important; flex:\
+  \ 0 0 210px !important; }\n  [data-test=\"filter-bar\"].open .ant-select { font-size:\
+  \ 11px !important; }\n\n}\n\n@media (max-width: 820px) {\n\n  [data-test=\"filter-bar\"\
+  ].open,\ndiv:has(> [data-test=\"filter-bar\"].open) { width: 175px !important; min-width:\
+  \ 175px !important; flex: 0 0 175px !important; }\n\n}\n\n/* === LISIBILITE & LIBELLES\
+  \ (9) === */\n.dashboard [data-test=\"slice-header\"] .header-title,\n.dashboard\
+  \ [data-test=\"slice-header\"] .header-title .editable-title { overflow: visible\
+  \ !important; text-overflow: clip !important; white-space: normal !important; }\n\
+  \n.dashboard [data-test=\"slice-header\"] .header-title { height: auto !important;\
+  \ max-height: 42px; line-height: 1.2 !important; }\n\n.dashboard [data-test=\"slice-header\"\
+  ] { align-items: flex-start !important; }\n\n.dashboard .ant-tabs-nav .ant-tabs-tab\
+  \ { padding: 7px 11px !important; }\n\n.dashboard .ant-tabs-nav .ant-tabs-tab .editable-title,\n\
+  .dashboard .ant-tabs-nav .ant-tabs-tab span { font-size: 11.5px !important; letter-spacing:\
+  \ 0.2px !important; }\n\n.dashboard .ant-tabs-nav .ant-tabs-tab { padding: 7px 9px\
+  \ !important; }\n\n.dashboard .ant-tabs-nav .ant-tabs-tab .editable-title,\n.dashboard\
+  \ .ant-tabs-nav .ant-tabs-tab span { font-size: 10.5px !important; }\n\n/* =====\
+  \ B. SYSTEME DE DESIGN v3 (cadres, KPI, onglets, tables) ===== */\n/* =====================================================================\n\
+  \   LOGIMEV - Systeme de design du tableau de bord  (v3)\n   Cadres, en-tetes, cartes\
+  \ KPI, tables, onglets - valable sur TOUS les onglets\n   =====================================================================\
+  \ */\n\n/* ---------- 1. CADRE DES CARTES ---------- */\n.dashboard-component-chart-holder\
+  \ { position: relative; background: #ffffff; border: 1px solid #e7ecf5; border-radius:\
+  \ 16px; box-shadow: 0 1px 2px rgba(15,23,42,.05),0 12px 28px -20px rgba(15,23,42,.55);\
+  \ transition: box-shadow .28s ease,transform .28s ease,border-color .28s ease; }\n\
+  .dashboard-component-chart-holder:hover { border-color: #c7d2fe; transform: translateY(-2px);\
+  \ box-shadow: 0 2px 6px rgba(15,23,42,.07),0 26px 48px -24px rgba(37,99,235,.55);\
+  \ }\n.dashboard-component-chart-holder::after { content: \"\"; position: absolute;\
+  \ left: 16px; right: 16px; top: 0; height: 3px; z-index: 2; border-radius: 0 0 6px\
+  \ 6px; pointer-events: none; background: linear-gradient(90deg,#1d4ed8,#7c3aed 55%,#06b6d4);\
+  \ opacity: .9; }\n\n/* ---------- 2. EN-TETE DE CARTE (titre entier, jamais tronque)\
+  \ ---------- */\n.dashboard-component-chart-holder [data-test=\"slice-header\"]\
+  \ { position: relative; height: auto!important; align-items: flex-start!important;\
+  \ padding-right: 2px; }\n.dashboard-component-chart-holder [data-test=\"slice-header\"\
+  ] .header-controls { position: absolute!important; top: 0; right: 0; z-index: 5;\
+  \ transform: scale(.75); transform-origin: top right; opacity: .5; transition: opacity\
+  \ .2s; }\n.dashboard-component-chart-holder:hover [data-test=\"slice-header\"] .header-controls\
+  \ { opacity: 1; }\n.dashboard-component-chart-holder [data-test=\"slice-header\"\
+  ] .header-title { flex: 1 1 auto; min-width: 0; padding-right: 46px!important; max-height:\
+  \ none!important; -webkit-line-clamp: 4!important; overflow: visible!important;\
+  \ }\n.dashboard-component-chart-holder [data-test=\"slice-header\"] .header-title\
+  \ .editable-title { display: block; white-space: normal!important; overflow: visible!important;\
+  \ text-overflow: clip!important; font-size: 11.5px!important; font-weight: 700!important;\
+  \ line-height: 1.25!important; letter-spacing: .15px; color: #0f172a!important;\
+  \ }\n\n/* ---------- 3. CARTES KPI ---------- */\n.chart-slice[data-test-viz-type=\"\
+  big_number_total\"] { --kpi: #1d4ed8; --kpi-soft: #eff6ff; --kpi-ring: #dbeafe;\
+  \ }\n\n.chart-slice[data-test-viz-type=\"big_number_total\"] .superset-legacy-chart-big-number\
+  \ { background: none!important; border-radius: 14px; padding: 2px 6px 8px!important;\
+  \ align-items: center!important; justify-content: center!important; }\n.chart-slice[data-test-viz-type=\"\
+  big_number_total\"] .header-line { height: auto!important; line-height: 1.02!important;\
+  \ font-weight: 800!important; letter-spacing: -.02em; color: var(--kpi)!important;\
+  \ text-align: center!important; width: 100%; white-space: nowrap!important; font-size:\
+  \ 30px!important; }\n@media (min-width:1100px) {\n.chart-slice[data-test-viz-type=\"\
+  big_number_total\"] .header-line { font-size: 36px!important; }\n}\n@media (min-width:1300px)\
+  \ {\n.chart-slice[data-test-viz-type=\"big_number_total\"] .header-line { font-size:\
+  \ 44px!important; }\n}\n@media (min-width:1550px) {\n.chart-slice[data-test-viz-type=\"\
+  big_number_total\"] .header-line { font-size: 54px!important; }\n}\n@media (min-width:1850px)\
+  \ {\n.chart-slice[data-test-viz-type=\"big_number_total\"] .header-line { font-size:\
+  \ 62px!important; }\n}\n.chart-slice[data-test-viz-type=\"big_number_total\"] .subheader-line\
+  \ { font-size: 11px!important; height: auto!important; line-height: 1.35!important;\
+  \ font-weight: 600!important; color: var(--kpi)!important; text-align: center!important;\
+  \ white-space: normal!important; width: fit-content; max-width: 96%; margin: 12px\
+  \ auto 0!important; padding: 6px 12px; background: #ffffffcc; border: 1px solid\
+  \ var(--kpi-ring); border-radius: 999px; }\n/* Teinte de fond + lisere colore, par\
+  \ famille d'indicateur */\n\n/* ---------- 4. TABLES ---------- */\n.dashboard-component-chart-holder\
+  \ .chart-container table th { background: #f8fafc!important; color: #0f172a!important;\
+  \ font-weight: 700!important; border-bottom: 2px solid #e2e8f0!important; letter-spacing:\
+  \ .2px; }\n.dashboard-component-chart-holder .chart-container table td { border-bottom:\
+  \ 1px solid #f1f5f9!important; }\n.dashboard-component-chart-holder .chart-container\
+  \ table tbody tr:hover { background: #f1f5f9!important; }\n\n/* ---------- 5. CADRE\
+  \ DES GUIDES (markdown) ---------- */\n.dashboard-component-markdown,\n.dashboard-markdown\
+  \ { background: #ffffff; border: 1px solid #e7ecf5; border-radius: 16px; box-shadow:\
+  \ 0 1px 2px rgba(15,23,42,.05),0 12px 28px -20px rgba(15,23,42,.5); }\n\n/* ----------\
+  \ 6. ONGLETS : tous visibles, style pilule ---------- */\n.dashboard-component-tabs>.ant-tabs>.ant-tabs-nav\
+  \ { background: #ffffff; border: 1px solid #e7ecf5; border-radius: 14px; padding:\
+  \ 6px 8px; box-shadow: 0 1px 2px rgba(15,23,42,.05); margin-bottom: 14px; }\n.dashboard-component-tabs>.ant-tabs>.ant-tabs-nav::before\
+  \ { display: none!important; }\n.dashboard-component-tabs .ant-tabs-nav-wrap { white-space:\
+  \ normal!important; overflow: visible!important; }\n.dashboard-component-tabs .ant-tabs-nav-list\
+  \ { flex-wrap: wrap!important; transform: none!important; width: 100%; row-gap:\
+  \ 6px; }\n.dashboard-component-tabs .ant-tabs-nav-operations { display: none!important;\
+  \ }\n.dashboard-component-tabs .ant-tabs-ink-bar { display: none!important; }\n\
+  .dashboard-component-tabs .ant-tabs-tab { visibility: visible!important; order:\
+  \ 0!important; border: none!important; border-radius: 10px; padding: 6px 10px!important;\
+  \ margin: 0 4px 0 0!important; font-weight: 600; font-size: 10.5px!important; transition:\
+  \ .2s; }\n.dashboard-component-tabs .ant-tabs-tab:hover { background: #eff6ff; }\n\
+  .dashboard-component-tabs .ant-tabs-tab.ant-tabs-tab-active { background: linear-gradient(135deg,#1d4ed8,#3b82f6)!important;\
+  \ box-shadow: 0 6px 16px -8px rgba(29,78,216,.9)!important; }\n.dashboard-component-tabs\
+  \ .ant-tabs-tab.ant-tabs-tab-active * { color: #ffffff!important; }\n\n/* --- Onglets\
+  \ : largeur naturelle, pas d'etirement --- */\n.dashboard-component-tabs .ant-tabs-nav-list>.ant-tabs-tab\
+  \ { flex: 0 0 auto!important; width: auto!important; min-width: 0!important; max-width:\
+  \ none!important; }\n\n/* ==== 7. TABLEAUX - SYSTEME DE LISIBILITE (genere) ====\
+  \ */\n.superset-chart-table table thead th { white-space: normal!important; vertical-align:\
+  \ bottom!important; font-size: 10.5px!important; font-weight: 700!important; text-transform:\
+  \ uppercase; letter-spacing: .4px; line-height: 1.3!important; padding: 8px 10px!important;\
+  \ color: #475569!important; background: #f1f5f9!important; border-bottom: 2px solid\
+  \ #cbd5e1!important; }\n.superset-chart-table table tbody td { padding: 7px 10px!important;\
+  \ line-height: 1.45!important; border-bottom: 1px solid #eef2f7!important; color:\
+  \ #334155!important; font-size: 12px!important; vertical-align: top!important; }\n\
+  \n.superset-chart-table table tbody tr:hover { background: #f8fafc!important; }\n\
+  .pvtTable thead th { font-size: 10.5px!important; font-weight: 700!important; letter-spacing:\
+  \ .3px; color: #475569!important; background: #f1f5f9!important; padding: 7px 9px!important;\
+  \ line-height: 1.3!important; }\n.pvtTable tbody th { font-size: 11.5px!important;\
+  \ font-weight: 600!important; color: #0f172a!important; text-align: left!important;\
+  \ background: #f8fafc!important; padding: 7px 9px!important; line-height: 1.35!important;\
+  \ }\n.pvtTable tbody td { padding: 7px 9px!important; font-size: 12px!important;\
+  \ font-variant-numeric: tabular-nums; color: #0f172a!important; border-bottom: 1px\
+  \ solid #eef2f7!important; }\n.pvtTable tbody tr:hover { background: #f8fafc!important;\
+  \ }\n\n/* ==== 8. TABLEAUX CROISES (pivot v2) ==== */\n.pvtTable { border-collapse:\
+  \ collapse!important; font-size: 12px!important; }\n.pvtTable th.pvtAxisLabel {\
+  \ font-size: 10px!important; text-transform: uppercase; letter-spacing: .4px; color:\
+  \ #64748b!important; background: #e2e8f0!important; font-weight: 700!important;\
+  \ padding: 6px 9px!important; text-align: left!important; }\n.pvtTable th.pvtColLabel,\n\
+  .pvtTable th.pvtTotalLabel { font-size: 10.5px!important; font-weight: 700!important;\
+  \ letter-spacing: .3px; color: #334155!important; background: #f1f5f9!important;\
+  \ padding: 7px 9px!important; line-height: 1.3!important; text-align: center!important;\
+  \ white-space: normal!important; }\n.pvtTable th.pvtRowLabel { font-size: 11.5px!important;\
+  \ font-weight: 600!important; color: #0f172a!important; background: #f8fafc!important;\
+  \ text-align: left!important; padding: 7px 9px!important; white-space: normal!important;\
+  \ }\n.pvtTable td.pvtVal { text-align: right!important; font-variant-numeric: tabular-nums;\
+  \ padding: 7px 9px!important; color: #0f172a!important; border-bottom: 1px solid\
+  \ #eef2f7!important; }\n.pvtTable td.pvtTotal,\n.pvtTable td.pvtGrandTotal { text-align:\
+  \ right!important; font-weight: 700!important; font-variant-numeric: tabular-nums;\
+  \ background: #f1f5f9!important; color: #0f172a!important; padding: 7px 9px!important;\
+  \ border-top: 2px solid #cbd5e1!important; }\n.pvtTable td.pvtGrandTotal { background:\
+  \ #e2e8f0!important; }\n.pvtTable tbody tr:hover td.pvtVal { background: #f8fafc!important;\
+  \ }\n\n/* --- tableaux croises : occuper toute la largeur de la tuile --- */\n.chart-slice[data-test-viz-type=\"\
+  pivot_table_v2\"] div:has(> table.pvtTable),\n.chart-slice[data-test-viz-type=\"\
+  pivot_table_v2\"] div:has(> div > table.pvtTable) { max-width: none!important; width:\
+  \ 100%!important; }\n.chart-slice[data-test-viz-type=\"pivot_table_v2\"] table.pvtTable\
+  \ { width: 100%!important; }\n\n/* ============================================================\n\
+  \   RAPPORT DE STOCK - RDC : surcouche specifique\n   ============================================================\
+  \ */\n\n/* --- Bandeau de titre dynamique (chart \"En-tete - Date du rapport\")\
+  \ --- */\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Date du rapport\"]) { background: linear-gradient(90deg, #1F3864 0%, #2c4f8a\
+  \ 100%) !important; border: none !important; border-radius: 10px !important; box-shadow:\
+  \ 0 2px 6px rgba(15,23,42,.18) !important; padding: 0 !important; }\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Date du rapport\"]) .header-title,\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Date du rapport\"]) [data-test=\"slice-header\"] { display: none !important;\
+  \ }\n.chart-slice[data-test-chart-name=\"En-tete - Date du rapport\"] thead { display:\
+  \ none !important; }\n.chart-slice[data-test-chart-name=\"En-tete - Date du rapport\"\
+  ] table,\n.chart-slice[data-test-chart-name=\"En-tete - Date du rapport\"] tbody\
+  \ tr,\n.chart-slice[data-test-chart-name=\"En-tete - Date du rapport\"] tbody td\
+  \ { background: transparent !important; border: none !important; box-shadow: none\
+  \ !important; }\n.chart-slice[data-test-chart-name=\"En-tete - Date du rapport\"\
+  ] tbody td { color: #FFFFFF !important; font-size: 24px !important; font-weight:\
+  \ 800 !important; letter-spacing: .3px; text-align: left !important; padding: 14px\
+  \ 20px !important; white-space: nowrap; }\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Date du rapport\"] .pagination-container,\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Date du rapport\"] .dt-controls { display: none !important; }\n\n/* ---\
+  \ Bandeau KPI --- */\n.chart-slice[data-test-viz-type=\"big_number_total\"] .header-line\
+  \ { color: #1F3864 !important; }\n.chart-slice[data-test-viz-type=\"big_number_total\"\
+  ] .subheader-line { color: #475569 !important; }\n\n/* --- Tableau du rapport ---\
+  \ */\n.chart-slice[data-test-chart-name=\"Rapport de stock\"] table thead th { background:\
+  \ #1F3864 !important; color: #FFFFFF !important; font-weight: 700 !important; white-space:\
+  \ normal !important; }\n\n.chart-slice[data-test-chart-name=\"Rapport de stock\"\
+  ] table tbody td { font-size: 12.5px !important; }\n\n/* Statut : pastilles de couleur\
+  \ */\n.chart-slice[data-test-chart-name=\"Rapport de stock\"] td[data-column-name=\"\
+  Statut\"] { font-weight: 600 !important; }\n\n/* --- Corrections rapport de stock\
+  \ --- */\n.chart-slice[data-test-chart-name=\"Rapport de stock\"] table thead th\
+  \ { text-transform: none !important; font-size: 12.5px !important; }\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Date du rapport\"]) [data-test=\"slice-header\"] { display: none !important;\
+  \ }\n.chart-slice[data-test-chart-name=\"En-tete - Date du rapport\"] .superset-legacy-chart-table,\n\
+  .chart-slice[data-test-chart-name=\"En-tete - Date du rapport\"] .chart-container\
+  \ { display: flex !important; align-items: center !important; height: 100% !important;\
+  \ }\n.chart-slice[data-test-chart-name=\"En-tete - Date du rapport\"] .dt-metric,\n\
+  .chart-slice[data-test-chart-name=\"En-tete - Date du rapport\"] .dt-is-filter {\
+  \ cursor: default !important; }\n\n.chart-slice[data-test-chart-name=\"En-tete -\
+  \ Date du rapport\"] thead th { color: transparent !important; background: transparent\
+  \ !important; border: none !important; font-size: 0 !important; line-height: 0 !important;\
+  \ height: 0 !important; padding: 0 !important; }\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Date du rapport\"] thead th span,\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Date du rapport\"] thead th svg { display: none !important; }\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Date du rapport\"] tbody tr,\n.chart-slice[data-test-chart-name=\"En-tete\
+  \ - Date du rapport\"] tbody td { visibility: visible !important; }\n\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Date du rapport\"] thead { display: table-header-group !important; }\n\
+  .chart-slice[data-test-chart-name=\"En-tete - Date du rapport\"] table { visibility:\
+  \ visible !important; }\n\n/* ================= HARMONISATION CHARTE GESTION DES\
+  \ COMMANDES ================= */\n\n/* Tableau : entete claire facon Gestion des\
+  \ commandes */\n.chart-slice[data-test-chart-name=\"Rapport de stock\"] table thead\
+  \ th { background: #f1f5f9 !important; color: #475569 !important; font-size: 10.5px\
+  \ !important; font-weight: 700 !important; text-transform: uppercase !important;\
+  \ letter-spacing: .4px !important; padding: 9px 10px !important; border-bottom:\
+  \ 2px solid #cbd5e1 !important; white-space: normal !important; vertical-align:\
+  \ bottom !important; }\n.chart-slice[data-test-chart-name=\"Rapport de stock\"]\
+  \ table { width: 100% !important; max-width: 100% !important; font-size: 12.5px\
+  \ !important; }\n\n.chart-slice[data-test-chart-name=\"Rapport de stock\"] table\
+  \ tbody td { font-size: 12.5px !important; padding: 11px 10px 11px 16px !important;\
+  \ border-bottom: 1px solid #e9eef5 !important; white-space: normal !important; line-height:\
+  \ 1.5 !important; }\n\n/* Coloration des lignes selon la gravite: supprimee (Superset\
+  \ 6 n'ecrit plus la couleur en style inline; la colonne Gravite reste visible avec\
+  \ ses couleurs) */\n\n/* Restaure la couleur KPI par carte (var --kpi) */\n.chart-slice[data-test-viz-type=\"\
+  big_number_total\"] .header-line { color: var(--kpi) !important; }\n.chart-slice[data-test-viz-type=\"\
+  big_number_total\"] .subheader-line { color: var(--kpi) !important; border-color:\
+  \ var(--kpi-ring) !important; }\n\n/* ===== Tableau : quadrillage / delimitation\
+  \ des cellules ===== */\n.chart-slice[data-test-chart-name=\"Rapport de stock\"\
+  ] table { border-collapse: separate !important; border-spacing: 0 !important; border:\
+  \ 1px solid #cbd5e1 !important; border-radius: 6px !important; overflow: hidden\
+  \ !important; }\n.chart-slice[data-test-chart-name=\"Rapport de stock\"] table thead\
+  \ th { border-right: 1px solid #cbd5e1 !important; border-bottom: 2px solid #94a3b8\
+  \ !important; }\n.chart-slice[data-test-chart-name=\"Rapport de stock\"] table thead\
+  \ th:last-child { border-right: 0 !important; }\n.chart-slice[data-test-chart-name=\"\
+  Rapport de stock\"] table tbody td { border-right: 1px solid #dbe3ec !important;\
+  \ border-bottom: 1px solid #dbe3ec !important; }\n.chart-slice[data-test-chart-name=\"\
+  Rapport de stock\"] table tbody td:last-child { border-right: 0 !important; }\n\
+  .chart-slice[data-test-chart-name=\"Rapport de stock\"] table tbody tr:last-child\
+  \ td { border-bottom: 0 !important; }\n\n.chart-slice[data-test-chart-name=\"Rapport\
+  \ de stock\"] table tbody td { padding: 10px 12px !important; vertical-align: middle\
+  \ !important; }\n.chart-slice[data-test-chart-name=\"Rapport de stock\"] table tbody\
+  \ td:nth-child(1) { padding-left: 16px !important; }\n\n/* === En-tetes onglets\
+  \ rupture / sync (clone du \"En-tete - Date du rapport\") === */\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Ruptures\"]) { background: linear-gradient(90deg, #1F3864 0%, #2c4f8a\
+  \ 100%) !important; border: none !important; border-radius: 10px !important; box-shadow:\
+  \ 0 2px 6px rgba(15,23,42,.18) !important; padding: 0 !important; }\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Ruptures\"]) .header-title,\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Ruptures\"]) [data-test=\"slice-header\"] { display: none !important;\
+  \ }\n.chart-slice[data-test-chart-name=\"En-tete - Ruptures\"] thead { display:\
+  \ none !important; }\n.chart-slice[data-test-chart-name=\"En-tete - Ruptures\"]\
+  \ table,\n.chart-slice[data-test-chart-name=\"En-tete - Ruptures\"] tbody tr,\n\
+  .chart-slice[data-test-chart-name=\"En-tete - Ruptures\"] tbody td { background:\
+  \ transparent !important; border: none !important; box-shadow: none !important;\
+  \ }\n.chart-slice[data-test-chart-name=\"En-tete - Ruptures\"] tbody td { color:\
+  \ #FFFFFF !important; font-size: 24px !important; font-weight: 800 !important; letter-spacing:\
+  \ .3px; text-align: left !important; padding: 14px 20px !important; white-space:\
+  \ nowrap; }\n.chart-slice[data-test-chart-name=\"En-tete - Ruptures\"] .pagination-container,\n\
+  .chart-slice[data-test-chart-name=\"En-tete - Ruptures\"] .dt-controls { display:\
+  \ none !important; }\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Ruptures\"]) [data-test=\"slice-header\"] { display: none !important;\
+  \ }\n.chart-slice[data-test-chart-name=\"En-tete - Ruptures\"] .superset-legacy-chart-table,\n\
+  .chart-slice[data-test-chart-name=\"En-tete - Ruptures\"] .chart-container { display:\
+  \ flex !important; align-items: center !important; height: 100% !important; }\n\
+  .chart-slice[data-test-chart-name=\"En-tete - Ruptures\"] .dt-metric,\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Ruptures\"] .dt-is-filter { cursor: default !important; }\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Ruptures\"] thead th { color: transparent !important; background: transparent\
+  \ !important; border: none !important; font-size: 0 !important; line-height: 0 !important;\
+  \ height: 0 !important; padding: 0 !important; }\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Ruptures\"] thead th span,\n.chart-slice[data-test-chart-name=\"En-tete\
+  \ - Ruptures\"] thead th svg { display: none !important; }\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Ruptures\"] tbody tr,\n.chart-slice[data-test-chart-name=\"En-tete - Ruptures\"\
+  ] tbody td { visibility: visible !important; }\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Ruptures\"] thead { display: table-header-group !important; }\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Ruptures\"] table { visibility: visible !important; }\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Synchronisation\"]) { background: linear-gradient(90deg, #1F3864 0%, #2c4f8a\
+  \ 100%) !important; border: none !important; border-radius: 10px !important; box-shadow:\
+  \ 0 2px 6px rgba(15,23,42,.18) !important; padding: 0 !important; }\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Synchronisation\"]) .header-title,\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Synchronisation\"]) [data-test=\"slice-header\"] { display: none !important;\
+  \ }\n.chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"] thead { display:\
+  \ none !important; }\n.chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"\
+  ] table,\n.chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"] tbody\
+  \ tr,\n.chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"] tbody td\
+  \ { background: transparent !important; border: none !important; box-shadow: none\
+  \ !important; }\n.chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"\
+  ] tbody td { color: #FFFFFF !important; font-size: 24px !important; font-weight:\
+  \ 800 !important; letter-spacing: .3px; text-align: left !important; padding: 14px\
+  \ 20px !important; white-space: nowrap; }\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Synchronisation\"] .pagination-container,\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Synchronisation\"] .dt-controls { display: none !important; }\n.dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name=\"\
+  En-tete - Synchronisation\"]) [data-test=\"slice-header\"] { display: none !important;\
+  \ }\n.chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"] .superset-legacy-chart-table,\n\
+  .chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"] .chart-container\
+  \ { display: flex !important; align-items: center !important; height: 100% !important;\
+  \ }\n.chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"] .dt-metric,\n\
+  .chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"] .dt-is-filter {\
+  \ cursor: default !important; }\n.chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"\
+  ] thead th { color: transparent !important; background: transparent !important;\
+  \ border: none !important; font-size: 0 !important; line-height: 0 !important; height:\
+  \ 0 !important; padding: 0 !important; }\n.chart-slice[data-test-chart-name=\"En-tete\
+  \ - Synchronisation\"] thead th span,\n.chart-slice[data-test-chart-name=\"En-tete\
+  \ - Synchronisation\"] thead th svg { display: none !important; }\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Synchronisation\"] tbody tr,\n.chart-slice[data-test-chart-name=\"En-tete\
+  \ - Synchronisation\"] tbody td { visibility: visible !important; }\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Synchronisation\"] thead { display: table-header-group !important; }\n\
+  .chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"] table { visibility:\
+  \ visible !important; }\n\n\n/* ============================================================\n\
+  \   Superset 6 - complements (phase 7d)\n   ============================================================\
+  \ */\n/* Boutons de la barre de filtres en majuscules, comme sous Superset 1.5 */\n\
+  [data-test=\"filter-bar__apply-button\"],\n[data-test=\"filter-bar__clear-button\"\
+  ] { text-transform: uppercase !important; }\n/* Onglets sur une seule ligne: Superset\
+  \ 6 ajoute 8 px de marge autour de chaque titre d'onglet */\n.dashboard-component-tabs\
+  \ .ant-tabs-nav-list > .ant-tabs-tab { margin: 0 2px 0 0 !important; }\n.dashboard-component-tabs\
+  \ .ant-tabs-tab .dragdroppable-tab { margin: 0 !important; }\n\n/* Bandeau de titre:\
+  \ le conteneur interne de Superset 6 est blanc par defaut */\n.dashboard-header-container\
+  \ .header-with-actions { background: transparent !important; }\n\n/* Bandeaux \"\
+  En-tete - ...\": Superset 6 dimensionne le graphique sans tenir compte de\n   l'en-tete\
+  \ masque; on laisse le contenu deborder dans la tuile (88 px) au lieu de le couper\
+  \ */\n.chart-slice[data-test-chart-name=\"En-tete - Date du rapport\"] div,\n.chart-slice[data-test-chart-name=\"\
+  En-tete - Ruptures\"] div,\n.chart-slice[data-test-chart-name=\"En-tete - Synchronisation\"\
+  ] div { overflow: visible !important; height: auto !important; max-height: none\
+  \ !important; }"
 slug: rapport_stock_rdc
-css: |-
-  /* ============================================================
-     LOGIMEV - feuille Superset 6 (rework minimum viable, phase 7d)
-     Les regles propres a un graphique sont cle'es sur
-     .chart-slice[data-test-chart-name="<slice_name du YAML>"] et non plus
-     sur l'id numerique (#chart-id-N / data-test-chart-id): les ids changent
-     a chaque import (dev, UAT, prod), une regle cle'e sur un id finit par
-     styler le mauvais graphique. Le nom (slice_name) est stable.
-     Supprime: regles sur ids legacy (couleurs KPI par famille, largeurs de
-     colonnes), teinte de ligne par Gravite (dependait du style inline de
-     Superset 1.5), selecteurs DOM Superset 1.5 disparus.
-     ============================================================ */
-
-  /* ===== A. CHARTE LOGIMEV (bandeau + barre de filtres bleu marine) ===== */
-  /* ============================================================
-     Gestion des commandes - habillage repris de "Rapport d'etat de stock"
-     ============================================================ */
-  /* ====== THEME LOGIMEV - Rapport d'etat de stock ====== */
-
-  /* --- Fond general bleu --- */
-  body,
-  #app,
-  .dashboard,
-  .dashboard-content,
-  [data-test="dashboard-content-wrapper"],
-  .grid-content,
-  .dashboard .dashboard-grid,
-  .dashboard-component-tabs-content,
-  .grid-row,
-  .dragdroppable-row { background-color: #4E93CF !important; }
-
-  .grid-content { padding: 12px !important; }
-
-  /* --- Bandeau de titre bleu fonce --- */
-  .dashboard-header-container { background-color: #1F3864 !important; border-bottom: none !important; box-shadow: none !important; }
-
-  .dashboard-header-container [data-test="editable-title-input"],
-  .dashboard-header-container .title-panel .input-sizer { color: #FFFFFF !important; font-weight: 700 !important; font-size: 22px !important; background: transparent !important; }
-
-  /* --- Onglets en paves --- */
-  .dashboard .ant-tabs-nav { background: transparent !important; margin-bottom: 10px !important; }
-
-  .dashboard .ant-tabs-nav::before { border-bottom: none !important; }
-
-  .dashboard .ant-tabs-ink-bar { display: none !important; }
-
-  .dashboard .ant-tabs-tab { background-color: #8FB8DE !important; border-radius: 4px 4px 0 0 !important; margin: 0 4px 0 0 !important; padding: 10px 14px !important; border: none !important; white-space: nowrap !important; }
-
-  .dashboard .ant-tabs-tab .ant-tabs-tab-btn,
-  .dashboard .ant-tabs-tab .ant-tabs-tab-btn * { color: #1F3864 !important; font-weight: 600 !important; font-size: 12px !important; text-transform: uppercase; white-space: nowrap !important; }
-
-  .dashboard .ant-tabs-tab.ant-tabs-tab-active { background-color: #1F3864 !important; }
-
-  .dashboard .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
-  .dashboard .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn * { color: #FFFFFF !important; }
-
-  /* --- Cartes de graphiques / tableaux --- */
-  .dashboard-component-chart-holder { background-color: #FFFFFF !important; border: 1px solid #2E5C8A !important; border-radius: 6px !important; box-shadow: 0 2px 6px rgba(0,0,0,0.18) !important; padding: 6px 8px !important; }
-
-  .dashboard-component-chart-holder .header-title,
-  .dashboard-component-chart-holder .header-title span,
-  [data-test="slice-header"] .header-title { color: #1F3864 !important; font-weight: 700 !important; text-align: center !important; width: 100% !important; }
-
-  /* --- Blocs Markdown (en-tete / legende) --- */
-  .dashboard-markdown { background-color: #FFFFFF !important; border: 1px solid #2E5C8A !important; border-radius: 6px !important; }
-
-  /* --- Barre de filtres --- */
-  [data-test="filter-bar"],
-  [data-test="filter-bar"] > div,
-  [data-test="filter-bar"] > div > div { background-color: #4E93CF !important; }
-
-  [data-test="filter-bar"] h4,
-  [data-test="filter-bar"] label,
-  [data-test="filter-bar"] .ant-form-item-label > label { color: #FFFFFF !important; font-weight: 700 !important; }
-
-  [data-test="filter-bar"] .ant-form-item { background-color: #1F3864 !important; border-radius: 6px !important; padding: 8px 10px 4px 10px !important; margin-bottom: 12px !important; }
-
-  [data-test="filter-bar"] .ant-select-selector { border-radius: 4px !important; border: 1px solid #FFFFFF !important; background-color: #FFFFFF !important; }
-
-  [data-test="filter-bar"] .ant-select-selection-placeholder,
-  [data-test="filter-bar"] .ant-select-selection-item { color: #1F3864 !important; }
-
-  [data-test="filter-bar__expand-button"] svg,
-  [data-test="filter-bar__filter-icon"] svg { color: #FFFFFF !important; }
-
-  /* --- Tableaux --- */
-  .dashboard table thead th { background-color: #DCE6F1 !important; color: #1F3864 !important; font-weight: 700 !important; }
-
-  .dashboard table tbody tr:nth-child(even) { background-color: #EEF4FB !important; }
-
-  /* --- Boutons de la barre de filtres --- */
-  [data-test="filter-bar__apply-button"] { background-color: #1F3864 !important; border-color: #1F3864 !important; color: #FFFFFF !important; font-weight: 700 !important; }
-
-  [data-test="filter-bar__apply-button"] span { color: #FFFFFF !important; }
-
-  [data-test="filter-bar__clear-button"],
-  [data-test="filter-bar__clear-button"] span,
-  [data-test="filter-bar"] .ant-btn-link span,
-  [data-test="filter-bar"] [role="button"] { color: #FFFFFF !important; }
-
-  /* --- Bouton Clear all : fond bleu marine, texte blanc --- */
-  [data-test="filter-bar__clear-button"] { background-color: #1F3864 !important; border: 1px solid #1F3864 !important; border-radius: 4px !important; color: #FFFFFF !important; font-weight: 700 !important; }
-
-  [data-test="filter-bar__clear-button"] span { color: #FFFFFF !important; }
-
-  [data-test="filter-bar__clear-button"]:hover { background-color: #2E5C8A !important; border-color: #2E5C8A !important; color: #FFFFFF !important; }
-
-  /* === RESPONSIVE === */
-  /* --- fluidite generale --- */
-  .dashboard .grid-content,
-  .dashboard-content,
-  .dashboard-component-chart-holder { max-width: 100% !important; }
-
-  .dashboard-component-chart-holder .chart-container,
-  .dashboard-component-chart-holder .slice_container { width: 100% !important; max-width: 100% !important; }
-
-  .dashboard-component-chart-holder .superset-chart-table,
-  .dashboard-component-chart-holder .chart-slice[data-test-viz-type="pivot_table_v2"] { overflow-x: auto !important; max-width: 100% !important; }
-
-  /* --- barre de filtres : on recupere de la place sur petits ecrans --- */
-  @media (max-width: 1100px) {
-
-    [data-test="filter-bar"].open,
-  div:has(> [data-test="filter-bar"].open) { width: 210px !important; min-width: 210px !important; flex: 0 0 210px !important; }
-    [data-test="filter-bar"].open .ant-select { font-size: 11px !important; }
-
-  }
-
-  @media (max-width: 820px) {
-
-    [data-test="filter-bar"].open,
-  div:has(> [data-test="filter-bar"].open) { width: 175px !important; min-width: 175px !important; flex: 0 0 175px !important; }
-
-  }
-
-  /* === LISIBILITE & LIBELLES (9) === */
-  .dashboard [data-test="slice-header"] .header-title,
-  .dashboard [data-test="slice-header"] .header-title .editable-title { overflow: visible !important; text-overflow: clip !important; white-space: normal !important; }
-
-  .dashboard [data-test="slice-header"] .header-title { height: auto !important; max-height: 42px; line-height: 1.2 !important; }
-
-  .dashboard [data-test="slice-header"] { align-items: flex-start !important; }
-
-  .dashboard .ant-tabs-nav .ant-tabs-tab { padding: 7px 11px !important; }
-
-  .dashboard .ant-tabs-nav .ant-tabs-tab .editable-title,
-  .dashboard .ant-tabs-nav .ant-tabs-tab span { font-size: 11.5px !important; letter-spacing: 0.2px !important; }
-
-  .dashboard .ant-tabs-nav .ant-tabs-tab { padding: 7px 9px !important; }
-
-  .dashboard .ant-tabs-nav .ant-tabs-tab .editable-title,
-  .dashboard .ant-tabs-nav .ant-tabs-tab span { font-size: 10.5px !important; }
-
-  /* ===== B. SYSTEME DE DESIGN v3 (cadres, KPI, onglets, tables) ===== */
-  /* =====================================================================
-     LOGIMEV - Systeme de design du tableau de bord  (v3)
-     Cadres, en-tetes, cartes KPI, tables, onglets - valable sur TOUS les onglets
-     ===================================================================== */
-
-  /* ---------- 1. CADRE DES CARTES ---------- */
-  .dashboard-component-chart-holder { position: relative; background: #ffffff; border: 1px solid #e7ecf5; border-radius: 16px; box-shadow: 0 1px 2px rgba(15,23,42,.05),0 12px 28px -20px rgba(15,23,42,.55); transition: box-shadow .28s ease,transform .28s ease,border-color .28s ease; }
-  .dashboard-component-chart-holder:hover { border-color: #c7d2fe; transform: translateY(-2px); box-shadow: 0 2px 6px rgba(15,23,42,.07),0 26px 48px -24px rgba(37,99,235,.55); }
-  .dashboard-component-chart-holder::after { content: ""; position: absolute; left: 16px; right: 16px; top: 0; height: 3px; z-index: 2; border-radius: 0 0 6px 6px; pointer-events: none; background: linear-gradient(90deg,#1d4ed8,#7c3aed 55%,#06b6d4); opacity: .9; }
-
-  /* ---------- 2. EN-TETE DE CARTE (titre entier, jamais tronque) ---------- */
-  .dashboard-component-chart-holder [data-test="slice-header"] { position: relative; height: auto!important; align-items: flex-start!important; padding-right: 2px; }
-  .dashboard-component-chart-holder [data-test="slice-header"] .header-controls { position: absolute!important; top: 0; right: 0; z-index: 5; transform: scale(.75); transform-origin: top right; opacity: .5; transition: opacity .2s; }
-  .dashboard-component-chart-holder:hover [data-test="slice-header"] .header-controls { opacity: 1; }
-  .dashboard-component-chart-holder [data-test="slice-header"] .header-title { flex: 1 1 auto; min-width: 0; padding-right: 46px!important; max-height: none!important; -webkit-line-clamp: 4!important; overflow: visible!important; }
-  .dashboard-component-chart-holder [data-test="slice-header"] .header-title .editable-title { display: block; white-space: normal!important; overflow: visible!important; text-overflow: clip!important; font-size: 11.5px!important; font-weight: 700!important; line-height: 1.25!important; letter-spacing: .15px; color: #0f172a!important; }
-
-  /* ---------- 3. CARTES KPI ---------- */
-  .chart-slice[data-test-viz-type="big_number_total"] { --kpi: #1d4ed8; --kpi-soft: #eff6ff; --kpi-ring: #dbeafe; }
-
-  .chart-slice[data-test-viz-type="big_number_total"] .superset-legacy-chart-big-number { background: none!important; border-radius: 14px; padding: 2px 6px 8px!important; align-items: center!important; justify-content: center!important; }
-  .chart-slice[data-test-viz-type="big_number_total"] .header-line { height: auto!important; line-height: 1.02!important; font-weight: 800!important; letter-spacing: -.02em; color: var(--kpi)!important; text-align: center!important; width: 100%; white-space: nowrap!important; font-size: 30px!important; }
-  @media (min-width:1100px) {
-  .chart-slice[data-test-viz-type="big_number_total"] .header-line { font-size: 36px!important; }
-  }
-  @media (min-width:1300px) {
-  .chart-slice[data-test-viz-type="big_number_total"] .header-line { font-size: 44px!important; }
-  }
-  @media (min-width:1550px) {
-  .chart-slice[data-test-viz-type="big_number_total"] .header-line { font-size: 54px!important; }
-  }
-  @media (min-width:1850px) {
-  .chart-slice[data-test-viz-type="big_number_total"] .header-line { font-size: 62px!important; }
-  }
-  .chart-slice[data-test-viz-type="big_number_total"] .subheader-line { font-size: 11px!important; height: auto!important; line-height: 1.35!important; font-weight: 600!important; color: var(--kpi)!important; text-align: center!important; white-space: normal!important; width: fit-content; max-width: 96%; margin: 12px auto 0!important; padding: 6px 12px; background: #ffffffcc; border: 1px solid var(--kpi-ring); border-radius: 999px; }
-  /* Teinte de fond + lisere colore, par famille d'indicateur */
-
-  /* ---------- 4. TABLES ---------- */
-  .dashboard-component-chart-holder .chart-container table th { background: #f8fafc!important; color: #0f172a!important; font-weight: 700!important; border-bottom: 2px solid #e2e8f0!important; letter-spacing: .2px; }
-  .dashboard-component-chart-holder .chart-container table td { border-bottom: 1px solid #f1f5f9!important; }
-  .dashboard-component-chart-holder .chart-container table tbody tr:hover { background: #f1f5f9!important; }
-
-  /* ---------- 5. CADRE DES GUIDES (markdown) ---------- */
-  .dashboard-component-markdown,
-  .dashboard-markdown { background: #ffffff; border: 1px solid #e7ecf5; border-radius: 16px; box-shadow: 0 1px 2px rgba(15,23,42,.05),0 12px 28px -20px rgba(15,23,42,.5); }
-
-  /* ---------- 6. ONGLETS : tous visibles, style pilule ---------- */
-  .dashboard-component-tabs>.ant-tabs>.ant-tabs-nav { background: #ffffff; border: 1px solid #e7ecf5; border-radius: 14px; padding: 6px 8px; box-shadow: 0 1px 2px rgba(15,23,42,.05); margin-bottom: 14px; }
-  .dashboard-component-tabs>.ant-tabs>.ant-tabs-nav::before { display: none!important; }
-  .dashboard-component-tabs .ant-tabs-nav-wrap { white-space: normal!important; overflow: visible!important; }
-  .dashboard-component-tabs .ant-tabs-nav-list { flex-wrap: wrap!important; transform: none!important; width: 100%; row-gap: 6px; }
-  .dashboard-component-tabs .ant-tabs-nav-operations { display: none!important; }
-  .dashboard-component-tabs .ant-tabs-ink-bar { display: none!important; }
-  .dashboard-component-tabs .ant-tabs-tab { visibility: visible!important; order: 0!important; border: none!important; border-radius: 10px; padding: 6px 10px!important; margin: 0 4px 0 0!important; font-weight: 600; font-size: 10.5px!important; transition: .2s; }
-  .dashboard-component-tabs .ant-tabs-tab:hover { background: #eff6ff; }
-  .dashboard-component-tabs .ant-tabs-tab.ant-tabs-tab-active { background: linear-gradient(135deg,#1d4ed8,#3b82f6)!important; box-shadow: 0 6px 16px -8px rgba(29,78,216,.9)!important; }
-  .dashboard-component-tabs .ant-tabs-tab.ant-tabs-tab-active * { color: #ffffff!important; }
-
-  /* --- Onglets : largeur naturelle, pas d'etirement --- */
-  .dashboard-component-tabs .ant-tabs-nav-list>.ant-tabs-tab { flex: 0 0 auto!important; width: auto!important; min-width: 0!important; max-width: none!important; }
-
-  /* ==== 7. TABLEAUX - SYSTEME DE LISIBILITE (genere) ==== */
-  .superset-chart-table table thead th { white-space: normal!important; vertical-align: bottom!important; font-size: 10.5px!important; font-weight: 700!important; text-transform: uppercase; letter-spacing: .4px; line-height: 1.3!important; padding: 8px 10px!important; color: #475569!important; background: #f1f5f9!important; border-bottom: 2px solid #cbd5e1!important; }
-  .superset-chart-table table tbody td { padding: 7px 10px!important; line-height: 1.45!important; border-bottom: 1px solid #eef2f7!important; color: #334155!important; font-size: 12px!important; vertical-align: top!important; }
-
-  .superset-chart-table table tbody tr:hover { background: #f8fafc!important; }
-  .pvtTable thead th { font-size: 10.5px!important; font-weight: 700!important; letter-spacing: .3px; color: #475569!important; background: #f1f5f9!important; padding: 7px 9px!important; line-height: 1.3!important; }
-  .pvtTable tbody th { font-size: 11.5px!important; font-weight: 600!important; color: #0f172a!important; text-align: left!important; background: #f8fafc!important; padding: 7px 9px!important; line-height: 1.35!important; }
-  .pvtTable tbody td { padding: 7px 9px!important; font-size: 12px!important; font-variant-numeric: tabular-nums; color: #0f172a!important; border-bottom: 1px solid #eef2f7!important; }
-  .pvtTable tbody tr:hover { background: #f8fafc!important; }
-
-  /* ==== 8. TABLEAUX CROISES (pivot v2) ==== */
-  .pvtTable { border-collapse: collapse!important; font-size: 12px!important; }
-  .pvtTable th.pvtAxisLabel { font-size: 10px!important; text-transform: uppercase; letter-spacing: .4px; color: #64748b!important; background: #e2e8f0!important; font-weight: 700!important; padding: 6px 9px!important; text-align: left!important; }
-  .pvtTable th.pvtColLabel,
-  .pvtTable th.pvtTotalLabel { font-size: 10.5px!important; font-weight: 700!important; letter-spacing: .3px; color: #334155!important; background: #f1f5f9!important; padding: 7px 9px!important; line-height: 1.3!important; text-align: center!important; white-space: normal!important; }
-  .pvtTable th.pvtRowLabel { font-size: 11.5px!important; font-weight: 600!important; color: #0f172a!important; background: #f8fafc!important; text-align: left!important; padding: 7px 9px!important; white-space: normal!important; }
-  .pvtTable td.pvtVal { text-align: right!important; font-variant-numeric: tabular-nums; padding: 7px 9px!important; color: #0f172a!important; border-bottom: 1px solid #eef2f7!important; }
-  .pvtTable td.pvtTotal,
-  .pvtTable td.pvtGrandTotal { text-align: right!important; font-weight: 700!important; font-variant-numeric: tabular-nums; background: #f1f5f9!important; color: #0f172a!important; padding: 7px 9px!important; border-top: 2px solid #cbd5e1!important; }
-  .pvtTable td.pvtGrandTotal { background: #e2e8f0!important; }
-  .pvtTable tbody tr:hover td.pvtVal { background: #f8fafc!important; }
-
-  /* --- tableaux croises : occuper toute la largeur de la tuile --- */
-  .chart-slice[data-test-viz-type="pivot_table_v2"] div:has(> table.pvtTable),
-  .chart-slice[data-test-viz-type="pivot_table_v2"] div:has(> div > table.pvtTable) { max-width: none!important; width: 100%!important; }
-  .chart-slice[data-test-viz-type="pivot_table_v2"] table.pvtTable { width: 100%!important; }
-
-  /* ============================================================
-     RAPPORT DE STOCK - RDC : surcouche specifique
-     ============================================================ */
-
-  /* --- Bandeau de titre dynamique (chart "En-tete - Date du rapport") --- */
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Date du rapport"]) { background: linear-gradient(90deg, #1F3864 0%, #2c4f8a 100%) !important; border: none !important; border-radius: 10px !important; box-shadow: 0 2px 6px rgba(15,23,42,.18) !important; padding: 0 !important; }
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Date du rapport"]) .header-title,
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Date du rapport"]) [data-test="slice-header"] { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] thead { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] table,
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] tbody tr,
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] tbody td { background: transparent !important; border: none !important; box-shadow: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] tbody td { color: #FFFFFF !important; font-size: 24px !important; font-weight: 800 !important; letter-spacing: .3px; text-align: left !important; padding: 14px 20px !important; white-space: nowrap; }
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] .pagination-container,
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] .dt-controls { display: none !important; }
-
-  /* --- Bandeau KPI --- */
-  .chart-slice[data-test-viz-type="big_number_total"] .header-line { color: #1F3864 !important; }
-  .chart-slice[data-test-viz-type="big_number_total"] .subheader-line { color: #475569 !important; }
-
-  /* --- Tableau du rapport --- */
-  .chart-slice[data-test-chart-name="Rapport de stock"] table thead th { background: #1F3864 !important; color: #FFFFFF !important; font-weight: 700 !important; white-space: normal !important; }
-
-  .chart-slice[data-test-chart-name="Rapport de stock"] table tbody td { font-size: 12.5px !important; }
-
-  /* Statut : pastilles de couleur */
-  .chart-slice[data-test-chart-name="Rapport de stock"] td[data-column-name="Statut"] { font-weight: 600 !important; }
-
-  /* --- Corrections rapport de stock --- */
-  .chart-slice[data-test-chart-name="Rapport de stock"] table thead th { text-transform: none !important; font-size: 12.5px !important; }
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Date du rapport"]) [data-test="slice-header"] { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] .superset-legacy-chart-table,
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] .chart-container { display: flex !important; align-items: center !important; height: 100% !important; }
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] .dt-metric,
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] .dt-is-filter { cursor: default !important; }
-
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] thead th { color: transparent !important; background: transparent !important; border: none !important; font-size: 0 !important; line-height: 0 !important; height: 0 !important; padding: 0 !important; }
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] thead th span,
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] thead th svg { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] tbody tr,
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] tbody td { visibility: visible !important; }
-
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] thead { display: table-header-group !important; }
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] table { visibility: visible !important; }
-
-  /* ================= HARMONISATION CHARTE GESTION DES COMMANDES ================= */
-
-  /* Tableau : entete claire facon Gestion des commandes */
-  .chart-slice[data-test-chart-name="Rapport de stock"] table thead th { background: #f1f5f9 !important; color: #475569 !important; font-size: 10.5px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: .4px !important; padding: 9px 10px !important; border-bottom: 2px solid #cbd5e1 !important; white-space: normal !important; vertical-align: bottom !important; }
-  .chart-slice[data-test-chart-name="Rapport de stock"] table { width: 100% !important; max-width: 100% !important; font-size: 12.5px !important; }
-
-  .chart-slice[data-test-chart-name="Rapport de stock"] table tbody td { font-size: 12.5px !important; padding: 11px 10px 11px 16px !important; border-bottom: 1px solid #e9eef5 !important; white-space: normal !important; line-height: 1.5 !important; }
-
-  /* Coloration des lignes selon la gravite: supprimee (Superset 6 n'ecrit plus la couleur en style inline; la colonne Gravite reste visible avec ses couleurs) */
-
-  /* Restaure la couleur KPI par carte (var --kpi) */
-  .chart-slice[data-test-viz-type="big_number_total"] .header-line { color: var(--kpi) !important; }
-  .chart-slice[data-test-viz-type="big_number_total"] .subheader-line { color: var(--kpi) !important; border-color: var(--kpi-ring) !important; }
-
-  /* ===== Tableau : quadrillage / delimitation des cellules ===== */
-  .chart-slice[data-test-chart-name="Rapport de stock"] table { border-collapse: separate !important; border-spacing: 0 !important; border: 1px solid #cbd5e1 !important; border-radius: 6px !important; overflow: hidden !important; }
-  .chart-slice[data-test-chart-name="Rapport de stock"] table thead th { border-right: 1px solid #cbd5e1 !important; border-bottom: 2px solid #94a3b8 !important; }
-  .chart-slice[data-test-chart-name="Rapport de stock"] table thead th:last-child { border-right: 0 !important; }
-  .chart-slice[data-test-chart-name="Rapport de stock"] table tbody td { border-right: 1px solid #dbe3ec !important; border-bottom: 1px solid #dbe3ec !important; }
-  .chart-slice[data-test-chart-name="Rapport de stock"] table tbody td:last-child { border-right: 0 !important; }
-  .chart-slice[data-test-chart-name="Rapport de stock"] table tbody tr:last-child td { border-bottom: 0 !important; }
-
-  .chart-slice[data-test-chart-name="Rapport de stock"] table tbody td { padding: 10px 12px !important; vertical-align: middle !important; }
-  .chart-slice[data-test-chart-name="Rapport de stock"] table tbody td:nth-child(1) { padding-left: 16px !important; }
-
-  /* === En-tetes onglets rupture / sync (clone du "En-tete - Date du rapport") === */
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Ruptures"]) { background: linear-gradient(90deg, #1F3864 0%, #2c4f8a 100%) !important; border: none !important; border-radius: 10px !important; box-shadow: 0 2px 6px rgba(15,23,42,.18) !important; padding: 0 !important; }
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Ruptures"]) .header-title,
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Ruptures"]) [data-test="slice-header"] { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] thead { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] table,
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] tbody tr,
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] tbody td { background: transparent !important; border: none !important; box-shadow: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] tbody td { color: #FFFFFF !important; font-size: 24px !important; font-weight: 800 !important; letter-spacing: .3px; text-align: left !important; padding: 14px 20px !important; white-space: nowrap; }
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] .pagination-container,
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] .dt-controls { display: none !important; }
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Ruptures"]) [data-test="slice-header"] { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] .superset-legacy-chart-table,
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] .chart-container { display: flex !important; align-items: center !important; height: 100% !important; }
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] .dt-metric,
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] .dt-is-filter { cursor: default !important; }
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] thead th { color: transparent !important; background: transparent !important; border: none !important; font-size: 0 !important; line-height: 0 !important; height: 0 !important; padding: 0 !important; }
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] thead th span,
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] thead th svg { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] tbody tr,
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] tbody td { visibility: visible !important; }
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] thead { display: table-header-group !important; }
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] table { visibility: visible !important; }
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Synchronisation"]) { background: linear-gradient(90deg, #1F3864 0%, #2c4f8a 100%) !important; border: none !important; border-radius: 10px !important; box-shadow: 0 2px 6px rgba(15,23,42,.18) !important; padding: 0 !important; }
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Synchronisation"]) .header-title,
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Synchronisation"]) [data-test="slice-header"] { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] thead { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] table,
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] tbody tr,
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] tbody td { background: transparent !important; border: none !important; box-shadow: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] tbody td { color: #FFFFFF !important; font-size: 24px !important; font-weight: 800 !important; letter-spacing: .3px; text-align: left !important; padding: 14px 20px !important; white-space: nowrap; }
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] .pagination-container,
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] .dt-controls { display: none !important; }
-  .dashboard-component-chart-holder:has(.chart-slice[data-test-chart-name="En-tete - Synchronisation"]) [data-test="slice-header"] { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] .superset-legacy-chart-table,
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] .chart-container { display: flex !important; align-items: center !important; height: 100% !important; }
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] .dt-metric,
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] .dt-is-filter { cursor: default !important; }
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] thead th { color: transparent !important; background: transparent !important; border: none !important; font-size: 0 !important; line-height: 0 !important; height: 0 !important; padding: 0 !important; }
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] thead th span,
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] thead th svg { display: none !important; }
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] tbody tr,
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] tbody td { visibility: visible !important; }
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] thead { display: table-header-group !important; }
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] table { visibility: visible !important; }
-
-
-  /* ============================================================
-     Superset 6 - complements (phase 7d)
-     ============================================================ */
-  /* Boutons de la barre de filtres en majuscules, comme sous Superset 1.5 */
-  [data-test="filter-bar__apply-button"],
-  [data-test="filter-bar__clear-button"] { text-transform: uppercase !important; }
-  /* Onglets sur une seule ligne: Superset 6 ajoute 8 px de marge autour de chaque titre d'onglet */
-  .dashboard-component-tabs .ant-tabs-nav-list > .ant-tabs-tab { margin: 0 2px 0 0 !important; }
-  .dashboard-component-tabs .ant-tabs-tab .dragdroppable-tab { margin: 0 !important; }
-
-  /* Bandeau de titre: le conteneur interne de Superset 6 est blanc par defaut */
-  .dashboard-header-container .header-with-actions { background: transparent !important; }
-
-  /* Bandeaux "En-tete - ...": Superset 6 dimensionne le graphique sans tenir compte de
-     l'en-tete masque; on laisse le contenu deborder dans la tuile (88 px) au lieu de le couper */
-  .chart-slice[data-test-chart-name="En-tete - Date du rapport"] div,
-  .chart-slice[data-test-chart-name="En-tete - Ruptures"] div,
-  .chart-slice[data-test-chart-name="En-tete - Synchronisation"] div { overflow: visible !important; height: auto !important; max-height: none !important; }
-published: true
 certified_by: null
 certification_details: null
-is_managed_externally: false
+published: true
+uuid: bf2d3933-6a81-4ee2-bfe0-38ac1c785e96
+position:
+  CHART-hdr:
+    children: []
+    id: CHART-hdr
+    meta:
+      chartId: 116
+      height: 11
+      sliceName: En-tete - Date du rapport
+      uuid: b300af4b-eade-41fa-b202-0b59c1793552
+      width: 12
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-stock
+    - ROW-hdr
+    type: CHART
+  CHART-k1:
+    children: []
+    id: CHART-k1
+    meta:
+      chartId: 106
+      height: 26
+      sliceName: Lignes suivies
+      sliceNameOverride: Lignes suivies
+      uuid: a2d8e46a-aeb9-4ab4-9151-1258910d3cd7
+      width: 3
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-stock
+    - ROW-kpi
+    type: CHART
+  CHART-k2:
+    children: []
+    id: CHART-k2
+    meta:
+      chartId: 37
+      height: 26
+      sliceName: Structures suivies
+      sliceNameOverride: Structures suivies
+      uuid: 5d235dd0-0b13-41d2-b815-967ddf90825c
+      width: 3
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-stock
+    - ROW-kpi
+    type: CHART
+  CHART-k3:
+    children: []
+    id: CHART-k3
+    meta:
+      chartId: 22
+      height: 26
+      sliceName: Taux de rupture
+      sliceNameOverride: Taux de rupture
+      uuid: ed4485ca-f463-4402-884b-be4e2551cd5b
+      width: 2
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-stock
+    - ROW-kpi
+    type: CHART
+  CHART-k4:
+    children: []
+    id: CHART-k4
+    meta:
+      chartId: 54
+      height: 26
+      sliceName: SDU total
+      sliceNameOverride: SDU total
+      uuid: b2daaef8-760e-4efe-9501-ee4016755436
+      width: 2
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-stock
+    - ROW-kpi
+    type: CHART
+  CHART-k5:
+    children: []
+    id: CHART-k5
+    meta:
+      chartId: 95
+      height: 26
+      sliceName: Produits suivis
+      sliceNameOverride: Produits suivis
+      uuid: fde29a85-307e-46c9-a0bc-cbbf64be05cb
+      width: 2
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-stock
+    - ROW-kpi
+    type: CHART
+  CHART-r1:
+    children: []
+    id: CHART-r1
+    meta:
+      chartId: 62
+      height: 26
+      sliceName: Rupture - Lignes en rupture
+      sliceNameOverride: Lignes en rupture
+      uuid: e9beb3ca-f5ac-45a2-84f3-6081a5133ae9
+      width: 3
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-rupture
+    - ROW-rkpi
+    type: CHART
+  CHART-r2:
+    children: []
+    id: CHART-r2
+    meta:
+      chartId: 59
+      height: 26
+      sliceName: Rupture - Taux de rupture
+      sliceNameOverride: Taux de rupture
+      uuid: 2eacef59-b89d-4cad-ae2f-c4f18d8352c6
+      width: 2
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-rupture
+    - ROW-rkpi
+    type: CHART
+  CHART-r3:
+    children: []
+    id: CHART-r3
+    meta:
+      chartId: 61
+      height: 26
+      sliceName: Rupture - Produits en rupture
+      sliceNameOverride: Produits en rupture
+      uuid: 8de7b0d8-f06e-4021-ad7f-e92882804104
+      width: 2
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-rupture
+    - ROW-rkpi
+    type: CHART
+  CHART-r4:
+    children: []
+    id: CHART-r4
+    meta:
+      chartId: 60
+      height: 26
+      sliceName: Rupture - Structures touchees
+      sliceNameOverride: "Structures touch\xE9es"
+      uuid: baffe4bf-e1b1-4176-b324-a39abfb6946e
+      width: 2
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-rupture
+    - ROW-rkpi
+    type: CHART
+  CHART-r5:
+    children: []
+    id: CHART-r5
+    meta:
+      chartId: 65
+      height: 26
+      sliceName: Rupture - Besoin non couvert
+      sliceNameOverride: Besoin non couvert
+      uuid: 87478987-78cc-47a8-85dc-aa9b955c34ae
+      width: 3
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-rupture
+    - ROW-rkpi
+    type: CHART
+  CHART-rhdr:
+    children: []
+    id: CHART-rhdr
+    meta:
+      chartId: 115
+      height: 11
+      sliceName: En-tete - Ruptures
+      uuid: 7bd8fec6-9ff3-4b3a-bf52-8bd6027b2b52
+      width: 12
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-rupture
+    - ROW-rhdr
+    type: CHART
+  CHART-rtbl:
+    children: []
+    id: CHART-rtbl
+    meta:
+      chartId: 63
+      height: 84
+      sliceName: Rupture - Detail structure / produit
+      sliceNameOverride: "D\xE9tail des ruptures"
+      uuid: 36624050-4124-42c0-8975-80ab35bda434
+      width: 12
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-rupture
+    - ROW-rtbl
+    type: CHART
+  CHART-s1:
+    children: []
+    id: CHART-s1
+    meta:
+      chartId: 31
+      height: 26
+      sliceName: Sync - Structures suivies
+      sliceNameOverride: Structures suivies
+      uuid: 05e330aa-1988-49e1-8e66-fa4d662c83b6
+      width: 3
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-sync
+    - ROW-skpi
+    type: CHART
+  CHART-s2:
+    children: []
+    id: CHART-s2
+    meta:
+      chartId: 30
+      height: 26
+      sliceName: Sync - Structures synchronisees
+      sliceNameOverride: "Structures synchronis\xE9es"
+      uuid: 35768dc5-1d41-4f40-bf04-a1bcae0b902a
+      width: 3
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-sync
+    - ROW-skpi
+    type: CHART
+  CHART-s3:
+    children: []
+    id: CHART-s3
+    meta:
+      chartId: 32
+      height: 26
+      sliceName: Sync - Structures non synchronisees
+      sliceNameOverride: "Non synchronis\xE9es"
+      uuid: 469ecb26-6264-47b3-8328-aea558f87958
+      width: 3
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-sync
+    - ROW-skpi
+    type: CHART
+  CHART-s4:
+    children: []
+    id: CHART-s4
+    meta:
+      chartId: 29
+      height: 26
+      sliceName: Sync - Taux de synchronisation
+      sliceNameOverride: Taux de synchronisation
+      uuid: 793a9533-f84f-4005-893b-fe1bf407c797
+      width: 3
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-sync
+    - ROW-skpi
+    type: CHART
+  CHART-shdr:
+    children: []
+    id: CHART-shdr
+    meta:
+      chartId: 114
+      height: 11
+      sliceName: En-tete - Synchronisation
+      uuid: 63b9adc9-e8fc-41ff-846c-6a50e7107dde
+      width: 12
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-sync
+    - ROW-shdr
+    type: CHART
+  CHART-stbl:
+    children: []
+    id: CHART-stbl
+    meta:
+      chartId: 33
+      height: 84
+      sliceName: Sync - Etat par structure
+      sliceNameOverride: "\xC9tat de synchronisation par structure"
+      uuid: 60852c1c-a832-4aba-bbce-22ceeb6db505
+      width: 12
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-sync
+    - ROW-stbl
+    type: CHART
+  CHART-tbl:
+    children: []
+    id: CHART-tbl
+    meta:
+      chartId: 88
+      height: 84
+      sliceName: Rapport de stock
+      uuid: bb583383-36f0-40e4-ae66-78eec6300df9
+      width: 12
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-stock
+    - ROW-tbl
+    type: CHART
+  DASHBOARD_VERSION_KEY: v2
+  GRID_ID:
+    children:
+    - TABS-main
+    id: GRID_ID
+    meta: {}
+    parents:
+    - ROOT_ID
+    type: GRID
+  HEADER_ID:
+    id: HEADER_ID
+    meta:
+      text: Suivi journalier des stocks
+    type: HEADER
+  ROOT_ID:
+    children:
+    - GRID_ID
+    id: ROOT_ID
+    meta: {}
+    parents: []
+    type: ROOT
+  ROW-hdr:
+    children:
+    - CHART-hdr
+    id: ROW-hdr
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-stock
+    type: ROW
+  ROW-kpi:
+    children:
+    - CHART-k1
+    - CHART-k2
+    - CHART-k3
+    - CHART-k4
+    - CHART-k5
+    id: ROW-kpi
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-stock
+    type: ROW
+  ROW-rhdr:
+    children:
+    - CHART-rhdr
+    id: ROW-rhdr
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-rupture
+    type: ROW
+  ROW-rkpi:
+    children:
+    - CHART-r1
+    - CHART-r2
+    - CHART-r3
+    - CHART-r4
+    - CHART-r5
+    id: ROW-rkpi
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-rupture
+    type: ROW
+  ROW-rtbl:
+    children:
+    - CHART-rtbl
+    id: ROW-rtbl
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-rupture
+    type: ROW
+  ROW-shdr:
+    children:
+    - CHART-shdr
+    id: ROW-shdr
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-sync
+    type: ROW
+  ROW-skpi:
+    children:
+    - CHART-s1
+    - CHART-s2
+    - CHART-s3
+    - CHART-s4
+    id: ROW-skpi
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-sync
+    type: ROW
+  ROW-stbl:
+    children:
+    - CHART-stbl
+    id: ROW-stbl
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-sync
+    type: ROW
+  ROW-tbl:
+    children:
+    - CHART-tbl
+    id: ROW-tbl
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    - TAB-stock
+    type: ROW
+  TAB-rupture:
+    children:
+    - ROW-rhdr
+    - ROW-rkpi
+    - ROW-rtbl
+    id: TAB-rupture
+    meta:
+      defaultText: Onglet titre
+      placeholder: Onglet titre
+      text: RUPTURES DE STOCK
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    type: TAB
+  TAB-stock:
+    children:
+    - ROW-hdr
+    - ROW-kpi
+    - ROW-tbl
+    id: TAB-stock
+    meta:
+      defaultText: Onglet titre
+      placeholder: Onglet titre
+      text: "\xC9TAT DES STOCKS"
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    type: TAB
+  TAB-sync:
+    children:
+    - ROW-shdr
+    - ROW-skpi
+    - ROW-stbl
+    id: TAB-sync
+    meta:
+      defaultText: Onglet titre
+      placeholder: Onglet titre
+      text: SYNCHRONISATION
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - TABS-main
+    type: TAB
+  TABS-main:
+    children:
+    - TAB-stock
+    - TAB-rupture
+    - TAB-sync
+    id: TABS-main
+    meta: {}
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    type: TABS
 metadata:
   timed_refresh_immune_slices: []
   expanded_slices: {}
@@ -394,818 +911,287 @@ metadata:
     1. Rupture: '#C00000'
     2. Risque de rupture: '#FF7043'
     3. Satisfaisant: '#3FA64B'
-    4. Stock présent - CMM indisponible: '#9E9E9E'
-    5. Sans donnée: '#BDBDBD'
+    "4. Stock pr\xE9sent - CMM indisponible": '#9E9E9E'
+    "5. Sans donn\xE9e": '#BDBDBD'
     6. Surstock: '#1F77B4'
   color_scheme_domain: []
   shared_label_colors: []
   cross_filters_enabled: false
   filter_bar_orientation: VERTICAL
   native_filter_configuration:
-    - id: NATIVE_FILTER-rsNiveau
-      name: Niveau d'organisation
-      filterType: filter_select
-      type: NATIVE_FILTER
-      targets:
-        - column:
-            name: niveau_organisation
-          datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
-      controlValues:
-        sortAscending: true
-        enableEmptyFilter: false
-        defaultToFirstItem: false
-        multiSelect: true
-        searchAllOptions: false
-        inverseSelection: false
-      cascadeParentIds: []
-      defaultDataMask:
-        extraFormData: {}
-        filterState: {}
-        ownState: {}
-      scope:
-        rootPath:
-          - ROOT_ID
-        excluded: []
-      description: ''
-    - id: NATIVE_FILTER-rsUnite
-      name: Unité d'organisation
-      filterType: filter_select
-      type: NATIVE_FILTER
-      targets:
-        - column:
-            name: unite_organisation
-          datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
-      controlValues:
-        sortAscending: true
-        enableEmptyFilter: false
-        defaultToFirstItem: false
-        multiSelect: true
-        searchAllOptions: false
-        inverseSelection: false
-      cascadeParentIds:
-        - NATIVE_FILTER-rsNiveau
-      defaultDataMask:
-        extraFormData: {}
-        filterState: {}
-        ownState: {}
-      scope:
-        rootPath:
-          - ROOT_ID
-        excluded: []
-      description: ''
-    - id: NATIVE_FILTER-rsTypeStr
-      name: Type de structure
-      filterType: filter_select
-      type: NATIVE_FILTER
-      targets:
-        - column:
-            name: type_structure
-          datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
-      controlValues:
-        sortAscending: true
-        enableEmptyFilter: false
-        defaultToFirstItem: false
-        multiSelect: true
-        searchAllOptions: false
-        inverseSelection: false
-      cascadeParentIds:
-        - NATIVE_FILTER-rsUnite
-      defaultDataMask:
-        extraFormData: {}
-        filterState: {}
-        ownState: {}
-      scope:
-        rootPath:
-          - ROOT_ID
-        excluded: []
-      description: ''
-    - id: NATIVE_FILTER-rsStruct
-      name: Structure
-      filterType: filter_select
-      type: NATIVE_FILTER
-      targets:
-        - column:
-            name: structure
-          datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
-      controlValues:
-        sortAscending: true
-        enableEmptyFilter: false
-        defaultToFirstItem: false
-        multiSelect: true
-        searchAllOptions: false
-        inverseSelection: false
-      cascadeParentIds:
-        - NATIVE_FILTER-rsTypeStr
-      defaultDataMask:
-        extraFormData: {}
-        filterState: {}
-        ownState: {}
-      scope:
-        rootPath:
-          - ROOT_ID
-        excluded: []
-      description: ''
-    - id: NATIVE_FILTER-rsProg
-      name: Programme
-      filterType: filter_select
-      type: NATIVE_FILTER
-      targets:
-        - column:
-            name: programme
-          datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
-      controlValues:
-        sortAscending: true
-        enableEmptyFilter: false
-        defaultToFirstItem: false
-        multiSelect: true
-        searchAllOptions: false
-        inverseSelection: false
-      cascadeParentIds:
-        - NATIVE_FILTER-rsStruct
-      defaultDataMask:
-        extraFormData: {}
-        filterState: {}
-        ownState: {}
-      scope:
-        rootPath:
-          - ROOT_ID
-        excluded: []
-      description: ''
-    - id: NATIVE_FILTER-rsProd
-      name: Produit
-      filterType: filter_select
-      type: NATIVE_FILTER
-      targets:
-        - column:
-            name: produit
-          datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
-      controlValues:
-        sortAscending: true
-        enableEmptyFilter: false
-        defaultToFirstItem: false
-        multiSelect: true
-        searchAllOptions: false
-        inverseSelection: false
-      cascadeParentIds:
-        - NATIVE_FILTER-rsProg
-      defaultDataMask:
-        extraFormData: {}
-        filterState: {}
-        ownState: {}
-      scope:
-        rootPath:
-          - ROOT_ID
-        excluded: []
-      description: ''
-    - id: NATIVE_FILTER-rsAnnee
-      name: Année
-      filterType: filter_select
-      type: NATIVE_FILTER
-      targets:
-        - column:
-            name: annee
-          datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
-      controlValues:
-        sortAscending: false
-        enableEmptyFilter: false
-        defaultToFirstItem: false
-        multiSelect: true
-        searchAllOptions: false
-        inverseSelection: false
-      cascadeParentIds: []
-      defaultDataMask:
-        extraFormData: {}
-        filterState: {}
-        ownState: {}
-      scope:
-        rootPath:
-          - ROOT_ID
-        excluded: []
-      description: ''
-    - id: NATIVE_FILTER-rsMois
-      name: Mois
-      filterType: filter_select
-      type: NATIVE_FILTER
-      targets:
-        - column:
-            name: mois
-          datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
-      controlValues:
-        sortAscending: false
-        enableEmptyFilter: false
-        defaultToFirstItem: false
-        multiSelect: true
-        searchAllOptions: false
-        inverseSelection: false
-      cascadeParentIds:
-        - NATIVE_FILTER-rsAnnee
-      defaultDataMask:
-        extraFormData: {}
-        filterState: {}
-        ownState: {}
-      scope:
-        rootPath:
-          - ROOT_ID
-        excluded: []
-      description: ''
-      sortMetric: mois_ordre
-    - id: NATIVE_FILTER-rsJour
-      name: Jour
-      filterType: filter_select
-      type: NATIVE_FILTER
-      targets:
-        - column:
-            name: jour
-          datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
-      controlValues:
-        sortAscending: false
-        enableEmptyFilter: false
-        defaultToFirstItem: false
-        multiSelect: true
-        searchAllOptions: false
-        inverseSelection: false
-      cascadeParentIds:
-        - NATIVE_FILTER-rsMois
-      defaultDataMask:
-        extraFormData: {}
-        filterState: {}
-        ownState: {}
-      scope:
-        rootPath:
-          - ROOT_ID
-        excluded: []
-      description: ''
-    - id: NATIVE_FILTER-w_TC20Jnqr
-      controlValues:
-        enableEmptyFilter: false
-        defaultToFirstItem: false
-        multiSelect: true
-        searchAllOptions: false
-        inverseSelection: false
-      name: Période
-      filterType: filter_select
-      targets:
-        - column:
-            name: periode
-          datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
-      defaultDataMask:
-        extraFormData:
-          filters:
-            - col: periode
-              op: IN
-              val:
-                - J-1
-        filterState:
-          validateMessage: false
-          validateStatus: false
-          label: J-1
-          value:
-            - J-1
-        __cache:
-          validateMessage: false
-          validateStatus: false
-          label: J-1
-          value:
-            - J-1
-      cascadeParentIds: []
-      scope:
-        rootPath:
-          - ROOT_ID
-        excluded: []
-      type: NATIVE_FILTER
-      description: 'Par défaut : données de la veille (J-1). Videz ce filtre pour explorer d''autres dates
-        via Année / Mois / Jour.'
+  - id: NATIVE_FILTER-rsNiveau
+    name: Niveau d'organisation
+    filterType: filter_select
+    type: NATIVE_FILTER
+    targets:
+    - column:
+        name: niveau_organisation
+      datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
+    controlValues:
+      sortAscending: true
+      enableEmptyFilter: false
+      defaultToFirstItem: false
+      multiSelect: true
+      searchAllOptions: false
+      inverseSelection: false
+    cascadeParentIds: []
+    defaultDataMask:
+      extraFormData: {}
+      filterState: {}
+      ownState: {}
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    description: ''
+  - id: NATIVE_FILTER-rsUnite
+    name: "Unit\xE9 d'organisation"
+    filterType: filter_select
+    type: NATIVE_FILTER
+    targets:
+    - column:
+        name: unite_organisation
+      datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
+    controlValues:
+      sortAscending: true
+      enableEmptyFilter: false
+      defaultToFirstItem: false
+      multiSelect: true
+      searchAllOptions: false
+      inverseSelection: false
+    cascadeParentIds:
+    - NATIVE_FILTER-rsNiveau
+    defaultDataMask:
+      extraFormData: {}
+      filterState: {}
+      ownState: {}
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    description: ''
+  - id: NATIVE_FILTER-rsTypeStr
+    name: Type de structure
+    filterType: filter_select
+    type: NATIVE_FILTER
+    targets:
+    - column:
+        name: type_structure
+      datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
+    controlValues:
+      sortAscending: true
+      enableEmptyFilter: false
+      defaultToFirstItem: false
+      multiSelect: true
+      searchAllOptions: false
+      inverseSelection: false
+    cascadeParentIds:
+    - NATIVE_FILTER-rsUnite
+    defaultDataMask:
+      extraFormData: {}
+      filterState: {}
+      ownState: {}
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    description: ''
+  - id: NATIVE_FILTER-rsStruct
+    name: Structure
+    filterType: filter_select
+    type: NATIVE_FILTER
+    targets:
+    - column:
+        name: structure
+      datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
+    controlValues:
+      sortAscending: true
+      enableEmptyFilter: false
+      defaultToFirstItem: false
+      multiSelect: true
+      searchAllOptions: false
+      inverseSelection: false
+    cascadeParentIds:
+    - NATIVE_FILTER-rsTypeStr
+    defaultDataMask:
+      extraFormData: {}
+      filterState: {}
+      ownState: {}
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    description: ''
+  - id: NATIVE_FILTER-rsProg
+    name: Programme
+    filterType: filter_select
+    type: NATIVE_FILTER
+    targets:
+    - column:
+        name: programme
+      datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
+    controlValues:
+      sortAscending: true
+      enableEmptyFilter: false
+      defaultToFirstItem: false
+      multiSelect: true
+      searchAllOptions: false
+      inverseSelection: false
+    cascadeParentIds:
+    - NATIVE_FILTER-rsStruct
+    defaultDataMask:
+      extraFormData: {}
+      filterState: {}
+      ownState: {}
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    description: ''
+  - id: NATIVE_FILTER-rsProd
+    name: Produit
+    filterType: filter_select
+    type: NATIVE_FILTER
+    targets:
+    - column:
+        name: produit
+      datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
+    controlValues:
+      sortAscending: true
+      enableEmptyFilter: false
+      defaultToFirstItem: false
+      multiSelect: true
+      searchAllOptions: false
+      inverseSelection: false
+    cascadeParentIds:
+    - NATIVE_FILTER-rsProg
+    defaultDataMask:
+      extraFormData: {}
+      filterState: {}
+      ownState: {}
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    description: ''
+  - id: NATIVE_FILTER-rsAnnee
+    name: "Ann\xE9e"
+    filterType: filter_select
+    type: NATIVE_FILTER
+    targets:
+    - column:
+        name: annee
+      datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
+    controlValues:
+      sortAscending: false
+      enableEmptyFilter: false
+      defaultToFirstItem: false
+      multiSelect: true
+      searchAllOptions: false
+      inverseSelection: false
+    cascadeParentIds: []
+    defaultDataMask:
+      extraFormData: {}
+      filterState: {}
+      ownState: {}
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    description: ''
+  - id: NATIVE_FILTER-rsMois
+    name: Mois
+    filterType: filter_select
+    type: NATIVE_FILTER
+    targets:
+    - column:
+        name: mois
+      datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
+    controlValues:
+      sortAscending: false
+      enableEmptyFilter: false
+      defaultToFirstItem: false
+      multiSelect: true
+      searchAllOptions: false
+      inverseSelection: false
+    cascadeParentIds:
+    - NATIVE_FILTER-rsAnnee
+    defaultDataMask:
+      extraFormData: {}
+      filterState: {}
+      ownState: {}
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    description: ''
+    sortMetric: mois_ordre
+  - id: NATIVE_FILTER-rsJour
+    name: Jour
+    filterType: filter_select
+    type: NATIVE_FILTER
+    targets:
+    - column:
+        name: jour
+      datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
+    controlValues:
+      sortAscending: false
+      enableEmptyFilter: false
+      defaultToFirstItem: false
+      multiSelect: true
+      searchAllOptions: false
+      inverseSelection: false
+    cascadeParentIds:
+    - NATIVE_FILTER-rsMois
+    defaultDataMask:
+      extraFormData: {}
+      filterState: {}
+      ownState: {}
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    description: ''
+  - id: NATIVE_FILTER-w_TC20Jnqr
+    controlValues:
+      enableEmptyFilter: false
+      defaultToFirstItem: false
+      multiSelect: true
+      searchAllOptions: false
+      inverseSelection: false
+    name: "P\xE9riode"
+    filterType: filter_select
+    targets:
+    - column:
+        name: periode
+      datasetUuid: 759bfb27-3540-48f6-aa36-9ea687114946
+    defaultDataMask:
+      extraFormData:
+        filters:
+        - col: periode
+          op: IN
+          val:
+          - J-1
+      filterState:
+        validateMessage: false
+        validateStatus: false
+        label: J-1
+        value:
+        - J-1
+      __cache:
+        validateMessage: false
+        validateStatus: false
+        label: J-1
+        value:
+        - J-1
+    cascadeParentIds: []
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    type: NATIVE_FILTER
+    description: "Par d\xE9faut : donn\xE9es de la veille (J-1). Videz ce filtre pour\
+      \ explorer d'autres dates via Ann\xE9e / Mois / Jour."
   chart_configuration: {}
-position:
-  CHART-hdr:
-    children: []
-    id: CHART-hdr
-    meta:
-      chartId: 156
-      height: 11
-      sliceName: En-tete - Date du rapport
-      uuid: b300af4b-eade-41fa-b202-0b59c1793552
-      width: 12
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-stock
-      - ROW-hdr
-    type: CHART
-  CHART-k1:
-    children: []
-    id: CHART-k1
-    meta:
-      chartId: 157
-      height: 26
-      sliceName: Lignes suivies
-      sliceNameOverride: Lignes suivies
-      uuid: a2d8e46a-aeb9-4ab4-9151-1258910d3cd7
-      width: 3
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-stock
-      - ROW-kpi
-    type: CHART
-  CHART-k2:
-    children: []
-    id: CHART-k2
-    meta:
-      chartId: 158
-      height: 26
-      sliceName: Structures suivies
-      sliceNameOverride: Structures suivies
-      uuid: 5d235dd0-0b13-41d2-b815-967ddf90825c
-      width: 3
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-stock
-      - ROW-kpi
-    type: CHART
-  CHART-k3:
-    children: []
-    id: CHART-k3
-    meta:
-      chartId: 159
-      height: 26
-      sliceName: Taux de rupture
-      sliceNameOverride: Taux de rupture
-      uuid: ed4485ca-f463-4402-884b-be4e2551cd5b
-      width: 2
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-stock
-      - ROW-kpi
-    type: CHART
-  CHART-k4:
-    children: []
-    id: CHART-k4
-    meta:
-      chartId: 160
-      height: 26
-      sliceName: SDU total
-      sliceNameOverride: SDU total
-      uuid: b2daaef8-760e-4efe-9501-ee4016755436
-      width: 2
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-stock
-      - ROW-kpi
-    type: CHART
-  CHART-k5:
-    children: []
-    id: CHART-k5
-    meta:
-      chartId: 161
-      height: 26
-      sliceName: Produits suivis
-      sliceNameOverride: Produits suivis
-      uuid: fde29a85-307e-46c9-a0bc-cbbf64be05cb
-      width: 2
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-stock
-      - ROW-kpi
-    type: CHART
-  CHART-r1:
-    children: []
-    id: CHART-r1
-    meta:
-      chartId: 163
-      height: 26
-      sliceName: Rupture - Lignes en rupture
-      sliceNameOverride: Lignes en rupture
-      uuid: e9beb3ca-f5ac-45a2-84f3-6081a5133ae9
-      width: 3
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-rupture
-      - ROW-rkpi
-    type: CHART
-  CHART-r2:
-    children: []
-    id: CHART-r2
-    meta:
-      chartId: 164
-      height: 26
-      sliceName: Rupture - Taux de rupture
-      sliceNameOverride: Taux de rupture
-      uuid: 2eacef59-b89d-4cad-ae2f-c4f18d8352c6
-      width: 2
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-rupture
-      - ROW-rkpi
-    type: CHART
-  CHART-r3:
-    children: []
-    id: CHART-r3
-    meta:
-      chartId: 165
-      height: 26
-      sliceName: Rupture - Produits en rupture
-      sliceNameOverride: Produits en rupture
-      uuid: 8de7b0d8-f06e-4021-ad7f-e92882804104
-      width: 2
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-rupture
-      - ROW-rkpi
-    type: CHART
-  CHART-r4:
-    children: []
-    id: CHART-r4
-    meta:
-      chartId: 166
-      height: 26
-      sliceName: Rupture - Structures touchees
-      sliceNameOverride: Structures touchées
-      uuid: baffe4bf-e1b1-4176-b324-a39abfb6946e
-      width: 2
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-rupture
-      - ROW-rkpi
-    type: CHART
-  CHART-r5:
-    children: []
-    id: CHART-r5
-    meta:
-      chartId: 167
-      height: 26
-      sliceName: Rupture - Besoin non couvert
-      sliceNameOverride: Besoin non couvert
-      uuid: 87478987-78cc-47a8-85dc-aa9b955c34ae
-      width: 3
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-rupture
-      - ROW-rkpi
-    type: CHART
-  CHART-rhdr:
-    children: []
-    id: CHART-rhdr
-    meta:
-      chartId: 174
-      height: 11
-      sliceName: En-tete - Ruptures
-      uuid: 7bd8fec6-9ff3-4b3a-bf52-8bd6027b2b52
-      width: 12
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-rupture
-      - ROW-rhdr
-    type: CHART
-  CHART-rtbl:
-    children: []
-    id: CHART-rtbl
-    meta:
-      chartId: 168
-      height: 84
-      sliceName: Rupture - Detail structure / produit
-      sliceNameOverride: Détail des ruptures
-      uuid: 36624050-4124-42c0-8975-80ab35bda434
-      width: 12
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-rupture
-      - ROW-rtbl
-    type: CHART
-  CHART-s1:
-    children: []
-    id: CHART-s1
-    meta:
-      chartId: 169
-      height: 26
-      sliceName: Sync - Structures suivies
-      sliceNameOverride: Structures suivies
-      uuid: 05e330aa-1988-49e1-8e66-fa4d662c83b6
-      width: 3
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-sync
-      - ROW-skpi
-    type: CHART
-  CHART-s2:
-    children: []
-    id: CHART-s2
-    meta:
-      chartId: 170
-      height: 26
-      sliceName: Sync - Structures synchronisees
-      sliceNameOverride: Structures synchronisées
-      uuid: 35768dc5-1d41-4f40-bf04-a1bcae0b902a
-      width: 3
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-sync
-      - ROW-skpi
-    type: CHART
-  CHART-s3:
-    children: []
-    id: CHART-s3
-    meta:
-      chartId: 172
-      height: 26
-      sliceName: Sync - Structures non synchronisees
-      sliceNameOverride: Non synchronisées
-      uuid: 469ecb26-6264-47b3-8328-aea558f87958
-      width: 3
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-sync
-      - ROW-skpi
-    type: CHART
-  CHART-s4:
-    children: []
-    id: CHART-s4
-    meta:
-      chartId: 171
-      height: 26
-      sliceName: Sync - Taux de synchronisation
-      sliceNameOverride: Taux de synchronisation
-      uuid: 793a9533-f84f-4005-893b-fe1bf407c797
-      width: 3
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-sync
-      - ROW-skpi
-    type: CHART
-  CHART-shdr:
-    children: []
-    id: CHART-shdr
-    meta:
-      chartId: 175
-      height: 11
-      sliceName: En-tete - Synchronisation
-      uuid: 63b9adc9-e8fc-41ff-846c-6a50e7107dde
-      width: 12
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-sync
-      - ROW-shdr
-    type: CHART
-  CHART-stbl:
-    children: []
-    id: CHART-stbl
-    meta:
-      chartId: 173
-      height: 84
-      sliceName: Sync - Etat par structure
-      sliceNameOverride: État de synchronisation par structure
-      uuid: 60852c1c-a832-4aba-bbce-22ceeb6db505
-      width: 12
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-sync
-      - ROW-stbl
-    type: CHART
-  CHART-tbl:
-    children: []
-    id: CHART-tbl
-    meta:
-      chartId: 162
-      height: 84
-      sliceName: Rapport de stock
-      uuid: bb583383-36f0-40e4-ae66-78eec6300df9
-      width: 12
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-stock
-      - ROW-tbl
-    type: CHART
-  DASHBOARD_VERSION_KEY: v2
-  GRID_ID:
-    children:
-      - TABS-main
-    id: GRID_ID
-    meta: {}
-    parents:
-      - ROOT_ID
-    type: GRID
-  HEADER_ID:
-    id: HEADER_ID
-    meta:
-      text: Suivi journalier des stocks
-    type: HEADER
-  ROOT_ID:
-    children:
-      - GRID_ID
-    id: ROOT_ID
-    meta: {}
-    parents: []
-    type: ROOT
-  ROW-hdr:
-    children:
-      - CHART-hdr
-    id: ROW-hdr
-    meta:
-      background: BACKGROUND_TRANSPARENT
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-stock
-    type: ROW
-  ROW-kpi:
-    children:
-      - CHART-k1
-      - CHART-k2
-      - CHART-k3
-      - CHART-k4
-      - CHART-k5
-    id: ROW-kpi
-    meta:
-      background: BACKGROUND_TRANSPARENT
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-stock
-    type: ROW
-  ROW-rhdr:
-    children:
-      - CHART-rhdr
-    id: ROW-rhdr
-    meta:
-      background: BACKGROUND_TRANSPARENT
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-rupture
-    type: ROW
-  ROW-rkpi:
-    children:
-      - CHART-r1
-      - CHART-r2
-      - CHART-r3
-      - CHART-r4
-      - CHART-r5
-    id: ROW-rkpi
-    meta:
-      background: BACKGROUND_TRANSPARENT
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-rupture
-    type: ROW
-  ROW-rtbl:
-    children:
-      - CHART-rtbl
-    id: ROW-rtbl
-    meta:
-      background: BACKGROUND_TRANSPARENT
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-rupture
-    type: ROW
-  ROW-shdr:
-    children:
-      - CHART-shdr
-    id: ROW-shdr
-    meta:
-      background: BACKGROUND_TRANSPARENT
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-sync
-    type: ROW
-  ROW-skpi:
-    children:
-      - CHART-s1
-      - CHART-s2
-      - CHART-s3
-      - CHART-s4
-    id: ROW-skpi
-    meta:
-      background: BACKGROUND_TRANSPARENT
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-sync
-    type: ROW
-  ROW-stbl:
-    children:
-      - CHART-stbl
-    id: ROW-stbl
-    meta:
-      background: BACKGROUND_TRANSPARENT
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-sync
-    type: ROW
-  ROW-tbl:
-    children:
-      - CHART-tbl
-    id: ROW-tbl
-    meta:
-      background: BACKGROUND_TRANSPARENT
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-      - TAB-stock
-    type: ROW
-  TAB-rupture:
-    children:
-      - ROW-rhdr
-      - ROW-rkpi
-      - ROW-rtbl
-    id: TAB-rupture
-    meta:
-      defaultText: Onglet titre
-      placeholder: Onglet titre
-      text: RUPTURES DE STOCK
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-    type: TAB
-  TAB-stock:
-    children:
-      - ROW-hdr
-      - ROW-kpi
-      - ROW-tbl
-    id: TAB-stock
-    meta:
-      defaultText: Onglet titre
-      placeholder: Onglet titre
-      text: ÉTAT DES STOCKS
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-    type: TAB
-  TAB-sync:
-    children:
-      - ROW-shdr
-      - ROW-skpi
-      - ROW-stbl
-    id: TAB-sync
-    meta:
-      defaultText: Onglet titre
-      placeholder: Onglet titre
-      text: SYNCHRONISATION
-    parents:
-      - ROOT_ID
-      - GRID_ID
-      - TABS-main
-    type: TAB
-  TABS-main:
-    children:
-      - TAB-stock
-      - TAB-rupture
-      - TAB-sync
-    id: TABS-main
-    meta: {}
-    parents:
-      - ROOT_ID
-      - GRID_ID
-    type: TABS
+theme_uuid: null
+version: 1.0.0

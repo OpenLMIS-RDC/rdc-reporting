@@ -1,19 +1,14 @@
-slice_name: Réq. – Répartition par statut actuel
-viz_type: pie
-uuid: b415c885-4917-4356-8cd3-19a8736bd301
-version: 1.0.0
-dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+slice_name: "R\xE9q. \u2013 R\xE9partition par statut actuel"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: pie
 params:
   viz_type: pie
   adhoc_filters: []
   time_range: No filter
   groupby:
-    - statut_requisition
+  - statut_requisition
   metric: nb_requisitions
   row_limit: 25
   donut: true
@@ -31,4 +26,9 @@ params:
   legendMargin: 0
   show_labels_threshold: 2
   outerRadius: 72
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: b415c885-4917-4356-8cd3-19a8736bd301
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
