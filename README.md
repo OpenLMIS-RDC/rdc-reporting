@@ -46,7 +46,7 @@ rdc-reporting/
 - Virtual datasets are written in ClickHouse SQL and carry `source_db_engine: clickhousedb`; without it `superset import-directory` transpiles the SQL from a generic dialect and rewrites `dateDiff` arguments.
 - Marts `ref()` core marts (`mart_stock_status`, `mart_facility_directory`, `mart_requisition_summary`, ...) wherever the legacy view was a thin wrapper over the same data. Only build from staging when core has no equivalent.
 - Column names are the ones the RDC team defined in the legacy views and datasets, kept verbatim (French in the `vw_*` line, English in the `analytics.*` star schema). When a mart builds on a core mart, core columns are aliased back to the legacy names. Display labels go in the dataset YAML `verbose_name`. This keeps the existing charts and the Power BI model valid without a column remap.
-- Assets are authored in the Superset UI against dev, exported from there, merged into `superset/assets/` with `scripts/merge-superset-export.py` and committed as YAML (see [Changing charts and dashboards](#changing-charts-and-dashboards)).
+- Assets are authored in the Superset UI against dev, exported from there, merged into `superset/assets/` with `scripts/merge-superset-export.sh` and committed as YAML (see [Changing charts and dashboards](#changing-charts-and-dashboards)).
 
 ## Usage
 
@@ -77,21 +77,22 @@ Every deploy re-imports `superset/assets/` and overwrites what has the same UUID
 
 1. Build or change the charts and dashboards in the Superset UI on dev.
 2. Export each changed dashboard: dashboard `...` menu -> Download -> Export YAML. The ZIP holds the dashboard with its charts and datasets.
-3. Merge the export into this repo (needs PyYAML once: `python3 -m pip install pyyaml`):
+3. Merge the export into this repo. The script needs bash, grep, sed and unzip (on Windows, run it from Git Bash or WSL):
 
    ```bash
-   python3 scripts/merge-superset-export.py ~/Downloads/dashboard_export_<timestamp>.zip --dry-run
-   python3 scripts/merge-superset-export.py ~/Downloads/dashboard_export_<timestamp>.zip
+   scripts/merge-superset-export.sh --dry-run ~/Downloads/dashboard_export_<timestamp>.zip
+   scripts/merge-superset-export.sh ~/Downloads/dashboard_export_<timestamp>.zip
    ```
 
-   The script overwrites the existing files by UUID, names new assets without Superset's id suffix, leaves `databases/` alone, sets `source_db_engine: clickhousedb` on SQL datasets and writes readable YAML. With `--core <openlmis-reporting checkout>` it also skips core assets that a dashboard happens to use.
-4. Review `git diff`, commit and push, then run the deploy job.
+   It overwrites the existing files by UUID, names new assets without Superset's id suffix, leaves `databases/` alone, adds `source_db_engine: clickhousedb` to SQL datasets and stops on duplicate UUIDs. Files keep the format Superset writes. With `--core <openlmis-reporting checkout>` it also skips core assets that a dashboard happens to use. Without unzip, unzip the export yourself and pass the folder.
+4. Review `git diff`, commit and open a PR. The dev deploy takes this repo from `master`, so the change is kept once the PR is merged. To check it straight away, run the dev deploy job with `KEEP_OR_RESTORE=keep` (it redeploys OpenLMIS as well).
 
 Notes:
 
-- The first export of an asset that was written by hand also adds the fields Superset always exports (`null` column attributes, `annotation_layers`) and drops `is_managed_externally`. Later exports only show real changes. Numeric `chartId` values follow the Superset instance and may change; the import maps charts by UUID.
+- The first export of an asset that was written by hand rewrites the whole file in Superset's format: accents as escapes (`\xE9`), SQL and CSS as quoted strings, Superset's key order and the fields it always exports. Later exports change only the lines that changed, though accented text still shows as escapes in the diff.
+- Numeric `chartId` values, and chart ids in filter scopes, follow the Superset instance, so an export from another instance changes them. The import maps charts by UUID.
 - Deleting a chart or dashboard in Superset does not delete its YAML: remove the file by hand, or the next deploy brings it back.
-- A new dashboard that should open inside OpenLMIS also needs embedding switched on in Superset and a dashboard report with that Embedded UUID in OpenLMIS (see `superset/assets/embedded.yaml`).
+- A new dashboard that should open inside OpenLMIS also needs embedding switched on in Superset (again after a deploy with `restore`) and a dashboard report with that Embedded UUID in OpenLMIS (see `superset/assets/embedded.yaml`).
 
 ## Verification against the legacy stack
 
