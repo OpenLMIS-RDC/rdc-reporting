@@ -71,28 +71,31 @@ make superset-import    # import datasets, charts, dashboards
 make verify-packages    # all of the above plus dashboard checks
 ```
 
+`make package-validate` also reports the core database UUID that `databases/reporting_clickhouse.yaml` re-declares and exits non-zero, so `make verify-packages` stops at validation too. That collision is expected; any other one is real.
+
 ## Changing charts and dashboards
 
 Every deploy re-imports `superset/assets/` and overwrites what has the same UUID, so a change made only in the Superset UI is lost on the next deploy. To keep a change:
 
-1. Build or change the charts and dashboards in the Superset UI on dev.
+1. Build or change the charts and dashboards in the Superset UI on dev. Use datasets from this package only: the platform imports each package on its own, so a DRC chart on a core dataset, or a core chart on a DRC dashboard, does not survive the import. For data from a core mart, create a SQL dataset on it.
 2. Export each changed dashboard: dashboard `...` menu -> Download -> Export YAML. The ZIP holds the dashboard with its charts and datasets.
-3. Merge the export into this repo. The script needs bash, grep, sed and unzip (on Windows, run it from Git Bash or WSL):
+3. Merge the export into this repo. The script needs bash, grep, sed and unzip (on Windows, run it from Git Bash or WSL), and `--core` needs a checkout of [openlmis-reporting](https://github.com/OpenLMIS/openlmis-reporting) on `main`, here next to this repo:
 
    ```bash
-   scripts/merge-superset-export.sh --dry-run ~/Downloads/dashboard_export_<timestamp>.zip
-   scripts/merge-superset-export.sh ~/Downloads/dashboard_export_<timestamp>.zip
+   scripts/merge-superset-export.sh --dry-run --core ../openlmis-reporting ~/Downloads/dashboard_export_<timestamp>.zip
+   scripts/merge-superset-export.sh --core ../openlmis-reporting ~/Downloads/dashboard_export_<timestamp>.zip
    ```
 
-   It overwrites the existing files by UUID, names new assets without Superset's id suffix, leaves `databases/` alone, adds `source_db_engine: clickhousedb` to SQL datasets and stops on duplicate UUIDs. Files keep the format Superset writes. With `--core <openlmis-reporting checkout>` it also skips core assets that a dashboard happens to use. Without unzip, unzip the export yourself and pass the folder.
-4. Review `git diff`, commit and open a PR. The dev deploy takes this repo from `master`, so the change is kept once the PR is merged. To check it straight away, run the dev deploy job with `KEEP_OR_RESTORE=keep` (it redeploys OpenLMIS as well).
+   It overwrites the existing files by UUID, names new assets without Superset's id suffix, leaves `databases/` alone, adds `source_db_engine: clickhousedb` to SQL datasets and stops on duplicate UUIDs. It also stops, writing nothing, when a chart or dashboard uses a core chart or dataset (this needs `--core`), or when a new dataset points at the same table as an existing one under another UUID, which happens when a dataset is deleted and recreated in Superset. Files keep the format Superset writes. Without unzip, unzip the export yourself and pass the folder.
+4. Review `git diff`, commit only the files you meant to change and open a PR. The dev deploy takes this repo from `master`, so the change is kept once the PR is merged. To check that the merged files import, run the dev deploy job with `KEEP_OR_RESTORE=keep` after the merge, not before: it re-imports everything from `master`, so it overwrites UI changes on dev that are not merged yet (anyone's), and it redeploys OpenLMIS as well. A green job does not prove the import worked: search its log for `An error occurred` and open the dashboard.
 
 Notes:
 
+- Dev Superset is shared, and an export takes the current state of everything on the dashboard there. Export right after your change, keep one person per dashboard at a time and keep the PR short: if a deploy or someone else's work changes dev in between, the next export brings that into your branch.
 - The first export of an asset that was written by hand rewrites the whole file in Superset's format: accents as escapes (`\xE9`), SQL and CSS as quoted strings, Superset's key order and the fields it always exports. Later exports change only the lines that changed, though accented text still shows as escapes in the diff.
 - Numeric `chartId` values, and chart ids in filter scopes, follow the Superset instance, so an export from another instance changes them. The import maps charts by UUID.
 - Deleting a chart or dashboard in Superset does not delete its YAML: remove the file by hand, or the next deploy brings it back.
-- A new dashboard that should open inside OpenLMIS also needs embedding switched on in Superset (again after a deploy with `restore`) and a dashboard report with that Embedded UUID in OpenLMIS (see `superset/assets/embedded.yaml`).
+- A new dashboard that should open inside OpenLMIS also needs embedding switched on in Superset, which then shows the dashboard's Embedded UUID, and a dashboard report with that UUID in OpenLMIS. Record the slug and UUID in `superset/assets/embedded.yaml` as well; no deploy applies that file yet. A deploy with `KEEP_OR_RESTORE=restore` wipes Superset's database and replaces the OpenLMIS database from a snapshot, so embedding has to be switched on again (with a new UUID to enter in OpenLMIS) and a dashboard report added after that snapshot has to be added again.
 
 ## Verification against the legacy stack
 

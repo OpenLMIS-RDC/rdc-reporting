@@ -19,8 +19,21 @@
 # datasets and refuses to leave two files with the same UUID. Files are copied
 # as Superset writes them. Review `git diff` afterwards.
 #
+# It also stops, writing nothing, on two exports that would import wrongly:
+# - With --core, a chart or dashboard that uses a core chart or dataset. The
+#   platform imports each package on its own, and Superset only links assets
+#   within one package: such a chart is skipped and such a dashboard fails.
+# - A new dataset on the same table as an existing one under another UUID (a
+#   dataset recreated in Superset). The import folds both files into one
+#   dataset, and either definition can win.
+#
 # Needs bash (the 3.2 that ships with macOS is enough), grep, sed and, for a
 # ZIP, unzip.
+
+if [ -z "${BASH_VERSION:-}" ]; then
+  echo "Run this script with bash: bash scripts/merge-superset-export.sh ..." >&2
+  exit 1
+fi
 
 set -eu
 export LC_ALL=C
@@ -29,6 +42,7 @@ REPO_ROOT=$(cd "$(dirname "$0")/.." && pwd)
 ASSETS="$REPO_ROOT/superset/assets"
 SOURCE_DB_ENGINE=clickhousedb
 TAB=$'\t'
+BACKSLASH_NEWLINE=$'\\\n'
 
 usage() {
   cat <<'EOF'
@@ -37,7 +51,8 @@ Usage: scripts/merge-superset-export.sh [--dry-run] [--core PATH] EXPORT
   EXPORT     Superset export ZIP, or the unzipped export folder
   --dry-run  show what would change, write nothing
   --core     openlmis-reporting checkout (or its superset/assets); core assets
-             in the export are then skipped instead of copied here
+             in the export are then skipped instead of copied here, and a
+             chart or dashboard that uses one stops the merge
 EOF
 }
 
@@ -57,6 +72,156 @@ top_value() {
 
 uuid_of() {
   top_value uuid "$1" | tr 'A-F' 'a-f'
+}
+
+# Chart and dataset UUIDs a dashboard refers to (layout charts, native filter targets).
+dashboard_refs() {
+  sed -n -E 's/^[[:space:]]+(-[[:space:]]+)?(uuid|datasetUuid):[[:space:]]*"?([0-9a-fA-F-]{36})"?[[:space:]]*$/\3/p' "$1" \
+    | tr 'A-F' 'a-f' | sort -u
+}
+
+# Raw text of a top-level YAML scalar, including the lines Superset's dumper
+# wraps a long value onto.
+top_scalar() {
+  awk -v key="$1" '
+    { sub(/\r$/, "") }
+    found && /^[^ \t]/ { exit }
+    found { line = $0; sub(/^[ \t]+/, "", line); value = value "\n" line; next }
+    index($0, key ":") == 1 { found = 1; value = substr($0, length(key) + 2); sub(/^[ \t]+/, "", value) }
+    END { printf "%s", value }
+  ' "$2"
+}
+
+# UTF-8 bytes of a code point.
+utf8() {
+  code=$1
+  if [ "$code" -lt 128 ]; then
+    set -- "$code"
+  elif [ "$code" -lt 2048 ]; then
+    set -- $((192 + code / 64)) $((128 + code % 64))
+  elif [ "$code" -lt 65536 ]; then
+    set -- $((224 + code / 4096)) $((128 + code / 64 % 64)) $((128 + code % 64))
+  else
+    set -- $((240 + code / 262144)) $((128 + code / 4096 % 64)) $((128 + code / 64 % 64)) $((128 + code % 64))
+  fi
+  printf '%b' "$(printf '\\0%03o' "$@")"
+}
+
+# Decodes the escapes of a YAML double-quoted scalar (Superset writes accents as
+# \xE9 or –), so an exported name compares equal to a hand-written one.
+yaml_unescape() {
+  s=$1
+  out=""
+  i=0
+  while [ "$i" -lt "${#s}" ]; do
+    c=${s:i:1}
+    if [ "$c" != "\\" ]; then
+      out="$out$c"
+      i=$((i + 1))
+      continue
+    fi
+    e=${s:i+1:1}
+    case "$e" in
+      x) len=2 ;;
+      u) len=4 ;;
+      U) len=8 ;;
+      *) len=0 ;;
+    esac
+    hex=${s:i+2:len}
+    if [ "$len" -gt 0 ] && [ "${#hex}" -eq "$len" ] && [ -z "${hex//[0-9A-Fa-f]/}" ]; then
+      out="$out$(utf8 $((16#$hex)))"
+      i=$((i + 2 + len))
+      continue
+    fi
+    case "$e" in
+      _) out="$out$(utf8 160)" ;;
+      N) out="$out$(utf8 133)" ;;
+      L) out="$out$(utf8 8232)" ;;
+      P) out="$out$(utf8 8233)" ;;
+      t) out="$out$TAB" ;;
+      n) out="$out"$'\n' ;;
+      *) out="$out$e" ;;
+    esac
+    i=$((i + 2))
+  done
+  printf '%s' "$out"
+}
+
+# Decoded value of a top-level YAML scalar such as a name, whether Superset wrote
+# it (quoted, escaped, wrapped) or someone wrote it by hand.
+name_of() {
+  v=$(top_scalar "$1" "$2")
+  case "$v" in
+    \"*)
+      # A wrapped double-quoted line ends in a backslash and joins directly; any
+      # other line break folds to a space. Anything after the closing quote is
+      # a comment.
+      v=${v//"$BACKSLASH_NEWLINE"/}
+      v=${v//$'\n'/ }
+      v=${v#\"}
+      v=$(yaml_unescape "${v%\"*}")
+      ;;
+    \'*)
+      v=${v//$'\n'/ }
+      v=${v#\'}
+      v=${v%\'*}
+      v=${v//\'\'/\'}
+      ;;
+    *)
+      v=${v//$'\n'/ }
+      v=${v%% #*}
+      v=${v%"${v##*[![:space:]]}"}
+      ;;
+  esac
+  printf '%s' "$v"
+}
+
+# "database_uuid|schema|table_name" of a dataset: what Superset matches datasets on.
+dataset_key() {
+  printf '%s|%s|%s\n' "$(top_value database_uuid "$1" | tr 'A-F' 'a-f')" \
+    "$(name_of schema "$1")" "$(name_of table_name "$1")"
+}
+
+# Prints the path of an existing chart or dashboard whose name is $2 ($1 is the
+# folder: charts or dashboards). The name index is built on first use.
+find_same_name() {
+  if [ ! -e "$WORK/names" ]; then
+    : > "$WORK/names"
+    for spec in charts:slice_name dashboards:dashboard_title; do
+      [ -d "$ASSETS/${spec%%:*}" ] || continue
+      find "$ASSETS/${spec%%:*}" -type f -name '*.yaml' | sort | while IFS= read -r file; do
+        printf '%s\t%s\t%s\n' "${spec%%:*}" "$(name_of "${spec#*:}" "$file")" "$file"
+      done >> "$WORK/names"
+    done
+  fi
+  while IFS="$TAB" read -r kind name path; do
+    if [ "$kind" = "$1" ] && [ "$name" = "$2" ]; then
+      printf '%s\n' "$path"
+      return 0
+    fi
+  done < "$WORK/names"
+}
+
+# Appends "key<TAB>uuid<TAB>path" for every dataset file under $1 to $2, leaving
+# out the UUIDs listed in file $3 (datasets the export replaces).
+index_dataset_keys() {
+  [ -d "$1" ] || return 0
+  find "$1" -type f -name '*.yaml' | sort | while IFS= read -r file; do
+    uuid=$(uuid_of "$file")
+    if [ -n "$(top_value table_name "$file")" ] && ! grep -qxF "$uuid" "$3"; then
+      printf '%s\t%s\t%s\n' "$(dataset_key "$file")" "$uuid" "$file"
+    fi
+  done >> "$2"
+}
+
+# Prints the path of the first entry with key $1 in dataset-key index $2.
+find_dataset_key() {
+  while IFS="$TAB" read -r key _ path; do
+    if [ "$key" = "$1" ]; then
+      printf '%s\n' "$path"
+      return 0
+    fi
+  done < "$2"
 }
 
 # Writes "uuid<TAB>path" for every chart, dashboard and dataset file under $1 to $2.
@@ -150,6 +315,9 @@ trap 'rm -rf "$WORK"' EXIT
 : > "$WORK/skipped"
 : > "$WORK/seen"
 : > "$WORK/core"
+: > "$WORK/warnings"
+: > "$WORK/dataset_keys"
+: > "$WORK/core_dataset_keys"
 
 if [ -d "$EXPORT" ]; then
   SRC=${EXPORT%/}
@@ -181,8 +349,13 @@ done > "$WORK/databases"
 if [ -n "$CORE" ]; then
   if [ -d "$CORE/superset/assets" ]; then
     CORE="$CORE/superset/assets"
-  elif [ ! -d "$CORE" ]; then
+  fi
+  if [ ! -d "$CORE/charts" ] && [ ! -d "$CORE/dashboards" ] && [ ! -d "$CORE/datasets" ]; then
     die "--core: $CORE is neither openlmis-reporting nor its superset/assets folder"
+  fi
+  if [ "$(cd "$CORE" && pwd -P)" = "$(cd "$ASSETS" && pwd -P)" ] \
+    || grep -qs '^type:[[:space:]]*extension' "$CORE/../../manifest.yaml"; then
+    die "--core: $CORE belongs to an extension package; pass the openlmis-reporting checkout"
   fi
   find "$CORE" -type f -name '*.yaml' | while IFS= read -r file; do
     uuid=$(uuid_of "$file")
@@ -190,10 +363,19 @@ if [ -n "$CORE" ]; then
       echo "$uuid"
     fi
   done > "$WORK/core"
+  index_dataset_keys "$CORE/datasets" "$WORK/core_dataset_keys" /dev/null
 fi
 
 count=0
 find "$SRC" -type f -name '*.yaml' | sort > "$WORK/files"
+# Repo datasets the export replaces are compared in their exported form, so a
+# rename in the same export is not mistaken for a clash.
+while IFS= read -r file; do
+  case "$file" in
+    "$SRC"/datasets/*) uuid_of "$file" ;;
+  esac
+done < "$WORK/files" > "$WORK/export_datasets"
+index_dataset_keys "$ASSETS/datasets" "$WORK/dataset_keys" "$WORK/export_datasets"
 while IFS= read -r file; do
   rel=${file#"$SRC"/}
   case "$rel" in
@@ -223,6 +405,28 @@ while IFS= read -r file; do
     continue
   fi
   echo "$uuid" >> "$WORK/seen"
+  target=$(grep "^$uuid$TAB" "$WORK/index" | head -n 1 | cut -f2)
+
+  # Core assets cannot be linked from this package (see the header).
+  case "$rel" in
+    charts/*)
+      ref=$(top_value dataset_uuid "$file" | tr 'A-F' 'a-f')
+      if [ -n "$ref" ] && grep -qxF "$ref" "$WORK/core"; then
+        echo "$rel: the chart uses core dataset $ref; a DRC chart needs a dataset from this package" >> "$WORK/errors"
+        continue
+      fi
+      ;;
+    dashboards/*)
+      core_refs=0
+      for ref in $(dashboard_refs "$file"); do
+        if grep -qxF "$ref" "$WORK/core"; then
+          echo "$rel: the dashboard uses core chart or dataset $ref; a DRC dashboard needs charts and datasets from this package" >> "$WORK/errors"
+          core_refs=1
+        fi
+      done
+      [ "$core_refs" -eq 0 ] || continue
+      ;;
+  esac
 
   count=$((count + 1))
   staged="$WORK/staged.$count"
@@ -234,6 +438,18 @@ while IFS= read -r file; do
         echo "$rel: dataset is not on the reporting_clickhouse database" >> "$WORK/errors"
         continue
       fi
+      key=$(dataset_key "$file")
+      other=$(find_dataset_key "$key" "$WORK/dataset_keys")
+      if [ -n "$other" ]; then
+        echo "$rel: same table as $(relative "$other") under another UUID, and the import would merge the two (dataset recreated in Superset? then delete the old file and run again)" >> "$WORK/errors"
+        continue
+      fi
+      other=$(find_dataset_key "$key" "$WORK/core_dataset_keys")
+      if [ -n "$other" ]; then
+        echo "$rel: same table as core dataset ${other##*/}, and the import would merge the two; use a SQL dataset on that table instead" >> "$WORK/errors"
+        continue
+      fi
+      printf '%s\t%s\t%s\n' "$key" "$uuid" "$rel in this export" >> "$WORK/dataset_keys"
       case "$(top_value sql "$file")" in
         "" | null | "~" | "''") ;;
         *) add_source_db_engine "$staged" ;;
@@ -241,7 +457,23 @@ while IFS= read -r file; do
       ;;
   esac
 
-  target=$(grep "^$uuid$TAB" "$WORK/index" | head -n 1 | cut -f2)
+  # A new chart or dashboard named like an existing one is allowed, but often a mistake.
+  if [ -z "$target" ]; then
+    case "$rel" in
+      charts/*) name_key=slice_name ;;
+      dashboards/*) name_key=dashboard_title ;;
+      *) name_key="" ;;
+    esac
+    if [ -n "$name_key" ]; then
+      name=$(name_of "$name_key" "$file")
+      same=""
+      if [ -n "$name" ]; then
+        same=$(find_same_name "${rel%%/*}" "$name")
+      fi
+      [ -z "$same" ] || echo "$rel is new but has the same name as $(relative "$same")" >> "$WORK/warnings"
+    fi
+  fi
+
   if [ -z "$target" ]; then
     target=$(new_path "$ASSETS/${rel%/*}" "$(basename "$rel" .yaml)" "$uuid")
   fi
@@ -295,13 +527,15 @@ unchanged=$(grep -c "^same$TAB" "$WORK/plan" || true)
 skipped=$(grep -c . "$WORK/skipped" || true)
 echo
 echo "$added added, $updated updated, $unchanged unchanged, $skipped skipped."
+sed 's/^/Warning: /' "$WORK/warnings"
 if [ -z "$CORE" ]; then
-  echo "Core check skipped (no --core); \`make package-validate\` still catches core UUIDs."
+  echo "Core check skipped: pass --core <openlmis-reporting checkout> to stop on core charts and datasets."
 fi
 if grep -q "^add$TAB.*/dashboards/[^/]*$" "$WORK/plan"; then
   echo "New dashboard: to show it inside OpenLMIS, enable embedding on it in Superset and add a" \
     "dashboard report with that Embedded UUID in OpenLMIS."
 fi
 if [ "$DRY_RUN" -eq 0 ] && [ $((added + updated)) -gt 0 ]; then
-  echo "Next: review \`git diff\`, commit and open a PR. Once it is merged to master, the next deploy keeps it."
+  echo "Next: review \`git diff\`, commit only the files you meant to change and open a PR." \
+    "Once it is merged to master, the next deploy keeps it."
 fi

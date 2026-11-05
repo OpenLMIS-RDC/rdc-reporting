@@ -1,2 +1,4 @@
-# Shell scripts must keep LF line endings, also in Windows checkouts.
+# Keep LF line endings in Windows checkouts too: bash cannot run a CRLF script, and
+# merge-superset-export.sh compares the asset files byte by byte with Superset exports.
 *.sh text eol=lf
+*.yaml text eol=lf
