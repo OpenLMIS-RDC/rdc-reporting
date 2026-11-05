@@ -1,122 +1,122 @@
-slice_name: Diagnostic des statuts — blocage, volume et action
-viz_type: table
-uuid: 196a1cc7-f789-489e-b4f3-9fa04b4239d8
-version: 1.0.0
-dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+slice_name: "Diagnostic des statuts \u2014 blocage, volume et action"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: table
 params:
   viz_type: table
   query_mode: aggregate
   groupby:
-    - expressionType: SQL
-      sqlExpression: CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED' THEN 2 WHEN
-        'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN 5 ELSE 9 END) WHEN 1 THEN '1. Commande
-        échouée' WHEN 2 THEN '2. Commandée — non prise en charge' WHEN 3 THEN '3. En préparation' WHEN
-        4 THEN '4. Expédiée — réception non confirmée' WHEN 5 THEN '5. Reçue' ELSE '9. Statut à qualifier'
-        END
-      label: Statut (du plus bloquant au plus abouti)
-      hasCustomLabel: true
-      optionName: col_pc4f44pr
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
+  - expressionType: SQL
+    sqlExpression: "CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED'\
+      \ THEN 2 WHEN 'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN\
+      \ 5 ELSE 9 END) WHEN 1 THEN '1. Commande \xE9chou\xE9e' WHEN 2 THEN '2. Command\xE9\
+      e \u2014 non prise en charge' WHEN 3 THEN '3. En pr\xE9paration' WHEN 4 THEN\
+      \ '4. Exp\xE9di\xE9e \u2014 r\xE9ception non confirm\xE9e' WHEN 5 THEN '5. Re\xE7\
+      ue' ELSE '9. Statut \xE0 qualifier' END"
+    label: Statut (du plus bloquant au plus abouti)
+    hasCustomLabel: true
+    optionName: col_pc4f44pr
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
   metrics:
-    - expressionType: SQL
-      sqlExpression: |-
-        MAX(CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED' THEN 2 WHEN 'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN 5 ELSE 9 END)
-         WHEN 1 THEN 1
-         WHEN 2 THEN 2
-         WHEN 3 THEN 3
-         WHEN 4 THEN 2
-         WHEN 5 THEN 4
-         ELSE 6 END)
-      label: Gravité
-      hasCustomLabel: true
-      optionName: m_grav_139
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: COUNT(DISTINCT numero_commande)
-      label: Commandes
-      hasCustomLabel: true
-      optionName: m_knso3o0y
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: COUNT(DISTINCT structure)
-      label: Structures
-      hasCustomLabel: true
-      optionName: m_2cmcs0iq
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: COUNT(DISTINCT programme)
-      label: Programmes
-      hasCustomLabel: true
-      optionName: m_vhw2k2gu
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: COUNT(DISTINCT type_de_structure)
-      label: Types de structure
-      hasCustomLabel: true
-      optionName: m_4rvf5eon
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: |-
-        MAX(CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED' THEN 2 WHEN 'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN 5 ELSE 9 END)
-         WHEN 1 THEN '🔴 1 · CRITIQUE'
-         WHEN 2 THEN '🟠 2 · URGENT'
-         WHEN 3 THEN '🟡 3 · VIGILANCE'
-         WHEN 4 THEN '🟠 4 · À CONFIRMER'
-         WHEN 5 THEN '🟢 5 · CONFORME'
-         ELSE '⚪ 9 · À QUALIFIER' END)
-      label: Niveau d’urgence
-      hasCustomLabel: true
-      optionName: m_wnlq8uxk
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: |-
-        MAX(CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED' THEN 2 WHEN 'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN 5 ELSE 9 END)
-         WHEN 1 THEN 'Incident technique : la commande a échoué et ne repartira pas seule. La relancer depuis l’application source ; si elle échoue de nouveau, ouvrir un ticket au support et prévenir la structure destinataire.'
-         WHEN 2 THEN 'Goulot à l’entrée : l’entrepôt ne prend pas les demandes en charge. Vérifier sa charge et ses priorités, puis relancer les commandes les plus anciennes en premier.'
-         WHEN 3 THEN 'Traitement en cours, normal tant qu’il ne vieillit pas. Mesurer l’ancienneté dans l’onglet Délai moyen de traitement des réquisitions avant toute intervention.'
-         WHEN 4 THEN 'Le transport a eu lieu mais la réception n’est pas confirmée. Appeler les structures : dans la majorité des cas la marchandise est arrivée sans que la réception soit saisie. Corriger la saisie avant de conclure à une perte.'
-         WHEN 5 THEN 'Aucune action. Maintenir la régularité de la confirmation de réception côté structures.'
-         ELSE 'Statut non reconnu : vérifier la remontée du statut avant toute interprétation.' END)
-      label: Propositions d'actions
-      hasCustomLabel: true
-      optionName: m_v8so70dt
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
+  - expressionType: SQL
+    sqlExpression: "MAX(CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN\
+      \ 'ORDERED' THEN 2 WHEN 'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED'\
+      \ THEN 5 ELSE 9 END)\n WHEN 1 THEN 1\n WHEN 2 THEN 2\n WHEN 3 THEN 3\n WHEN\
+      \ 4 THEN 2\n WHEN 5 THEN 4\n ELSE 6 END)"
+    label: "Gravit\xE9"
+    hasCustomLabel: true
+    optionName: m_grav_139
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: COUNT(DISTINCT numero_commande)
+    label: Commandes
+    hasCustomLabel: true
+    optionName: m_knso3o0y
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: COUNT(DISTINCT structure)
+    label: Structures
+    hasCustomLabel: true
+    optionName: m_2cmcs0iq
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: COUNT(DISTINCT programme)
+    label: Programmes
+    hasCustomLabel: true
+    optionName: m_vhw2k2gu
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: COUNT(DISTINCT type_de_structure)
+    label: Types de structure
+    hasCustomLabel: true
+    optionName: m_4rvf5eon
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: "MAX(CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN\
+      \ 'ORDERED' THEN 2 WHEN 'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED'\
+      \ THEN 5 ELSE 9 END)\n WHEN 1 THEN '\U0001F534 1 \xB7 CRITIQUE'\n WHEN 2 THEN\
+      \ '\U0001F7E0 2 \xB7 URGENT'\n WHEN 3 THEN '\U0001F7E1 3 \xB7 VIGILANCE'\n WHEN\
+      \ 4 THEN '\U0001F7E0 4 \xB7 \xC0 CONFIRMER'\n WHEN 5 THEN '\U0001F7E2 5 \xB7\
+      \ CONFORME'\n ELSE '\u26AA 9 \xB7 \xC0 QUALIFIER' END)"
+    label: "Niveau d\u2019urgence"
+    hasCustomLabel: true
+    optionName: m_wnlq8uxk
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: "MAX(CASE (CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN\
+      \ 'ORDERED' THEN 2 WHEN 'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED'\
+      \ THEN 5 ELSE 9 END)\n WHEN 1 THEN 'Incident technique : la commande a \xE9\
+      chou\xE9 et ne repartira pas seule. La relancer depuis l\u2019application source\
+      \ ; si elle \xE9choue de nouveau, ouvrir un ticket au support et pr\xE9venir\
+      \ la structure destinataire.'\n WHEN 2 THEN 'Goulot \xE0 l\u2019entr\xE9e :\
+      \ l\u2019entrep\xF4t ne prend pas les demandes en charge. V\xE9rifier sa charge\
+      \ et ses priorit\xE9s, puis relancer les commandes les plus anciennes en premier.'\n\
+      \ WHEN 3 THEN 'Traitement en cours, normal tant qu\u2019il ne vieillit pas.\
+      \ Mesurer l\u2019anciennet\xE9 dans l\u2019onglet D\xE9lai moyen de traitement\
+      \ des r\xE9quisitions avant toute intervention.'\n WHEN 4 THEN 'Le transport\
+      \ a eu lieu mais la r\xE9ception n\u2019est pas confirm\xE9e. Appeler les structures\
+      \ : dans la majorit\xE9 des cas la marchandise est arriv\xE9e sans que la r\xE9\
+      ception soit saisie. Corriger la saisie avant de conclure \xE0 une perte.'\n\
+      \ WHEN 5 THEN 'Aucune action. Maintenir la r\xE9gularit\xE9 de la confirmation\
+      \ de r\xE9ception c\xF4t\xE9 structures.'\n ELSE 'Statut non reconnu : v\xE9\
+      rifier la remont\xE9e du statut avant toute interpr\xE9tation.' END)"
+    label: Propositions d'actions
+    hasCustomLabel: true
+    optionName: m_v8so70dt
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
   percent_metrics:
-    - expressionType: SQL
-      sqlExpression: COUNT(*)
-      label: Part des lignes
-      hasCustomLabel: true
-      optionName: m_k9urkxpr
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
+  - expressionType: SQL
+    sqlExpression: COUNT(*)
+    label: Part des lignes
+    hasCustomLabel: true
+    optionName: m_k9urkxpr
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
   adhoc_filters: []
   row_limit: 100
   timeseries_limit_metric:
     expressionType: SQL
-    sqlExpression: MIN(CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED' THEN 2 WHEN 'FULFILLING'
-      THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN 5 ELSE 9 END)
+    sqlExpression: MIN(CASE order_status WHEN 'TRANSFER_FAILED' THEN 1 WHEN 'ORDERED'
+      THEN 2 WHEN 'FULFILLING' THEN 3 WHEN 'SHIPPED' THEN 4 WHEN 'RECEIVED' THEN 5
+      ELSE 9 END)
     label: Ordre
     hasCustomLabel: true
     optionName: m_yhf02dz0
@@ -147,39 +147,44 @@ params:
       horizontalAlign: right
     Statut (du plus bloquant au plus abouti):
       horizontalAlign: left
-    Niveau d’urgence:
+    "Niveau d\u2019urgence":
       horizontalAlign: left
     Propositions d'actions:
       horizontalAlign: left
   time_range: No filter
   conditional_formatting:
-    - operator: '='
-      targetValue: 1
-      colorScheme: '#d92d20'
-      column: Gravité
-    - operator: '='
-      targetValue: 2
-      colorScheme: '#e8770c'
-      column: Gravité
-    - operator: '='
-      targetValue: 3
-      colorScheme: '#dcae04'
-      column: Gravité
-    - operator: '='
-      targetValue: 4
-      colorScheme: '#12984f'
-      column: Gravité
-    - operator: '='
-      targetValue: 5
-      colorScheme: '#2563eb'
-      column: Gravité
-    - operator: '='
-      targetValue: 6
-      colorScheme: '#98a2b3'
-      column: Gravité
-    - operator: '='
-      targetValue: 7
-      colorScheme: '#334155'
-      column: Gravité
+  - operator: '='
+    targetValue: 1
+    colorScheme: '#d92d20'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 2
+    colorScheme: '#e8770c'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 3
+    colorScheme: '#dcae04'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 4
+    colorScheme: '#12984f'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 5
+    colorScheme: '#2563eb'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 6
+    colorScheme: '#98a2b3'
+    column: "Gravit\xE9"
+  - operator: '='
+    targetValue: 7
+    colorScheme: '#334155'
+    column: "Gravit\xE9"
   allow_render_html: true
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 196a1cc7-f789-489e-b4f3-9fa04b4239d8
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3

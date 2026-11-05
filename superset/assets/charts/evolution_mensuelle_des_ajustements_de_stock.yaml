@@ -1,25 +1,20 @@
-slice_name: Évolution mensuelle des ajustements de stock
-viz_type: echarts_timeseries_bar
-uuid: d4cc52ef-203f-4e74-8cb4-c3bef23c4388
-version: 1.0.0
-dataset_uuid: 5279f063-d572-484e-a63e-66dbb23ec2de
+slice_name: "\xC9volution mensuelle des ajustements de stock"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   adhoc_filters: []
   color_scheme: supersetColors
   metrics:
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      isNew: false
-      label: Volume ajusté
-      optionName: metric_cvu4vdsavuv_g3xqpao7egi
-      sqlExpression: COALESCE(SUM(quantite_absolue), 0)
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    isNew: false
+    label: "Volume ajust\xE9"
+    optionName: metric_cvu4vdsavuv_g3xqpao7egi
+    sqlExpression: COALESCE(SUM(quantite_absolue), 0)
   order_desc: true
   rich_tooltip: true
   row_limit: 10000
@@ -27,12 +22,12 @@ params:
   time_range: No filter
   viz_type: echarts_timeseries_bar
   y_axis_bounds:
-    - null
-    - null
+  - null
+  - null
   y_axis_format: .3s
   x_axis: annee_mois
   groupby:
-    - sens_ajustement
+  - sens_ajustement
   stack: Stack
   show_value: false
   x_axis_sort: annee_mois
@@ -43,4 +38,9 @@ params:
   orientation: vertical
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: d4cc52ef-203f-4e74-8cb4-c3bef23c4388
+version: 1.0.0
+dataset_uuid: 5279f063-d572-484e-a63e-66dbb23ec2de

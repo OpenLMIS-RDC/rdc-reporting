@@ -1,26 +1,21 @@
-slice_name: Réq. – Évolution mensuelle soumissions / libérations
-viz_type: echarts_timeseries_line
-uuid: 27351276-ad3d-484b-9b0a-123aec513364
-version: 1.0.0
-dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+slice_name: "R\xE9q. \u2013 \xC9volution mensuelle soumissions / lib\xE9rations"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_line
 params:
   viz_type: echarts_timeseries_line
   adhoc_filters:
-    - clause: WHERE
-      expressionType: SIMPLE
-      operator: TEMPORAL_RANGE
-      operatorId: TEMPORAL_RANGE
-      subject: date_initiated
-      comparator: No filter
+  - clause: WHERE
+    expressionType: SIMPLE
+    operator: TEMPORAL_RANGE
+    operatorId: TEMPORAL_RANGE
+    subject: date_initiated
+    comparator: No filter
   time_range: No filter
   metrics:
-    - nb_soumises
-    - nb_liberees
+  - nb_soumises
+  - nb_liberees
   groupby: []
   row_limit: 10000
   color_scheme: supersetColors
@@ -34,10 +29,15 @@ params:
   seriesType: line
   x_axis_time_format: smart_date
   x_axis_title: Mois
-  y_axis_title: Nombre de réquisitions
+  y_axis_title: "Nombre de r\xE9quisitions"
   x_axis_title_margin: 30
   y_axis_title_margin: 30
   y_axis_title_position: Left
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 27351276-ad3d-484b-9b0a-123aec513364
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79

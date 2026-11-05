@@ -1,26 +1,26 @@
-slice_name: Statut – Commandes échouées
-viz_type: big_number_total
-uuid: ff8dfbc5-ae50-4cc0-a149-808068c8fadf
-version: 1.0.0
-dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+slice_name: "Statut \u2013 Commandes \xE9chou\xE9es"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   adhoc_filters: []
   metric:
     expressionType: SQL
-    sqlExpression: COUNT(DISTINCT CASE WHEN statut_commande = 'Commande échouée' THEN numero_commande
-      END)
-    label: Commandes échouées
+    sqlExpression: "COUNT(DISTINCT CASE WHEN statut_commande = 'Commande \xE9chou\xE9\
+      e' THEN numero_commande END)"
+    label: "Commandes \xE9chou\xE9es"
     hasCustomLabel: true
     optionName: m_fei0o6fd
-  subheader: Commandes échouées à traiter
+  subheader: "Commandes \xE9chou\xE9es \xE0 traiter"
   y_axis_format: ',d'
   header_font_size: 0.4
   subheader_font_size: 0.125
   time_range: No filter
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: ff8dfbc5-ae50-4cc0-a149-808068c8fadf
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3

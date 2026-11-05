@@ -1,32 +1,27 @@
 slice_name: Top 15 produits par jours de rupture
-viz_type: echarts_timeseries_bar
-uuid: 9a27155a-e2a3-4d2f-9409-8ff3917fcf26
-version: 1.0.0
-dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   viz_type: echarts_timeseries_bar
   metrics:
-    - expressionType: SQL
-      sqlExpression: COALESCE(SUM(nombre_de_jours_de_rupture),0)
-      label: Jours de rupture
-      hasCustomLabel: true
-      optionName: m_pm2mfeb2
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: COALESCE(SUM(nombre_de_jours_disponibles),0)
-      label: Jours disponibles
-      hasCustomLabel: true
-      optionName: m_6a7njeus
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
+  - expressionType: SQL
+    sqlExpression: COALESCE(SUM(nombre_de_jours_de_rupture),0)
+    label: Jours de rupture
+    hasCustomLabel: true
+    optionName: m_pm2mfeb2
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: COALESCE(SUM(nombre_de_jours_disponibles),0)
+    label: Jours disponibles
+    hasCustomLabel: true
+    optionName: m_6a7njeus
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
   adhoc_filters: []
   row_limit: 15
   color_scheme: supersetColors
@@ -43,11 +38,16 @@ params:
   x_axis_sort_asc: false
   xAxisLabelRotation: 0
   x_axis_title: ''
-  y_axis_title: Jours-structures observés
+  y_axis_title: "Jours-structures observ\xE9s"
   x_axis_title_margin: 0
   y_axis_title_margin: 30
   y_axis_title_position: Left
   orientation: horizontal
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 9a27155a-e2a3-4d2f-9409-8ff3917fcf26
+version: 1.0.0
+dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc

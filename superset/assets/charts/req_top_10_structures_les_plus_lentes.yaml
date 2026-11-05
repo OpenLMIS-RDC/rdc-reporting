@@ -1,19 +1,14 @@
-slice_name: Réq. – Top 10 structures les plus lentes
-viz_type: echarts_timeseries_bar
-uuid: 7c11c2a1-8971-43b4-8a1a-c37892c51b1f
-version: 1.0.0
-dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+slice_name: "R\xE9q. \u2013 Top 10 structures les plus lentes"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   viz_type: echarts_timeseries_bar
   adhoc_filters:
-    - clause: WHERE
-      expressionType: SQL
-      sqlExpression: delai_total_j IS NOT NULL
+  - clause: WHERE
+    expressionType: SQL
+    sqlExpression: delai_total_j IS NOT NULL
   time_range: No filter
   color_scheme: supersetColors
   show_legend: false
@@ -21,11 +16,11 @@ params:
   order_desc: true
   row_limit: 10
   y_axis_bounds:
-    - null
-    - null
+  - null
+  - null
   y_axis_format: ',.1f'
   metrics:
-    - delai_moyen_total_j
+  - delai_moyen_total_j
   x_axis: structure
   groupby: []
   stack: null
@@ -35,10 +30,15 @@ params:
   x_axis_sort_asc: false
   xAxisLabelRotation: 45
   x_axis_title: ''
-  y_axis_title: Délai moyen (jours)
+  y_axis_title: "D\xE9lai moyen (jours)"
   y_axis_title_margin: 30
   y_axis_title_position: Left
   orientation: vertical
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 7c11c2a1-8971-43b4-8a1a-c37892c51b1f
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79

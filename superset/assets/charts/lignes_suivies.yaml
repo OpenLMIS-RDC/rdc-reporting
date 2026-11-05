@@ -1,13 +1,8 @@
 slice_name: Lignes suivies
-viz_type: big_number_total
-uuid: a2d8e46a-aeb9-4ab4-9151-1258910d3cd7
-version: 1.0.0
-dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   metric:
@@ -16,10 +11,15 @@ params:
     label: Lignes suivies
     hasCustomLabel: true
     optionName: m_zz0tzjdp
-  subheader: Lignes structure-produit (période filtrée)
+  subheader: "Lignes structure-produit (p\xE9riode filtr\xE9e)"
   y_axis_format: ',d'
   header_font_size: 0.35
   subheader_font_size: 0.125
   adhoc_filters: []
   time_range: No filter
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: a2d8e46a-aeb9-4ab4-9151-1258910d3cd7
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946

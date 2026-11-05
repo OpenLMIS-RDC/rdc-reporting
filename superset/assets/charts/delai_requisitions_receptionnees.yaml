@@ -1,25 +1,25 @@
-slice_name: Délai – Réquisitions réceptionnées
-viz_type: big_number_total
-uuid: 4613bfad-24ae-42e1-a9f3-e7670ac1e042
-version: 1.0.0
-dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+slice_name: "D\xE9lai \u2013 R\xE9quisitions r\xE9ceptionn\xE9es"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   adhoc_filters: []
   metric:
     expressionType: SQL
     sqlExpression: COUNT(delai_traitement_jours)
-    label: Réceptionnées
+    label: "R\xE9ceptionn\xE9es"
     hasCustomLabel: true
     optionName: m_k0e9w11z
-  subheader: Lignes avec une réception enregistrée
+  subheader: "Lignes avec une r\xE9ception enregistr\xE9e"
   y_axis_format: ',d'
   header_font_size: 0.4
   subheader_font_size: 0.125
   time_range: No filter
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 4613bfad-24ae-42e1-a9f3-e7670ac1e042
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2

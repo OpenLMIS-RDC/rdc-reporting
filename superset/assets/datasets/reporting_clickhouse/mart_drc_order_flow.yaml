@@ -1,14 +1,13 @@
 table_name: mart_drc_order_flow
-uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
-version: 1.0.0
-database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
-schema: curated
 main_dttm_col: date_commande
-description: Circuit commande → expédition → réception par ligne de commande. Remplace le dataset « ds_commandes
-  ».
+currency_code_column: null
+description: "Circuit commande \u2192 exp\xE9dition \u2192 r\xE9ception par ligne\
+  \ de commande. Remplace le dataset \xAB ds_commandes \xBB."
 default_endpoint: null
 offset: 0
 cache_timeout: null
+catalog: null
+schema: curated
 sql: null
 params: null
 template_params: null
@@ -17,368 +16,538 @@ fetch_values_predicate: null
 extra: null
 normalize_columns: false
 always_filter_main_dttm: false
-is_managed_externally: false
-columns:
-  - column_name: order_line_item_id
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: UUID
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: requisition_id
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(UUID)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: order_id
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: UUID
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: numero_commande
-    verbose_name: N° de commande
-    is_dttm: false
-    is_active: true
-    type: String
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: periode
-    verbose_name: Période
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: order_status
-    verbose_name: Statut (code système)
-    is_dttm: false
-    is_active: true
-    type: String
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: statut_commande
-    verbose_name: Statut
-    is_dttm: false
-    is_active: true
-    type: String
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: orderable_id
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(UUID)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: code_produit
-    verbose_name: Code produit
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: nom_du_produit
-    verbose_name: Produit
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: unite_du_produit
-    verbose_name: Unité
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: qte_demandee
-    verbose_name: Quantité demandée
-    is_dttm: false
-    is_active: true
-    type: Nullable(Int64)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: qte_approuvee
-    verbose_name: Quantité approuvée
-    is_dttm: false
-    is_active: true
-    type: Nullable(Int64)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: qte_commandee
-    verbose_name: Quantité commandée
-    is_dttm: false
-    is_active: true
-    type: Int64
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: qte_livree
-    verbose_name: Quantité livrée
-    is_dttm: false
-    is_active: true
-    type: Int64
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: qte_acceptee
-    verbose_name: Quantité acceptée
-    is_dttm: false
-    is_active: true
-    type: Nullable(Int64)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: qte_rejetee
-    verbose_name: Quantité rejetée
-    is_dttm: false
-    is_active: true
-    type: Nullable(Int64)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: nb_lots
-    verbose_name: Nombre de lots
-    is_dttm: false
-    is_active: true
-    type: Nullable(UInt64)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: taux_satisfaction_pct
-    verbose_name: Taux de satisfaction (%)
-    is_dttm: false
-    is_active: true
-    type: Nullable(Float64)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: taux_reception_pct
-    verbose_name: Taux de réception (%)
-    is_dttm: false
-    is_active: true
-    type: Nullable(Float64)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: taux_rejet_pct
-    verbose_name: Taux de rejet (%)
-    is_dttm: false
-    is_active: true
-    type: Nullable(Float64)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: incoherence_qte
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: UInt8
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: date_commande
-    verbose_name: Date de commande
-    is_dttm: true
-    is_active: true
-    type: Nullable(DateTime)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: date_expedition
-    verbose_name: Date d'expédition
-    is_dttm: true
-    is_active: true
-    type: Nullable(DateTime)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: date_reception
-    verbose_name: Date de réception
-    is_dttm: true
-    is_active: true
-    type: Nullable(Date)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: niveau_organisationnel
-    verbose_name: Niveau d'organisation
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: zone_geographique
-    verbose_name: Zone géographique
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: type_de_structure
-    verbose_name: Type de structure
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: structure
-    verbose_name: Structure
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: programme
-    verbose_name: Programme
-    is_dttm: false
-    is_active: true
-    type: Nullable(String)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: annee
-    verbose_name: Année
-    is_dttm: false
-    is_active: true
-    type: Nullable(UInt16)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: mois
-    verbose_name: Mois
-    is_dttm: false
-    is_active: true
-    type: Nullable(UInt8)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: urgence
-    verbose_name: Urgence
-    is_dttm: false
-    is_active: true
-    type: UInt8
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: facility_id
-    verbose_name: null
-    is_dttm: false
-    is_active: true
-    type: Nullable(UUID)
-    groupby: true
-    filterable: true
-    expression: null
-    description: null
-  - column_name: mois_nom
-    verbose_name: Mois
-    is_dttm: false
-    is_active: true
-    type: null
-    groupby: true
-    filterable: true
-    expression: CASE mois WHEN 1 THEN 'Janvier' WHEN 2 THEN '​Février' WHEN 3 THEN '​​Mars' WHEN 4 THEN
-      '​​​Avril' WHEN 5 THEN '​​​​Mai' WHEN 6 THEN '​​​​​Juin' WHEN 7 THEN '​​​​​​Juillet' WHEN 8 THEN
-      '​​​​​​​Août' WHEN 9 THEN '​​​​​​​​Septembre' WHEN 10 THEN '​​​​​​​​​Octobre' WHEN 11 THEN '​​​​​​​​​​Novembre'
-      WHEN 12 THEN '​​​​​​​​​​​Décembre' END
-    description: null
-  - column_name: type_commande
-    verbose_name: Type de commande
-    is_dttm: false
-    is_active: true
-    type: null
-    groupby: true
-    filterable: true
-    expression: CASE WHEN urgence = 1 THEN 'Urgence' ELSE 'Régulière' END
-    description: null
-  - column_name: annee_saisie
-    verbose_name: Année de saisie
-    is_dttm: false
-    is_active: true
-    type: null
-    groupby: true
-    filterable: true
-    expression: 'toYear(date_commande)'
-    description: null
-  - column_name: mois_saisie
-    verbose_name: Mois de saisie (n°)
-    is_dttm: false
-    is_active: true
-    type: null
-    groupby: true
-    filterable: true
-    expression: 'toMonth(date_commande)'
-    description: null
-  - column_name: mois_saisie_nom
-    verbose_name: Mois de saisie
-    is_dttm: false
-    is_active: true
-    type: null
-    groupby: true
-    filterable: true
-    expression: 'CASE toMonth(date_commande) WHEN 1 THEN ''01 · Janvier'' WHEN 2 THEN ''02 · Février'' WHEN 3 THEN ''03 · Mars'' WHEN 4 THEN ''04 · Avril'' WHEN 5 THEN ''05 · Mai'' WHEN 6 THEN ''06 · Juin'' WHEN 7 THEN ''07 · Juillet'' WHEN 8 THEN ''08 · Août'' WHEN 9 THEN ''09 · Septembre'' WHEN 10 THEN ''10 · Octobre'' WHEN 11 THEN ''11 · Novembre'' WHEN 12 THEN ''12 · Décembre'' END'
-    description: null
+folders: null
+uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
 metrics:
-  - metric_name: count
-    verbose_name: COUNT(*)
-    metric_type: null
-    expression: COUNT(*)
-    description: null
-    d3format: null
-    extra: null
-    warning_text: null
+- metric_name: count
+  verbose_name: COUNT(*)
+  metric_type: null
+  expression: COUNT(*)
+  description: null
+  d3format: null
+  currency: null
+  extra: null
+  warning_text: null
+columns:
+- column_name: mois_saisie_nom
+  verbose_name: Mois de saisie
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: "CASE toMonth(date_commande) WHEN 1 THEN '01 \xB7 Janvier' WHEN 2 THEN\
+    \ '02 \xB7 F\xE9vrier' WHEN 3 THEN '03 \xB7 Mars' WHEN 4 THEN '04 \xB7 Avril'\
+    \ WHEN 5 THEN '05 \xB7 Mai' WHEN 6 THEN '06 \xB7 Juin' WHEN 7 THEN '07 \xB7 Juillet'\
+    \ WHEN 8 THEN '08 \xB7 Ao\xFBt' WHEN 9 THEN '09 \xB7 Septembre' WHEN 10 THEN '10\
+    \ \xB7 Octobre' WHEN 11 THEN '11 \xB7 Novembre' WHEN 12 THEN '12 \xB7 D\xE9cembre'\
+    \ END"
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: mois_nom
+  verbose_name: Mois
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: "CASE mois WHEN 1 THEN 'Janvier' WHEN 2 THEN '\u200BF\xE9vrier' WHEN\
+    \ 3 THEN '\u200B\u200BMars' WHEN 4 THEN '\u200B\u200B\u200BAvril' WHEN 5 THEN\
+    \ '\u200B\u200B\u200B\u200BMai' WHEN 6 THEN '\u200B\u200B\u200B\u200B\u200BJuin'\
+    \ WHEN 7 THEN '\u200B\u200B\u200B\u200B\u200B\u200BJuillet' WHEN 8 THEN '\u200B\
+    \u200B\u200B\u200B\u200B\u200B\u200BAo\xFBt' WHEN 9 THEN '\u200B\u200B\u200B\u200B\
+    \u200B\u200B\u200B\u200BSeptembre' WHEN 10 THEN '\u200B\u200B\u200B\u200B\u200B\
+    \u200B\u200B\u200B\u200BOctobre' WHEN 11 THEN '\u200B\u200B\u200B\u200B\u200B\u200B\
+    \u200B\u200B\u200B\u200BNovembre' WHEN 12 THEN '\u200B\u200B\u200B\u200B\u200B\
+    \u200B\u200B\u200B\u200B\u200B\u200BD\xE9cembre' END"
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: type_commande
+  verbose_name: Type de commande
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: "CASE WHEN urgence = 1 THEN 'Urgence' ELSE 'R\xE9guli\xE8re' END"
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: taux_satisfaction_pct
+  verbose_name: Taux de satisfaction (%)
+  is_dttm: false
+  is_active: true
+  type: Nullable(Float64)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: taux_reception_pct
+  verbose_name: "Taux de r\xE9ception (%)"
+  is_dttm: false
+  is_active: true
+  type: Nullable(Float64)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: taux_rejet_pct
+  verbose_name: Taux de rejet (%)
+  is_dttm: false
+  is_active: true
+  type: Nullable(Float64)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: mois_saisie
+  verbose_name: "Mois de saisie (n\xB0)"
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: toMonth(date_commande)
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: nb_lots
+  verbose_name: Nombre de lots
+  is_dttm: false
+  is_active: true
+  type: Nullable(UInt64)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: annee_saisie
+  verbose_name: "Ann\xE9e de saisie"
+  is_dttm: false
+  is_active: true
+  type: null
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: toYear(date_commande)
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: date_commande
+  verbose_name: Date de commande
+  is_dttm: true
+  is_active: true
+  type: Nullable(DateTime)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: date_reception
+  verbose_name: "Date de r\xE9ception"
+  is_dttm: true
+  is_active: true
+  type: Nullable(Date)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: type_de_structure
+  verbose_name: Type de structure
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: order_status
+  verbose_name: "Statut (code syst\xE8me)"
+  is_dttm: false
+  is_active: true
+  type: String
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: numero_commande
+  verbose_name: "N\xB0 de commande"
+  is_dttm: false
+  is_active: true
+  type: String
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: date_expedition
+  verbose_name: "Date d'exp\xE9dition"
+  is_dttm: true
+  is_active: true
+  type: Nullable(DateTime)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: niveau_organisationnel
+  verbose_name: Niveau d'organisation
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: qte_acceptee
+  verbose_name: "Quantit\xE9 accept\xE9e"
+  is_dttm: false
+  is_active: true
+  type: Nullable(Int64)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: qte_demandee
+  verbose_name: "Quantit\xE9 demand\xE9e"
+  is_dttm: false
+  is_active: true
+  type: Nullable(Int64)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: qte_approuvee
+  verbose_name: "Quantit\xE9 approuv\xE9e"
+  is_dttm: false
+  is_active: true
+  type: Nullable(Int64)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: qte_rejetee
+  verbose_name: "Quantit\xE9 rejet\xE9e"
+  is_dttm: false
+  is_active: true
+  type: Nullable(Int64)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: code_produit
+  verbose_name: Code produit
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: zone_geographique
+  verbose_name: "Zone g\xE9ographique"
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: qte_commandee
+  verbose_name: "Quantit\xE9 command\xE9e"
+  is_dttm: false
+  is_active: true
+  type: Int64
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: qte_livree
+  verbose_name: "Quantit\xE9 livr\xE9e"
+  is_dttm: false
+  is_active: true
+  type: Int64
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: annee
+  verbose_name: "Ann\xE9e"
+  is_dttm: false
+  is_active: true
+  type: Nullable(UInt16)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: mois
+  verbose_name: Mois
+  is_dttm: false
+  is_active: true
+  type: Nullable(UInt8)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: nom_du_produit
+  verbose_name: Produit
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: programme
+  verbose_name: Programme
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: periode
+  verbose_name: "P\xE9riode"
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: structure
+  verbose_name: Structure
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: unite_du_produit
+  verbose_name: "Unit\xE9"
+  is_dttm: false
+  is_active: true
+  type: Nullable(String)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: urgence
+  verbose_name: Urgence
+  is_dttm: false
+  is_active: true
+  type: UInt8
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: statut_commande
+  verbose_name: Statut
+  is_dttm: false
+  is_active: true
+  type: String
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: orderable_id
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(UUID)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: facility_id
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(UUID)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: requisition_id
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: Nullable(UUID)
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: incoherence_qte
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: UInt8
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: order_line_item_id
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: UUID
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+- column_name: order_id
+  verbose_name: null
+  is_dttm: false
+  is_active: true
+  type: UUID
+  advanced_data_type: null
+  groupby: true
+  filterable: true
+  expression: null
+  description: null
+  python_date_format: null
+  datetime_format: null
+  extra: null
+version: 1.0.0
+database_uuid: b1a2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d

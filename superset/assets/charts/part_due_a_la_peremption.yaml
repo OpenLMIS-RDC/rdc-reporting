@@ -1,30 +1,30 @@
-slice_name: Part due à la péremption
-viz_type: big_number_total
-uuid: fcea85b5-ebb4-44f0-8572-bd9cc7a7d089
-version: 1.0.0
-dataset_uuid: 55ce0ab8-12a4-4b55-a761-636882680240
+slice_name: "Part due \xE0 la p\xE9remption"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   metric:
     expressionType: SQL
     sqlExpression: toFloat64(SUM(pertes_peremption)) / NULLIF(SUM(valeur_pertes),0)
-    label: Part péremption
+    label: "Part p\xE9remption"
     hasCustomLabel: true
     optionName: m_48dsgh6p
     sqlExpressionType: SIMPLE
     aggregate: null
     column: null
   adhoc_filters: []
-  subheader: 'Poids de la péremption : pertes évitables'
+  subheader: "Poids de la p\xE9remption : pertes \xE9vitables"
   y_axis_format: .0%
   header_font_size: 0.4
   subheader_font_size: 0.125
   time_range: No filter
   time_format: smart_date
   force_timestamp_formatting: false
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: fcea85b5-ebb4-44f0-8572-bd9cc7a7d089
+version: 1.0.0
+dataset_uuid: 55ce0ab8-12a4-4b55-a761-636882680240

@@ -1,19 +1,14 @@
-slice_name: Répartition des commandes par statut
-viz_type: pie
-uuid: e4796adc-9885-463d-ac8e-5f00d57163c8
-version: 1.0.0
-dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+slice_name: "R\xE9partition des commandes par statut"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: pie
 params:
   adhoc_filters: []
   date_format: smart_date
   donut: true
   groupby:
-    - statut_commande
+  - statut_commande
   innerRadius: 50
   label_type: key_percent
   labels_outside: true
@@ -35,4 +30,9 @@ params:
   time_range: No filter
   viz_type: pie
   show_total: true
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: e4796adc-9885-463d-ac8e-5f00d57163c8
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3

@@ -1,77 +1,72 @@
 slice_name: Rupture - Detail structure / produit
-viz_type: table
-uuid: 36624050-4124-42c0-8975-80ab35bda434
-version: 1.0.0
-dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: table
 params:
   viz_type: table
   query_mode: aggregate
   groupby:
-    - expressionType: SQL
-      sqlExpression: province
-      label: Province
-      hasCustomLabel: true
-      optionName: c_province
-    - expressionType: SQL
-      sqlExpression: zone_de_sante
-      label: Zone de santé
-      hasCustomLabel: true
-      optionName: c_zone_de_sante
-    - expressionType: SQL
-      sqlExpression: structure
-      label: Structure
-      hasCustomLabel: true
-      optionName: c_structure
-    - expressionType: SQL
-      sqlExpression: type_structure
-      label: Type de structure
-      hasCustomLabel: true
-      optionName: c_type_structure
-    - expressionType: SQL
-      sqlExpression: programme
-      label: Programme
-      hasCustomLabel: true
-      optionName: c_programme
-    - expressionType: SQL
-      sqlExpression: produit
-      label: Produit
-      hasCustomLabel: true
-      optionName: c_produit
+  - expressionType: SQL
+    sqlExpression: province
+    label: Province
+    hasCustomLabel: true
+    optionName: c_province
+  - expressionType: SQL
+    sqlExpression: zone_de_sante
+    label: "Zone de sant\xE9"
+    hasCustomLabel: true
+    optionName: c_zone_de_sante
+  - expressionType: SQL
+    sqlExpression: structure
+    label: Structure
+    hasCustomLabel: true
+    optionName: c_structure
+  - expressionType: SQL
+    sqlExpression: type_structure
+    label: Type de structure
+    hasCustomLabel: true
+    optionName: c_type_structure
+  - expressionType: SQL
+    sqlExpression: programme
+    label: Programme
+    hasCustomLabel: true
+    optionName: c_programme
+  - expressionType: SQL
+    sqlExpression: produit
+    label: Produit
+    hasCustomLabel: true
+    optionName: c_produit
   metrics:
-    - expressionType: SQL
-      sqlExpression: SUM(stock_disponible)
-      label: SDU
-      hasCustomLabel: true
-      optionName: m_rt_sdu
-    - expressionType: SQL
-      sqlExpression: ROUND(SUM(cmm_m_1),2)
-      label: CMM (M-1)
-      hasCustomLabel: true
-      optionName: m_rt_cmm
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      label: Jours en rupture
-      optionName: m_jours_rupt
-      sqlExpression: MAX(jours_en_rupture)
-    - expressionType: SQL
-      sqlExpression: CASE WHEN SUM(cmm_m_1) > 0 THEN '<span style="display:block;background-color:#C00000;color:#ffffff;padding:2px
-        6px;font-weight:600;">Rupture</span>' ELSE '<span style="display:block;background-color:#C00000;color:#ffffff;padding:2px
-        6px;font-weight:600;">Rupture - CMM indisponible</span>' END
-      label: Statut
-      hasCustomLabel: true
-      optionName: m_rt_statut
+  - expressionType: SQL
+    sqlExpression: SUM(stock_disponible)
+    label: SDU
+    hasCustomLabel: true
+    optionName: m_rt_sdu
+  - expressionType: SQL
+    sqlExpression: ROUND(SUM(cmm_m_1),2)
+    label: CMM (M-1)
+    hasCustomLabel: true
+    optionName: m_rt_cmm
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    label: Jours en rupture
+    optionName: m_jours_rupt
+    sqlExpression: MAX(jours_en_rupture)
+  - expressionType: SQL
+    sqlExpression: CASE WHEN SUM(cmm_m_1) > 0 THEN '<span style="display:block;background-color:#C00000;color:#ffffff;padding:2px
+      6px;font-weight:600;">Rupture</span>' ELSE '<span style="display:block;background-color:#C00000;color:#ffffff;padding:2px
+      6px;font-weight:600;">Rupture - CMM indisponible</span>' END
+    label: Statut
+    hasCustomLabel: true
+    optionName: m_rt_statut
   percent_metrics: []
   adhoc_filters:
-    - expressionType: SQL
-      sqlExpression: est_en_rupture = 1
-      clause: WHERE
+  - expressionType: SQL
+    sqlExpression: est_en_rupture = 1
+    clause: WHERE
   time_range: No filter
   timeseries_limit_metric:
     aggregate: null
@@ -103,7 +98,7 @@ params:
       horizontalAlign: left
     Province:
       horizontalAlign: left
-    Zone de santé:
+    "Zone de sant\xE9":
       horizontalAlign: left
     Structure:
       horizontalAlign: left
@@ -115,4 +110,9 @@ params:
       d3NumberFormat: ',d'
   conditional_formatting: []
   allow_render_html: true
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 36624050-4124-42c0-8975-80ab35bda434
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
