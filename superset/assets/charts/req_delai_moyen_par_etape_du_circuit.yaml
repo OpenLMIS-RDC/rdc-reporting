@@ -1,19 +1,14 @@
-slice_name: Réq. – Délai moyen par étape du circuit
-viz_type: echarts_timeseries_bar
-uuid: 0d2bc598-d8d1-4810-86eb-83998d9960ec
-version: 1.0.0
-dataset_uuid: 0920c8ab-4b6b-435d-8ad1-5a0ccfa81820
+slice_name: "R\xE9q. \u2013 D\xE9lai moyen par \xE9tape du circuit"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   viz_type: echarts_timeseries_bar
   adhoc_filters:
-    - clause: WHERE
-      expressionType: SQL
-      sqlExpression: etape <> '1. Initiée'
+  - clause: WHERE
+    expressionType: SQL
+    sqlExpression: "etape <> '1. Initi\xE9e'"
   time_range: No filter
   color_scheme: supersetColors
   show_legend: false
@@ -21,11 +16,11 @@ params:
   order_desc: true
   row_limit: 50
   y_axis_bounds:
-    - null
-    - null
+  - null
+  - null
   y_axis_format: ',.2f'
   metrics:
-    - delai_moyen_etape_j
+  - delai_moyen_etape_j
   x_axis: etape
   groupby: []
   stack: null
@@ -34,7 +29,7 @@ params:
   x_axis_sort: etape
   x_axis_sort_asc: true
   xAxisLabelRotation: 0
-  x_axis_title: Étape atteinte
+  x_axis_title: "\xC9tape atteinte"
   y_axis_title: Jours (moyenne)
   x_axis_title_margin: 30
   y_axis_title_margin: 30
@@ -42,4 +37,9 @@ params:
   orientation: vertical
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 0d2bc598-d8d1-4810-86eb-83998d9960ec
+version: 1.0.0
+dataset_uuid: 0920c8ab-4b6b-435d-8ad1-5a0ccfa81820

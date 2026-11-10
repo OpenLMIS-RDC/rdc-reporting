@@ -1,13 +1,8 @@
 slice_name: Rupture - Lignes en rupture
-viz_type: big_number_total
-uuid: e9beb3ca-f5ac-45a2-84f3-6081a5133ae9
-version: 1.0.0
-dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   metric:
@@ -22,4 +17,9 @@ params:
   subheader_font_size: 0.125
   adhoc_filters: []
   time_range: No filter
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: e9beb3ca-f5ac-45a2-84f3-6081a5133ae9
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946

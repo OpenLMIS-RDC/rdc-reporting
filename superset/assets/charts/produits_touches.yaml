@@ -1,19 +1,14 @@
-slice_name: Produits touchés
-viz_type: big_number_total
-uuid: 1f8d8495-2658-41e3-906b-cd3c8298f84a
-version: 1.0.0
-dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc
+slice_name: "Produits touch\xE9s"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   metric:
     expressionType: SQL
     sqlExpression: uniqExactIf(produit, nombre_de_jours_de_rupture > 0)
-    label: Produits touchés
+    label: "Produits touch\xE9s"
     hasCustomLabel: true
     optionName: m_6kfqylyy
     sqlExpressionType: SIMPLE
@@ -27,4 +22,9 @@ params:
   time_range: No filter
   time_format: smart_date
   force_timestamp_formatting: false
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 1f8d8495-2658-41e3-906b-cd3c8298f84a
+version: 1.0.0
+dataset_uuid: e9fe3024-68a9-44fe-9027-3eb5e7d539bc

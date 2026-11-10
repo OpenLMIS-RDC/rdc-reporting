@@ -1,13 +1,8 @@
-slice_name: Délai – En attente de réception
-viz_type: big_number_total
-uuid: 738652f8-5a22-4d74-a1ab-0dbaf6feb371
-version: 1.0.0
-dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+slice_name: "D\xE9lai \u2013 En attente de r\xE9ception"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   adhoc_filters: []
@@ -17,9 +12,14 @@ params:
     label: En attente
     hasCustomLabel: true
     optionName: m_0i569dke
-  subheader: Lignes sans réception enregistrée
+  subheader: "Lignes sans r\xE9ception enregistr\xE9e"
   y_axis_format: ',d'
   header_font_size: 0.4
   subheader_font_size: 0.125
   time_range: No filter
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 738652f8-5a22-4d74-a1ab-0dbaf6feb371
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2

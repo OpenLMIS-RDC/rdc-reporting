@@ -1,13 +1,8 @@
-slice_name: Réq. – Célérité par tranche de délai
-viz_type: echarts_timeseries_bar
-uuid: 1cfcba36-abb2-410b-9417-055431b34700
-version: 1.0.0
-dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+slice_name: "R\xE9q. \u2013 C\xE9l\xE9rit\xE9 par tranche de d\xE9lai"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   viz_type: echarts_timeseries_bar
   adhoc_filters: []
@@ -18,11 +13,11 @@ params:
   order_desc: true
   row_limit: 50
   y_axis_bounds:
-    - null
-    - null
+  - null
+  - null
   y_axis_format: ',d'
   metrics:
-    - nb_requisitions
+  - nb_requisitions
   x_axis: tranche_celerite
   groupby: []
   stack: null
@@ -31,12 +26,17 @@ params:
   x_axis_sort: tranche_celerite
   x_axis_sort_asc: true
   xAxisLabelRotation: 0
-  x_axis_title: Tranche de délai total
-  y_axis_title: Nombre de réquisitions
+  x_axis_title: "Tranche de d\xE9lai total"
+  y_axis_title: "Nombre de r\xE9quisitions"
   x_axis_title_margin: 30
   y_axis_title_margin: 30
   y_axis_title_position: Left
   orientation: vertical
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 1cfcba36-abb2-410b-9417-055431b34700
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79

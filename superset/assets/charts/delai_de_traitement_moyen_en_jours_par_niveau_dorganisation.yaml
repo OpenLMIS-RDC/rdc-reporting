@@ -1,36 +1,31 @@
-slice_name: Délai de traitement moyen (en jours) par Niveau d’Organisation
-viz_type: table
-uuid: e158ad61-4b18-48a9-a88f-b0dc39e6f886
-version: 1.0.0
-dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2
+slice_name: "D\xE9lai de traitement moyen (en jours) par Niveau d\u2019Organisation"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: table
 params:
   viz_type: table
   query_mode: aggregate
   groupby:
-    - niveau_organisationnel
+  - niveau_organisationnel
   metrics:
-    - aggregate: COUNT
-      column:
-        column_name: numero_commande
-      expressionType: SIMPLE
-      hasCustomLabel: true
-      isNew: false
-      label: Nombre de commandes
-      optionName: metric_yoypvp7wnwh_nzk01r1q1y
-      sqlExpression: null
-    - aggregate: null
-      column: null
-      expressionType: SQL
-      hasCustomLabel: true
-      isNew: false
-      label: Délai moyen (jours)
-      optionName: metric_tsaigapq22p_58fmo7xbia5
-      sqlExpression: COALESCE(AVG(delai_traitement_jours), 0)
+  - aggregate: COUNT
+    column:
+      column_name: numero_commande
+    expressionType: SIMPLE
+    hasCustomLabel: true
+    isNew: false
+    label: Nombre de commandes
+    optionName: metric_yoypvp7wnwh_nzk01r1q1y
+    sqlExpression: null
+  - aggregate: null
+    column: null
+    expressionType: SQL
+    hasCustomLabel: true
+    isNew: false
+    label: "D\xE9lai moyen (jours)"
+    optionName: metric_tsaigapq22p_58fmo7xbia5
+    sqlExpression: COALESCE(AVG(delai_traitement_jours), 0)
   percent_metrics: []
   adhoc_filters: []
   row_limit: 1000
@@ -41,7 +36,7 @@ params:
     expressionType: SQL
     hasCustomLabel: true
     isNew: false
-    label: Délai moyen (jours)
+    label: "D\xE9lai moyen (jours)"
     optionName: metric_tsaigapq22p_58fmo7xbia5
     sqlExpression: COALESCE(AVG(delai_traitement_jours), 0)
   table_timestamp_format: smart_date
@@ -55,17 +50,22 @@ params:
     Nombre de commandes:
       d3NumberFormat: ',d'
       horizontalAlign: right
-    Délai moyen (jours):
+    "D\xE9lai moyen (jours)":
       d3NumberFormat: ',.1f'
       horizontalAlign: right
   conditional_formatting:
-    - operator: ≤
-      targetValue: 3
-      colorScheme: '#a6f4c5'
-      column: Délai moyen (jours)
-    - operator: '>'
-      targetValue: 3
-      colorScheme: '#fda29b'
-      column: Délai moyen (jours)
+  - operator: "\u2264"
+    targetValue: 3
+    colorScheme: '#a6f4c5'
+    column: "D\xE9lai moyen (jours)"
+  - operator: '>'
+    targetValue: 3
+    colorScheme: '#fda29b'
+    column: "D\xE9lai moyen (jours)"
   allow_render_html: true
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: e158ad61-4b18-48a9-a88f-b0dc39e6f886
+version: 1.0.0
+dataset_uuid: e9654cf8-c497-42e4-a130-9ecb68cb08d2

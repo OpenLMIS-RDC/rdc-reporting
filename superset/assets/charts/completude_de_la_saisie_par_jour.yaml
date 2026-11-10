@@ -1,39 +1,34 @@
-slice_name: Complétude de la saisie par jour
-viz_type: echarts_timeseries_bar
-uuid: 1cdfe4be-97ab-41a5-aa88-afe3fcf994d0
-version: 1.0.0
-dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+slice_name: "Compl\xE9tude de la saisie par jour"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   viz_type: echarts_timeseries_bar
   metrics:
-    - expressionType: SQL
-      sqlExpression: COUNT(DISTINCT structure)
-      label: Structures ayant saisi
-      hasCustomLabel: true
-      optionName: m_hgibqntk
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
-    - expressionType: SQL
-      sqlExpression: COUNT(DISTINCT produit)
-      label: Produits saisis
-      hasCustomLabel: true
-      optionName: m_3hbpneb0
-      sqlExpressionType: SIMPLE
-      aggregate: null
-      column: null
+  - expressionType: SQL
+    sqlExpression: COUNT(DISTINCT structure)
+    label: Structures ayant saisi
+    hasCustomLabel: true
+    optionName: m_hgibqntk
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
+  - expressionType: SQL
+    sqlExpression: COUNT(DISTINCT produit)
+    label: Produits saisis
+    hasCustomLabel: true
+    optionName: m_3hbpneb0
+    sqlExpressionType: SIMPLE
+    aggregate: null
+    column: null
   adhoc_filters:
-    - clause: WHERE
-      expressionType: SIMPLE
-      operator: TEMPORAL_RANGE
-      operatorId: TEMPORAL_RANGE
-      subject: date_rapport
-      comparator: No filter
+  - clause: WHERE
+    expressionType: SIMPLE
+    operator: TEMPORAL_RANGE
+    operatorId: TEMPORAL_RANGE
+    subject: date_rapport
+    comparator: No filter
   row_limit: 200
   color_scheme: supersetColors
   show_legend: true
@@ -54,4 +49,9 @@ params:
   orientation: vertical
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 1cdfe4be-97ab-41a5-aa88-afe3fcf994d0
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946

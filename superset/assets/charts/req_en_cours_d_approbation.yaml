@@ -1,23 +1,23 @@
-slice_name: Réq. – En cours d'approbation
-viz_type: big_number_total
-uuid: 3ccc9e89-e4d8-4857-8fda-ca7cb4cdec26
-version: 1.0.0
-dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79
+slice_name: "R\xE9q. \u2013 En cours d'approbation"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   adhoc_filters: []
   time_range: No filter
   metric: nb_en_approbation
-  subheader: Entrées dans le circuit d'approbation
+  subheader: "Entr\xE9es dans le circuit d'approbation"
   header_font_size: 0.4
   subheader_font_size: 0.18
   number_format: ',d'
   y_axis_format: ',d'
   time_format: smart_date
   force_timestamp_formatting: false
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 3ccc9e89-e4d8-4857-8fda-ca7cb4cdec26
+version: 1.0.0
+dataset_uuid: 6e01057a-c11b-4348-aa3a-121742f36d79

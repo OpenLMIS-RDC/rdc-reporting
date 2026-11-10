@@ -1,32 +1,27 @@
-slice_name: Demandé → Approuvé → Livré par programme
-viz_type: echarts_timeseries_bar
-uuid: 72e8e09c-9390-4fb5-8275-a10c360b0911
-version: 1.0.0
-dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3
+slice_name: "Demand\xE9 \u2192 Approuv\xE9 \u2192 Livr\xE9 par programme"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: echarts_timeseries_bar
 params:
   viz_type: echarts_timeseries_bar
   adhoc_filters: []
   metrics:
-    - expressionType: SQL
-      sqlExpression: SUM(qte_demandee)
-      label: Quantité demandée
-      hasCustomLabel: true
-      optionName: m_vz60rs4j
-    - expressionType: SQL
-      sqlExpression: SUM(qte_approuvee)
-      label: Quantité approuvée
-      hasCustomLabel: true
-      optionName: m_l0p27fl6
-    - expressionType: SQL
-      sqlExpression: SUM(qte_livree)
-      label: Quantité livrée
-      hasCustomLabel: true
-      optionName: m_bgexuyxm
+  - expressionType: SQL
+    sqlExpression: SUM(qte_demandee)
+    label: "Quantit\xE9 demand\xE9e"
+    hasCustomLabel: true
+    optionName: m_vz60rs4j
+  - expressionType: SQL
+    sqlExpression: SUM(qte_approuvee)
+    label: "Quantit\xE9 approuv\xE9e"
+    hasCustomLabel: true
+    optionName: m_l0p27fl6
+  - expressionType: SQL
+    sqlExpression: SUM(qte_livree)
+    label: "Quantit\xE9 livr\xE9e"
+    hasCustomLabel: true
+    optionName: m_bgexuyxm
   row_limit: 10
   order_desc: true
   show_legend: true
@@ -34,15 +29,15 @@ params:
   y_axis_format: .3s
   rich_tooltip: true
   y_axis_bounds:
-    - null
-    - null
+  - null
+  - null
   time_range: No filter
   x_axis: programme
   groupby: []
   stack: null
   show_value: false
   show_extra_controls: false
-  x_axis_sort: Quantité demandée
+  x_axis_sort: "Quantit\xE9 demand\xE9e"
   x_axis_sort_asc: false
   xAxisLabelRotation: 45
   x_axis_title: ''
@@ -50,4 +45,9 @@ params:
   orientation: vertical
   legendType: scroll
   legendOrientation: top
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 72e8e09c-9390-4fb5-8275-a10c360b0911
+version: 1.0.0
+dataset_uuid: 57497c9e-a88b-4394-900a-e98ce3fa90a3

@@ -1,13 +1,8 @@
-slice_name: Lots à risque (≤ 90 j)
-viz_type: big_number_total
-uuid: 0a44139f-52f1-47a2-83b7-58774aa41c2c
-version: 1.0.0
-dataset_uuid: 8c994ec6-0cc7-4601-a021-28a32372771a
+slice_name: "Lots \xE0 risque (\u2264 90 j)"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: big_number_total
 params:
   viz_type: big_number_total
   metric:
@@ -27,4 +22,9 @@ params:
   time_range: No filter
   time_format: smart_date
   force_timestamp_formatting: false
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 0a44139f-52f1-47a2-83b7-58774aa41c2c
+version: 1.0.0
+dataset_uuid: 8c994ec6-0cc7-4601-a021-28a32372771a

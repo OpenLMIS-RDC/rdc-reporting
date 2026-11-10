@@ -1,17 +1,12 @@
-slice_name: Répartition des lignes-jours par statut
-viz_type: pie
-uuid: 3bae220f-3748-4485-9368-6266d9d830e0
-version: 1.0.0
-dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
+slice_name: "R\xE9partition des lignes-jours par statut"
 description: null
 certified_by: null
 certification_details: null
-is_managed_externally: false
-cache_timeout: null
+viz_type: pie
 params:
   viz_type: pie
   groupby:
-    - statut
+  - statut
   metric:
     expressionType: SQL
     sqlExpression: COUNT(*)
@@ -38,4 +33,9 @@ params:
   show_labels_threshold: 1
   show_total: true
   time_range: No filter
+  annotation_layers: []
 query_context: null
+cache_timeout: null
+uuid: 3bae220f-3748-4485-9368-6266d9d830e0
+version: 1.0.0
+dataset_uuid: 759bfb27-3540-48f6-aa36-9ea687114946
