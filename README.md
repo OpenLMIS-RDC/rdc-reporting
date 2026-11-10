@@ -78,16 +78,18 @@ make verify-packages    # all of the above plus dashboard checks
 Every deploy re-imports `superset/assets/` and overwrites what has the same UUID, so a change made only in the Superset UI is lost on the next deploy. To keep a change:
 
 1. Build or change the charts and dashboards in the Superset UI on dev. Use datasets from this package only: the platform imports each package on its own, so a DRC chart on a core dataset, or a core chart on a DRC dashboard, does not survive the import. For data from a core mart, create a SQL dataset on it.
-2. Export each changed dashboard: dashboard `...` menu -> Download -> Export YAML. The ZIP holds the dashboard with its charts and datasets.
-3. Merge the export into this repo. The script needs bash, grep, sed and unzip (on Windows, run it from Git Bash or WSL), and `--core` needs a checkout of [openlmis-reporting](https://github.com/OpenLMIS/openlmis-reporting) on `main`, here next to this repo:
+2. Export the dashboards you changed. One dashboard: its `...` menu -> Download -> Export YAML. Several: Dashboards list -> Bulk select, tick them, Export. Either way you get one ZIP with the dashboards and their charts and datasets. Export only what you changed (see the note on shared dev below). An export of every dashboard still merges, because the script skips the core ones, but it also brings in whatever else differs on dev.
+3. Merge the export into this repo. The script needs bash, unzip and the usual Unix tools (awk, sed, grep, find, xargs). On Windows, run it from Git Bash or WSL. It also needs an up-to-date clone of [openlmis-reporting](https://github.com/OpenLMIS/openlmis-reporting) on `main` next to this repo, as `../openlmis-reporting`. If your clone is elsewhere, pass `--core PATH`.
 
    ```bash
-   scripts/merge-superset-export.sh --dry-run --core ../openlmis-reporting ~/Downloads/dashboard_export_<timestamp>.zip
-   scripts/merge-superset-export.sh --core ../openlmis-reporting ~/Downloads/dashboard_export_<timestamp>.zip
+   git clone https://github.com/OpenLMIS/openlmis-reporting.git ../openlmis-reporting   # once
+   git -C ../openlmis-reporting pull                                                  # before each merge
+   scripts/merge-superset-export.sh --dry-run ~/Downloads/dashboard_export_<timestamp>.zip
+   scripts/merge-superset-export.sh ~/Downloads/dashboard_export_<timestamp>.zip
    ```
 
-   It overwrites the existing files by UUID, names new assets without Superset's id suffix, leaves `databases/` alone, adds `source_db_engine: clickhousedb` to SQL datasets and stops on duplicate UUIDs. It also stops, writing nothing, when a chart or dashboard uses a core chart or dataset (this needs `--core`), or when a new dataset points at the same table as an existing one under another UUID, which happens when a dataset is deleted and recreated in Superset. Files keep the format Superset writes. Without unzip, unzip the export yourself and pass the folder.
-4. Review `git diff`, commit only the files you meant to change and open a PR. The dev deploy takes this repo from `master`, so the change is kept once the PR is merged. To check that the merged files import, run the dev deploy job with `KEEP_OR_RESTORE=keep` after the merge, not before: it re-imports everything from `master`, so it overwrites UI changes on dev that are not merged yet (anyone's), and it redeploys OpenLMIS as well. A green job does not prove the import worked: search its log for `An error occurred` and open the dashboard.
+   It overwrites the existing files by UUID, names new assets without Superset's id suffix, skips `databases/` and core assets, adds `source_db_engine: clickhousedb` to SQL datasets and stops on duplicate UUIDs. It also stops, writing nothing, when a chart or dashboard uses a core chart or dataset, or when a new dataset points at the same table as an existing one under another UUID, which happens when a dataset is deleted and recreated in Superset. Pass one export per run: the ZIP, or the folder you unzipped it into if you have no unzip. Files keep the format Superset writes.
+4. Review `git diff`, commit only the files you meant to change and open a PR. The dev deploy takes this repo from `master`, so the change is kept once the PR is merged. SolDevelo reviews the PR. After the merge, SolDevelo runs the Jenkins job `rdc-OpenLMIS-3.0-deploy-to-dev` with `KEEP_OR_RESTORE=keep` and `SKIP_REPORTING_STACK=0` to check that the merged files import. Never run it before the merge: it re-imports everything from `master`, which overwrites UI changes on dev that are not merged yet (anyone's), and it redeploys OpenLMIS as well. A green job does not prove the import worked, so search its log for `An error occurred` and open the dashboard.
 
 Notes:
 
